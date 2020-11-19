@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 using Xamarin_Forms_demo.Models;
 
 namespace Xamarin_Forms_demo.ViewModels

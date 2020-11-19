@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xamarin_Forms_demo.Models
+﻿namespace Xamarin_Forms_demo.Models
 {
     public enum MenuItemType
     {

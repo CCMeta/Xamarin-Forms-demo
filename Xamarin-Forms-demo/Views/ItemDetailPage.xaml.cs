@@ -1,7 +1,5 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.ViewModels;

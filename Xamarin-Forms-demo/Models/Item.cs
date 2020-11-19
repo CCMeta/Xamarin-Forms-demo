@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Xamarin_Forms_demo.Models
+﻿namespace Xamarin_Forms_demo.Models
 {
     public class Item
     {

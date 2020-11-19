@@ -46,7 +46,9 @@ namespace WebApplication1.Controllers
         {
             string content = "fuck this shit bitch";
             return _context.Database.ExecuteSqlRaw("UPDATE goods SET name = 123").ToString();
+#pragma warning disable CS0162 // 检测到无法访问的代码
             Console.WriteLine(content);
+#pragma warning restore CS0162 // 检测到无法访问的代码
             return Summaries;
         }
     }

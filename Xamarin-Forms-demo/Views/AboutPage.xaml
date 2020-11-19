@@ -25,11 +25,14 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
         <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                 <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                    
                 </ContentView>
+            </StackLayout>
+            <StackLayout>
             </StackLayout>
         </StackLayout>
         <ScrollView Grid.Row="1">
@@ -75,6 +78,7 @@
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
             </StackLayout>
+
         </ScrollView>
     </Grid>
     

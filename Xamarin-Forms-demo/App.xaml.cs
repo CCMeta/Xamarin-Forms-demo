@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 using Xamarin_Forms_demo.Services;
 using Xamarin_Forms_demo.Views;
 
@@ -11,14 +9,15 @@ namespace Xamarin_Forms_demo
 
         public App()
         {
+            Device.SetFlags(new string[] { "MediaElement_Experimental" });
             InitializeComponent();
-
             DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
         }
 
         protected override void OnStart()
         {
+
         }
 
         protected override void OnSleep()
