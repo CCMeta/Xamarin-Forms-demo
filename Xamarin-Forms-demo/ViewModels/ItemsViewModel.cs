@@ -188,7 +188,7 @@ namespace Xamarin_Forms_demo.ViewModels
             _pc.addTrack(audioTrack);
             //there is need to try android track 
 
-            _pc.OnRtpPacketReceived += async (IPEndPoint, media, rtpPkt) =>
+            _pc.OnRtpPacketReceived += (IPEndPoint, media, rtpPkt) =>
             {
                 //Fuck("OnRtpPacketReceived");
                 if (!_pc.IsDtlsNegotiationComplete)

@@ -27,6 +27,11 @@ namespace Xamarin_Forms_demo.Views
             FULL_SDP_PATH = ItemsViewModel.FULL_SDP_PATH;
             Core.Initialize();
             var options = new string[] { "-vvv", "--sout-keep", "--sout-all", "--rtsp-timeout=300", "--rtp-timeout=300", "--loop", "--rtsp-tcp" };
+            options = new string[] { 
+                "--rtsp-caching=100", " --file-caching=100", "--live-caching=100",
+            "--realrtsp-caching=100",  "--network-caching=0",
+            "--skip-frames",
+            "--drop-late-frames",};
             _libvlc = new LibVLC(enableDebugLogs: true, options);
 
             BindingContext = viewModel = new ItemsViewModel();
