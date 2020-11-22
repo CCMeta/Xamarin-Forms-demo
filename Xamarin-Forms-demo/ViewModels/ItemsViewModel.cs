@@ -21,6 +21,7 @@ using System.Linq;
 using System.IO;
 using LibVLCSharp.Shared;
 using System.ComponentModel;
+using SkiaSharp;
 
 namespace Xamarin_Forms_demo.ViewModels
 {
@@ -41,6 +42,8 @@ namespace Xamarin_Forms_demo.ViewModels
             get => drawPoints;
             set { SetProperty(ref drawPoints, value, "DrawPoints"); }
         }
+        public static Queue<List<SKPoint>> drawPointsQueue = new Queue<List<SKPoint>>();
+
         //public event PropertyChangedEventHandler PropertyChanged;
         //private LibVLC _libVLC;
         //public LibVLC LibVLC
@@ -241,6 +244,13 @@ namespace Xamarin_Forms_demo.ViewModels
                     {
                         case "draw-canvas":
                             DrawPoints = receviceData["data"].ToString();
+                            var pointsList = JsonSerializer.Deserialize<List<List<float>>>(DrawPoints);
+                            List<SKPoint> sKPoints = new List<SKPoint>(3);
+                            sKPoints.Add(new SKPoint(pointsList[0][0], pointsList[0][1]));
+                            sKPoints.Add(new SKPoint(pointsList[1][0], pointsList[1][1]));
+                            sKPoints.Add(new SKPoint(pointsList[2][0], pointsList[2][1]));
+                            drawPointsQueue.Enqueue(sKPoints);
+
                             //Fuck(DrawPoints);
                             break;
                         default:
@@ -280,7 +290,7 @@ namespace Xamarin_Forms_demo.ViewModels
                 _pc = new RTCPeerConnection(RTCConfiguration);
             }
         }
-
+        static int counter = 0;
         private RTPSession CreateLocalRtpSession(List<SDPMediaFormat> audioFormats, List<SDPMediaFormat> videoFormats)
         {
             var rtpSession = new RTPSession(false, false, false, IPAddress.Loopback, RTP_SESSION_PORT);

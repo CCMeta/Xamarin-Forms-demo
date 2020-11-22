@@ -20,6 +20,19 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             Title = "Simple Circle";
+            //viewModel = new ItemsViewModel();
+
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    //監聽 VM的變量是否變動 
+                    if (ItemsViewModel.drawPointsQueue.Count > 0)
+                    {
+                        canvasView.InvalidateSurface();
+                    }
+                }
+            });
         }
 
         //SKCanvas canvas;
@@ -27,15 +40,17 @@ namespace Xamarin_Forms_demo.Views
         {
             Style = SKPaintStyle.Stroke,
             Color = Color.Red.ToSKColor(),
-            StrokeWidth = 10
+            StrokeWidth = 5
         };
         public void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             var canvas = args.Surface.Canvas;
             //canvas.Clear();
 
-            if (sKPoints.Count > 0)
+            while (ItemsViewModel.drawPointsQueue.TryDequeue(out List<SKPoint> sKPoints))
             {
+                counter = counter + 1;
+                Console.WriteLine("fuck counter = " + counter);
                 SKPath path = new SKPath();
                 path.MoveTo(sKPoints[0]);
                 path.QuadTo(sKPoints[1], sKPoints[2]);
@@ -43,14 +58,16 @@ namespace Xamarin_Forms_demo.Views
             }
         }
 
-        List<SKPoint> sKPoints = new List<SKPoint>(3);
-        private async Task Drawing(List<List<float>> pointsList, bool isNeedSend = true)
+
+        Queue<List<SKPoint>> numbers = new Queue<List<SKPoint>>();
+
+        public void Drawing(List<List<float>> pointsList, bool isNeedSend = true)
         {
-            sKPoints.Clear();
+            List<SKPoint> sKPoints = new List<SKPoint>(3);
             sKPoints.Add(new SKPoint(pointsList[0][0], pointsList[0][1]));
             sKPoints.Add(new SKPoint(pointsList[1][0], pointsList[1][1]));
             sKPoints.Add(new SKPoint(pointsList[2][0], pointsList[2][1]));
-            //Console.WriteLine("FUCK TO CALL ");
+            numbers.Enqueue(sKPoints);
             canvasView.InvalidateSurface();
             //SKPath path = new SKPath();
             //path.MoveTo(beginPoint);
@@ -64,17 +81,19 @@ namespace Xamarin_Forms_demo.Views
             base.OnAppearing();
         }
 
+        static int counter = 0;
         private void Button_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            return;
+            counter = counter + 1;
+            Console.WriteLine("fuck counter = " + counter);
             string drawPoint = ((Button)sender).Text;
             if (string.IsNullOrEmpty(drawPoint))
                 return;
             var pointsList = JsonSerializer.Deserialize<List<List<float>>>(drawPoint);
             //Console.WriteLine("I dont give a fuck " + drawPoint.ToString());
-            Task.Run(async () =>
-            {
-                await Drawing(pointsList, isNeedSend: false);
-            });
+
+            Drawing(pointsList, isNeedSend: false);
         }
 
     }
