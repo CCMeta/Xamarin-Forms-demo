@@ -35,12 +35,12 @@ namespace Xamarin_Forms_demo.ViewModels
         public static RTCPeerConnection _pc;
         public static RTPSession rtpSession;
         //public static MediaElement mediaElement = new MediaElement();
-        //public MediaSource videoUri;
-        //public MediaSource VideoUri
-        //{
-        //    get { return videoUri; }
-        //    set { SetProperty(ref videoUri, value); }
-        //}
+        public string drawPoints;
+        public string DrawPoints
+        {
+            get => drawPoints;
+            set { SetProperty(ref drawPoints, value, "DrawPoints"); }
+        }
         //public event PropertyChangedEventHandler PropertyChanged;
         //private LibVLC _libVLC;
         //public LibVLC LibVLC
@@ -64,8 +64,12 @@ namespace Xamarin_Forms_demo.ViewModels
         //    }
         //}
 
-
-
+        private const string FFPLAY_DEFAULT_SDP_PATH = "local.sdp";
+        private const string FFPLAY_DEFAULT_COMMAND = "ffplay -probesize 32 -protocol_whitelist \"file,rtp,udp\" -i {0}";
+        private const int RTP_SESSION_PORT = 5014;
+        private const int FFPLAY_DEFAULT_AUDIO_PORT = 5016;
+        private const int FFPLAY_DEFAULT_VIDEO_PORT = 5018;
+        public static readonly string FULL_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + FFPLAY_DEFAULT_SDP_PATH;
 
         public ItemsViewModel()
         {
@@ -83,7 +87,6 @@ namespace Xamarin_Forms_demo.ViewModels
                 var newItem = item as Item;
                 Items.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
-
             });
             AddConsoleLogger();
             FuckServerWebSocket();
@@ -183,7 +186,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
             var audioTrack = new MediaStreamTrack(
                 SDPMediaTypesEnum.audio, false,
-                new List<SDPMediaFormat> { new SDPMediaFormat(SDPMediaFormatsEnum.PCMA),new SDPMediaFormat(SDPMediaFormatsEnum.OPUS) },
+                new List<SDPMediaFormat> { new SDPMediaFormat(SDPMediaFormatsEnum.PCMA), new SDPMediaFormat(SDPMediaFormatsEnum.OPUS) },
                 MediaStreamStatusEnum.SendRecv);
             _pc.addTrack(audioTrack);
             //there is need to try android track 
@@ -229,7 +232,22 @@ namespace Xamarin_Forms_demo.ViewModels
             _pc.ondatachannel += (dc) =>
             {
                 dc.onopen += () => Console.WriteLine($"{_pc}: Data channel now open label {dc.label}, stream ID {dc.id}.");
-                dc.onmessage += (info) => { Fuck(info); };
+                dc.onerror += (info) => Console.WriteLine($"{_pc}: Data channel error = {info}");
+                dc.onclose += () => Console.WriteLine($"{_pc}: Data channel = close");
+                dc.onmessage += (info) =>
+                {
+                    var receviceData = JsonSerializer.Deserialize<Hashtable>(info);
+                    switch (receviceData["type"].ToString())
+                    {
+                        case "draw-canvas":
+                            DrawPoints = receviceData["data"].ToString();
+                            //Fuck(DrawPoints);
+                            break;
+                        default:
+                            Fuck(info);
+                            break;
+                    }
+                };
             };
 
             static async Task CreatePeerConnection()
@@ -262,54 +280,6 @@ namespace Xamarin_Forms_demo.ViewModels
                 _pc = new RTCPeerConnection(RTCConfiguration);
             }
         }
-
-        async Task ExecuteLoadItemsCommand()
-        {
-            IsBusy = true;
-
-            try
-            {
-                Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
-                {
-                    Items.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
-            finally
-            {
-                IsBusy = false;
-            }
-        }
-
-        private static void Fuck(string log)
-        {
-            Console.WriteLine($"[fuck] : {log} \r\n");
-        }
-
-        private static void AddConsoleLogger()
-        {
-            var loggerFactory = new LoggerFactory();
-            var loggerConfig = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .MinimumLevel.Is(Serilog.Events.LogEventLevel.Debug)
-                //.WriteTo.Console()
-                .WriteTo.Debug()
-                .CreateLogger();
-            loggerFactory.AddSerilog(loggerConfig);
-            //SIPSorcery.Sys.Log.LoggerFactory = loggerFactory;
-        }
-
-        private const string FFPLAY_DEFAULT_SDP_PATH = "local.sdp";
-        private const string FFPLAY_DEFAULT_COMMAND = "ffplay -probesize 32 -protocol_whitelist \"file,rtp,udp\" -i {0}";
-        private const int RTP_SESSION_PORT = 5014;
-        private const int FFPLAY_DEFAULT_AUDIO_PORT = 5016;
-        private const int FFPLAY_DEFAULT_VIDEO_PORT = 5018;
-        public static readonly string FULL_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + FFPLAY_DEFAULT_SDP_PATH;
 
         private RTPSession CreateLocalRtpSession(List<SDPMediaFormat> audioFormats, List<SDPMediaFormat> videoFormats)
         {
@@ -354,5 +324,47 @@ namespace Xamarin_Forms_demo.ViewModels
 
             return rtpSession;
         }
+
+        async Task ExecuteLoadItemsCommand()
+        {
+            IsBusy = true;
+
+            try
+            {
+                Items.Clear();
+                var items = await DataStore.GetItemsAsync(true);
+                foreach (var item in items)
+                {
+                    Items.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        private static void Fuck(string log)
+        {
+            Console.WriteLine($"[fuck] : {log} \r\n");
+        }
+
+        private static void AddConsoleLogger()
+        {
+            var loggerFactory = new LoggerFactory();
+            var loggerConfig = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .MinimumLevel.Is(Serilog.Events.LogEventLevel.Debug)
+                //.WriteTo.Console()
+                .WriteTo.Debug()
+                .CreateLogger();
+            loggerFactory.AddSerilog(loggerConfig);
+            //SIPSorcery.Sys.Log.LoggerFactory = loggerFactory;
+        }
+
     }
 }

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Xamarin-Forms-demo": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
