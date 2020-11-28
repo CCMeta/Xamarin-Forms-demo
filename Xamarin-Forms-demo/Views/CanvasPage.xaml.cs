@@ -60,7 +60,7 @@ namespace Xamarin_Forms_demo.Views
 
 
         Queue<List<SKPoint>> numbers = new Queue<List<SKPoint>>();
-
+        //unused
         public void Drawing(List<List<float>> pointsList, bool isNeedSend = true)
         {
             List<SKPoint> sKPoints = new List<SKPoint>(3);
@@ -81,6 +81,7 @@ namespace Xamarin_Forms_demo.Views
             base.OnAppearing();
         }
 
+        //unused
         static int counter = 0;
         private void Button_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

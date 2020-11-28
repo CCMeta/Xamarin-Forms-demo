@@ -22,6 +22,7 @@ using System.IO;
 using LibVLCSharp.Shared;
 using System.ComponentModel;
 using SkiaSharp;
+using SIPSorceryMedia.Abstractions.V1;
 
 namespace Xamarin_Forms_demo.ViewModels
 {
@@ -189,7 +190,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
             var audioTrack = new MediaStreamTrack(
                 SDPMediaTypesEnum.audio, false,
-                new List<SDPMediaFormat> { new SDPMediaFormat(SDPMediaFormatsEnum.PCMA), new SDPMediaFormat(SDPMediaFormatsEnum.OPUS) },
+                new List<SDPAudioVideoMediaFormat> { new SDPAudioVideoMediaFormat(SDPWellKnownMediaFormatsEnum.PCMA), new SDPAudioVideoMediaFormat(SDPWellKnownMediaFormatsEnum.PCMU) },
                 MediaStreamStatusEnum.SendRecv);
             _pc.addTrack(audioTrack);
             //there is need to try android track 
@@ -291,7 +292,7 @@ namespace Xamarin_Forms_demo.ViewModels
             }
         }
         static int counter = 0;
-        private RTPSession CreateLocalRtpSession(List<SDPMediaFormat> audioFormats, List<SDPMediaFormat> videoFormats)
+        private RTPSession CreateLocalRtpSession(List<SDPAudioVideoMediaFormat> audioFormats, List<SDPAudioVideoMediaFormat> videoFormats)
         {
             var rtpSession = new RTPSession(false, false, false, IPAddress.Loopback, RTP_SESSION_PORT);
             bool hasAudio = false;
