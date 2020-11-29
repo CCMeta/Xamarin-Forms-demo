@@ -69,7 +69,7 @@ namespace Xamarin_Forms_demo.ViewModels
         //}
 
         private const string FFPLAY_DEFAULT_SDP_PATH = "local.sdp";
-        private const string FFPLAY_DEFAULT_COMMAND = "ffplay -probesize 32 -protocol_whitelist \"file,rtp,udp\" -i {0}";
+        //private const string FFPLAY_DEFAULT_COMMAND = "ffplay -probesize 32 -protocol_whitelist \"file,rtp,udp\" -i {0}";
         private const int RTP_SESSION_PORT = 5014;
         private const int FFPLAY_DEFAULT_AUDIO_PORT = 5016;
         private const int FFPLAY_DEFAULT_VIDEO_PORT = 5018;
@@ -246,10 +246,12 @@ namespace Xamarin_Forms_demo.ViewModels
                         case "draw-canvas":
                             DrawPoints = receviceData["data"].ToString();
                             var pointsList = JsonSerializer.Deserialize<List<List<float>>>(DrawPoints);
-                            List<SKPoint> sKPoints = new List<SKPoint>(3);
-                            sKPoints.Add(new SKPoint(pointsList[0][0], pointsList[0][1]));
-                            sKPoints.Add(new SKPoint(pointsList[1][0], pointsList[1][1]));
-                            sKPoints.Add(new SKPoint(pointsList[2][0], pointsList[2][1]));
+                            List<SKPoint> sKPoints = new List<SKPoint>(3)
+                            {
+                                new SKPoint(pointsList[0][0], pointsList[0][1]),
+                                new SKPoint(pointsList[1][0], pointsList[1][1]),
+                                new SKPoint(pointsList[2][0], pointsList[2][1])
+                            };
                             drawPointsQueue.Enqueue(sKPoints);
 
                             //Fuck(DrawPoints);
@@ -291,7 +293,7 @@ namespace Xamarin_Forms_demo.ViewModels
                 _pc = new RTCPeerConnection(RTCConfiguration);
             }
         }
-        static int counter = 0;
+        //static int counter = 0;
         private RTPSession CreateLocalRtpSession(List<SDPAudioVideoMediaFormat> audioFormats, List<SDPAudioVideoMediaFormat> videoFormats)
         {
             var rtpSession = new RTPSession(false, false, false, IPAddress.Loopback, RTP_SESSION_PORT);
