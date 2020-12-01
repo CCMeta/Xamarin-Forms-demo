@@ -8,7 +8,8 @@
              x:Class="Xamarin_Forms_demo.Views.CanvasPage"
              xmlns:local="clr-namespace:Xamarin_Forms_demo.ViewModels"
              Title="{Binding Title}"
-             x:Name="BrowseCanvasPage">
+             x:Name="BrowseCanvasPage"  
+             Visual="Material">
     <ContentPage.BindingContext>
         <local:ItemsViewModel />
     </ContentPage.BindingContext>
