@@ -6,13 +6,9 @@
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.CanvasPage"
-             xmlns:local="clr-namespace:Xamarin_Forms_demo.ViewModels"
              Title="{Binding Title}"
              x:Name="BrowseCanvasPage"  
              Visual="Material">
-    <ContentPage.BindingContext>
-        <local:ItemsViewModel />
-    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>

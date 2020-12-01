@@ -24,7 +24,6 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
 
-            FULL_SDP_PATH = ItemsViewModel.FULL_SDP_PATH;
             Core.Initialize();
             var options = new string[] { "-vvv", "--sout-keep", "--sout-all", "--rtsp-timeout=300", "--rtp-timeout=300", "--loop", "--rtsp-tcp" };
             options = new string[] { 
@@ -34,7 +33,7 @@ namespace Xamarin_Forms_demo.Views
             "--drop-late-frames",};
             _libvlc = new LibVLC(enableDebugLogs: true, options);
 
-            BindingContext = viewModel = new ItemsViewModel();
+            //BindingContext = viewModel = new ItemsViewModel();
         }
 
         async void OnItemSelected(object sender, EventArgs args)

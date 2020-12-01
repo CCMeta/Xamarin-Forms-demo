@@ -14,25 +14,15 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class CanvasPage : ContentPage
     {
-        ItemsViewModel viewModel;
 
         public CanvasPage()
         {
-            InitializeComponent();
             Title = "Simple Circle";
-            //viewModel = new ItemsViewModel();
-
-            Task.Run(() =>
+            InitializeComponent();
+            new ItemsViewModel().drawCanvasEvent += (object sender, EventArgs e) =>
             {
-                while (true)
-                {
-                    //監聽 VM的變量是否變動 
-                    if (ItemsViewModel.drawPointsQueue.Count > 0)
-                    {
-                        canvasView.InvalidateSurface();
-                    }
-                }
-            });
+                canvasView.InvalidateSurface();
+            };
         }
 
         //SKCanvas canvas;

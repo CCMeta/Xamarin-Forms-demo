@@ -30,8 +30,8 @@ namespace Xamarin_Forms_demo.ViewModels
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-
-        public static ClientWebSocket ClientWebSocket { get; set; }
+        public event EventHandler drawCanvasEvent;
+        public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
         public static ArraySegment<byte> response_buffer;
         public static StringDictionary rtc_session = new StringDictionary();
         public static RTCPeerConnection _pc;
@@ -45,31 +45,7 @@ namespace Xamarin_Forms_demo.ViewModels
         }
         public static Queue<List<SKPoint>> drawPointsQueue = new Queue<List<SKPoint>>();
 
-        //public event PropertyChangedEventHandler PropertyChanged;
-        //private LibVLC _libVLC;
-        //public LibVLC LibVLC
-        //{
-        //    get => _libVLC;
-        //    private set => Set(nameof(LibVLC), ref _libVLC, value);
-        //}
-        //private MediaPlayer _mediaPlayer;
-        //public MediaPlayer MediaPlayer
-        //{
-        //    get => _mediaPlayer;
-        //    private set => Set(nameof(MediaPlayer), ref _mediaPlayer, value);
-        //}
-
-        //private void Set<T>(string propertyName, ref T field, T value)
-        //{
-        //    if (field == null && value != null || field != null && !field.Equals(value))
-        //    {
-        //        field = value;
-        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //    }
-        //}
-
         private const string FFPLAY_DEFAULT_SDP_PATH = "local.sdp";
-        //private const string FFPLAY_DEFAULT_COMMAND = "ffplay -probesize 32 -protocol_whitelist \"file,rtp,udp\" -i {0}";
         private const int RTP_SESSION_PORT = 5014;
         private const int FFPLAY_DEFAULT_AUDIO_PORT = 5016;
         private const int FFPLAY_DEFAULT_VIDEO_PORT = 5018;
@@ -77,13 +53,6 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public ItemsViewModel()
         {
-            //LibVLCSharp start
-            //Core.Initialize();
-            //LibVLC = new LibVLC(enableDebugLogs: true);
-
-            //Title = "https://sec.ch9.ms/ch9/5d93/a1eab4bf-3288-4faf-81c4-294402a85d93/XamarinShow_mid.mp4";
-            //VideoUri = MediaSource.FromUri(new Uri(Title));
-
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
@@ -93,13 +62,15 @@ namespace Xamarin_Forms_demo.ViewModels
                 await DataStore.AddItemAsync(newItem);
             });
             AddConsoleLogger();
-            FuckServerWebSocket();
-            FuckServerWebRTCAsync();
+            if (ClientWebSocket.State == WebSocketState.None)
+            {
+                FuckServerWebSocket();
+                FuckServerWebRTCAsync();
+            }
         }
 
         async void FuckServerWebSocket()
         {
-            ClientWebSocket = new ClientWebSocket();
             var uri = new Uri("wss://ccmeta.com:9502/websocket");
             response_buffer = WebSocket.CreateClientBuffer(4096 * 20, 4096 * 20);
             await ClientWebSocket.ConnectAsync(uri, CancellationToken.None);
@@ -178,16 +149,6 @@ namespace Xamarin_Forms_demo.ViewModels
         {
             await CreatePeerConnection();
 
-            //await CrossMediaManager.Current.Play("https://ia800806.us.archive.org/15/items/Mp3Playlist_555/AaronNeville-CrazyLove.mp3");
-
-            //var success = ThreadPool.QueueUserWorkItem(async (callback) =>
-            //{
-            //    var uri = "https://wenba-ooo-qiniu.xueba100.com/1v1-office-course-video1.mp4?333";
-            //    var HttpClient = new HttpClient();
-            //    Stream stream = await HttpClient.GetStreamAsync(uri);
-            //});
-
-
             var audioTrack = new MediaStreamTrack(
                 SDPMediaTypesEnum.audio, false,
                 new List<SDPAudioVideoMediaFormat> { new SDPAudioVideoMediaFormat(SDPWellKnownMediaFormatsEnum.PCMA), new SDPAudioVideoMediaFormat(SDPWellKnownMediaFormatsEnum.PCMU) },
@@ -253,8 +214,7 @@ namespace Xamarin_Forms_demo.ViewModels
                                 new SKPoint(pointsList[2][0], pointsList[2][1])
                             };
                             drawPointsQueue.Enqueue(sKPoints);
-
-                            //Fuck(DrawPoints);
+                            drawCanvasEvent(this, EventArgs.Empty);
                             break;
                         default:
                             Fuck(info);
