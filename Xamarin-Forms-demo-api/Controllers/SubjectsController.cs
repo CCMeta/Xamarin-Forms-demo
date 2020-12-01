@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿//using Dapper;
+using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin_Forms_demo_api.Models;
-using MySqlConnector;
 
 namespace Xamarin_Forms_demo_api.Controllers
 {
@@ -13,35 +11,18 @@ namespace Xamarin_Forms_demo_api.Controllers
     [ApiController]
     public class SubjectsController : ControllerBase
     {
-        private readonly MySqlConnection _dbcontext;
+        private readonly SubjectsRepository _ProductRepository;
 
-        public SubjectsController(MySqlConnection dbContext)
+        public SubjectsController(SubjectsRepository productRepository)
         {
-            _dbcontext = dbContext;
-            _dbcontext.Open();
+            _ProductRepository = productRepository;
         }
 
         // GET: api/<SubjectsController>
         [HttpGet]
-        public async Task<IEnumerable<string>> GetAsync()
+        public async Task<IEnumerable<Subjects>> GetAsync()
         {
-            //var fuck = _dbcontext.Subjects.FromSqlRaw("SELECT * FROM subjects LIMIT 5").ToList();
-            //var fuck2 = JsonSerializer.Serialize(fuck);
-            using (var cmd = new MySqlCommand())
-            {
-                cmd.Connection = _dbcontext;
-                cmd.CommandText = "SELECT * FROM subjects LIMIT @p";
-                cmd.Parameters.AddWithValue("p", 6);
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    var subjects = new List<string>();
-                    while (await reader.ReadAsync())
-                    {
-                        subjects.Add(reader.GetString("vname"));
-                    }
-                    return subjects;
-                }
-            }
+            return await _ProductRepository.GetSubjects();
         }
 
         // GET api/<SubjectsController>/5

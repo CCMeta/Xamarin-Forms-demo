@@ -32,20 +32,21 @@ namespace Xamarin_Forms_demo_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddTransient<SubjectsRepository>();
+            //services.AddTransient(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+            //services.AddDbContextPool<DbContext>(options => options.UseMySql(
+            //    connectionString: Configuration["ConnectionStrings:Default"],
+            //    serverVersion: new MySqlServerVersion(new Version(5, 7, 31)),
+            //    mySqlOptionsAction: mySqlOptions => mySqlOptions
+            //                .CharSetBehavior(CharSetBehavior.NeverAppend))
+            //                .EnableDetailedErrors()
+            //                .EnableSensitiveDataLogging()
+            //);
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
-            }); ;
-            services.AddTransient(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
-            services.AddDbContextPool<MysqlContext>(options => options.UseMySql(
-                connectionString: Configuration["ConnectionStrings:Default"],
-                serverVersion: new MySqlServerVersion(new Version(5, 7, 31)),
-                mySqlOptionsAction: mySqlOptions => mySqlOptions
-                            .CharSetBehavior(CharSetBehavior.NeverAppend))
-                            .EnableDetailedErrors()
-                            .EnableSensitiveDataLogging()
-            );
-
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Xamarin_Forms_demo_api", Version = "v1" });

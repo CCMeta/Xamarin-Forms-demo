@@ -8,5 +8,12 @@ namespace Xamarin_Forms_demo_api.Models
     public class Subjects
     {
         public long Id { get; set; }
+        public string img { get; set; }
+        public string info { get; set; }
+        public string score { get; set; }
+        public string vtype { get; set; }
+        public string summary { get; set; }
+        public string vname { get; set; }
+
     }
 }
