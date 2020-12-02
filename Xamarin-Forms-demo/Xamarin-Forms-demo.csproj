@@ -31,4 +31,10 @@
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.1709-pre4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Views\SubjectsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

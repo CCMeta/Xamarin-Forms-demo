@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Xamarin_Forms_demo.Views.SubjectsPage"
+             Title="New Item" Visual="Material">
+    <ContentPage.Resources>
+        <StyleSheet>
+            <![CDATA[
+            Label {
+            }
+
+            ]]>
+        </StyleSheet>
+    </ContentPage.Resources>
+
+    <CollectionView x:Name="CollectionView" 
+                    ItemsSource="{Binding subjects}"
+                    EmptyView="No items to display">
+        <!--Built in Cells-->
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid Padding="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Grid.RowSpan="2"
+                       Source="{Binding Img}"
+                       Aspect="AspectFill" />
+                    <Label Grid.Column="1" Grid.ColumnSpan="2"
+                           Padding="5,0"
+                       Text="{Binding vname}"
+                       FontAttributes="Bold" />
+                    <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" MaxLines="6"
+                           Padding="5,0"
+                       Text="{Binding summary}"
+                       FontAttributes="Italic"
+                       VerticalOptions="EndAndExpand" />
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
