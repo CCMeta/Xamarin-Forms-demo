@@ -33,7 +33,7 @@ namespace Xamarin_Forms_demo.Views
             "--drop-late-frames",};
             _libvlc = new LibVLC(enableDebugLogs: true, options);
 
-            //BindingContext = viewModel = new ItemsViewModel();
+            viewModel = new ItemsViewModel();
         }
 
         async void OnItemSelected(object sender, EventArgs args)

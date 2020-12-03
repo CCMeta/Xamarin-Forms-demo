@@ -20,7 +20,8 @@ namespace Xamarin_Forms_demo.Views
             {
                 new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="fuck师兄" }
+                new HomeMenuItem {Id = MenuItemType.Subjects, Title="Subjects" },
+                new HomeMenuItem {Id = MenuItemType.Canvas, Title="Canvas" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

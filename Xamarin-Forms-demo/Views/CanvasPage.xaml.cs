@@ -76,15 +76,15 @@ namespace Xamarin_Forms_demo.Views
         private void Button_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             return;
-            counter = counter + 1;
-            Console.WriteLine("fuck counter = " + counter);
-            string drawPoint = ((Button)sender).Text;
-            if (string.IsNullOrEmpty(drawPoint))
-                return;
-            var pointsList = JsonSerializer.Deserialize<List<List<float>>>(drawPoint);
-            //Console.WriteLine("I dont give a fuck " + drawPoint.ToString());
+            //counter = counter + 1;
+            //Console.WriteLine("fuck counter = " + counter);
+            //string drawPoint = ((Button)sender).Text;
+            //if (string.IsNullOrEmpty(drawPoint))
+            //    return;
+            //var pointsList = JsonSerializer.Deserialize<List<List<float>>>(drawPoint);
+            ////Console.WriteLine("I dont give a fuck " + drawPoint.ToString());
 
-            Drawing(pointsList, isNeedSend: false);
+            //Drawing(pointsList, isNeedSend: false);
         }
 
     }
