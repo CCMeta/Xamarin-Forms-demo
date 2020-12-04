@@ -19,7 +19,7 @@ namespace Xamarin_Forms_demo.Views
         {
             Title = "Simple Circle";
             InitializeComponent();
-            new ItemsViewModel().drawCanvasEvent += (object sender, EventArgs e) =>
+            new ItemsViewModel().DrawCanvasEvent += (object sender, EventArgs e) =>
             {
                 canvasView.InvalidateSurface();
             };

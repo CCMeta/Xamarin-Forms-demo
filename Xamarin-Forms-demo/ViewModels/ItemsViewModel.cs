@@ -30,7 +30,7 @@ namespace Xamarin_Forms_demo.ViewModels
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        public event EventHandler drawCanvasEvent;
+        public event EventHandler DrawCanvasEvent;
         public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
         public static ArraySegment<byte> response_buffer;
         public static StringDictionary rtc_session = new StringDictionary();
@@ -214,7 +214,7 @@ namespace Xamarin_Forms_demo.ViewModels
                                 new SKPoint(pointsList[2][0], pointsList[2][1])
                             };
                             drawPointsQueue.Enqueue(sKPoints);
-                            drawCanvasEvent(this, EventArgs.Empty);
+                            DrawCanvasEvent(this, EventArgs.Empty);
                             break;
                         default:
                             Fuck(info);
