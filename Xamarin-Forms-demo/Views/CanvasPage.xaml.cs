@@ -20,16 +20,13 @@ namespace Xamarin_Forms_demo.Views
             Color = Color.Red.ToSKColor(),
             StrokeWidth = 5
         };
-        private readonly ItemsViewModel itemsViewModel = new ItemsViewModel();
-
+        private static readonly ItemsViewModel itemsViewModel = new ItemsViewModel();
+        
         public CanvasPage()
         {
             Title = "CanvasPage";
             InitializeComponent();
-            itemsViewModel.DrawCanvasEvent += (object sender, EventArgs e) =>
-            {
-                canvasView.InvalidateSurface();
-            };
+
         }
 
         public void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
@@ -46,6 +43,10 @@ namespace Xamarin_Forms_demo.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            itemsViewModel.DrawCanvasEvent += (object sender, EventArgs e) =>
+            {
+                canvasView.InvalidateSurface();
+            };
         }
     }
 }
