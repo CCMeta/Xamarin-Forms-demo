@@ -21,7 +21,7 @@
             <ColumnDefinition  Width="*"/>
         </Grid.ColumnDefinitions>
         <Vlc:VideoView x:Name="VlcVideoView" Grid.Row="0" Grid.Column="0" />
-        <Button x:Name="VlcVideoStart" Clicked="Button_Clicked" Grid.Row="1" Grid.Column="1" Text="Start"></Button>
+        <Button x:Name="VlcVideoStart" Clicked="OnPlayStarted" Grid.Row="1" Grid.Column="1" Text="Start"></Button>
 
     </Grid>
 

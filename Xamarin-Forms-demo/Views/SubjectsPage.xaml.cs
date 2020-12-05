@@ -15,8 +15,8 @@ namespace Xamarin_Forms_demo.Views
 
         public SubjectsPage()
         {
-            GetSubjectsAsync();
             InitializeComponent();
+            GetSubjectsAsync();
         }
 
         public async void GetSubjectsAsync()

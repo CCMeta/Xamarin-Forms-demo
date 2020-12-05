@@ -28,20 +28,13 @@ namespace Xamarin_Forms_demo.ViewModels
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        public event EventHandler DrawCanvasEvent;
         public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
         public static ArraySegment<byte> response_buffer;
         public static StringDictionary rtc_session = new StringDictionary();
         public static RTCPeerConnection _pc;
         public static RTPSession rtpSession;
-        //public static MediaElement mediaElement = new MediaElement();
-        public string drawPoints;
-        public string DrawPoints
-        {
-            get => drawPoints;
-            set { SetProperty(ref drawPoints, value, "DrawPoints"); }
-        }
         public static Queue<List<SKPoint>> drawPointsQueue = new Queue<List<SKPoint>>();
+        public event EventHandler DrawCanvasEvent;
 
         private const string FFPLAY_DEFAULT_SDP_PATH = "local.sdp";
         private const int RTP_SESSION_PORT = 15014;
@@ -86,31 +79,27 @@ namespace Xamarin_Forms_demo.ViewModels
                     switch (action_type)
                     {
                         case "set-sid":
-                            Fuck("Switch to set-sid");
                             rtc_session.Add("sid", action_data);
                             break;
                         case "description":
-                            Fuck("Switch to description");
                             var response_data_Hashtable = JsonSerializer.Deserialize<Hashtable>(action_data);
                             switch (response_data_Hashtable["type"].ToString())
                             {
                                 case "offer":
                                     //setremote
-                                    var init = new RTCSessionDescriptionInit()
+                                    Fuck(response_data_Hashtable["sdp"].ToString());
+                                    var remoteSDP = new RTCSessionDescriptionInit()
                                     {
                                         sdp = response_data_Hashtable["sdp"].ToString(),
                                         type = RTCSdpType.offer,
                                     };
-                                    for (int i = 0; i < 50; i++)
-                                    {
-                                    }
-                                    _pc.setRemoteDescription(init);
+                                    _pc.setRemoteDescription(remoteSDP);
 
                                     //setLocalDescription
                                     var answer = _pc.createAnswer(new RTCAnswerOptions());
                                     await _pc.setLocalDescription(answer);
 
-                                    //send answer to offerman
+                                    //send answer to offer client
                                     string request_json = JsonSerializer.Serialize(new
                                     {
                                         type = "description",
@@ -131,7 +120,7 @@ namespace Xamarin_Forms_demo.ViewModels
                             }
                             break;
                         case "ice-candidate":
-                            Fuck("Switch to ice-candidate");
+                            Fuck(action_data);
                             var _RTCIceCandidateInit = JsonSerializer.Deserialize<RTCIceCandidateInit>(action_data);
                             _pc.addIceCandidate(_RTCIceCandidateInit);
                             break;
@@ -149,14 +138,16 @@ namespace Xamarin_Forms_demo.ViewModels
 
             var audioTrack = new MediaStreamTrack(
                 SDPMediaTypesEnum.audio, false,
-                new List<SDPMediaFormat> { new SDPMediaFormat(SDPMediaFormatsEnum.OPUS) },
+                new List<SDPMediaFormat> {
+                    new SDPMediaFormat(SDPMediaFormatsEnum.OPUS) ,
+                    new SDPMediaFormat(SDPMediaFormatsEnum.PCMA) ,
+                    new SDPMediaFormat(SDPMediaFormatsEnum.PCMU) ,
+                },
                 MediaStreamStatusEnum.SendRecv);
             _pc.addTrack(audioTrack);
-            //there is need to try android track 
 
             _pc.OnRtpPacketReceived += (IPEndPoint, media, rtpPkt) =>
             {
-                //Fuck("OnRtpPacketReceived");
                 if (!_pc.IsDtlsNegotiationComplete)
                 {
                     return;
@@ -178,12 +169,31 @@ namespace Xamarin_Forms_demo.ViewModels
                     //logger.LogDebug($"Forwarding {media} RTP packet to ffplay timestamp {rtpPkt.Header.Timestamp}.");
                     rtpSession.SendRtpRaw(media, rtpPkt.Payload, rtpPkt.Header.Timestamp, rtpPkt.Header.MarkerBit, rtpPkt.Header.PayloadType);
                 }
-            };
+            }; // End of _pc.OnRtpPacketReceived
             _pc.OnReceiveReport += (IPEndPoint, SDPMediaTypesEnum, RTPPacket) => { };
             _pc.OnRtpEvent += (IPEndPoint, RTPEvent, RTPHeader) => { };
-            _pc.onicecandidate += (_RTCIceCandidate) =>
+            _pc.onicecandidate += async (candidate) =>
             {
-                //Fuck($"onicecandidate  fuck-me ");
+                if (_pc.signalingState == RTCSignalingState.have_local_offer ||
+                    _pc.signalingState == RTCSignalingState.have_remote_offer)
+                {
+                    var localCandidate = new RTCIceCandidateInit()
+                    {
+                        candidate = "candidate:" + candidate.ToString(),
+                        sdpMid = candidate.sdpMid,
+                        sdpMLineIndex = candidate.sdpMLineIndex,
+                        usernameFragment=candidate.usernameFragment
+                    };
+                    string request_json = JsonSerializer.Serialize(new
+                    {
+                        type = "ice-candidate",
+                        data = localCandidate
+                    });
+                    Fuck(request_json);
+                    await ClientWebSocket.SendAsync(
+                        new ArraySegment<byte>(System.Text.Encoding.ASCII.GetBytes(request_json)),
+                        WebSocketMessageType.Binary, true, CancellationToken.None);
+                }
             };
             _pc.onconnectionstatechange += (state) => Fuck($"Peer connection state change to {state}.");
             _pc.onnegotiationneeded += () => Fuck("onnegotiationneeded");
@@ -191,7 +201,6 @@ namespace Xamarin_Forms_demo.ViewModels
             _pc.onicegatheringstatechange += (state) => Fuck("onicegatheringstatechange" + state);
             _pc.onicecandidateerror += (candidate, info) => Fuck("onicecandidateerror" + candidate + "-----" + info);
             _pc.oniceconnectionstatechange += (state) => Fuck($"ICE connection state change to {state}.");
-
             _pc.ondatachannel += (dc) =>
             {
                 dc.onopen += () => Console.WriteLine($"{_pc}: Data channel now open label {dc.label}, stream ID {dc.id}.");
@@ -203,8 +212,7 @@ namespace Xamarin_Forms_demo.ViewModels
                     switch (receviceData["type"].ToString())
                     {
                         case "draw-canvas":
-                            DrawPoints = receviceData["data"].ToString();
-                            var pointsList = JsonSerializer.Deserialize<List<List<float>>>(DrawPoints);
+                            var pointsList = JsonSerializer.Deserialize<List<List<float>>>(receviceData["data"].ToString());
                             List<SKPoint> sKPoints = new List<SKPoint>(3)
                             {
                                 new SKPoint(pointsList[0][0], pointsList[0][1]),
@@ -219,39 +227,40 @@ namespace Xamarin_Forms_demo.ViewModels
                             break;
                     }
                 };
-            };
+            }; // end of _pc.ondatachannel
 
-            static async Task CreatePeerConnection()
+        }
+
+        async Task CreatePeerConnection()
+        {
+            var ssl_file = await new HttpClient().GetAsync("https://shadow-board.ccmeta.com/ssl.pfx");
+            var localhostCert = new X509Certificate2(await ssl_file.Content.ReadAsByteArrayAsync(), "0");
+            var presetCertificates = new List<RTCCertificate> {
+                    new RTCCertificate { Certificate = localhostCert },
+                };
+            var IceServersStun = new RTCIceServer
             {
-                var ssl_file = await new HttpClient().GetAsync("https://shadow-board.ccmeta.com/ssl.pfx");
-                var localhostCert = new X509Certificate2(await ssl_file.Content.ReadAsByteArrayAsync(), "0");
-                var presetCertificates = new List<RTCCertificate> {
-                new RTCCertificate { Certificate = localhostCert },
+                urls = "stun:137.220.233.101:13333",
             };
-                var IceServersStun = new RTCIceServer
-                {
-                    urls = "stun:137.220.233.101:3333",
-                };
-                var IceServersTurn = new RTCIceServer
-                {
-                    urls = "turn:137.220.233.101:3333",
-                    username = "username1",
-                    credential = "key1",
-                };
-                var presetIceServers = new List<RTCIceServer> {
+            var IceServersTurn = new RTCIceServer
+            {
+                urls = "turn:137.220.233.101:13333",
+                username = "username1",
+                credential = "key1",
+            };
+            var presetIceServers = new List<RTCIceServer> {
                     IceServersStun,
                     IceServersTurn,
                 };
-                var RTCConfiguration = new RTCConfiguration
-                {
-                    certificates = presetCertificates,
-                    X_BindAddress = IPAddress.Any,
-                    iceServers = presetIceServers,
-                };
-                _pc = new RTCPeerConnection(RTCConfiguration);
-            }
+            var RTCConfiguration = new RTCConfiguration
+            {
+                certificates = presetCertificates,
+                X_BindAddress = IPAddress.Any,
+                iceServers = presetIceServers,
+            };
+            _pc = new RTCPeerConnection(RTCConfiguration);
         }
-        //static int counter = 0;
+
         private RTPSession CreateLocalRtpSession(List<SDPMediaFormat> audioFormats, List<SDPMediaFormat> videoFormats)
         {
             var rtpSession = new RTPSession(false, false, false, IPAddress.Loopback, RTP_SESSION_PORT);
@@ -287,7 +296,6 @@ namespace Xamarin_Forms_demo.ViewModels
             }
 
             File.WriteAllText(FULL_SDP_PATH, sdpOffer.ToString());
-            //Console.WriteLine(string.Format(FFPLAY_DEFAULT_COMMAND, full_sdp_path));
 
             rtpSession.Start();
             rtpSession.SetDestination(SDPMediaTypesEnum.audio, new IPEndPoint(IPAddress.Loopback, FFPLAY_DEFAULT_AUDIO_PORT), new IPEndPoint(IPAddress.Loopback, FFPLAY_DEFAULT_AUDIO_PORT + 1));
@@ -319,7 +327,7 @@ namespace Xamarin_Forms_demo.ViewModels
             }
         }
 
-        private static void Fuck(string log)
+        public static void Fuck(string log)
         {
             Console.WriteLine($"[fuck] : {log} \r\n");
         }
@@ -330,11 +338,9 @@ namespace Xamarin_Forms_demo.ViewModels
             var loggerConfig = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .MinimumLevel.Is(Serilog.Events.LogEventLevel.Debug)
-                //.WriteTo.Console()
                 .WriteTo.Debug()
                 .CreateLogger();
             loggerFactory.AddSerilog(loggerConfig);
-            //SIPSorcery.Sys.Log.LoggerFactory = loggerFactory;
         }
 
     }
