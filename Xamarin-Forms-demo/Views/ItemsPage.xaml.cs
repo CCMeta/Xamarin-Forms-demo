@@ -1,6 +1,7 @@
 ﻿using LibVLCSharp.Shared;
 using System;
 using System.ComponentModel;
+using System.IO;
 using Xamarin.Forms;
 
 using Xamarin_Forms_demo.Models;
@@ -26,11 +27,11 @@ namespace Xamarin_Forms_demo.Views
 
             Core.Initialize();
             var options = new string[] { "-vvv", "--sout-keep", "--sout-all", "--rtsp-timeout=300", "--rtp-timeout=300", "--loop", "--rtsp-tcp" };
-            options = new string[] { 
+            options = new string[] {
                 "--rtsp-caching=100", " --file-caching=100", "--live-caching=100",
             "--realrtsp-caching=100",  "--network-caching=0",
-            "--skip-frames",
-            "--drop-late-frames",};
+            "--skip-frames", "--sout-keep", "--sout-all",
+            "--drop-late-frames","--rtsp-tcp"};
             _libvlc = new LibVLC(enableDebugLogs: true, options);
 
             viewModel = new ItemsViewModel();
@@ -59,6 +60,7 @@ namespace Xamarin_Forms_demo.Views
         private void Button_Clicked(object sender, EventArgs e)
         {
             VlcVideoView.MediaPlayer = new MediaPlayer(_libvlc);
+            //ItemsViewModel.Fuck(File.ReadAllText(FULL_SDP_PATH));
             VlcVideoView.MediaPlayer.Play(new Media(_libvlc, FULL_SDP_PATH, FromType.FromPath));
         }
     }

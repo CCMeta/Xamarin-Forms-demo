@@ -19,10 +19,8 @@ using Xamarin_Forms_demo.Views;
 using SIPSorcery.Net;
 using System.Linq;
 using System.IO;
-using LibVLCSharp.Shared;
-using System.ComponentModel;
 using SkiaSharp;
-using SIPSorceryMedia.Abstractions.V1;
+
 
 namespace Xamarin_Forms_demo.ViewModels
 {
@@ -46,9 +44,9 @@ namespace Xamarin_Forms_demo.ViewModels
         public static Queue<List<SKPoint>> drawPointsQueue = new Queue<List<SKPoint>>();
 
         private const string FFPLAY_DEFAULT_SDP_PATH = "local.sdp";
-        private const int RTP_SESSION_PORT = 5014;
-        private const int FFPLAY_DEFAULT_AUDIO_PORT = 5016;
-        private const int FFPLAY_DEFAULT_VIDEO_PORT = 5018;
+        private const int RTP_SESSION_PORT = 15014;
+        private const int FFPLAY_DEFAULT_AUDIO_PORT = 15016;
+        private const int FFPLAY_DEFAULT_VIDEO_PORT = 15018;
         public static readonly string FULL_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + FFPLAY_DEFAULT_SDP_PATH;
 
         public ItemsViewModel()
@@ -151,7 +149,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
             var audioTrack = new MediaStreamTrack(
                 SDPMediaTypesEnum.audio, false,
-                new List<SDPAudioVideoMediaFormat> { new SDPAudioVideoMediaFormat(SDPWellKnownMediaFormatsEnum.PCMA), new SDPAudioVideoMediaFormat(SDPWellKnownMediaFormatsEnum.PCMU) },
+                new List<SDPMediaFormat> { new SDPMediaFormat(SDPMediaFormatsEnum.OPUS) },
                 MediaStreamStatusEnum.SendRecv);
             _pc.addTrack(audioTrack);
             //there is need to try android track 
@@ -254,7 +252,7 @@ namespace Xamarin_Forms_demo.ViewModels
             }
         }
         //static int counter = 0;
-        private RTPSession CreateLocalRtpSession(List<SDPAudioVideoMediaFormat> audioFormats, List<SDPAudioVideoMediaFormat> videoFormats)
+        private RTPSession CreateLocalRtpSession(List<SDPMediaFormat> audioFormats, List<SDPMediaFormat> videoFormats)
         {
             var rtpSession = new RTPSession(false, false, false, IPAddress.Loopback, RTP_SESSION_PORT);
             bool hasAudio = false;
