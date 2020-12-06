@@ -5,7 +5,8 @@
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             mc:Ignorable="d"
             xmlns:views="clr-namespace:Xamarin_Forms_demo.Views"
-            x:Class="Xamarin_Forms_demo.Views.MainPage">
+            x:Class="Xamarin_Forms_demo.Views.MainPage"
+            Visual="Material">
 
     <FlyoutPage.Flyout>
         <views:MenuPage />
@@ -14,7 +15,7 @@
     <FlyoutPage.Detail>
         <NavigationPage>
             <x:Arguments>
-                <views:CanvasPage />
+                <views:StudyTabbedPage />
             </x:Arguments>
             <NavigationPage.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">

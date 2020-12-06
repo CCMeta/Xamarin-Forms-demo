@@ -5,11 +5,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.SubjectsPage"
-             Title="New Item" Visual="Material">
+             Title="Subjects">
     <ContentPage.Resources>
         <StyleSheet>
             <![CDATA[
-            Label {
+            Grid {
+                border-bottom: 1px solid #000000;
             }
 
             ]]>
@@ -17,7 +18,7 @@
     </ContentPage.Resources>
 
     <CollectionView x:Name="CollectionView" 
-                    ItemsSource="{Binding subjects}"
+                    ItemsSource="{Binding Subjects}"
                     EmptyView="No items to display">
         <!--Built in Cells-->
         <CollectionView.ItemTemplate>

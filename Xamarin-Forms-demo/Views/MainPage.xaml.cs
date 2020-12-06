@@ -17,11 +17,11 @@ namespace Xamarin_Forms_demo.Views
 
             FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
 
-            //MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
-            MenuPages.Add((int)MenuItemType.Browse, new NavigationPage(new ItemsPage()));
-            MenuPages.Add((int)MenuItemType.About, new NavigationPage(new AboutPage()));
-            MenuPages.Add((int)MenuItemType.Canvas, new NavigationPage(new CanvasPage()));
-            MenuPages.Add((int)MenuItemType.Subjects, new NavigationPage(new SubjectsPage()));
+            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            //MenuPages.Add((int)MenuItemType.Browse, new NavigationPage(new ItemsPage()));
+            //MenuPages.Add((int)MenuItemType.About, new NavigationPage(new AboutPage()));
+            //MenuPages.Add((int)MenuItemType.Canvas, new NavigationPage(new CanvasPage()));
+            //MenuPages.Add((int)MenuItemType.Subjects, new NavigationPage(new SubjectsPage()));
         }
 
         public async Task NavigateFromMenu(int id)
@@ -53,7 +53,7 @@ namespace Xamarin_Forms_demo.Views
 
                 if (Device.RuntimePlatform == Device.Android)
                     await Task.Delay(100);
-
+                
                 IsPresented = false;
             }
         }
