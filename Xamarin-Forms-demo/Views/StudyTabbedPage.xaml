@@ -6,21 +6,21 @@
             x:Class="Xamarin_Forms_demo.Views.StudyTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom">
 
-    <ContentPage Title="Class">
+    <views:ClassroomPage Title="Class">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" Size="44" />
         </ContentPage.IconImageSource>
-    </ContentPage>
-    <ContentPage Title="Test">
+    </views:ClassroomPage>
+    <views:TestPage Title="Test">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid" Size="44" />
         </ContentPage.IconImageSource>
-    </ContentPage>
-    <ContentPage Title="Data" >
+    </views:TestPage>
+    <views:DataPage Title="Data">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid" Size="44" />
         </ContentPage.IconImageSource>
-    </ContentPage>
+    </views:DataPage>
     <views:SubjectsPage Title="Subjects">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" Size="44" />

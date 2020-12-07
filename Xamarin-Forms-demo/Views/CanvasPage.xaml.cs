@@ -24,9 +24,8 @@ namespace Xamarin_Forms_demo.Views
         
         public CanvasPage()
         {
-            Title = "CanvasPage";
             InitializeComponent();
-
+            Title = "CanvasPage";
         }
 
         public void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)

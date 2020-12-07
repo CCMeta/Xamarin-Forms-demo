@@ -40,6 +40,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\SubjectPage.xaml.cs">
+      <DependentUpon>SubjectPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DataPage.xaml.cs">
+      <DependentUpon>DataPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ClassroomPage.xaml.cs">
+      <DependentUpon>ClassroomPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\BaseContentPage.xaml.cs">
       <DependentUpon>BaseContentPage.xaml</DependentUpon>
     </Compile>

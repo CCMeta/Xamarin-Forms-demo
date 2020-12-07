@@ -30,6 +30,7 @@ namespace Xamarin_Forms_demo.Views
         async void OnSelectionItemChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = e.CurrentSelection.FirstOrDefault() as Subjects;
+            await Navigation.PushModalAsync(new NavigationPage(new SubjectPage(selected)));
             await DisplayAlert($"{selected.vname}", $"{selected.info}", "OK");
         }
     }
