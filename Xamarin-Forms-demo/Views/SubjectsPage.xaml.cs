@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin_Forms_demo.Models;
@@ -26,15 +27,10 @@ namespace Xamarin_Forms_demo.Views
             CollectionView.ItemsSource = Subjects;
         }
 
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        async void OnSelectionItemChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.Item == null)
-                return;
-
-            await DisplayAlert("Item Tapped", "An item was tapped.", "OK");
-
-            //Deselect Item
-            ((ListView)sender).SelectedItem = null;
+            var selected = e.CurrentSelection.FirstOrDefault() as Subjects;
+            await DisplayAlert($"{selected.vname}", $"{selected.info}", "OK");
         }
     }
 }

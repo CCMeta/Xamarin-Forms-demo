@@ -10,7 +10,6 @@
         <StyleSheet>
             <![CDATA[
             Grid {
-                border-bottom: 1px solid #000000;
             }
 
             ]]>
@@ -19,8 +18,8 @@
 
     <CollectionView x:Name="CollectionView" 
                     ItemsSource="{Binding Subjects}"
-                    EmptyView="No items to display">
-        <!--Built in Cells-->
+                    SelectionMode="Single" 
+                    SelectionChanged="OnSelectionItemChanged">
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="20">
