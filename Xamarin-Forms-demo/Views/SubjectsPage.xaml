@@ -19,7 +19,8 @@
     <CollectionView x:Name="CollectionView" 
                     ItemsSource="{Binding Subjects}"
                     SelectionMode="Single" 
-                    SelectionChanged="OnSelectionItemChanged">
+                    SelectionChanged="OnSelectionItemChanged"
+                    ItemSizingStrategy="MeasureFirstItem">
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="20">

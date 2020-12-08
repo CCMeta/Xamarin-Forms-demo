@@ -6,5 +6,28 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.SubjectPage"
              Title="{Binding Title}">
-    
+    <ScrollView>
+    <StackLayout>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Grid.RowSpan="2"
+                       Source="{Binding Img}"
+                       Aspect="AspectFill" />
+            <Label Grid.Column="1" Grid.ColumnSpan="2"
+                           Padding="5,0"
+                       Text="{Binding vname}"
+                       FontAttributes="Bold" />
+            <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" MaxLines="6"
+                           Padding="5,0"
+                       Text="{Binding info}" />
+        </Grid>
+        <Label Padding="5,0" Text="{Binding summary}"  FontAttributes="Italic"  />
+        <Label Padding="5,0" Text="{Binding summary}"  FontAttributes="Italic"  />
+    </StackLayout>
+    </ScrollView>
 </ContentPage>

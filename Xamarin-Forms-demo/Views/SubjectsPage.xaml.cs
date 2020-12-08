@@ -31,7 +31,7 @@ namespace Xamarin_Forms_demo.Views
         {
             var selected = e.CurrentSelection.FirstOrDefault() as Subjects;
             await Navigation.PushModalAsync(new NavigationPage(new SubjectPage(selected)));
-            await DisplayAlert($"{selected.vname}", $"{selected.info}", "OK");
+            //await DisplayAlert($"{selected.vname}", $"{selected.info}", "OK");
         }
     }
 }

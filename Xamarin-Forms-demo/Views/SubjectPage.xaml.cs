@@ -12,6 +12,7 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             Title = subject.vname;
+            BindingContext = subject;
         }
         void OnMediaOpened(object sender, EventArgs e)
         {

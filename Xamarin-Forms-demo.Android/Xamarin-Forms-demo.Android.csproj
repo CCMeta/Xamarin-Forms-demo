@@ -47,6 +47,8 @@
     <AndroidTlsProvider>
     </AndroidTlsProvider>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
