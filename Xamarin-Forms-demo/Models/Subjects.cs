@@ -11,7 +11,8 @@ namespace Xamarin_Forms_demo.Models
         public string img { get; set; }
         public Uri Img
         {
-            get => new Uri("https://imgs.gamersky.com/ku/2019/ku_persona5r.jpg");
+            //get => new Uri("https://imgs.gamersky.com/ku/2019/ku_persona5r.jpg");
+            get => new Uri("https:" + img);
         }
         public string info { get; set; }
         public string score { get; set; }

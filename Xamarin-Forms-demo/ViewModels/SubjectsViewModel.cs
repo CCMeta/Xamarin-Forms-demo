@@ -12,7 +12,7 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class SubjectsViewModel : BaseViewModel
     {
-        private const string JSON_DATA = "https://ccmeta.com/Subjects.json";
+        private readonly string path = "/api/subjects";
 
         public SubjectsViewModel()
         {
@@ -22,9 +22,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public async Task<ObservableCollection<Subjects>> GetSubjectsAsync()
         {
-            var httpClient = await new HttpClient().GetAsync(JSON_DATA);
-            var stream = await httpClient.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<ObservableCollection<Subjects>>(stream);
+            return await HttpRequest.GetAsync<ObservableCollection<Subjects>>(path);
         }
 
         public ICommand OpenWebCommand { get; }
