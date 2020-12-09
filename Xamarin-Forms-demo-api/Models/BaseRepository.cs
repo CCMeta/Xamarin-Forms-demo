@@ -23,11 +23,9 @@ namespace Xamarin_Forms_demo_api.Models
         {
             try
             {
-                await using (var connection = new MySqlConnection(_connectionString))
-                {
-                    await connection.OpenAsync();
-                    return await getData(connection);
-                }
+                await using var connection = new MySqlConnection(_connectionString);
+                await connection.OpenAsync();
+                return await getData(connection);
             }
             catch (TimeoutException ex)
             {
@@ -44,11 +42,9 @@ namespace Xamarin_Forms_demo_api.Models
         {
             try
             {
-                await using (var connection = new MySqlConnection(_connectionString))
-                {
-                    await connection.OpenAsync();
-                    await getData(connection);
-                }
+                await using var connection = new MySqlConnection(_connectionString);
+                await connection.OpenAsync();
+                await getData(connection);
             }
             catch (TimeoutException ex)
             {
@@ -65,12 +61,10 @@ namespace Xamarin_Forms_demo_api.Models
         {
             try
             {
-                await using (var connection = new MySqlConnection(_connectionString))
-                {
-                    await connection.OpenAsync();
-                    var data = await getData(connection);
-                    return await process(data);
-                }
+                await using var connection = new MySqlConnection(_connectionString);
+                await connection.OpenAsync();
+                var data = await getData(connection);
+                return await process(data);
             }
             catch (TimeoutException ex)
             {

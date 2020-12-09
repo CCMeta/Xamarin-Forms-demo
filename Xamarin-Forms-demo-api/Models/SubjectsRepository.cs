@@ -14,12 +14,12 @@ namespace Xamarin_Forms_demo_api.Models
 
         }
 
-        public async Task<IEnumerable<Subjects>> GetSubjects(int limit = 6)
+        public async Task<IEnumerable<Subjects>> GetSubjects(int page = 1, int limit = 5)
         {
-            var sql = "SELECT * FROM subjects LIMIT @limit";
+            var sql = "SELECT * FROM subjects LIMIT @limit OFFSET @from";
             return await WithConnection(async conn =>
             {
-                return await conn.QueryAsync<Subjects>(sql, new { limit });
+                return await conn.QueryAsync<Subjects>(sql, new { from = (page - 1) * limit, limit });
             });
 
         }

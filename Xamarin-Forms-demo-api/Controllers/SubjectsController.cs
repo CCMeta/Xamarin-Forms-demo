@@ -1,6 +1,7 @@
 ﻿//using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin_Forms_demo_api.Models;
@@ -22,7 +23,8 @@ namespace Xamarin_Forms_demo_api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Subjects>> GetAsync()
         {
-            return await _ProductRepository.GetSubjects();
+            string page = HttpContext.Request.Query.TryGetValue("fuck", out var StringValues) ? StringValues.ToString() : "1";
+            return await _ProductRepository.GetSubjects(page: Convert.ToInt32(page), limit: 5);
         }
 
         // GET api/<SubjectsController>/5
