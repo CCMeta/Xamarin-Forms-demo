@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin_Forms_demo.Models;
@@ -11,27 +13,26 @@ namespace Xamarin_Forms_demo.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SubjectsPage : ContentPage
     {
-        SubjectsViewModel subjectsViewModel;
-        public ObservableCollection<Subjects> Subjects { get; set; }
+        public SubjectsViewModel SubjectsViewModel;
 
         public SubjectsPage()
         {
             InitializeComponent();
-            GetSubjectsAsync();
+            SubjectsViewModel = new SubjectsViewModel();
+            BindingContext = SubjectsViewModel;
         }
 
-        public async void GetSubjectsAsync()
-        {
-            subjectsViewModel = new SubjectsViewModel();
-            Subjects = await subjectsViewModel.GetSubjectsAsync();
-            CollectionView.ItemsSource = Subjects;
-        }
 
         async void OnSelectionItemChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = e.CurrentSelection.FirstOrDefault() as Subjects;
             await Navigation.PushModalAsync(new NavigationPage(new SubjectPage(selected)));
-            //await DisplayAlert($"{selected.vname}", $"{selected.info}", "OK");
+        }
+
+        public void OnRemainingItemsThresholdReached(object sender, EventArgs e)
+        {
+            Console.WriteLine("fuck this OnRemainingItemsThresholdReached ");
+            //SubjectsViewModel.GetSubjectsAsync();
         }
     }
 }

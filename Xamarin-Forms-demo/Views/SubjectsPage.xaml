@@ -17,7 +17,11 @@
     </ContentPage.Resources>
 
     <CollectionView x:Name="CollectionView" 
+                    VerticalScrollBarVisibility="Always"
                     ItemsSource="{Binding Subjects}"
+                    ItemsUpdatingScrollMode="KeepScrollOffset"
+                    RemainingItemsThreshold="0"
+                    RemainingItemsThresholdReachedCommand="{Binding GetSubjectsCommand}"
                     SelectionMode="Single" 
                     SelectionChanged="OnSelectionItemChanged"
                     ItemSizingStrategy="MeasureFirstItem">

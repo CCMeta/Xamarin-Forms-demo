@@ -17,11 +17,11 @@ namespace Xamarin_Forms_demo.ViewModels
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public readonly static IConfiguration _AppConfiguration = AppConfiguration.GetInstence();
-        public static string Domain
+        public static string Host
         {
-            get { return _AppConfiguration.GetValue<string>("Domain"); }
+            get { return _AppConfiguration.GetValue<string>("Host"); }
         }
-        public static HttpRequest HttpRequest = new HttpRequest(Domain);
+        public HttpRequest HttpRequest = new HttpRequest(Host);
         bool isBusy = false;
         public bool IsBusy
         {
