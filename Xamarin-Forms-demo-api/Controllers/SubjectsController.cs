@@ -23,7 +23,7 @@ namespace Xamarin_Forms_demo_api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Subjects>> GetAsync()
         {
-            string page = HttpContext.Request.Query.TryGetValue("fuck", out var StringValues) ? StringValues.ToString() : "1";
+            string page = HttpContext.Request.Query.TryGetValue("p", out var StringValues) ? StringValues.ToString() : "1";
             return await _ProductRepository.GetSubjects(page: Convert.ToInt32(page), limit: 5);
         }
 
