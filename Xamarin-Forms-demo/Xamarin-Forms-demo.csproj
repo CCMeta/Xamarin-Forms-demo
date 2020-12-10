@@ -53,19 +53,19 @@
     <Compile Update="Views\SubjectPage.xaml.cs">
       <DependentUpon>SubjectPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\DataPage.xaml.cs">
-      <DependentUpon>DataPage.xaml</DependentUpon>
+    <Compile Update="Views\StudyPages\DataIndexPage.xaml.cs">
+      <DependentUpon>DataIndexPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\TestPage.xaml.cs">
-      <DependentUpon>TestPage.xaml</DependentUpon>
+    <Compile Update="Views\StudyPages\TestIndexPage.xaml.cs">
+      <DependentUpon>TestIndexPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\ClassroomPage.xaml.cs">
-      <DependentUpon>ClassroomPage.xaml</DependentUpon>
+    <Compile Update="Views\StudyPages\ClassIndexPage.xaml.cs">
+      <DependentUpon>ClassIndexPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\BaseContentPage.xaml.cs">
       <DependentUpon>BaseContentPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\StudyTabbedPage.xaml.cs">
+    <Compile Update="Views\StudyPages\StudyTabbedPage.xaml.cs">
       <DependentUpon>StudyTabbedPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -74,7 +74,7 @@
     <EmbeddedResource Update="Views\SubjectsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\StudyTabbedPage.xaml">
+    <EmbeddedResource Update="Views\StudyPages\StudyTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

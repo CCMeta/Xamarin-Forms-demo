@@ -5,9 +5,9 @@ using Xamarin.Forms;
 namespace Xamarin_Forms_demo.Views
 {
     [DesignTimeVisible(false)]
-    public partial class TestPage : ContentPage
+    public partial class DataIndexPage : ContentPage
     {
-        public TestPage()
+        public DataIndexPage()
         {
             InitializeComponent();
         }
