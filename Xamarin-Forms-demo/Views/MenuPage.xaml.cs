@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
@@ -14,13 +15,11 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
 
-            menuItems = new List<HomeMenuItem>
+            menuItems = new List<HomeMenuItem>{ };
+            foreach (var item in Enum.GetValues(typeof(MenuItemType)))
             {
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" },
-                new HomeMenuItem {Id = MenuItemType.Subjects, Title="Subjects" },
-                new HomeMenuItem {Id = MenuItemType.Canvas, Title="Canvas" }
-            };
+                menuItems.Add(new HomeMenuItem { Id = Convert.ToInt32(item), Title = item.ToString() });
+            }
 
             ListViewMenu.ItemsSource = menuItems;
 
@@ -30,7 +29,7 @@ namespace Xamarin_Forms_demo.Views
                 if (e.SelectedItem == null)
                     return;
 
-                var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+                var id = ((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
         }

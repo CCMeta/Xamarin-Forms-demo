@@ -50,6 +50,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\SNSPages\PostsContentPage.xaml.cs">
+      <DependentUpon>PostsContentPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SubjectPage.xaml.cs">
       <DependentUpon>SubjectPage.xaml</DependentUpon>
     </Compile>

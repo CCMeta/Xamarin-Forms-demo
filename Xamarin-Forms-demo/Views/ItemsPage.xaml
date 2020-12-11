@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:Vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
+             xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ItemsPage"
              Title="{Binding Title}"
@@ -20,7 +20,7 @@
             <ColumnDefinition  Width="*"/>
             <ColumnDefinition  Width="*"/>
         </Grid.ColumnDefinitions>
-        <Vlc:VideoView x:Name="VlcVideoView" Grid.Row="0" Grid.Column="0" />
+        <vlc:VideoView x:Name="VlcVideoView" Grid.Row="0" Grid.Column="0" />
         <Button x:Name="VlcVideoStart" Clicked="OnPlayStarted" Grid.Row="1" Grid.Column="1" Text="Start"></Button>
 
     </Grid>

@@ -33,7 +33,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public SubjectsViewModel()
         {
-            Title = "About";
+            Title = "SubjectsViewModel";
             GetSubjectsCommand = new Command(() =>
             {
                 GetSubjectsAsync();
