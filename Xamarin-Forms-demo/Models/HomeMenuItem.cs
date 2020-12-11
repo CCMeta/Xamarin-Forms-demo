@@ -21,30 +21,16 @@ namespace Xamarin_Forms_demo.Models
 
         public static Page GetPageById(int id)
         {
-            Page page;
-            switch (id)
+            Page page = id switch
             {
-                case (int)MenuItemType.Posts:
-                    page = new PostsContentPage();
-                    break;
-                case (int)MenuItemType.Browse:
-                    page = new ItemsPage();
-                    break;
-                case (int)MenuItemType.About:
-                    page = new AboutPage();
-                    break;
-                case (int)MenuItemType.Canvas:
-                    page = new CanvasPage();
-                    break;
-                case (int)MenuItemType.Subjects:
-                    page = new SubjectsPage();
-                    break;
-                case (int)MenuItemType.StudyTabbed:
-                    page = new StudyTabbedPage();
-                    break;
-                default:
-                    throw new System.Exception("Nav Bar Is Fucked");
-            }
+                (int)MenuItemType.Posts => new PostsContentPage(),
+                (int)MenuItemType.Browse => new ItemsPage(),
+                (int)MenuItemType.About => new AboutPage(),
+                (int)MenuItemType.Canvas => new CanvasPage(),
+                (int)MenuItemType.Subjects => new SubjectsPage(),
+                (int)MenuItemType.StudyTabbed => new StudyTabbedPage(),
+                _ => throw new System.Exception("Nav Bar Is Fucked"),
+            };
             return page;
         }
     }

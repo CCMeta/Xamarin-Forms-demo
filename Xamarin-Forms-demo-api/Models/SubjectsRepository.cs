@@ -14,7 +14,7 @@ namespace Xamarin_Forms_demo_api.Models
 
         }
 
-        public async Task<IEnumerable<Subjects>> GetSubjects(int page = 1, int limit = 5)
+        public async Task<IEnumerable<Subjects>> GetList(int page = 1, int limit = 5)
         {
             var sql = "SELECT * FROM subjects LIMIT @limit OFFSET @from";
             return await WithConnection(async conn =>

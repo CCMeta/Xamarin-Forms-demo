@@ -10,7 +10,7 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : FlyoutPage
     {
-        Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+        Dictionary<int, NavigationPage> MenuPages;
         public MainPage()
         {
             InitializeComponent();

@@ -10,43 +10,43 @@ namespace Xamarin_Forms_demo_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectsController : ControllerBase
+    public class PostsController : ControllerBase
     {
-        private readonly SubjectsRepository _SubjectsController;
+        private readonly PostsRepository _PostsRepository;
 
-        public SubjectsController(SubjectsRepository SubjectsController)
+        public PostsController(PostsRepository PostsRepository)
         {
-            _SubjectsController = SubjectsController;
+            _PostsRepository = PostsRepository;
         }
 
-        // GET: api/<SubjectsController>
+        // GET: api/<PostsController>
         [HttpGet]
-        public async Task<IEnumerable<Subjects>> GetAsync()
+        public async Task<IEnumerable<Posts>> GetAsync()
         {
             string page = HttpContext.Request.Query.TryGetValue("p", out var StringValues) ? StringValues.ToString() : "1";
-            return await _SubjectsController.GetList(page: Convert.ToInt32(page), limit: 5);
+            return await _PostsRepository.GetList(page: Convert.ToInt32(page), limit: 5);
         }
 
-        // GET api/<SubjectsController>/5
+        // GET api/<PostsController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<SubjectsController>
+        // POST api/<PostsController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<SubjectsController>/5
+        // PUT api/<PostsController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<SubjectsController>/5
+        // DELETE api/<PostsController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

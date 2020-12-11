@@ -15,7 +15,6 @@ namespace Xamarin_Forms_demo_api.Models
         protected BaseRepository(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("Default");
-            //_connectionString = "server=ccmeta.com;user=root;password=19897216;database=bangumi";
         }
 
         // use for buffered queries that return a type

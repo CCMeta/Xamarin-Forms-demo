@@ -1,0 +1,27 @@
+﻿using Dapper;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Xamarin_Forms_demo_api.Models
+{
+    public class PostsRepository : BaseRepository
+    {
+        public PostsRepository(IConfiguration configuration) : base(configuration)
+        {
+
+        }
+
+        public async Task<IEnumerable<Posts>> GetList(int page = 1, int limit = 5)
+        {
+            var sql = "SELECT * FROM posts ORDER BY id DESC LIMIT @limit OFFSET @from";
+            return await WithConnection(async conn =>
+            {
+                return await conn.QueryAsync<Posts>(sql, new { from = (page - 1) * limit, limit });
+            });
+
+        }
+    }
+}
