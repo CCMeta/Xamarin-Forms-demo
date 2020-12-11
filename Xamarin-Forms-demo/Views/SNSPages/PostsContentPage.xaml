@@ -10,4 +10,33 @@
     <ContentPage.BindingContext>
         <vm:PostsViewModel />
     </ContentPage.BindingContext>
+    <RefreshView IsRefreshing="{Binding IsBusy}"
+             Command="{Binding GetListCommand}">
+        <CollectionView ItemsSource="{Binding Posts}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Grid.RowSpan="2"
+                       Source="https://wx3.sinaimg.cn/large/005TR3jLly1glk4dbpmijj60dw0dwwfd02.jpg"
+                       Aspect="AspectFill" />
+                        <Label Grid.Column="1" Grid.ColumnSpan="2"
+                           Padding="5,0"
+                       Text="{Binding created_at}"
+                       FontAttributes="Bold" />
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" MaxLines="6"
+                           Padding="5,0"
+                       Text="{Binding content}"
+                       FontAttributes="Italic"
+                       VerticalOptions="EndAndExpand" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>

@@ -46,16 +46,13 @@ namespace Xamarin_Forms_demo.ViewModels
             if (IsBusy)
                 return;
             IsBusy = true;
-            var page = (Math.Ceiling((double)Subjects.Count() / 5) + 1).ToString();
+            var page = Math.Ceiling((double)(Subjects.Count() + 1) / 5).ToString();
             var queryParams = new Dictionary<string, string>() {
-                    { "fuck", page }
+                    { "p", page }
             };
             var list = await HttpRequest.GetAsync<ObservableCollection<Subjects>>(path, queryParams: queryParams);
-            if (list.Count() > 0)
-            {
-                Subjects = list;
-                IsBusy = false;
-            }
+            Subjects = list;
+            IsBusy = false;
         }
 
         public ICommand OpenWebCommand { get; }
