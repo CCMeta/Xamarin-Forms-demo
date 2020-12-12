@@ -26,7 +26,6 @@ namespace Xamarin_Forms_demo.ViewModels
                 {
                     subjects.Add(item);
                 }
-                OnPropertyChanged("Subjects");
             }
         }
         public ICommand GetSubjectsCommand { protected set; get; }

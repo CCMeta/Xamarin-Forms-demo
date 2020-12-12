@@ -20,11 +20,9 @@ namespace Xamarin_Forms_demo.ViewModels
             {
                 foreach (var item in value)
                 {
-                    posts.Add(item);
+                    posts.Insert(0, item);
                 }
-                OnPropertyChanged("Posts");
                 IsBusy = false;
-                OnPropertyChanged("IsBusy");
             }
         }
         public ICommand GetListCommand { protected set; get; }
@@ -44,8 +42,7 @@ namespace Xamarin_Forms_demo.ViewModels
             var queryParams = new Dictionary<string, string>() {
                     { "p", page }
             };
-            var list = await HttpRequest.GetAsync<ObservableCollection<Posts>>(path, queryParams: queryParams);
-            Posts = list;
+            Posts = await HttpRequest.GetAsync<ObservableCollection<Posts>>(path, queryParams: queryParams);
         }
     }
 }

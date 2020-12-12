@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace Xamarin_Forms_demo.Views
