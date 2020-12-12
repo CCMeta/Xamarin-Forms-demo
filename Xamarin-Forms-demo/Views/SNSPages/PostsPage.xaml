@@ -5,11 +5,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              xmlns:vm="clr-namespace:Xamarin_Forms_demo.ViewModels"
-             x:Class="Xamarin_Forms_demo.Views.PostsContentPage"
+             x:Class="Xamarin_Forms_demo.Views.PostsPage"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:PostsViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarItem_ClickedAsync">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xf56b;" FontFamily="FontAwesome5Solid" Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <RefreshView IsRefreshing="{Binding IsBusy}"
              Command="{Binding GetListCommand}">
         <CollectionView  x:Name="collectionView" 

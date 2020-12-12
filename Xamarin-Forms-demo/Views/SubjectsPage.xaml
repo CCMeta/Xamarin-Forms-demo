@@ -6,15 +6,7 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.SubjectsPage"
              Title="{Binding Title}">
-    <ContentPage.Resources>
-        <StyleSheet>
-            <![CDATA[
-            Grid {
-            }
 
-            ]]>
-        </StyleSheet>
-    </ContentPage.Resources>
 
     <CollectionView x:Name="CollectionView" 
                     VerticalScrollBarVisibility="Always"

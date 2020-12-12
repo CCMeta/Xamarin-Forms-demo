@@ -50,8 +50,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\SNSPages\PostsContentPage.xaml.cs">
-      <DependentUpon>PostsContentPage.xaml</DependentUpon>
+    <Compile Update="Views\SNSPages\SendPostPage.xaml.cs">
+      <DependentUpon>SendPostPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SNSPages\PostsPage.xaml.cs">
+      <DependentUpon>PostsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SubjectPage.xaml.cs">
       <DependentUpon>SubjectPage.xaml</DependentUpon>
@@ -65,8 +68,8 @@
     <Compile Update="Views\StudyPages\ClassIndexPage.xaml.cs">
       <DependentUpon>ClassIndexPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\BaseContentPage.xaml.cs">
-      <DependentUpon>BaseContentPage.xaml</DependentUpon>
+    <Compile Update="Views\_TemplatePage.xaml.cs">
+      <DependentUpon>_TemplatePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StudyPages\StudyTabbedPage.xaml.cs">
       <DependentUpon>StudyTabbedPage.xaml</DependentUpon>

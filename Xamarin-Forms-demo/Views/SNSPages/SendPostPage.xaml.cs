@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace Xamarin_Forms_demo.Views
 {
     [DesignTimeVisible(false)]
-    public partial class PostsContentPage : ContentPage
+    public partial class SendPostPage : ContentPage
     {
-        public PostsContentPage()
+        public SendPostPage()
         {
             InitializeComponent();
         }
@@ -30,6 +29,10 @@ namespace Xamarin_Forms_demo.Views
         void OnSeekCompleted(object sender, EventArgs e)
         {
             Console.WriteLine("Seek completed.");
+        }
+        async void ToolbarItem_ClickedAsync(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SendPostPage());
         }
     }
 }
