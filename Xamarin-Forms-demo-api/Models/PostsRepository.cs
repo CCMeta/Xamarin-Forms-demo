@@ -21,7 +21,15 @@ namespace Xamarin_Forms_demo_api.Models
             {
                 return await conn.QueryAsync<Posts>(sql, new { from = (page - 1) * limit, limit });
             });
+        }
 
+        public async Task<int> Post(Posts post)
+        {
+            var sql = "INSERT INTO posts SET content = @content, uid = @uid";
+            return await WithConnection(async conn =>
+            {
+                return await conn.ExecuteAsync(sql, new { post.content, post.uid });
+            });
         }
     }
 }

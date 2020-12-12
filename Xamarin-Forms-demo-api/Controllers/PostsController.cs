@@ -37,8 +37,11 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // POST api/<PostsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostAsync([FromBody] Posts post)
         {
+            if (await _PostsRepository.Post(post) > 0)
+                return Ok(post);
+            return StatusCode(500);
         }
 
         // PUT api/<PostsController>/5
