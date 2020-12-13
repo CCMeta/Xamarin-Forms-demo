@@ -21,13 +21,9 @@ namespace Xamarin_Forms_demo_api.Services
         {
             //context.Request.Headers.Add("TOKEN", "a");
             if (context.Request.Headers.TryGetValue("TOKEN", out var token))
-            {
-                // get uid by token 
                 if (_sessionService.Sessions.TryGetValue(token, out int uid))
-                {
                     context.Items["uid"] = uid;
-                }
-            }
+
             await _next(context);
         }
     }

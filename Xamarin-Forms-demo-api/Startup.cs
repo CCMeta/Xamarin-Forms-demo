@@ -57,18 +57,21 @@ namespace Xamarin_Forms_demo_api
             //SESSION 
             app.UseMiddleware<AuthMiddleware>();
             //SESSION CHECK
-            app.Use(async (context, next) =>
-            {
-                if (!context.Items.ContainsKey("uid"))
-                {
-                    context.Response.StatusCode = 401;
-                    await context.Response.CompleteAsync();
-                }
-                else
-                {
-                    await next.Invoke();
-                }
-            });
+            app.UseWhen(context => !context.Request.Path.Value.ToLower().Contains("/token"), static (IApplicationBuilder app) =>
+              {
+                  app.Use(async (context, next) =>
+                  {
+                      if (!context.Items.ContainsKey("uid"))
+                      {
+                          context.Response.StatusCode = 401;
+                          await context.Response.CompleteAsync();
+                      }
+                      else
+                      {
+                          await next.Invoke();
+                      }
+                  });
+              });
 
             app.UseEndpoints(endpoints =>
             {
