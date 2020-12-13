@@ -1,22 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Xamarin_Forms_demo_api.Models;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using MySqlConnector;
 using System.Text.Encodings.Web;
-using System.Text.Unicode;
+using Xamarin_Forms_demo_api.Services;
 
 namespace Xamarin_Forms_demo_api
 {
@@ -32,7 +22,7 @@ namespace Xamarin_Forms_demo_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
+            services.AddSingleton<SessionService>()
                 .AddTransient<SubjectsRepository>()
                 .AddTransient<PostsRepository>();
             services.AddControllers().AddJsonOptions(options =>
@@ -60,6 +50,25 @@ namespace Xamarin_Forms_demo_api
             app.UseRouting();
 
             app.UseAuthorization();
+            //app.UseResponseCaching();
+            //app.UseResponseCompression();
+            //app.UseStaticFiles();
+
+            //SESSION 
+            app.UseMiddleware<AuthMiddleware>();
+            //SESSION CHECK
+            app.Use(async (context, next) =>
+            {
+                if (!context.Items.ContainsKey("uid"))
+                {
+                    context.Response.StatusCode = 401;
+                    await context.Response.CompleteAsync();
+                }
+                else
+                {
+                    await next.Invoke();
+                }
+            });
 
             app.UseEndpoints(endpoints =>
             {

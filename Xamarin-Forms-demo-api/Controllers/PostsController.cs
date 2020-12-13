@@ -1,4 +1,5 @@
 ﻿//using Dapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System;
@@ -40,8 +41,8 @@ namespace Xamarin_Forms_demo_api.Controllers
         public async Task<IActionResult> PostAsync([FromBody] Posts post)
         {
             if (await _PostsRepository.Post(post) > 0)
-                return Ok(post);
-            return StatusCode(500);
+                return Ok();
+            return BadRequest();
         }
 
         // PUT api/<PostsController>/5
