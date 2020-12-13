@@ -24,6 +24,7 @@ namespace Xamarin_Forms_demo_api
         {
             services.AddSingleton<SessionService>()
                 .AddTransient<SubjectsRepository>()
+                .AddTransient<UsersRepository>()
                 .AddTransient<PostsRepository>();
             services.AddControllers().AddJsonOptions(options =>
             {

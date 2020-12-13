@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin_Forms_demo_api.Models;
+using Xamarin_Forms_demo_api.Services;
 
 namespace Xamarin_Forms_demo_api.Controllers
 {
@@ -10,6 +12,14 @@ namespace Xamarin_Forms_demo_api.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
+        private readonly UsersRepository _usersRepository;
+        private readonly SessionService _sessionService;
+
+        public TokenController(UsersRepository usersRepository, SessionService sessionService)
+        {
+            _usersRepository = usersRepository;
+            _sessionService = sessionService;
+        }
         // GET: api/<TokenController>
         [HttpGet]
         public IEnumerable<string> Get([FromHeader] string TOKEN)
@@ -26,8 +36,17 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // POST api/<TokenController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostAsync([FromBody] Users user)
         {
+            var result = await _usersRepository.Get(user);
+            if (result.Count() == 1)
+            {
+                var _user = result.First();
+                var token = _sessionService.CreatToken(_user.username);
+                _sessionService.Sessions.Add(token, _user.id);
+                return Ok(new { token, _user.username });
+            }
+            return NotFound(user);
         }
 
         // PUT api/<TokenController>/5
