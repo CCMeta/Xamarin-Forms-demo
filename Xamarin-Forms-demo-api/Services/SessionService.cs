@@ -9,18 +9,24 @@ namespace Xamarin_Forms_demo_api.Services
     {
         public Dictionary<string, int> sessions = new Dictionary<string, int>();
 
-        public SessionService()
+        public Dictionary<string, int> Sessions
         {
-            sessions.Add("a", 1);
-            sessions.Add("b", 2);
-            sessions.Add("c", 3);
-            sessions.Add("d", 4);
+            get { return sessions; }
+            set
+            {
+                sessions = value;
+            }
         }
 
-        public void Write(string message)
+        public SessionService()
         {
-            Console.WriteLine($"Service1: {message}");
+            Sessions.Add("a", 1);
+            Sessions.Add("b", 2);
+            Sessions.Add("c", 3);
+            Sessions.Add("d", 4);
         }
+
+
 
         private bool _disposed;
         public void Dispose()
