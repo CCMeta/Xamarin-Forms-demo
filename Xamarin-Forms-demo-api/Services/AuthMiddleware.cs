@@ -20,7 +20,7 @@ namespace Xamarin_Forms_demo_api.Services
         public async Task InvokeAsync(HttpContext context)
         {
             //context.Request.Headers.Add("TOKEN", "a");
-            if (context.Request.Headers.TryGetValue("TOKEN", out var token))
+            if (context.Request.Headers.TryGetValue("Authorization", out var token))
                 if (_sessionService.Sessions.TryGetValue(token, out int uid))
                     context.Items["uid"] = uid;
 

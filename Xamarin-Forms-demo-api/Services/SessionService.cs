@@ -32,7 +32,7 @@ namespace Xamarin_Forms_demo_api.Services
         {
             byte[] salt = new byte[16];
             RandomNumberGenerator.Create().GetBytes(salt);
-            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            return Convert.ToHexString(KeyDerivation.Pbkdf2(
                 password: uid,
                 salt: salt,
                 prf: KeyDerivationPrf.HMACSHA1,

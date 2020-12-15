@@ -1,21 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Net.Http.Json;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Web;
+using System.Net.Http.Headers;
 
 namespace Xamarin_Forms_demo.Services
 {
     public class HttpRequest
     {
         public readonly string _host;
+        private static string token = string.Empty;
+        public static string Token { get => token; set => token = value; }
+        public readonly HttpClient _httpClient = new HttpClient();
 
         public HttpRequest(string host)
         {
             _host = host;
+            Login();
+        }
+
+        public async void Login()
+        {
+            var fuck = new Dictionary<string, string>
+            {
+                { "username", "dingchun" },
+                { "password", "aaaaaa" }
+            };
+            var user = await PostAsync<Dictionary<string, string>>("/api/token", fuck);
+            if (!string.IsNullOrEmpty(user["token"]))
+            {
+                Token = user["token"];
+                return;
+            }
+            throw new Exception($"No token responsed result = {user}");
         }
 
         public async Task<T> GetAsync<T>(string path, Dictionary<string, string> queryParams)
@@ -23,13 +44,23 @@ namespace Xamarin_Forms_demo.Services
             using var content = new FormUrlEncodedContent(queryParams);
             var query = content.ReadAsStringAsync().Result;
             var uri = _host + path + "?" + query;
-            var httpClient = await new HttpClient().GetAsync(uri);
-            if (!httpClient.IsSuccessStatusCode)
+            if (!string.IsNullOrEmpty(Token))
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Token);
+            return await _httpClient.GetFromJsonAsync<T>(uri);
+        }
+
+        public async Task<T> PostAsync<T>(string path, Dictionary<string, string> queryParams)
+        {
+            using var content = new FormUrlEncodedContent(queryParams);
+            var uri = _host + path;
+            if (!string.IsNullOrEmpty(Token))
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Token);
+            var result = await _httpClient.PostAsJsonAsync(uri, queryParams);
+            if (!result.IsSuccessStatusCode)
             {
-                throw new HttpRequestException($"HTTP = {httpClient}");
+                throw new HttpRequestException($"HTTP = {result}");
             }
-            using var stream = await httpClient.Content.ReadAsStreamAsync();
-            return await JsonSerializer.DeserializeAsync<T>(stream);
+            return await result.Content.ReadFromJsonAsync<T>();
         }
 
     }

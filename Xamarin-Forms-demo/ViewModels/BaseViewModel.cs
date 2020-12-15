@@ -1,13 +1,10 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 using Xamarin.Forms;
-
 using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.Services;
 
@@ -15,20 +12,19 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        //public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         public readonly static IConfiguration _AppConfiguration = AppConfiguration.GetInstence();
+        public HttpRequest HttpRequest = new HttpRequest(Host);
         public static string Host
         {
             get { return _AppConfiguration.GetValue<string>("Host"); }
         }
-        public HttpRequest HttpRequest = new HttpRequest(Host);
         bool isBusy = false;
         public bool IsBusy
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
-
         string title = string.Empty;
         public string Title
         {

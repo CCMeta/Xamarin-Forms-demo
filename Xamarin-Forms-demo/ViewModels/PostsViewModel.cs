@@ -33,7 +33,7 @@ namespace Xamarin_Forms_demo.ViewModels
             {
                 GetListAsync();
             });
-            GetListAsync();
+            //GetListAsync();
         }
 
         public async void GetListAsync()
