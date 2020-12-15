@@ -10,7 +10,7 @@ namespace Xamarin_Forms_demo_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TokenController : ControllerBase
+    public class TokenController : DefaultController
     {
         private readonly UsersRepository _usersRepository;
         private readonly SessionService _sessionService;

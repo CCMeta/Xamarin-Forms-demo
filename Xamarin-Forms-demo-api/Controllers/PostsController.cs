@@ -1,8 +1,5 @@
-﻿//using Dapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
