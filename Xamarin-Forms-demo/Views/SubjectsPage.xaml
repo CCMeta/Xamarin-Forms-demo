@@ -27,7 +27,7 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Image Grid.Column="0" Grid.RowSpan="2"
-                       Source="{Binding Img}"
+                       Source="{Binding ImgUri}"
                        Aspect="AspectFill" />
                     <Label Grid.Column="1" Grid.ColumnSpan="2"
                            Padding="5,0"

@@ -32,6 +32,13 @@ namespace Xamarin_Forms_demo.ViewModels
             set { SetProperty(ref title, value); }
         }
 
+        public BaseViewModel()
+        {
+            var username = _AppConfiguration.GetValue<string>("Identity:Username");
+            var password = _AppConfiguration.GetValue<string>("Identity:Password");
+            HttpRequest.Login(username, password);
+        }
+
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
             Action onChanged = null)

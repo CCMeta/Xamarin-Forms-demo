@@ -20,17 +20,18 @@ namespace Xamarin_Forms_demo.Services
         public HttpRequest(string host)
         {
             _host = host;
-            Login();
         }
 
-        public async void Login()
+        public void Login(string username, string password)
         {
-            var fuck = new Dictionary<string, string>
+            var identity = new Dictionary<string, string>
             {
-                { "username", "dingchun" },
-                { "password", "aaaaaa" }
+                { "username", username },
+                { "password", password }
             };
-            var user = await PostAsync<Dictionary<string, string>>("/api/token", fuck);
+            var user = Task.Run(async () =>
+                 await PostAsync<Dictionary<string, string>>("/api/token", identity)
+            ).Result;
             if (!string.IsNullOrEmpty(user["token"]))
             {
                 Token = user["token"];

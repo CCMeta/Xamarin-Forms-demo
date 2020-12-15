@@ -26,14 +26,15 @@ namespace Xamarin_Forms_demo.ViewModels
             }
         }
         public ICommand GetListCommand { protected set; get; }
-        public PostsViewModel()
+
+        public PostsViewModel() : base()
         {
             Title = "PostsViewModel";
             GetListCommand = new Command(() =>
             {
                 GetListAsync();
             });
-            //GetListAsync();
+            GetListAsync();
         }
 
         public async void GetListAsync()

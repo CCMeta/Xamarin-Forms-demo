@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
 
@@ -30,7 +25,7 @@ namespace Xamarin_Forms_demo.ViewModels
         }
         public ICommand GetSubjectsCommand { protected set; get; }
 
-        public SubjectsViewModel()
+        public SubjectsViewModel():base()
         {
             Title = "SubjectsViewModel";
             GetSubjectsCommand = new Command(() =>

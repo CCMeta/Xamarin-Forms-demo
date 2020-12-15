@@ -6,7 +6,7 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class AboutViewModel : BaseViewModel
     {
-        public AboutViewModel()
+        public AboutViewModel() : base()
         {
             Title = "About";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));

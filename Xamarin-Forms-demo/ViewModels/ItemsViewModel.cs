@@ -1,25 +1,23 @@
 ﻿using Microsoft.Extensions.Logging;
 using Serilog;
+using SIPSorcery.Net;
+using SkiaSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.WebSockets;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Net;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
-using Xamarin_Forms_demo.Views;
-using SIPSorcery.Net;
-using System.Linq;
-using System.IO;
-using SkiaSharp;
 
 
 namespace Xamarin_Forms_demo.ViewModels
@@ -42,7 +40,7 @@ namespace Xamarin_Forms_demo.ViewModels
         private const int FFPLAY_DEFAULT_VIDEO_PORT = 15018;
         public static readonly string FULL_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + FFPLAY_DEFAULT_SDP_PATH;
 
-        public ItemsViewModel()
+        public ItemsViewModel() : base()
         {
             AddConsoleLogger();
             if (ClientWebSocket.State == WebSocketState.None)
