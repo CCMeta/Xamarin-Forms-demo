@@ -14,10 +14,17 @@ namespace Xamarin_Forms_demo_api.Controllers
     public class PostsController : ControllerBase
     {
         private readonly PostsRepository _PostsRepository;
+        private readonly int _uid;
 
         public PostsController(PostsRepository PostsRepository)
         {
             _PostsRepository = PostsRepository;
+            if (HttpContext.Items.TryGetValue("uid", out var uid))
+            {
+                _uid = (int)uid;
+                return;
+            }
+            throw new Exception("Controller Init _uid fucked");
         }
 
         // GET: api/<PostsController>
@@ -26,7 +33,7 @@ namespace Xamarin_Forms_demo_api.Controllers
         {
             string page = HttpContext.Request.Query.TryGetValue("p", out var p) ? p.ToString() : "1";
             //string order = HttpContext.Request.Query.TryGetValue("o", out var o) ? o.ToString() : "1";
-            return await _PostsRepository.GetList(page: Convert.ToInt32(page), limit: 5);
+            return await _PostsRepository.GetList(_uid, page: Convert.ToInt32(page), limit: 5);
         }
 
         // GET api/<PostsController>/5
@@ -40,6 +47,7 @@ namespace Xamarin_Forms_demo_api.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] Posts post)
         {
+            post.uid = _uid;
             if (await _PostsRepository.Post(post) > 0)
                 return Ok();
             return BadRequest();
