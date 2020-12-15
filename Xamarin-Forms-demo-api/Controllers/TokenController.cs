@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace Xamarin_Forms_demo_api.Controllers
         private readonly UsersRepository _usersRepository;
         private readonly SessionService _sessionService;
 
-        public TokenController(UsersRepository usersRepository, SessionService sessionService)
+        public TokenController(UsersRepository usersRepository, SessionService sessionService, IHttpContextAccessor context) : base(context)
         {
             _usersRepository = usersRepository;
             _sessionService = sessionService;

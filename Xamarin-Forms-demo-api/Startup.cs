@@ -26,6 +26,7 @@ namespace Xamarin_Forms_demo_api
                 .AddTransient<SubjectsRepository>()
                 .AddTransient<UsersRepository>()
                 .AddTransient<PostsRepository>();
+            services.AddHttpContextAccessor();
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;

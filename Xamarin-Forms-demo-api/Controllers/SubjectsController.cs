@@ -1,6 +1,5 @@
-﻿//using Dapper;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,11 +9,11 @@ namespace Xamarin_Forms_demo_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectsController : ControllerBase
+    public class SubjectsController : DefaultController
     {
         private readonly SubjectsRepository _SubjectsController;
 
-        public SubjectsController(SubjectsRepository SubjectsController)
+        public SubjectsController(SubjectsRepository SubjectsController, IHttpContextAccessor context) : base(context)
         {
             _SubjectsController = SubjectsController;
         }

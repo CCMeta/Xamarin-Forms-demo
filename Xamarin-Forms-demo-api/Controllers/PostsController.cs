@@ -1,5 +1,6 @@
 ﻿//using Dapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 using System;
@@ -11,20 +12,13 @@ namespace Xamarin_Forms_demo_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class PostsController : DefaultController
     {
         private readonly PostsRepository _PostsRepository;
-        private readonly int _uid;
 
-        public PostsController(PostsRepository PostsRepository)
+        public PostsController(PostsRepository PostsRepository, IHttpContextAccessor context) : base(context)
         {
             _PostsRepository = PostsRepository;
-            if (HttpContext.Items.TryGetValue("uid", out var uid))
-            {
-                _uid = (int)uid;
-                return;
-            }
-            throw new Exception("Controller Init _uid fucked");
         }
 
         // GET: api/<PostsController>
