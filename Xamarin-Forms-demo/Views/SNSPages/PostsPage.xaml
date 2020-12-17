@@ -7,9 +7,6 @@
              xmlns:vm="clr-namespace:Xamarin_Forms_demo.ViewModels"
              x:Class="Xamarin_Forms_demo.Views.PostsPage"
              Title="{Binding Title}">
-    <ContentPage.BindingContext>
-        <vm:PostsViewModel />
-    </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="ToolbarItem_ClickedAsync">
             <ToolbarItem.IconImageSource>

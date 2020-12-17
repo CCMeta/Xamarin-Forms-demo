@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
@@ -22,7 +23,6 @@ namespace Xamarin_Forms_demo.ViewModels
                 {
                     posts.Insert(0, item);
                 }
-                IsBusy = false;
             }
         }
         public ICommand GetListCommand { protected set; get; }
@@ -34,7 +34,6 @@ namespace Xamarin_Forms_demo.ViewModels
             {
                 GetListAsync();
             });
-            GetListAsync();
         }
 
         public async void GetListAsync()
@@ -44,6 +43,20 @@ namespace Xamarin_Forms_demo.ViewModels
                     { "p", page }
             };
             Posts = await HttpRequest.GetAsync<ObservableCollection<Posts>>(path, queryParams: queryParams);
+            if (Posts.Count > 0)
+                IsBusy = false;
         }
+
+        public async Task<bool> PostAsync(string content)
+        {
+            var queryParams = new Dictionary<string, string>() {
+                    { "content", content }
+            };
+            var result = await HttpRequest.PostAsync<Posts>(path, queryParams);
+            if (result.content.Length > 0)
+                return true;
+            return false;
+        }
+
     }
 }

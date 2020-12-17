@@ -7,9 +7,6 @@
              xmlns:vm="clr-namespace:Xamarin_Forms_demo.ViewModels"
              x:Class="Xamarin_Forms_demo.Views.SendPostPage"
              Title="{Binding Title}">
-    <ContentPage.BindingContext>
-        <vm:PostsViewModel />
-    </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="ToolbarItem_ClickedAsync">
             <ToolbarItem.IconImageSource>
@@ -17,4 +14,5 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
+    <Editor Placeholder="请输入要发送的状态 最大长度140" MaxLength="140" x:Name="PostEditor"></Editor>
 </ContentPage>

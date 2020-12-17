@@ -40,8 +40,8 @@ namespace Xamarin_Forms_demo_api.Controllers
         {
             post.uid = _uid;
             if (await _PostsRepository.Post(post) > 0)
-                return Ok();
-            return BadRequest();
+                return Ok(post);
+            return BadRequest(post);
         }
 
         // PUT api/<PostsController>/5
