@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
+using Xamarin_Forms_demo.Services;
 
 namespace Xamarin_Forms_demo.ViewModels
 {

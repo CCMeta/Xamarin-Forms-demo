@@ -13,12 +13,12 @@ namespace Xamarin_Forms_demo.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         //public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-        public readonly static IConfiguration _AppConfiguration = AppConfiguration.GetInstence();
-        public HttpRequest HttpRequest = new HttpRequest(Host);
-        public static string Host
-        {
-            get { return _AppConfiguration.GetValue<string>("Host"); }
-        }
+        private readonly static IConfiguration _appConfiguration = Services.AppConfiguration.GetInstence();
+        public static IConfiguration AppConfiguration => _appConfiguration;
+
+        private readonly HttpRequest _httpRequest = new HttpRequest(AppConfiguration.GetValue<string>("Host"));
+        public HttpRequest HttpRequest { get => _httpRequest; }
+
         bool isBusy = false;
         public bool IsBusy
         {
@@ -34,8 +34,8 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public BaseViewModel()
         {
-            var username = _AppConfiguration.GetValue<string>("Identity:Username");
-            var password = _AppConfiguration.GetValue<string>("Identity:Password");
+            var username = AppConfiguration.GetValue<string>("Identity:Username");
+            var password = AppConfiguration.GetValue<string>("Identity:Password");
             HttpRequest.Login(username, password);
         }
 

@@ -11,7 +11,7 @@ namespace Xamarin_Forms_demo
         {
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
             InitializeComponent();
-            //DependencyService.Register<MockDataStore>();
+            //DependencyService.Register<HttpRequest>();
             MainPage = new MainPage();
         }
 
