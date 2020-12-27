@@ -51,6 +51,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AudioPage.xaml.cs">
+      <DependentUpon>AudioPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SNSPages\SendPostPage.xaml.cs">
       <DependentUpon>SendPostPage.xaml</DependentUpon>
     </Compile>

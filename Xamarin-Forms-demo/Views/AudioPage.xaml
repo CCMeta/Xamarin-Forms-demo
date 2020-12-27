@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              mc:Ignorable="d"
-             x:Class="Xamarin_Forms_demo.Views.ItemsPage"
+             x:Class="Xamarin_Forms_demo.Views.AudioPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
     <ContentPage.ToolbarItems>

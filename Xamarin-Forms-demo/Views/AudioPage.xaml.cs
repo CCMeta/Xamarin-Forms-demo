@@ -10,7 +10,7 @@ using Xamarin_Forms_demo.ViewModels;
 namespace Xamarin_Forms_demo.Views
 {
     [DesignTimeVisible(false)]
-    public partial class ItemsPage : ContentPage
+    public partial class AudioPage : ContentPage
     {
         readonly LibVLC _libVLC;
         private readonly ItemsViewModel _ItemsViewModel = new ItemsViewModel();
@@ -20,7 +20,7 @@ namespace Xamarin_Forms_demo.Views
             "--skip-frames", "--sout-keep", "--sout-all",
             "--drop-late-frames","--rtsp-tcp"};
 
-        public ItemsPage()
+        public AudioPage()
         {
             InitializeComponent();
 

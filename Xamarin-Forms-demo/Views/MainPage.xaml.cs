@@ -15,7 +15,7 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
-            MenuPages.Add((int)MenuItemType.Browse, (NavigationPage)Detail);
+            MenuPages.Add((int)MenuItemType.Index, (NavigationPage)Detail);
         }
 
         public async Task NavigateFromMenu(int id)

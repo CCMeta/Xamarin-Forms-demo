@@ -5,12 +5,13 @@ namespace Xamarin_Forms_demo.Models
 {
     public enum MenuItemType
     {
-        Browse,
+        Index,
         About,
         Subjects,
         Canvas,
         StudyTabbed,
         Posts,
+        Audio,
     }
 
     public class HomeMenuItem
@@ -23,8 +24,8 @@ namespace Xamarin_Forms_demo.Models
         {
             Page page = id switch
             {
+                (int)MenuItemType.Audio => new AudioPage(),
                 (int)MenuItemType.Posts => new PostsPage(),
-                (int)MenuItemType.Browse => new ItemsPage(),
                 (int)MenuItemType.About => new AboutPage(),
                 (int)MenuItemType.Canvas => new CanvasPage(),
                 (int)MenuItemType.Subjects => new SubjectsPage(),
