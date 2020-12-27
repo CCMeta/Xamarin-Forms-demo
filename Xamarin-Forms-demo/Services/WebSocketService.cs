@@ -1,9 +1,7 @@
 ﻿using SIPSorcery.Net;
-using SkiaSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
@@ -14,8 +12,6 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin_Forms_demo.Models;
 
 namespace Xamarin_Forms_demo.Services
 {
@@ -25,21 +21,19 @@ namespace Xamarin_Forms_demo.Services
         public static StringDictionary sidList = new StringDictionary();
         public static RTCPeerConnection _pc;
         public static RTPSession localRtpSession;
-        public static Queue<List<SKPoint>> drawPointsQueue = new Queue<List<SKPoint>>();
-        public event EventHandler DrawCanvasEvent;
 
-        private const string FFPLAY_DEFAULT_SDP_PATH = "local.sdp";
         private const int RTP_SESSION_PORT = 15014;
         private const int FFPLAY_DEFAULT_AUDIO_PORT = 15016;
         private const int FFPLAY_DEFAULT_VIDEO_PORT = 15018;
         private const string WS_URL = "wss://ccmeta.com:9502/websocket";
-        private static readonly string FULL_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + FFPLAY_DEFAULT_SDP_PATH;
+        public static readonly string FFPLAY_DEFAULT_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + "local.sdp";
 
-        public async void ListeningWebSocket()
+        public async Task ListeningWebSocketAsync(Action<List<List<float>>> OnDrawCanvas)
         {
             var uri = new Uri(WS_URL);
             var response_buffer = WebSocket.CreateClientBuffer(4096 * 20, 4096 * 20);
             await ClientWebSocket.ConnectAsync(uri, CancellationToken.None);
+            await ListeningWebRTCAsync(OnDrawCanvas);
             while (true)
             {
                 WebSocketReceiveResult response = await ClientWebSocket.ReceiveAsync(response_buffer, CancellationToken.None);
@@ -78,7 +72,7 @@ namespace Xamarin_Forms_demo.Services
                                         data = new
                                         {
                                             type = _pc.localDescription.type.ToString(),
-                                            sdp = _pc.localDescription.sdp,
+                                            sdp = _pc.localDescription.sdp.ToString(),
                                         },
                                     });
 
@@ -107,9 +101,9 @@ namespace Xamarin_Forms_demo.Services
             }//end of while loop
         }
 
-        public async void ListeningWebRTCAsync()
+        private async Task ListeningWebRTCAsync(Action<List<List<float>>> OnDrawCanvas)
         {
-            await CreatePeerConnection();
+            _pc = await CreatePeerConnectionAsync();
 
             var audioTrack = new MediaStreamTrack(
                 SDPMediaTypesEnum.audio, false,
@@ -124,13 +118,12 @@ namespace Xamarin_Forms_demo.Services
             _pc.OnRtpPacketReceived += (IPEndPoint, media, rtpPkt) =>
             {
                 if (!_pc.IsDtlsNegotiationComplete)
-                {
                     return;
-                }
+
                 //CreateRtpSession
                 if (localRtpSession == null)
                 {
-                    Console.WriteLine($"CreateRtpSession.");
+                    Console.WriteLine($"CreateLocalRtpSession.");
                     localRtpSession = CreateLocalRtpSession(_pc.AudioRemoteTrack?.Capabilities, _pc.VideoRemoteTrack?.Capabilities);
                 }
 
@@ -186,15 +179,8 @@ namespace Xamarin_Forms_demo.Services
                     switch (receviceData["type"].ToString())
                     {
                         case "draw-canvas":
-                            var pointsList = JsonSerializer.Deserialize<List<List<float>>>(receviceData["data"].ToString());
-                            List<SKPoint> sKPoints = new List<SKPoint>(3)
-                            {
-                                new SKPoint(pointsList[0][0], pointsList[0][1]),
-                                new SKPoint(pointsList[1][0], pointsList[1][1]),
-                                new SKPoint(pointsList[2][0], pointsList[2][1])
-                            };
-                            drawPointsQueue.Enqueue(sKPoints);
-                            DrawCanvasEvent(this, EventArgs.Empty);
+                            OnDrawCanvas.Invoke(
+                                JsonSerializer.Deserialize<List<List<float>>>(receviceData["data"].ToString()));
                             break;
                         default:
                             break;
@@ -203,13 +189,13 @@ namespace Xamarin_Forms_demo.Services
             }; // end of _pc.ondatachannel
         }
 
-        private async Task CreatePeerConnection()
+        private async Task<RTCPeerConnection> CreatePeerConnectionAsync()
         {
             var ssl_file = await new HttpClient().GetAsync("https://shadow-board.ccmeta.com/ssl.pfx");
             var localhostCert = new X509Certificate2(await ssl_file.Content.ReadAsByteArrayAsync(), "0");
             var presetCertificates = new List<RTCCertificate> {
                     new RTCCertificate { Certificate = localhostCert },
-                };
+            };
             var IceServersStun = new RTCIceServer
             {
                 urls = "stun:137.220.233.101:13333",
@@ -223,17 +209,17 @@ namespace Xamarin_Forms_demo.Services
             var presetIceServers = new List<RTCIceServer> {
                     IceServersStun,
                     IceServersTurn,
-                };
+            };
             var RTCConfiguration = new RTCConfiguration
             {
                 certificates = presetCertificates,
                 X_BindAddress = IPAddress.Any,
                 iceServers = presetIceServers,
             };
-            _pc = new RTCPeerConnection(RTCConfiguration);
+            return new RTCPeerConnection(RTCConfiguration);
         }
 
-        public RTPSession CreateLocalRtpSession(List<SDPMediaFormat> audioFormats, List<SDPMediaFormat> videoFormats)
+        private RTPSession CreateLocalRtpSession(List<SDPMediaFormat> audioFormats, List<SDPMediaFormat> videoFormats)
         {
             var rtpSession = new RTPSession(false, false, false, IPAddress.Loopback, RTP_SESSION_PORT);
             bool hasAudio = false;
@@ -267,7 +253,7 @@ namespace Xamarin_Forms_demo.Services
                 sdpOffer.Media.Single(x => x.Media == SDPMediaTypesEnum.video).Port = FFPLAY_DEFAULT_VIDEO_PORT;
             }
 
-            File.WriteAllText(FULL_SDP_PATH, sdpOffer.ToString());
+            File.WriteAllText(FFPLAY_DEFAULT_SDP_PATH, sdpOffer.ToString());
 
             rtpSession.Start();
             rtpSession.SetDestination(SDPMediaTypesEnum.audio, new IPEndPoint(IPAddress.Loopback, FFPLAY_DEFAULT_AUDIO_PORT), new IPEndPoint(IPAddress.Loopback, FFPLAY_DEFAULT_AUDIO_PORT + 1));

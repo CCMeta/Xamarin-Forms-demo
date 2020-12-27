@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using Serilog;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,17 +14,22 @@ namespace Xamarin_Forms_demo.ViewModels
     {
         public ObservableCollection<Item> Items { get; set; }
         public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
-        public static Queue<List<SKPoint>> drawPointsQueue = new Queue<List<SKPoint>>();
+        public static Queue<List<List<float>>> drawPointsQueue = new Queue<List<List<float>>>();
         public event EventHandler DrawCanvasEvent;
+        public static readonly string FFPLAY_DEFAULT_SDP_PATH = WebSocketService.FFPLAY_DEFAULT_SDP_PATH;
 
         public ItemsViewModel() : base()
         {
             AddConsoleLogger();
-            var WebSocketService = new WebSocketService();
-            Task.Run(() =>
+
+            var webSocketService = new WebSocketService();
+            Task.Run(async () =>
             {
-                WebSocketService.ListeningWebSocket();
-                WebSocketService.ListeningWebRTCAsync();
+                await webSocketService.ListeningWebSocketAsync((pointsList) =>
+                {
+                    drawPointsQueue.Enqueue(pointsList);
+                    DrawCanvasEvent(this, EventArgs.Empty);
+                });
             });
         }
 

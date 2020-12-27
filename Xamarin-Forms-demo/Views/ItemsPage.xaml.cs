@@ -16,7 +16,7 @@ namespace Xamarin_Forms_demo.Views
     {
         ItemsViewModel viewModel;
         readonly LibVLC _libvlc;
-        readonly string FULL_SDP_PATH = ItemsViewModel.FULL_SDP_PATH;
+        readonly string FFPLAY_DEFAULT_SDP_PATH = ItemsViewModel.FFPLAY_DEFAULT_SDP_PATH;
         readonly string[] _VLCOptions = new string[] {
                 "--rtsp-caching=100", " --file-caching=100", "--live-caching=100",
             "--realrtsp-caching=100",  "--network-caching=0",
@@ -34,7 +34,7 @@ namespace Xamarin_Forms_demo.Views
         private void OnPlayStarted(object sender, EventArgs e)
         {
             VlcVideoView.MediaPlayer = new MediaPlayer(_libvlc);
-            VlcVideoView.MediaPlayer.Play(new Media(_libvlc, FULL_SDP_PATH, FromType.FromPath));
+            VlcVideoView.MediaPlayer.Play(new Media(_libvlc, FFPLAY_DEFAULT_SDP_PATH, FromType.FromPath));
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
