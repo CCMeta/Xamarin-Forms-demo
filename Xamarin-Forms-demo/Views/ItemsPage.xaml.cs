@@ -9,15 +9,12 @@ using Xamarin_Forms_demo.ViewModels;
 
 namespace Xamarin_Forms_demo.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel viewModel;
-        readonly LibVLC _libvlc;
-        readonly string FFPLAY_DEFAULT_SDP_PATH = ItemsViewModel.FFPLAY_DEFAULT_SDP_PATH;
-        readonly string[] _VLCOptions = new string[] {
+        readonly LibVLC _libVLC;
+        private readonly ItemsViewModel _ItemsViewModel = new ItemsViewModel();
+        private readonly string[] _libVLCOptions = new string[] {
                 "--rtsp-caching=100", " --file-caching=100", "--live-caching=100",
             "--realrtsp-caching=100",  "--network-caching=0",
             "--skip-frames", "--sout-keep", "--sout-all",
@@ -28,13 +25,14 @@ namespace Xamarin_Forms_demo.Views
             InitializeComponent();
 
             Core.Initialize();
-            _libvlc = new LibVLC(enableDebugLogs: false, _VLCOptions);
-            viewModel = new ItemsViewModel();
+            _libVLC = new LibVLC(enableDebugLogs: false, _libVLCOptions);
+            BindingContext = _ItemsViewModel;
         }
         private void OnPlayStarted(object sender, EventArgs e)
         {
-            VlcVideoView.MediaPlayer = new MediaPlayer(_libvlc);
-            VlcVideoView.MediaPlayer.Play(new Media(_libvlc, FFPLAY_DEFAULT_SDP_PATH, FromType.FromPath));
+            VlcVideoView.MediaPlayer = new MediaPlayer(_libVLC);
+            VlcVideoView.MediaPlayer.Play(new Media(
+                _libVLC, _ItemsViewModel.FFPLAY_DEFAULT_SDP_PATH, FromType.FromPath));
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)

@@ -16,7 +16,7 @@ namespace Xamarin_Forms_demo.ViewModels
         public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
         public static Queue<List<List<float>>> drawPointsQueue = new Queue<List<List<float>>>();
         public event EventHandler DrawCanvasEvent;
-        public static readonly string FFPLAY_DEFAULT_SDP_PATH = WebSocketService.FFPLAY_DEFAULT_SDP_PATH;
+        public readonly string FFPLAY_DEFAULT_SDP_PATH = WebSocketService.FFPLAY_DEFAULT_SDP_PATH;
 
         public ItemsViewModel() : base()
         {
