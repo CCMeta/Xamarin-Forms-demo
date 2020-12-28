@@ -24,6 +24,8 @@ namespace Xamarin_Forms_demo.Services
 
         public void Login(string username, string password)
         {
+            if (!string.IsNullOrEmpty(Token))
+                return;
             var identity = new Dictionary<string, string>
             {
                 { "username", username },

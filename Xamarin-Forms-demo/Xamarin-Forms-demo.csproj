@@ -51,7 +51,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\AudioPage.xaml.cs">
+    <Compile Update="Views\SNSPages\SNSTabbedPage.xaml.cs">
+      <DependentUpon>SNSTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SNSPages\GroupsPage.xaml.cs">
+      <DependentUpon>GroupsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Trush\_AboutPage.xaml.cs">
+      <DependentUpon>_AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Trush\_NewItemPage.xaml.cs">
+      <DependentUpon>_NewItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Trush\_ItemDetailPage.xaml.cs">
+      <DependentUpon>_ItemDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StudyPages\AudioPage.xaml.cs">
       <DependentUpon>AudioPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SNSPages\SendPostPage.xaml.cs">
@@ -60,7 +75,7 @@
     <Compile Update="Views\SNSPages\PostsPage.xaml.cs">
       <DependentUpon>PostsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SubjectPage.xaml.cs">
+    <Compile Update="Views\SNSPages\SubjectPage.xaml.cs">
       <DependentUpon>SubjectPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StudyPages\DataIndexPage.xaml.cs">
@@ -72,8 +87,8 @@
     <Compile Update="Views\StudyPages\ClassIndexPage.xaml.cs">
       <DependentUpon>ClassIndexPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\_TemplatePage.xaml.cs">
-      <DependentUpon>_TemplatePage.xaml</DependentUpon>
+    <Compile Update="Views\__TemplatePage.xaml.cs">
+      <DependentUpon>__TemplatePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StudyPages\StudyTabbedPage.xaml.cs">
       <DependentUpon>StudyTabbedPage.xaml</DependentUpon>
@@ -81,7 +96,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\SubjectsPage.xaml">
+    <EmbeddedResource Update="Views\SNSPages\SubjectsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StudyPages\StudyTabbedPage.xaml">

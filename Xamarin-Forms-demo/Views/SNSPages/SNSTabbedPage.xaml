@@ -3,23 +3,23 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:views="clr-namespace:Xamarin_Forms_demo.Views"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-            x:Class="Xamarin_Forms_demo.Views.StudyTabbedPage"
+            x:Class="Xamarin_Forms_demo.Views.SNSTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            Title="StudyTabbedPage">
+            Title="SNSTabbedPage">
 
-    <views:ClassIndexPage Title="Class">
+    <views:PostsPage Title="Posts">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf0a1;" FontFamily="FontAwesome5Solid" Size="44" />
         </ContentPage.IconImageSource>
-    </views:ClassIndexPage>
-    <views:TestIndexPage Title="Test">
+    </views:PostsPage>
+    <views:GroupsPage Title="Groups">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf0c0;" FontFamily="FontAwesome5Solid" Size="44" />
         </ContentPage.IconImageSource>
-    </views:TestIndexPage>
-    <views:DataIndexPage Title="Data">
+    </views:GroupsPage>
+    <views:SubjectsPage Title="Subjects">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" Size="44" />
         </ContentPage.IconImageSource>
-    </views:DataIndexPage>
+    </views:SubjectsPage>
 </TabbedPage>
