@@ -1,21 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ClassIndexPage"
-             Title="Classes">
-    <TableView>
-        <TableRoot>
-            <TableSection >
-                <TextCell Text="课程"/>
-                <TextCell Text="知识点"/>
-                <TextCell Text="讲师"/>
-                <TextCell Text="时间"/>
-                <TextCell Text="图片"/>
-            </TableSection>
-        </TableRoot>
-    </TableView>
-
+             Title="{Binding Title}">
+    <RefreshView IsRefreshing="{Binding IsBusy}"
+             Command="{Binding GetListCommand}">
+        <CollectionView  x:Name="collectionView" 
+                         ItemsSource="{Binding Courses}" 
+                         VerticalScrollBarVisibility="Always"
+                         ItemsUpdatingScrollMode="KeepScrollOffset">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="20,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Grid.RowSpan="2"
+                       Source="{Binding image}"
+                       Aspect="AspectFill" HeightRequest="80" WidthRequest="160"/>
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Padding="5,0" Text="{Binding created_at}" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding speaker}" Padding="5,0" />
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Text="{Binding speaker}" Padding="5,0" />
+                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" MaxLines="6" Padding="5,0" Text="{Binding title}"
+                           FontAttributes="Italic"
+                           VerticalOptions="EndAndExpand" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </RefreshView>
 </ContentPage>

@@ -44,8 +44,7 @@ namespace Xamarin_Forms_demo.ViewModels
                     { "p", page }
             };
             Posts = await HttpRequest.GetAsync<ObservableCollection<Posts>>(path, queryParams: queryParams);
-            if (Posts.Count > 0)
-                IsBusy = false;
+            IsBusy = false;
         }
 
         public async Task<bool> PostAsync(string content)

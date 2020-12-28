@@ -25,7 +25,7 @@ namespace Xamarin_Forms_demo.ViewModels
         }
         public ICommand GetSubjectsCommand { protected set; get; }
 
-        public SubjectsViewModel():base()
+        public SubjectsViewModel() : base()
         {
             Title = "SubjectsViewModel";
             GetSubjectsCommand = new Command(() =>
@@ -44,8 +44,7 @@ namespace Xamarin_Forms_demo.ViewModels
             var queryParams = new Dictionary<string, string>() {
                     { "p", page }
             };
-            var list = await HttpRequest.GetAsync<ObservableCollection<Subjects>>(path, queryParams: queryParams);
-            Subjects = list;
+            Subjects = await HttpRequest.GetAsync<ObservableCollection<Subjects>>(path, queryParams: queryParams);
             IsBusy = false;
         }
 
