@@ -9,43 +9,44 @@ namespace Xamarin_Forms_demo_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SubjectsController : DefaultController
+    public class CoursesController : DefaultController
     {
-        private readonly SubjectsRepository _SubjectsRepository;
+        private readonly CoursesRepository _CoursesRepository;
 
-        public SubjectsController(SubjectsRepository SubjectsRepository, IHttpContextAccessor context) : base(context)
+        public CoursesController(CoursesRepository CoursesRepository, IHttpContextAccessor context) : base(context)
         {
-            _SubjectsRepository = SubjectsRepository;
+            _CoursesRepository = CoursesRepository;
         }
 
-        // GET: api/<SubjectsController>
+        // GET: api/<CoursesController>
         [HttpGet]
-        public async Task<IEnumerable<Subjects>> GetAsync()
+        public async Task<IEnumerable<Courses>> GetAsync()
         {
             string page = HttpContext.Request.Query.TryGetValue("p", out var StringValues) ? StringValues.ToString() : "1";
-            return await _SubjectsRepository.GetList(page: Convert.ToInt32(page), limit: 5);
+            var fuck = await _CoursesRepository.GetList(page: Convert.ToInt32(page), limit: 5);
+            return fuck;
         }
 
-        // GET api/<SubjectsController>/5
+        // GET api/<CoursesController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<SubjectsController>
+        // POST api/<CoursesController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<SubjectsController>/5
+        // PUT api/<CoursesController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<SubjectsController>/5
+        // DELETE api/<CoursesController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

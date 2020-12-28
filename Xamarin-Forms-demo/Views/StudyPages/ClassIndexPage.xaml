@@ -5,6 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ClassIndexPage"
-             Title="{Binding Title}">
-    <Label Text="woshidie"/>
+             Title="Classes">
+    <TableView>
+        <TableRoot>
+            <TableSection >
+                <TextCell Text="课程"/>
+                <TextCell Text="知识点"/>
+                <TextCell Text="讲师"/>
+                <TextCell Text="时间"/>
+                <TextCell Text="图片"/>
+            </TableSection>
+        </TableRoot>
+    </TableView>
+
 </ContentPage>
