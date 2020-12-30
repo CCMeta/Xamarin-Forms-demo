@@ -41,7 +41,7 @@ namespace Xamarin_Forms_demo.ViewModels
         {
             var page = Math.Ceiling((double)(Posts.Count() + 1) / 5).ToString();
             var queryParams = new Dictionary<string, string>() {
-                    { "p", page }
+                    { "p", page }// No page param is just last id in local.
             };
             Posts = await HttpRequest.GetAsync<ObservableCollection<Posts>>(path, queryParams: queryParams);
             IsBusy = false;

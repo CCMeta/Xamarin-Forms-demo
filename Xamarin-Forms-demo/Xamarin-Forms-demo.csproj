@@ -57,6 +57,9 @@
     <Compile Update="Views\SNSPages\GroupsPage.xaml.cs">
       <DependentUpon>GroupsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\SNSPages\ContectsPage.xaml.cs">
+      <DependentUpon>ContectsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Trush\_AboutPage.xaml.cs">
       <DependentUpon>_AboutPage.xaml</DependentUpon>
     </Compile>

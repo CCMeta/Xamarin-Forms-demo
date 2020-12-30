@@ -29,7 +29,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public CoursesViewModel() : base()
         {
-            Title = "CoursesViewModel";
+            Title = "Courses";
             GetListCommand = new Command(() =>
             {
                 GetListAsync();

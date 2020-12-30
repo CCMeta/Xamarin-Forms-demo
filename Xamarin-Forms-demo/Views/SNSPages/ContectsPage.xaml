@@ -4,14 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Xamarin_Forms_demo.Views.TestIndexPage"
+             x:Class="Xamarin_Forms_demo.Views.ContectsPage"
              Title="{Binding Title}">
     <StackLayout>
-        <Label Text="按知识点选择测试"/>
-        <Label Text="按大考章节选择测试"/>
-        <Label Text="按中高考真题选择测试"/>
-        <Label Text="按期中期末选择测试"/>
-        <Label Text="按本学年已学过随机生成试卷综合测试"/>
-        <Label Text="按薄弱点错题本随机生成试卷综合测试"/>
+        <Label Text="好友当前状态-正在答题？/忙碌/等"/>
     </StackLayout>
 </ContentPage>
