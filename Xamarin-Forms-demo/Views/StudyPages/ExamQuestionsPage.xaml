@@ -4,9 +4,24 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Xamarin_Forms_demo.Views.ExamQuestionsPage"
-             Title="{Binding Title}">
+             x:Class="Xamarin_Forms_demo.Views.ExamQuestionsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="ToolbarItem_ClickedAsync">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xf573;" FontFamily="FontAwesome5Solid" Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <StackLayout>
-        <Label Text="ExamQuestionsPage"/>
+        <CarouselView ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="20">
+                        <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+        <IndicatorView x:Name="indicatorView" IndicatorColor="LightGray" SelectedIndicatorColor="DarkGray" HorizontalOptions="Center" />
     </StackLayout>
 </ContentPage>

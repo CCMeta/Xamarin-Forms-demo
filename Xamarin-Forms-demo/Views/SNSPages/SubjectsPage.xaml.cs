@@ -26,7 +26,7 @@ namespace Xamarin_Forms_demo.Views
         async void OnSelectionItemChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = e.CurrentSelection.FirstOrDefault() as Subjects;
-            await Navigation.PushModalAsync(new NavigationPage(new SubjectPage(selected)));
+            await Navigation.PushAsync(new SubjectPage(selected));
         }
 
         public void OnRemainingItemsThresholdReached(object sender, EventArgs e)
