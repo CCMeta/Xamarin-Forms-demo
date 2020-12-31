@@ -1,34 +1,30 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
+using Xamarin_Forms_demo.ViewModels;
 
 namespace Xamarin_Forms_demo.Views
 {
     [DesignTimeVisible(false)]
     public partial class TestIndexPage : ContentPage
     {
+        private readonly ExamQuestionsViewModel ExamQuestionsViewModel;
         public TestIndexPage()
         {
             InitializeComponent();
-        }
-        void OnMediaOpened(object sender, EventArgs e)
-        {
-            Console.WriteLine("Media opened.");
+            BindingContext = ExamQuestionsViewModel = new ExamQuestionsViewModel();
         }
 
-        void OnMediaFailed(object sender, EventArgs e)
+        protected override void OnAppearing()
         {
-            Console.WriteLine("Media failed.");
+            base.OnAppearing();
+            IsBusy = true;
+            ExamQuestionsViewModel.GetListAsync();
         }
 
-        void OnMediaEnded(object sender, EventArgs e)
+        private async void OnEnterExamQuestionsPage(object sender, EventArgs e)
         {
-            Console.WriteLine("Media ended.");
-        }
-
-        void OnSeekCompleted(object sender, EventArgs e)
-        {
-            Console.WriteLine("Seek completed.");
+            await Navigation.PushAsync(new ExamQuestionsPage());
         }
     }
 }

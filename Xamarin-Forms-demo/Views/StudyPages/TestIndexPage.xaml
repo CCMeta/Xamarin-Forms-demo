@@ -11,7 +11,22 @@
         <Label Text="按大考章节选择测试"/>
         <Label Text="按中高考真题选择测试"/>
         <Label Text="按期中期末选择测试"/>
-        <Label Text="按本学年已学过随机生成试卷综合测试"/>
         <Label Text="按薄弱点错题本随机生成试卷综合测试"/>
+        <Label Text="按本学年已学过随机生成试卷综合测试"/>
+        <Button Text="2020全国卷一历史 / 共计11道题目 / 共计55分 / 平均分45分" Clicked="OnEnterExamQuestionsPage"/>
+        <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
+            <CollectionView  x:Name="collectionView" 
+                         ItemsSource="{Binding ExamQuestions}" 
+                         VerticalScrollBarVisibility="Always"
+                         ItemsUpdatingScrollMode="KeepScrollOffset">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="20,10">
+                            <Label Text="{Binding content}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
 </ContentPage>
