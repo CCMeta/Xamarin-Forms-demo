@@ -20,7 +20,14 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
-                            <Label Text="{Binding Title}" d:Text="{Binding .}" FontSize="20"/>
+                            <Label d:Text="{Binding .}" FontSize="20">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="&#xf6ad; " FontFamily="FontAwesome5Solid"/>
+                                        <Span Text="{Binding Title}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

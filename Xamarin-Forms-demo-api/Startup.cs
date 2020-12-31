@@ -23,6 +23,7 @@ namespace Xamarin_Forms_demo_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<SessionService>()
+                .AddTransient<ExamQuestionsRepository>()
                 .AddTransient<SubjectsRepository>()
                 .AddTransient<CoursesRepository>()
                 .AddTransient<UsersRepository>()
