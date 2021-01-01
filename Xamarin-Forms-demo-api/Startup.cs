@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using Xamarin_Forms_demo_api.Models;
 using System.Text.Encodings.Web;
 using Xamarin_Forms_demo_api.Services;
+using System.Reflection;
 
 namespace Xamarin_Forms_demo_api
 {
@@ -24,6 +25,7 @@ namespace Xamarin_Forms_demo_api
         {
             services.AddSingleton<SessionService>()
                 .AddTransient<ExamQuestionsRepository>()
+                .AddTransient<ExamsRepository>()
                 .AddTransient<SubjectsRepository>()
                 .AddTransient<CoursesRepository>()
                 .AddTransient<UsersRepository>()

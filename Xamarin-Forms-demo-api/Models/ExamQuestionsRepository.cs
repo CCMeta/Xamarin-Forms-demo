@@ -14,12 +14,12 @@ namespace Xamarin_Forms_demo_api.Models
 
         }
 
-        public async Task<IEnumerable<ExamQuestions>> GetList( int page = 1, int limit = 5)
+        public async Task<IEnumerable<ExamQuestions>> GetList(int exams_id)
         {
-            var sql = "SELECT * FROM exam_questions LIMIT @limit OFFSET @from";
+            var sql = "SELECT * FROM exam_questions WHERE exam_id = @exams_id";
             return await WithConnection(async conn =>
             {
-                return await conn.QueryAsync<ExamQuestions>(sql, new { from = (page - 1) * limit, limit });
+                return await conn.QueryAsync<ExamQuestions>(sql, new { exams_id });
             });
         }
 

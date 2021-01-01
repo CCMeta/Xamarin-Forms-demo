@@ -7,22 +7,23 @@ using Xamarin_Forms_demo_api.Models;
 
 namespace Xamarin_Forms_demo_api.Controllers
 {
-    [Route("api/Exams/{exams_id}/Questions")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class ExamQuestionsController : DefaultController
+    public class ExamsController : DefaultController
     {
-        private readonly ExamQuestionsRepository _ExamQuestionsRepository;
+        private readonly ExamsRepository _ExamsRepository;
 
-        public ExamQuestionsController(ExamQuestionsRepository ExamQuestionsRepository, IHttpContextAccessor context) : base(context)
+        public ExamsController(ExamsRepository ExamsRepository, IHttpContextAccessor context) : base(context)
         {
-            _ExamQuestionsRepository = ExamQuestionsRepository;
+            _ExamsRepository = ExamsRepository;
         }
 
         // GET: api/<CoursesController>
         [HttpGet]
-        public async Task<IEnumerable<ExamQuestions>> GetAsync(int exams_id)
+        public async Task<IEnumerable<Exams>> GetAsync()
         {
-            return await _ExamQuestionsRepository.GetList(exams_id);
+            string page = HttpContext.Request.Query.TryGetValue("p", out var StringValues) ? StringValues.ToString() : "1";
+            return await _ExamsRepository.GetList(page: Convert.ToInt32(page), limit: 5);
         }
 
         // GET api/<CoursesController>/5
