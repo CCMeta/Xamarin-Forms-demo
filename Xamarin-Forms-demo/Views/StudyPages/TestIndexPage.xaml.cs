@@ -8,23 +8,23 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class TestIndexPage : ContentPage
     {
-        private readonly ExamQuestionsViewModel ExamQuestionsViewModel;
+        private readonly ExamsViewModel ExamsViewModel;
         public TestIndexPage()
         {
             InitializeComponent();
-            BindingContext = ExamQuestionsViewModel = new ExamQuestionsViewModel();
+            BindingContext = ExamsViewModel = new ExamsViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             IsBusy = true;
-            ExamQuestionsViewModel.GetListAsync();
+            ExamsViewModel.GetListAsync();
         }
 
         private async void OnEnterExamQuestionsPage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ExamQuestionsPage());
+            await Navigation.PushAsync(new ExamQuestionsPage(1));
         }
     }
 }

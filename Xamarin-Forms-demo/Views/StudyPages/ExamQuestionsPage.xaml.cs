@@ -9,10 +9,10 @@ namespace Xamarin_Forms_demo.Views
     public partial class ExamQuestionsPage : ContentPage
     {
         private readonly ExamQuestionsViewModel ExamQuestionsViewModel;
-        public ExamQuestionsPage()
+        public ExamQuestionsPage(int exam_id)
         {
             InitializeComponent();
-            BindingContext = ExamQuestionsViewModel = new ExamQuestionsViewModel();
+            BindingContext = ExamQuestionsViewModel = new ExamQuestionsViewModel(exam_id);
         }
 
         protected override void OnAppearing()

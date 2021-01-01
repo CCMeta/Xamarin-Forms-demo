@@ -16,13 +16,13 @@
         <Button Text="2020全国卷一历史 / 共计11道题目 / 共计55分 / 平均分45分" Clicked="OnEnterExamQuestionsPage"/>
         <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
             <CollectionView  x:Name="collectionView" 
-                         ItemsSource="{Binding ExamQuestions}" 
+                         ItemsSource="{Binding Exams}" 
                          VerticalScrollBarVisibility="Always"
                          ItemsUpdatingScrollMode="KeepScrollOffset">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="20,10">
-                            <Label Text="{Binding content}"/>
+                            <Label Text="{Binding title}"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

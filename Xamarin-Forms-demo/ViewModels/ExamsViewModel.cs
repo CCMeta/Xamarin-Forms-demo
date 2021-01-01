@@ -9,28 +9,26 @@ using Xamarin_Forms_demo.Services;
 
 namespace Xamarin_Forms_demo.ViewModels
 {
-    public class ExamQuestionsViewModel : BaseViewModel
+    public class ExamsViewModel : BaseViewModel
     {
-        private int _exam_id;
-        private readonly string path = "/api/exams/{0}/questions";
-        public ObservableCollection<ExamQuestions> examQuestions = new ObservableCollection<ExamQuestions>();
-        public ObservableCollection<ExamQuestions> ExamQuestions
+        private readonly string path = "/api/exams";
+        public ObservableCollection<Exams> exams = new ObservableCollection<Exams>();
+        public ObservableCollection<Exams> Exams
         {
-            get { return examQuestions; }
+            get { return exams; }
             set
             {
                 foreach (var item in value)
                 {
-                    examQuestions.Insert(0, item);
+                    exams.Insert(0, item);
                 }
             }
         }
         public ICommand GetListCommand { protected set; get; }
 
-        public ExamQuestionsViewModel(int exam_id) : base()
+        public ExamsViewModel() : base()
         {
-            _exam_id = exam_id;
-            Title = "ExamQuestions";
+            Title = "Exams";
             GetListCommand = new Command(() =>
             {
                 GetListAsync();
@@ -40,7 +38,7 @@ namespace Xamarin_Forms_demo.ViewModels
         public async void GetListAsync()
         {
             var queryParams = new Dictionary<string, string>() { };
-            ExamQuestions = await HttpRequest.GetAsync<ObservableCollection<ExamQuestions>>(string.Format(path, _exam_id), queryParams: queryParams);
+            Exams = await HttpRequest.GetAsync<ObservableCollection<Exams>>(path, queryParams: queryParams);
             IsBusy = false;
         }
 
