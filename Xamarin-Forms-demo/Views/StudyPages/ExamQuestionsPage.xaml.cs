@@ -23,7 +23,7 @@ namespace Xamarin_Forms_demo.Views
 
         private async void ToolbarItem_ClickedAsync(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new SendPostPage());
+            await Navigation.PushAsync(new ExamAnswersPage(ExamQuestionsViewModel));
         }
     }
 }

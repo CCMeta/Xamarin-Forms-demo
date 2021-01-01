@@ -63,6 +63,9 @@
     <Compile Update="Views\StudyPages\ExamQuestionsPage.xaml.cs">
       <DependentUpon>ExamQuestionsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\StudyPages\ExamAnswersPage.xaml.cs">
+      <DependentUpon>ExamAnswersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Trush\_AboutPage.xaml.cs">
       <DependentUpon>_AboutPage.xaml</DependentUpon>
     </Compile>
