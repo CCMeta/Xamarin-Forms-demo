@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
@@ -16,25 +15,31 @@ namespace Xamarin_Forms_demo.ViewModels
         public ObservableCollection<ExamQuestions> examQuestions = new ObservableCollection<ExamQuestions>();
         public ObservableCollection<ExamQuestions> ExamQuestions
         {
-            get { return examQuestions; }
+            get => examQuestions;
             set
             {
                 foreach (var item in value)
                 {
-                    examQuestions.Insert(0, item);
+                    examQuestions.Add(item);
                 }
             }
         }
-        public ICommand GetListCommand { protected set; get; }
+
+        public ICommand OnAnswerClickCommand { protected set; get; }
 
         public ExamQuestionsViewModel(int exam_id) : base()
         {
             _exam_id = exam_id;
             Title = "ExamQuestions";
-            GetListCommand = new Command(() =>
+            OnAnswerClickCommand = new Command(() =>
             {
-                GetListAsync();
+                OnAnswerClickAsync();
             });
+        }
+
+        public async void OnAnswerClickAsync()
+        {
+
         }
 
         public async void GetListAsync()
@@ -44,5 +49,13 @@ namespace Xamarin_Forms_demo.ViewModels
             IsBusy = false;
         }
 
+        public async Task<bool> PostAsync()
+        {
+            var queryParams = new List<ExamAnswers>();
+            var result = await HttpRequest.PostAsync(path, queryParams);
+            if (result is List<ExamAnswers>)
+                return true;
+            return false;
+        }
     }
 }

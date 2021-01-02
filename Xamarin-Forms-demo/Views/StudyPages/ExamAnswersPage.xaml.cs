@@ -8,13 +8,10 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class ExamAnswersPage : ContentPage
     {
-        private readonly ExamQuestionsViewModel ExamQuestionsViewModel;
 
-        public ExamAnswersPage(ExamQuestionsViewModel ExamQuestionsViewModel)
+        public ExamAnswersPage()
         {
             InitializeComponent();
-            Title = "ExamAnswersPage";
-            BindingContext = ExamQuestionsViewModel;
         }
     }
 }

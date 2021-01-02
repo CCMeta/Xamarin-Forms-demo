@@ -49,11 +49,10 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public async Task<bool> PostAsync(string content)
         {
-            var queryParams = new Dictionary<string, string>() {
-                    { "content", content }
-            };
-            var result = await HttpRequest.PostAsync<Posts>(path, queryParams);
-            if (result.content.Length > 0)
+            var queryParams = new Posts();
+            queryParams.content = content;
+            var result = await HttpRequest.PostAsync(path, queryParams);
+            if (result is Posts)
                 return true;
             return false;
         }

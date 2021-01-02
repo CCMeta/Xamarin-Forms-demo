@@ -32,7 +32,7 @@ namespace Xamarin_Forms_demo.Services
                 { "password", password }
             };
             var user = Task.Run(async () =>
-                 await PostAsync<Dictionary<string, string>>("/api/token", identity)
+                 await PostAsync("/api/token", identity)
             ).Result;
             if (!string.IsNullOrEmpty(user["token"]))
             {
@@ -52,9 +52,8 @@ namespace Xamarin_Forms_demo.Services
             return await _httpClient.GetFromJsonAsync<T>(uri);
         }
 
-        public async Task<T> PostAsync<T>(string path, Dictionary<string, string> queryParams)
+        public async Task<T> PostAsync<T>(string path, T queryParams)
         {
-            using var content = new FormUrlEncodedContent(queryParams);
             var uri = _host + path;
             if (!string.IsNullOrEmpty(Token))
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Token);
@@ -65,6 +64,5 @@ namespace Xamarin_Forms_demo.Services
             }
             return await result.Content.ReadFromJsonAsync<T>();
         }
-
     }
 }

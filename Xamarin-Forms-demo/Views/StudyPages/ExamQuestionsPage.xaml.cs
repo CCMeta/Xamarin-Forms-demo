@@ -13,17 +13,16 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             BindingContext = ExamQuestionsViewModel = new ExamQuestionsViewModel(exam_id);
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
             ExamQuestionsViewModel.GetListAsync();
         }
 
+
         private async void ToolbarItem_ClickedAsync(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ExamAnswersPage(ExamQuestionsViewModel));
+            await Navigation.PushAsync(new ExamAnswersPage
+            {
+                BindingContext = ExamQuestionsViewModel
+            });
         }
     }
 }
