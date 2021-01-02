@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ExamAnswersPage"
              Title="{Binding Title}" Visual="Material">
-    <CollectionView ItemsSource="{Binding ExamQuestions}" ItemsLayout="VerticalGrid, 5">
+    <CollectionView ItemsSource="{Binding ExamQuestions}" ItemsLayout="VerticalGrid, 5"
+                    SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <Grid Padding="10">
@@ -16,13 +17,14 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Button Text="{Binding id}" BackgroundColor="Pink" BorderWidth="1" CornerRadius="50" BorderColor="Black"
-                                WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Button Text="{Binding id}" BackgroundColor="Pink" BorderWidth="1" CornerRadius="50" BorderColor="Black" IsEnabled="False"
+                            WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center">
+                    </Button>
                 </Grid>
             </DataTemplate>
         </CollectionView.ItemTemplate>
         <CollectionView.Footer>
-            <Button Text="Commit Test Paper"/>
+            <Button Text="Commit Test Paper" Command="{Binding OnCommitPaperCommand}" />
         </CollectionView.Footer>
     </CollectionView>
 </ContentPage>

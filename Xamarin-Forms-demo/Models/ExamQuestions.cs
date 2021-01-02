@@ -2,7 +2,7 @@
 {
     public class ExamQuestions
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string content { get; set; }
         public string type { get; set; }
         public string answer { get; set; }
