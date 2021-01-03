@@ -35,8 +35,9 @@ namespace Xamarin_Forms_demo.Views
             {
                 throw new Exception("ExamAnswersViewModel.PostListAsync");
             }
-            await DisplayAlert("Result", "Success", "Cancel");
+            await DisplayAlert("Result", "Success", "OK");
             Content.IsEnabled = true;
+            await Navigation.PopToRootAsync();
         }
     }
 }
