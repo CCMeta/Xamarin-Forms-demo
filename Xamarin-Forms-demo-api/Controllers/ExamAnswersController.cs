@@ -13,10 +13,14 @@ namespace Xamarin_Forms_demo_api.Controllers
     public class ExamAnswersController : DefaultController
     {
         private readonly ExamAnswersRepository _repository;
+        private readonly ExamQuestionsRepository _examQuestionsRepository;
 
-        public ExamAnswersController(ExamAnswersRepository ExamAnswersRepository, IHttpContextAccessor context) : base(context)
+        public ExamAnswersController(
+            ExamAnswersRepository ExamAnswersRepository, ExamQuestionsRepository examQuestionsRepository
+            , IHttpContextAccessor context) : base(context)
         {
             _repository = ExamAnswersRepository;
+            _examQuestionsRepository = examQuestionsRepository;
         }
 
         [HttpGet]
@@ -34,7 +38,14 @@ namespace Xamarin_Forms_demo_api.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] ExamAnswers[] examAnswers)
         {
-            IEnumerable<int> exam_ids = examAnswers.Select((a) => a.questionId);
+            var questionIdList = examAnswers.Select(examAnswer => examAnswer.questionId).ToArray();
+            var examQuestions = await _examQuestionsRepository.GetListByQuestionIdList(questionIdList);
+            foreach (ExamAnswers examAnswer in examAnswers)
+            {
+                var regularAnswer = examQuestions.First(examQuestion => examQuestion.id == examAnswer.questionId).answer;
+                examAnswer.point = examAnswer.answer == regularAnswer ? 5 : 0;
+            }
+            //exam_ids select all of questions take the regular answers and compute points , then take points to examAnswers model
             if (await _repository.Post(examAnswers, uid: _uid))
                 return Ok(examAnswers);
             return BadRequest(examAnswers);

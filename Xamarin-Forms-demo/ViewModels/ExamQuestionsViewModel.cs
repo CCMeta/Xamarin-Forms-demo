@@ -13,7 +13,7 @@ namespace Xamarin_Forms_demo.ViewModels
     public class ExamQuestionsViewModel : BaseViewModel
     {
         private int _exam_id;
-        private readonly string path = "/api/exams/{0}/questions";
+        private readonly string path = "/api/exams/{0}/questions";//i should take exam_id to query not path
         public Dictionary<int, ExamAnswers> examAnswers = new Dictionary<int, ExamAnswers>();
         public ObservableCollection<ExamQuestions> examQuestions = new ObservableCollection<ExamQuestions>();
         public ObservableCollection<ExamQuestions> ExamQuestions

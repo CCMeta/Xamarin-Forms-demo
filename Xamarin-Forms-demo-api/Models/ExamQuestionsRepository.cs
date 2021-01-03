@@ -23,5 +23,15 @@ namespace Xamarin_Forms_demo_api.Models
             });
         }
 
+        public async Task<IEnumerable<ExamQuestions>> GetListByQuestionIdList(int[] questionIdList)
+        {
+            //var shit = string.Join(',', questionIdList);
+            var sql = "SELECT * FROM exam_questions WHERE id IN @questionIdList";
+            return await WithConnection(async conn =>
+            {
+                return await conn.QueryAsync<ExamQuestions>(sql, new { questionIdList = questionIdList });
+            });
+        }
+
     }
 }
