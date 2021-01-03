@@ -6,6 +6,7 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ExamAnswersPage"
              Title="{Binding Title}" Visual="Material">
+    <StackLayout>
     <CollectionView ItemsSource="{Binding ExamQuestions}" ItemsLayout="VerticalGrid, 5"
                     SelectionMode="Single" SelectionChanged="CollectionView_SelectionChanged">
         <CollectionView.ItemTemplate>
@@ -24,7 +25,9 @@
             </DataTemplate>
         </CollectionView.ItemTemplate>
         <CollectionView.Footer>
-            <Button Text="Commit Test Paper" Command="{Binding OnCommitPaperCommand}" />
+            <Button Text="Commit Test Paper" Clicked="OnCommitPaperAsync" />
         </CollectionView.Footer>
     </CollectionView>
+
+    </StackLayout>
 </ContentPage>

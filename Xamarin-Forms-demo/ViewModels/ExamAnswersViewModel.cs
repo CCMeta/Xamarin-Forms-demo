@@ -13,9 +13,7 @@ namespace Xamarin_Forms_demo.ViewModels
     public class ExamAnswersViewModel : BaseViewModel
     {
         private readonly int _exam_id;
-        private readonly string path = "/api/exams/{0}/questions";
-        public ObservableCollection<ExamQuestions> examQuestions = new ObservableCollection<ExamQuestions>();
-        public ObservableCollection<ExamQuestions> ExamQuestions { get => examQuestions; set => examQuestions = value; }
+        private readonly string path = "/api/exams/{0}/answers";
 
         public ICommand GetListCommand { protected set; get; }
 
@@ -24,5 +22,12 @@ namespace Xamarin_Forms_demo.ViewModels
             _exam_id = exam_id;
         }
 
+        public async Task<bool> PostListAsync(ExamAnswers[] examAnswers)
+        {
+            var result = await HttpRequest.PostAsync(path, examAnswers.ToArray());
+            if (result is ExamAnswers[])
+                return true;
+            return false;
+        }
     }
 }
