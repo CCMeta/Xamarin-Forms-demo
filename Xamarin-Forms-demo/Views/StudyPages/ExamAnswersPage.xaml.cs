@@ -19,15 +19,15 @@ namespace Xamarin_Forms_demo.Views
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var current_id = ((ExamQuestions)e.CurrentSelection[0]).id;
-            _examQuestionsViewModel.OnAnswerClick(current_id, $"Answer = {current_id}");
+            var answer = $"Answer = {current_id}";
+            _examQuestionsViewModel.OnAnswerClick(current_id, answer);
         }
 
         private async void OnCommitPaperAsync(object sender, EventArgs e)
         {
-            ((Button)sender).IsEnabled = false;
+            Content.IsEnabled = false;
             var examAnswers = _examQuestionsViewModel.examAnswers;
             var _examAnswersViewModel = new ExamAnswersViewModel(_examQuestionsViewModel._exam_id);
-            Content.IsEnabled = false;
 
             //This using is super cool for async var to go with life before not async expressions.
             using var result = _examAnswersViewModel.PostListAsync(examAnswers.ToArray());
