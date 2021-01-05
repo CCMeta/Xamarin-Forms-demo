@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Xamarin_Forms_demo.Views
@@ -10,6 +11,11 @@ namespace Xamarin_Forms_demo.Views
         public ExamTranscriptsPage()
         {
             InitializeComponent();
+        }
+
+        protected override async void OnDisappearing()
+        {
+            await Navigation.PopToRootAsync();
         }
     }
 }

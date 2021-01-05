@@ -37,7 +37,7 @@ namespace Xamarin_Forms_demo.Views
             }
             await DisplayAlert("Result", "Success", "OK");
             Content.IsEnabled = true;
-            await Navigation.PopToRootAsync();
+            await Navigation.PushAsync(new ExamTranscriptsPage());
         }
     }
 }
