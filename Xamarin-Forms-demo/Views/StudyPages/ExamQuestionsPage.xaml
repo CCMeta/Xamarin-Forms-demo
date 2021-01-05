@@ -18,13 +18,13 @@
                 <DataTemplate>
                     <StackLayout Padding="20">
                         <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="A.礼乐制度不复存在" Value="A" GroupName="colors" TextColor="Red"/>
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="A.礼乐制度不复存在" Value="A" GroupName="GroupName" TextColor="Red"/>
                         <Line X2="1000" Stroke="Red" StrokeThickness="1" Opacity="0.5" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="B.王位世袭制度消亡" Value="B" GroupName="colors" TextColor="Red"/>
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="B.王位世袭制度消亡" Value="B" GroupName="GroupName" TextColor="Red"/>
                         <Line X2="1000" Stroke="Red" StrokeThickness="1" Opacity="0.5" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="C.宗法制度开始解体" Value="C" GroupName="colors" TextColor="Red"/>
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="C.宗法制度开始解体" Value="C" GroupName="GroupName" TextColor="Red"/>
                         <Line X2="1000" Stroke="Red" StrokeThickness="1" Opacity="0.5" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="D.分封制度受到挑战" Value="D" GroupName="colors" TextColor="Red"/>
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="D.分封制度受到挑战" Value="D" GroupName="GroupName" TextColor="Red"/>
                     </StackLayout>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
