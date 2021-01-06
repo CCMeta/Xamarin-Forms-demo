@@ -5,12 +5,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.DataIndexPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}" Visual="Material">
     <StackLayout>
         <Label Text="出勤图表"/>
         <Label Text="知识点掌握列表进度条"/>
         <Label Text="考试日志-时间 得分 知识点经验"/>
         <Label Text="错题本"/>
         <Label Text="排位赛 RANK"/>
+        <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
+            <CollectionView  x:Name="collectionView" ItemsSource="{Binding ExamTranscripts}" 
+                         VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset"
+                         SelectionMode="Single" SelectionChanged="OnEnterExamTranscriptsPageAsync">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="20,10">
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding title, StringFormat='{0}'}"/>
+                                        <Span Text="{Binding duration, StringFormat='{0}'}"/>
+                                        <Span Text="{Binding major, StringFormat='{0}'}"/>
+                                        <Span Text="{Binding created_at, StringFormat='{0}'}"/>
+                                        <Span Text=" / 共计11道题目 / 共计55分 / 平均分45分"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
 </ContentPage>

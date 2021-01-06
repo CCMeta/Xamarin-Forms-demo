@@ -5,6 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.TemplatePage"
-             Title="{Binding Title}">
+             Title="{Binding Title}" Visual="Material">
     
 </ContentPage>

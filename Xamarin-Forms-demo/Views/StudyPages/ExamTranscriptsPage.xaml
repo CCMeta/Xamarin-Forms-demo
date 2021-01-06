@@ -7,7 +7,6 @@
              x:Class="Xamarin_Forms_demo.Views.ExamTranscriptsPage"
              Title="{Binding Title}" Visual="Material">
     <StackLayout Padding="20">
-
         <Label Text="时间：21：44"/>
         <Label Text="选择题 5 x 5分 = 25分"/>
         <Label Text="问答题 2 x 10分 = 30分"/>

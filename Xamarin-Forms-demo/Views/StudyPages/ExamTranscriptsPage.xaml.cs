@@ -8,7 +8,7 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class ExamTranscriptsPage : ContentPage
     {
-        public ExamTranscriptsPage()
+        public ExamTranscriptsPage(int? examTranscriptId = null)
         {
             InitializeComponent();
         }

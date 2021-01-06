@@ -1,4 +1,4 @@
-﻿namespace Xamarin_Forms_demo_api.Models
+﻿namespace Xamarin_Forms_demo.Models
 {
     public class ExamTranscripts
     {
