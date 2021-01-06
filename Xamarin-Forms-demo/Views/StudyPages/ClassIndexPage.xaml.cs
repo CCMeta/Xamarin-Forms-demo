@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
+using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.ViewModels;
 
 namespace Xamarin_Forms_demo.Views
@@ -23,5 +24,10 @@ namespace Xamarin_Forms_demo.Views
             _coursesViewModel.GetListAsync();
         }
 
+        private async void OnCoursesSelectedAsync(object sender, SelectionChangedEventArgs e)
+        {
+            string videoUrl = (e.CurrentSelection[0] as Courses).video;
+            await Navigation.PushAsync(new VideoPage(videoUrl));
+        }
     }
 }

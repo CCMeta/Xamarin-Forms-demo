@@ -10,6 +10,8 @@
              Command="{Binding GetListCommand}">
         <CollectionView  x:Name="collectionView" 
                          ItemsSource="{Binding Courses}" 
+                         SelectionMode="Single"
+                         SelectionChanged="OnCoursesSelectedAsync"
                          VerticalScrollBarVisibility="Always"
                          ItemsUpdatingScrollMode="KeepScrollOffset">
             <CollectionView.ItemTemplate>
