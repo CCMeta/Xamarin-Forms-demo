@@ -18,7 +18,6 @@
     },
     "Xamarin_Forms_demo_api": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "api/subjects",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

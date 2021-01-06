@@ -4,7 +4,7 @@ namespace Xamarin_Forms_demo.Models
 {
     public class Subjects
     {
-        public long id { get; set; }
+        public int id { get; set; }
         public string img { get; set; }
 
         public Uri ImgUri

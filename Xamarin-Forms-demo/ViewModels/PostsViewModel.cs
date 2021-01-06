@@ -39,9 +39,9 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public async void GetListAsync()
         {
-            var page = Math.Ceiling((double)(Posts.Count() + 1) / 5).ToString();
+            int maxId = Posts.Count > 0 ? Posts[0].id : 0;
             var queryParams = new Dictionary<string, string>() {
-                    { "p", page }// No page param is just last id in local.
+                    { "p",maxId.ToString() }
             };
             Posts = await HttpRequest.GetAsync<ObservableCollection<Posts>>(path, queryParams: queryParams);
             IsBusy = false;

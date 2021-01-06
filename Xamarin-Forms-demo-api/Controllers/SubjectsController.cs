@@ -20,10 +20,9 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // GET: api/<SubjectsController>
         [HttpGet]
-        public async Task<IEnumerable<Subjects>> GetAsync()
+        public async Task<IEnumerable<Subjects>> GetAsync([FromQuery] int p)
         {
-            string page = HttpContext.Request.Query.TryGetValue("p", out var StringValues) ? StringValues.ToString() : "1";
-            return await _SubjectsRepository.GetList(page: Convert.ToInt32(page), limit: 5);
+            return await _SubjectsRepository.GetList(maxId: p, limit: 5);
         }
 
         // GET api/<SubjectsController>/5

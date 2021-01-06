@@ -20,11 +20,9 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // GET: api/<PostsController>
         [HttpGet]
-        public async Task<IEnumerable<Posts>> GetAsync()
+        public async Task<IEnumerable<Posts>> GetAsync([FromQuery] int p)
         {
-            string page = HttpContext.Request.Query.TryGetValue("p", out var p) ? p.ToString() : "1";
-            //string order = HttpContext.Request.Query.TryGetValue("o", out var o) ? o.ToString() : "1";
-            return await _PostsRepository.GetList(_uid, page: Convert.ToInt32(page), limit: 5);
+            return await _PostsRepository.GetList(_uid, maxId: p, limit: 5);
         }
 
         // GET api/<PostsController>/5

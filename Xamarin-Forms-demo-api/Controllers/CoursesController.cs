@@ -20,11 +20,9 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // GET: api/<CoursesController>
         [HttpGet]
-        public async Task<IEnumerable<Courses>> GetAsync()
+        public async Task<IEnumerable<Courses>> GetAsync([FromQuery] int p)
         {
-            string page = HttpContext.Request.Query.TryGetValue("p", out var StringValues) ? StringValues.ToString() : "1";
-            var fuck = await _CoursesRepository.GetList(page: Convert.ToInt32(page), limit: 5);
-            return fuck;
+            return await _CoursesRepository.GetList(maxId: p, limit: 5);
         }
 
         // GET api/<CoursesController>/5

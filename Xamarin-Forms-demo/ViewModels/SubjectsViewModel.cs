@@ -40,9 +40,9 @@ namespace Xamarin_Forms_demo.ViewModels
             if (IsBusy)
                 return;
             IsBusy = true;
-            var page = Math.Ceiling((double)(Subjects.Count() + 1) / 5).ToString();
+            int maxId = Subjects.Count > 0 ? Subjects[0].id : 0;
             var queryParams = new Dictionary<string, string>() {
-                    { "p", page }
+                    { "p",maxId.ToString() }
             };
             Subjects = await HttpRequest.GetAsync<ObservableCollection<Subjects>>(path, queryParams: queryParams);
             IsBusy = false;

@@ -15,6 +15,13 @@ namespace Xamarin_Forms_demo.Views
             InitializeComponent();
             BindingContext = _examTranscriptsViewModel = new ExamTranscriptsViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _examTranscriptsViewModel.GetListAsync();
+        }
+
         private async void OnEnterExamTranscriptsPageAsync(object sender, SelectionChangedEventArgs e)
         {
             var selected_id = ((ExamTranscripts)e.CurrentSelection[0]).id;
