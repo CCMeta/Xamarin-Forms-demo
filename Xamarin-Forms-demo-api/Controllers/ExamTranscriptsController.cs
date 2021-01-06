@@ -20,9 +20,9 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // GET: api/<CoursesController>
         [HttpGet]
-        public async Task<IEnumerable<ExamTranscripts>> GetAsync()
+        public async Task<IEnumerable<ExamTranscripts>> GetAsync([FromQuery] int p)
         {
-            return await _ExamTranscriptsRepository.GetList(_uid);
+            return await _ExamTranscriptsRepository.GetList(_uid, maxId: p);
         }
 
         // GET api/<CoursesController>/5

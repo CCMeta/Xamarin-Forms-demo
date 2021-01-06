@@ -37,7 +37,10 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public async void GetListAsync()
         {
-            var queryParams = new Dictionary<string, string>() { };
+            int maxId = ExamTranscripts.Count > 0 ? ExamTranscripts[0].id : 0;
+            var queryParams = new Dictionary<string, string>() {
+                    { "p",maxId.ToString() }
+            };
             ExamTranscripts = await HttpRequest.GetAsync<ObservableCollection<ExamTranscripts>>(path, queryParams: queryParams);
             IsBusy = false;
         }

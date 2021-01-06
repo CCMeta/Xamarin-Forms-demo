@@ -8,7 +8,7 @@
              Title="{Binding Title}">
     <RefreshView IsRefreshing="{Binding IsBusy}"
              Command="{Binding GetListCommand}">
-        <CollectionView  x:Name="collectionView" 
+        <CollectionView  x:Name="collectionView"  
                          ItemsSource="{Binding Courses}" 
                          SelectionMode="Single"
                          SelectionChanged="OnCoursesSelectedAsync"
