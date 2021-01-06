@@ -46,7 +46,7 @@ namespace Xamarin_Forms_demo_api.Controllers
             foreach (ExamAnswers examAnswer in examAnswers)
             {
                 string regularAnswer = examQuestions.First(examQuestion => examQuestion.id == examAnswer.questionId).answer;
-                examAnswer.point = examAnswer.answer == regularAnswer ? 5 : 0;
+                examAnswer.point = (examAnswer.answer == regularAnswer) ? 5 : 0;
             }
 
             var examTranscript = new ExamTranscripts

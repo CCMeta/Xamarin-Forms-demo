@@ -14,12 +14,12 @@ namespace Xamarin_Forms_demo_api.Models
 
         }
 
-        public async Task<IEnumerable<ExamTranscripts>> GetList(int uid, int questionId)
+        public async Task<IEnumerable<ExamTranscripts>> GetList(int uid)
         {
-            var sql = "SELECT * FROM exam_transcripts WHERE uid = @uid ";
+            var sql = "SELECT * FROM exam_transcripts WHERE uid = @uid ORDER BY id DESC";
             return await WithConnection(async conn =>
             {
-                return await conn.QueryAsync<ExamTranscripts>(sql, new { uid, questionId });
+                return await conn.QueryAsync<ExamTranscripts>(sql, new { uid });
             });
         }
 
