@@ -22,25 +22,17 @@
                          ItemsUpdatingScrollMode="KeepScrollOffset">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="20">
+                    <Grid Padding="20,10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Grid.RowSpan="2"
-                       Source="https://wx3.sinaimg.cn/large/005TR3jLly1glk4dbpmijj60dw0dwwfd02.jpg"
-                       Aspect="AspectFit" HeightRequest="100" WidthRequest="100"/>
-                        <Label Grid.Column="1" Grid.ColumnSpan="2"
-                           Padding="5,0"
-                       Text="{Binding created_at}"
-                       FontAttributes="Bold" />
-                        <Label Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" MaxLines="6"
-                           Padding="5,0"
-                       Text="{Binding content}"
-                       FontAttributes="Italic"
-                       VerticalOptions="EndAndExpand" />
+                        <Image Grid.Column="0" Grid.RowSpan="2" Aspect="AspectFill" HeightRequest="60" WidthRequest="60"
+                         Source="https://wx3.sinaimg.cn/large/005TR3jLly1glk4dbpmijj60dw0dwwfd02.jpg" />
+                        <Label Grid.Column="1" Grid.ColumnSpan="4" Padding="5,0" Text="{Binding created_at}" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" MaxLines="6" Padding="5,0" Text="{Binding content}" FontAttributes="Italic" VerticalOptions="EndAndExpand" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

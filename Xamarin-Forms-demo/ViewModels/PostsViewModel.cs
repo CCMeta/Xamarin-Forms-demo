@@ -30,7 +30,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public PostsViewModel() : base()
         {
-            Title = "PostsViewModel";
+            Title = "Posts";
             GetListCommand = new Command(() =>
             {
                 GetListAsync();

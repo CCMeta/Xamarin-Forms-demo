@@ -11,7 +11,7 @@
         <Label Text="知识点掌握列表进度条"/>
         <Label Text="考试日志-时间 得分 知识点经验"/>
         <Label Text="错题本"/>
-        <Label Text="排位赛 RANK"/>
+        <Label Text="排位赛 RANK ( PVP log / metters/ score or rank/实战！轻点轻点)"/>
         <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
             <CollectionView  x:Name="collectionView" ItemsSource="{Binding ExamTranscripts}" 
                          VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset"
