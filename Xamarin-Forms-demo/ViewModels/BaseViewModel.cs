@@ -32,11 +32,36 @@ namespace Xamarin_Forms_demo.ViewModels
             set { SetProperty(ref title, value); }
         }
 
+        static Users me;
+        public Users Me
+        {
+            get { return me; }
+            set { SetProperty(ref me, value); }
+        }
+
         public BaseViewModel()
         {
             var username = AppConfiguration.GetValue<string>("Identity:Username");
             var password = AppConfiguration.GetValue<string>("Identity:Password");
-            HttpRequest.Login(username, password);
+            Login(username, password);
+        }
+
+        protected void Login(string username, string password)
+        {
+            if (!string.IsNullOrEmpty(HttpRequest.Token))
+                return;
+            var identity = new Users { username = username, password = password };
+
+            var user = Task.Run(async () =>
+                 await HttpRequest.PostAsync("/api/token", identity)
+            ).Result;
+            if (!string.IsNullOrEmpty(user.username))
+            {
+                HttpRequest.Token = user.token;
+                Me = user;
+                return;
+            }
+            throw new Exception($"No token responsed result = {user}");
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,

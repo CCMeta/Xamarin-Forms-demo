@@ -22,7 +22,7 @@ namespace Xamarin_Forms_demo.Views
         {
             if (!MenuPages.ContainsKey(id))
             {
-                MenuPages.Add(id, new NavigationPage(HomeMenuItem.GetPageById(id)));
+                MenuPages.Add(id, new NavigationPage(FlyoutPageItem.GetPageById(id)));
             }
 
             var newPage = MenuPages[id];

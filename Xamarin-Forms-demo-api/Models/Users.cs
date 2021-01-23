@@ -11,5 +11,6 @@ namespace Xamarin_Forms_demo_api.Models
         public string username { get; set; }
         public string password { get; set; }
         public string nickname { get; set; }
+        public string avatar { get; set; }
     }
 }

@@ -13,8 +13,9 @@ namespace Xamarin_Forms_demo.Services
     public class HttpRequest
     {
         public readonly string _host;
-        private static string token = string.Empty;
-        public static string Token { get => token; set => token = value; }
+
+        public static string Token { get; set; } = string.Empty;
+
         public readonly HttpClient _httpClient = new HttpClient();
 
         public HttpRequest(string host)
@@ -22,25 +23,6 @@ namespace Xamarin_Forms_demo.Services
             _host = host;
         }
 
-        public void Login(string username, string password)
-        {
-            if (!string.IsNullOrEmpty(Token))
-                return;
-            var identity = new Dictionary<string, string>
-            {
-                { "username", username },
-                { "password", password }
-            };
-            var user = Task.Run(async () =>
-                 await PostAsync("/api/token", identity)
-            ).Result;
-            if (!string.IsNullOrEmpty(user["token"]))
-            {
-                Token = user["token"];
-                return;
-            }
-            throw new Exception($"No token responsed result = {user}");
-        }
 
         public async Task<T> GetAsync<T>(string path, Dictionary<string, string> queryParams)
         {

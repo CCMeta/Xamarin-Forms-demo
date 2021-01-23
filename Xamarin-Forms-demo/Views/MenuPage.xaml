@@ -1,29 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.MenuPage"
-             Title="Menu">
-             
-    <StackLayout VerticalOptions="FillAndExpand">
-        <ListView x:Name="ListViewMenu"
-                    HasUnevenRows="True">
-            <d:ListView.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Item 1</x:String>
-                    <x:String>Item 2</x:String>
-                </x:Array>
-            </d:ListView.ItemsSource>
+             Visual="Material" 
+             Title="MenuPage">
+    <StackLayout>
+        <Image HeightRequest="200" BackgroundColor="DeepPink" x:Name="ImageAvatar" Source="{Binding avatar}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Label Text="{Binding username}" />
+        <Label Text="{Binding avatar}" />
+        <ListView x:Name="ListViewMenu" x:FieldModifier="public">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
-                            <Label d:Text="{Binding .}" FontSize="20">
+                            <Label FontSize="Medium">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="&#xf6ad; " FontFamily="FontAwesome5Solid"/>
+                                        <Span Text="&#xf6ad;" FontFamily="FontAwesome5Solid"/>
+                                        <Span Text="   "/>
                                         <Span Text="{Binding Title}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -34,5 +28,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-
 </ContentPage>
