@@ -21,7 +21,7 @@
             <TableView Intent="Menu">
                 <TableRoot>
                     <TableSection Title="NAVIGATION">
-                        <ViewCell>
+                        <ViewCell x:Name="NavStudyViewCell">
                             <Label TextColor="SteelBlue" VerticalOptions="Center">
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -31,12 +31,12 @@
                                 </Label.FormattedText>
                             </Label>
                         </ViewCell>
-                        <ViewCell>
+                        <ViewCell x:Name="NavSNSViewCell">
                             <Label TextColor="SteelBlue" VerticalOptions="Center">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="&#xf086;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
-                                        <Span Text="  Study" FontSize="Large"/>
+                                        <Span Text="  SNS" FontSize="Large"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>

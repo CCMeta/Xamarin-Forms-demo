@@ -24,6 +24,12 @@ namespace Xamarin_Forms_demo.Views
                 flyoutPageItems.Add(new FlyoutPageItem { Id = Convert.ToInt32(item), Title = item.ToString(), IconSource = "" });
             }
 
+            NavSNSViewCell.Tapped += async (sender, e) => {
+                await RootPage.NavigateFromMenu(MenuItemType.SNSTabbed);
+            };
+            NavStudyViewCell.Tapped += async (sender, e) => {
+                await RootPage.NavigateFromMenu(MenuItemType.StudyTabbed);
+            };
             //ListViewMenu.ItemsSource = flyoutPageItems;
             //ListViewMenu.ItemSelected += async (sender, e) =>
             //{
@@ -33,5 +39,6 @@ namespace Xamarin_Forms_demo.Views
             //    await RootPage.NavigateFromMenu(id);
             //};
         }
+
     }
 }

@@ -23,17 +23,17 @@ namespace Xamarin_Forms_demo.Models
 
         public string IconSource { get; set; }
 
-        public static Page GetPageById(int id)
+        public static Page GetPageById(MenuItemType id)
         {
             Page page = id switch
             {
-                //(int)MenuItemType.Audio => new AudioPage(),
-                //(int)MenuItemType.Posts => new PostsPage(),
-                //(int)MenuItemType.About => new AboutPage(),
-                //(int)MenuItemType.Canvas => new CanvasPage(),
-                //(int)MenuItemType.Subjects => new SubjectsPage(),
-                (int)MenuItemType.StudyTabbed => new StudyTabbedPage(),
-                (int)MenuItemType.SNSTabbed => new SNSTabbedPage(),
+                //MenuItemType.Audio => new AudioPage(),
+                //MenuItemType.Posts => new PostsPage(),
+                //MenuItemType.About => new AboutPage(),
+                //MenuItemType.Canvas => new CanvasPage(),
+                //MenuItemType.Subjects => new SubjectsPage(),
+                MenuItemType.StudyTabbed => new StudyTabbedPage(),
+                MenuItemType.SNSTabbed => new SNSTabbedPage(),
                 _ => throw new System.Exception("Nav Bar Is Fucked"),
             };
             return page;

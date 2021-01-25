@@ -10,15 +10,15 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class MainPage : FlyoutPage
     {
-        Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
+        Dictionary<MenuItemType, NavigationPage> MenuPages = new Dictionary<MenuItemType, NavigationPage>();
         public MainPage()
         {
             InitializeComponent();
             FlyoutLayoutBehavior = FlyoutLayoutBehavior.Popover;
-            MenuPages.Add((int)MenuItemType.Index, (NavigationPage)Detail);
+            MenuPages.Add(MenuItemType.Index, (NavigationPage)Detail);
         }
 
-        public async Task NavigateFromMenu(int id)
+        public async Task NavigateFromMenu(MenuItemType id)
         {
             if (!MenuPages.ContainsKey(id))
             {
