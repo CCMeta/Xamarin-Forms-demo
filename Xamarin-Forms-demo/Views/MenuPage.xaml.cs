@@ -25,7 +25,7 @@ namespace Xamarin_Forms_demo.Views
             }
 
             ListViewMenu.ItemsSource = flyoutPageItems;
-
+            Dismiss.BindingContext = ListViewMenu.Height.ToString();
             ListViewMenu.ItemSelected += async (sender, e) =>
             {
                 if (e.SelectedItem == null)

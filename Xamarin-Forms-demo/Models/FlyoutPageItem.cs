@@ -5,11 +5,11 @@ namespace Xamarin_Forms_demo.Models
 {
     public enum MenuItemType
     {
-        //About,
-        //Subjects,
-        //Canvas,
-        //Posts,
-        //Audio,
+        About,
+        Subjects,
+        Canvas,
+        Posts,
+        Audio,
         Index,
         StudyTabbed,
         SNSTabbed,

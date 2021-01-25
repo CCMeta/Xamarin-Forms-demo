@@ -4,43 +4,56 @@
              x:Class="Xamarin_Forms_demo.Views.MenuPage"
              Visual="Material"
              Title="MenuPage">
-    <ScrollView>
-        <StackLayout Padding="20">
-            <Frame BorderColor="Orange" CornerRadius="10" HasShadow="True">
-                <StackLayout BindableLayout.ItemTemplateSelector="fuck">
-                    <Label Text="Setting"/>
-                    <BoxView HeightRequest="1" Color="#CCC"/>
-                    <Label Text="About"/>
-                </StackLayout>
-            </Frame>
-            <Frame BorderColor="Orange" CornerRadius="10" HasShadow="True">
-                <Grid>
-                    <Image Grid.Column="0" Source="{Binding avatar}" HeightRequest="50"/>
-                    <Label Grid.Column="1" Text="{Binding username}" FontSize="25" VerticalOptions="Center" />
-                </Grid>
-            </Frame>
-            <Frame BorderColor="Orange" CornerRadius="10" HasShadow="True">
-                <ListView x:Name="ListViewMenu" x:FieldModifier="public">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid Padding="10">
-                                    <Label FontSize="Medium">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="&#xf6ad;" FontFamily="FontAwesome5Solid"/>
-                                                <Span Text="   "/>
-                                                <Span Text="{Binding Title}"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Frame>
-            <Button Text="Dismiss"/>
-        </StackLayout>
-    </ScrollView>
+    <Grid Padding="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True">
+            <Grid>
+                <Image Grid.Column="0" Source="{Binding avatar}" HeightRequest="50"/>
+                <Label Grid.Column="1" Text="{Binding username}" FontSize="25" VerticalOptions="Center" />
+            </Grid>
+        </Frame>
+        
+        <Frame Grid.Row="1" BorderColor="Orange" CornerRadius="10" HasShadow="True">
+            <ListView x:Name="ListViewMenu" x:FieldModifier="public">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Label FontSize="Medium">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="&#xf6ad;" FontFamily="FontAwesome5Solid"/>
+                                            <Span Text="   "/>
+                                            <Span Text="{Binding Title}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout BackgroundColor="Pink">
+                        <Button x:Name="Dismiss" Text="{Binding .}"/>
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+        </Frame>
+        
+        <Button Grid.Row="2" Text="Dismiss"/>
+        
+        <Frame Grid.Row="3" BorderColor="Orange" CornerRadius="10" HasShadow="True">
+            <StackLayout >
+                <Label Text="Setting"/>
+                <BoxView HeightRequest="1" Color="#CCC"/>
+                <Label Text="About"/>
+            </StackLayout>
+        </Frame>
+    </Grid>
 </ContentPage>
