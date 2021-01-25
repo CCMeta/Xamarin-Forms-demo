@@ -24,15 +24,14 @@ namespace Xamarin_Forms_demo.Views
                 flyoutPageItems.Add(new FlyoutPageItem { Id = Convert.ToInt32(item), Title = item.ToString(), IconSource = "" });
             }
 
-            ListViewMenu.ItemsSource = flyoutPageItems;
-            Dismiss.BindingContext = ListViewMenu.Height.ToString();
-            ListViewMenu.ItemSelected += async (sender, e) =>
-            {
-                if (e.SelectedItem == null)
-                    return;
-                var id = ((FlyoutPageItem)e.SelectedItem).Id;
-                await RootPage.NavigateFromMenu(id);
-            };
+            //ListViewMenu.ItemsSource = flyoutPageItems;
+            //ListViewMenu.ItemSelected += async (sender, e) =>
+            //{
+            //    if (e.SelectedItem == null)
+            //        return;
+            //    var id = ((FlyoutPageItem)e.SelectedItem).Id;
+            //    await RootPage.NavigateFromMenu(id);
+            //};
         }
     }
 }

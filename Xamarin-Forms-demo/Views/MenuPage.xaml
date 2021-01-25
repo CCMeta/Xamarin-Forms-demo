@@ -8,8 +8,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True">
@@ -18,42 +16,53 @@
                 <Label Grid.Column="1" Text="{Binding username}" FontSize="25" VerticalOptions="Center" />
             </Grid>
         </Frame>
-        
+
         <Frame Grid.Row="1" BorderColor="Orange" CornerRadius="10" HasShadow="True">
-            <ListView x:Name="ListViewMenu" x:FieldModifier="public">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
+            <TableView Intent="Menu">
+                <TableRoot>
+                    <TableSection Title="NAVIGATION">
                         <ViewCell>
-                            <Grid Padding="10">
-                                <Label FontSize="Medium">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="&#xf6ad;" FontFamily="FontAwesome5Solid"/>
-                                            <Span Text="   "/>
-                                            <Span Text="{Binding Title}"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                            </Grid>
+                            <Label TextColor="SteelBlue" VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
+                                        <Span Text="  Study" FontSize="Large"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                         </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.Footer>
-                    <StackLayout BackgroundColor="Pink">
-                        <Button x:Name="Dismiss" Text="{Binding .}"/>
-                    </StackLayout>
-                </ListView.Footer>
-            </ListView>
-        </Frame>
-        
-        <Button Grid.Row="2" Text="Dismiss"/>
-        
-        <Frame Grid.Row="3" BorderColor="Orange" CornerRadius="10" HasShadow="True">
-            <StackLayout >
-                <Label Text="Setting"/>
-                <BoxView HeightRequest="1" Color="#CCC"/>
-                <Label Text="About"/>
-            </StackLayout>
+                        <ViewCell>
+                            <Label TextColor="SteelBlue" VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="&#xf086;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
+                                        <Span Text="  Study" FontSize="Large"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection Title="MAJORS">
+                        <ViewCell>
+                            <RadioButton Content="History" Value="History" GroupName="CurrentMajor" />
+                        </ViewCell>
+                        <ViewCell>
+                            <RadioButton Content="Math" Value="Math" GroupName="CurrentMajor" />
+                        </ViewCell>
+                        <ViewCell>
+                            <RadioButton Content="Chinese" Value="Chinese" GroupName="CurrentMajor" />
+                        </ViewCell>
+                        <ViewCell>
+                            <RadioButton Content="English" Value="English" GroupName="CurrentMajor" />
+                        </ViewCell>
+                    </TableSection>
+                    <TableSection>
+                        <ViewCell>
+                            <Button Text="Dismiss" VerticalOptions="End"/>
+                        </ViewCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
         </Frame>
     </Grid>
 </ContentPage>
