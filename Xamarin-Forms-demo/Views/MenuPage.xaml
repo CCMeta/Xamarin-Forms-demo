@@ -13,7 +13,7 @@
         <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True" Padding="15">
             <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding avatar}" HeightRequest="50"/>
-                <Label Text="{Binding username}" FontSize="25" VerticalOptions="Center" />
+                <Label Text="{Binding username}" FontSize="25" VerticalOptions="Center"/>
                 <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
             </StackLayout>
         </Frame>
@@ -23,24 +23,18 @@
                 <TableRoot>
                     <TableSection Title="NAVIGATION">
                         <ViewCell x:Name="NavStudyViewCell">
-                            <Label TextColor="SteelBlue" VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
-                                        <Span Text="  Study" FontSize="Large"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
+                                <Label Text="学习模式" FontSize="Medium" VerticalOptions="Center" />
+                                <Label Text="&#xf054;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
                         </ViewCell>
                         <ViewCell x:Name="NavSNSViewCell">
-                            <Label TextColor="SteelBlue" VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="&#xf086;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
-                                        <Span Text="  SNS" FontSize="Large"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="&#xf086;" FontSize="Medium" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
+                                <Label Text="社交模式" FontSize="Medium" VerticalOptions="Center" />
+                                <Label Text="&#xf054;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
                         </ViewCell>
                     </TableSection>
                     <TableSection Title="MAJORS">
