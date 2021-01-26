@@ -42,7 +42,8 @@ namespace Xamarin_Forms_demo.ViewModels
             var queryParams = new Dictionary<string, string>() {
                     { "p",maxId.ToString() }
             };
-            Courses = await HttpRequest.GetAsync<ObservableCollection<Courses>>(path, queryParams: queryParams);
+            using var _ = HttpRequest.GetAsync<ObservableCollection<Courses>>(path, queryParams: queryParams);
+            Courses = await _;
             IsBusy = false;
         }
 
