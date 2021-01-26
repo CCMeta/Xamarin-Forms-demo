@@ -4,17 +4,18 @@
              x:Class="Xamarin_Forms_demo.Views.MenuPage"
              Visual="Material"
              Title="MenuPage">
-    <Grid Padding="20">
+    <Grid Padding="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True">
-            <Grid>
-                <Image Grid.Column="0" Source="{Binding avatar}" HeightRequest="50"/>
-                <Label Grid.Column="1" Text="{Binding username}" FontSize="25" VerticalOptions="Center" />
-            </Grid>
+        <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True" Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="{Binding avatar}" HeightRequest="50"/>
+                <Label Text="{Binding username}" FontSize="25" VerticalOptions="Center" />
+                <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+            </StackLayout>
         </Frame>
 
         <Frame Grid.Row="1" BorderColor="Orange" CornerRadius="10" HasShadow="True">

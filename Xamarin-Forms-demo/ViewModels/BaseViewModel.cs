@@ -19,20 +19,21 @@ namespace Xamarin_Forms_demo.ViewModels
         private readonly HttpRequest _httpRequest = new HttpRequest(AppConfiguration.GetValue<string>("Host"));
         public HttpRequest HttpRequest { get => _httpRequest; }
 
-        bool isBusy = false;
+        private bool isBusy = false;
         public bool IsBusy
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
         }
-        string title = string.Empty;
+
+        private string title = string.Empty;
         public string Title
         {
             get { return title; }
             set { SetProperty(ref title, value); }
         }
 
-        static Users me;
+        private static Users me;
         public Users Me
         {
             get { return me; }
@@ -64,6 +65,7 @@ namespace Xamarin_Forms_demo.ViewModels
             throw new Exception($"No token responsed result = {user}");
         }
 
+        //Tookit region begin
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",
             Action onChanged = null)
