@@ -25,7 +25,10 @@ namespace Xamarin_Forms_demo.Views
 
         async void OnSelectionItemChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = e.CurrentSelection.FirstOrDefault() as Subjects;
+            if (e.CurrentSelection.Count < 1)
+                return;
+            var selected = e.CurrentSelection[0] as Subjects;
+            (sender as CollectionView).SelectedItem = null;
             await Navigation.PushAsync(new SubjectPage(selected));
         }
 

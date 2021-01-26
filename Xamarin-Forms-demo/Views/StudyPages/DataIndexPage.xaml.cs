@@ -24,8 +24,11 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnEnterExamTranscriptsPageAsync(object sender, SelectionChangedEventArgs e)
         {
+            if (e.CurrentSelection.Count < 1)
+                return;
             var selected_id = ((ExamTranscripts)e.CurrentSelection[0]).id;
             await Navigation.PushAsync(new ExamTranscriptsPage(selected_id));
+            (sender as CollectionView).SelectedItem = null;
         }
     }
 }

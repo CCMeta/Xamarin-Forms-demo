@@ -18,9 +18,12 @@ namespace Xamarin_Forms_demo.Views
 
         private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (e.CurrentSelection.Count < 1)
+                return;
             var current_id = ((ExamQuestions)e.CurrentSelection[0]).id;
             var answer = $"Answer = {current_id}";
             _examQuestionsViewModel.OnAnswerClick(current_id, answer);
+            (sender as CollectionView).SelectedItem = null;
         }
 
         private async void OnCommitPaperAsync(object sender, EventArgs e)

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.ViewModels;
@@ -19,9 +21,11 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnEnterExamQuestionsPageAsync(object sender, SelectionChangedEventArgs e)
         {
-            var selected_id = ((Exams)e.CurrentSelection[0]).id;
+            if (e.CurrentSelection.Count < 1)
+                return;
+            int selected_id = ((Exams)e.CurrentSelection[0]).id;
+            (sender as CollectionView).SelectedItem = null;
             await Navigation.PushAsync(new ExamQuestionsPage(selected_id));
         }
-
     }
 }
