@@ -44,8 +44,7 @@
     <PackageReference Include="SIPSorcery" Version="4.0.81-pre" />
     <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3-preview.18" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
-    <PackageReference Include="System.Text.Json" Version="5.0.0" />
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.0.2" />  
+    <PackageReference Include="System.Text.Json" Version="5.0.0" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.0" />  
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />  
     <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.1874" />
