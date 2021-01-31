@@ -6,7 +6,7 @@
 	  <SignAssembly>false</SignAssembly>
 	  <UserSecretsId>6e0bdca8-877b-477f-8c98-9f568613c903</UserSecretsId>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <ApplicationIcon>Assets\rider.ico</ApplicationIcon>
+	  <ApplicationIcon></ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

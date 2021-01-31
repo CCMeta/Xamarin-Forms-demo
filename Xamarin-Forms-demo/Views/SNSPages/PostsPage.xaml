@@ -30,7 +30,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Grid.RowSpan="2" Aspect="AspectFill" HeightRequest="60" WidthRequest="60"
-                         Source="{Binding avatar}" />
+                         Source="https://tva4.sinaimg.cn/crop.0.0.641.641.180/68a0d5e5jw8ek4bc8ry9dj20ht0ht756.jpg" />
                         <Label Grid.Column="1" Grid.ColumnSpan="4" Padding="5,0" Text="{Binding created_at}" FontAttributes="Bold" />
                         <Label Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" MaxLines="6" Padding="5,0" Text="{Binding content}" FontAttributes="Italic" VerticalOptions="EndAndExpand" />
                     </Grid>

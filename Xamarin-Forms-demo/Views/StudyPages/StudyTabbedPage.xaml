@@ -9,17 +9,17 @@
 
     <views:ClassIndexPage Title="Class">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:ClassIndexPage>
     <views:TestIndexPage Title="Test">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:TestIndexPage>
     <views:DataIndexPage Title="Data">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:DataIndexPage>
 </TabbedPage>

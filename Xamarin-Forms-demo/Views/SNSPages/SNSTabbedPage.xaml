@@ -9,17 +9,17 @@
 
     <views:PostsPage Title="Posts">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf0a1;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf0a1;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:PostsPage>
     <views:GroupsPage Title="Groups">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf0c0;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf0c0;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:GroupsPage>
     <views:SubjectsPage Title="Subjects">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" Size="44" />
+            <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:SubjectsPage>
 </TabbedPage>
