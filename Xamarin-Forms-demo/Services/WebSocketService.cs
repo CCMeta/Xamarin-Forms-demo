@@ -31,12 +31,12 @@ namespace Xamarin_Forms_demo.Services
         private const string RTC_CERT_URL = "https://xamarin-web.ccmeta.com/ssl.pfx";
         public static readonly string FFPLAY_DEFAULT_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + "local.sdp";
 
-        public async Task ListeningWebSocketAsync(Action<List<List<float>>> OnDrawCanvas)
+        public async Task ListeningWebSocketAsync(Action<List<List<float>>> OnDrawCanvas, Action OnLocalRtpSession)
         {
             var uri = new Uri(WS_URL);
             var response_buffer = WebSocket.CreateClientBuffer(4096 * 20, 4096 * 20);
             await ClientWebSocket.ConnectAsync(uri, CancellationToken.None);
-            await ListeningWebRTCAsync(OnDrawCanvas);
+            await ListeningWebRTCAsync(OnDrawCanvas, OnLocalRtpSession);
             while (true)
             {
                 WebSocketReceiveResult response = await ClientWebSocket.ReceiveAsync(response_buffer, CancellationToken.None);
@@ -104,7 +104,7 @@ namespace Xamarin_Forms_demo.Services
             }//end of while loop
         }
 
-        private async Task ListeningWebRTCAsync(Action<List<List<float>>> OnDrawCanvas)
+        private async Task ListeningWebRTCAsync(Action<List<List<float>>> OnDrawCanvas, Action OnLocalRtpSession)
         {
             _pc = await CreatePeerConnectionAsync();
 
@@ -128,6 +128,7 @@ namespace Xamarin_Forms_demo.Services
                 {
                     Console.WriteLine($"CreateLocalRtpSession.");
                     localRtpSession = CreateLocalRtpSession(_pc.AudioRemoteTrack?.Capabilities, _pc.VideoRemoteTrack?.Capabilities);
+                    OnLocalRtpSession.Invoke();
                 }
 
                 if (media == SDPMediaTypesEnum.audio && localRtpSession.AudioDestinationEndPoint != null)

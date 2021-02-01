@@ -16,7 +16,8 @@ namespace Xamarin_Forms_demo.ViewModels
         public ObservableCollection<Item> Items { get; set; }
         public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
         public static Queue<List<List<float>>> drawPointsQueue = new Queue<List<List<float>>>();
-        public event EventHandler DrawCanvasEvent;
+        public event EventHandler OnDrawCanvas;
+        public event EventHandler OnLocalRtpSession;
         public readonly string FFPLAY_DEFAULT_SDP_PATH = WebSocketService.FFPLAY_DEFAULT_SDP_PATH;
 
         public ItemsViewModel() : base()
@@ -29,7 +30,10 @@ namespace Xamarin_Forms_demo.ViewModels
                 await webSocketService.ListeningWebSocketAsync((pointsList) =>
                 {
                     drawPointsQueue.Enqueue(pointsList);
-                    DrawCanvasEvent(this, EventArgs.Empty);
+                    OnDrawCanvas(this, EventArgs.Empty);
+                }, () =>
+                {
+                    OnLocalRtpSession(this, EventArgs.Empty);
                 });
             }).ContinueWith(_ => Debug.Fail(_.Exception.InnerException.Message), TaskContinuationOptions.OnlyOnFaulted);
 

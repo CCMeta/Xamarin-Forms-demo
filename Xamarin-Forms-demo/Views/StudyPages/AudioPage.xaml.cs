@@ -12,7 +12,7 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class AudioPage : ContentPage
     {
-        readonly LibVLC _libVLC;
+        private readonly LibVLC _libVLC;
         private readonly ItemsViewModel _ItemsViewModel = new ItemsViewModel();
         private readonly string[] _libVLCOptions = new string[] {
                 "--rtsp-caching=100", " --file-caching=100", "--live-caching=100",
@@ -28,6 +28,7 @@ namespace Xamarin_Forms_demo.Views
             _libVLC = new LibVLC(enableDebugLogs: false, _libVLCOptions);
             BindingContext = _ItemsViewModel;
         }
+
         private void OnPlayStarted(object sender, EventArgs e)
         {
             VlcVideoView.MediaPlayer = new MediaPlayer(_libVLC);

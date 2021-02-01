@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:SkiaSharp="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:LibVLCSharp="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.CanvasPage"
              Title="{Binding Title}"
@@ -19,8 +20,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <skia:SKCanvasView x:Name="canvasView" PaintSurface="OnCanvasViewPaintSurface" Grid.Row="1">
-        </skia:SKCanvasView>
+        <SkiaSharp:SKCanvasView x:Name="canvasView" PaintSurface="OnCanvasViewPaintSurface">
+        </SkiaSharp:SKCanvasView>
+
+        <LibVLCSharp:VideoView x:Name="VlcVideoView" IsVisible="false" />
     </Grid>
 
 </ContentPage>
