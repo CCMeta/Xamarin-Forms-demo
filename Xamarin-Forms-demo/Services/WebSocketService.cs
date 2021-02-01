@@ -26,6 +26,9 @@ namespace Xamarin_Forms_demo.Services
         private const int FFPLAY_DEFAULT_AUDIO_PORT = 15016;
         private const int FFPLAY_DEFAULT_VIDEO_PORT = 15018;
         private const string WS_URL = "wss://ccmeta.com:9502/websocket";
+        private const string STUN_URL = "stun:23.225.165.212:13333";
+        private const string TURN_URL = "turn:23.225.165.212:13333";
+        private const string RTC_CERT_URL = "https://xamarin-web.ccmeta.com/ssl.pfx";
         public static readonly string FFPLAY_DEFAULT_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + "local.sdp";
 
         public async Task ListeningWebSocketAsync(Action<List<List<float>>> OnDrawCanvas)
@@ -191,18 +194,19 @@ namespace Xamarin_Forms_demo.Services
 
         private async Task<RTCPeerConnection> CreatePeerConnectionAsync()
         {
-            var ssl_file = await new HttpClient().GetAsync("https://shadow-board.ccmeta.com/ssl.pfx");
-            var localhostCert = new X509Certificate2(await ssl_file.Content.ReadAsByteArrayAsync(), "0");
+            var ssl_file = await new HttpClient().GetByteArrayAsync(RTC_CERT_URL);
+            var localhostCert = new X509Certificate2(ssl_file, "0");
+            //var localhostCert = new X509Certificate2(await ssl_file.Content.ReadAsByteArrayAsync(), "0");
             var presetCertificates = new List<RTCCertificate> {
                     new RTCCertificate { Certificate = localhostCert },
             };
             var IceServersStun = new RTCIceServer
             {
-                urls = "stun:137.220.233.101:13333",
+                urls = STUN_URL,
             };
             var IceServersTurn = new RTCIceServer
             {
-                urls = "turn:137.220.233.101:13333",
+                urls = TURN_URL,
                 username = "username1",
                 credential = "key1",
             };

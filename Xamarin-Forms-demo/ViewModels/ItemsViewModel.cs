@@ -3,6 +3,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Xamarin_Forms_demo.Models;
@@ -23,14 +24,15 @@ namespace Xamarin_Forms_demo.ViewModels
             AddConsoleLogger();
 
             var webSocketService = new WebSocketService();
-            Task.Run(async () =>
+            var task = Task.Run(async () =>
             {
                 await webSocketService.ListeningWebSocketAsync((pointsList) =>
                 {
                     drawPointsQueue.Enqueue(pointsList);
                     DrawCanvasEvent(this, EventArgs.Empty);
                 });
-            });
+            }).ContinueWith(_ => Debug.Fail(_.Exception.InnerException.Message), TaskContinuationOptions.OnlyOnFaulted);
+
         }
 
         private static void AddConsoleLogger()
