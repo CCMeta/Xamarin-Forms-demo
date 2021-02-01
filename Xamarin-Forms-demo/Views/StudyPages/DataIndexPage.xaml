@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.DataIndexPage"
-             Title="{Binding Title}" Visual="Material">
+             Title="{Binding Title}" Visual="">
     <StackLayout>
         <Label Text="出勤图表"/>
         <Label Text="知识点掌握列表进度条"/>

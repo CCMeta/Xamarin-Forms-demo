@@ -30,8 +30,8 @@ namespace Xamarin_Forms_demo.Views
                 return;
 
             string videoUrl = (e.CurrentSelection[0] as Courses).video;
-            //await Navigation.PushAsync(new VideoPage(videoUrl));
-            await Navigation.PushModalAsync(new VideoPage(videoUrl));
+            await Navigation.PushAsync(new VideoPage(videoUrl));
+            //await Navigation.PushModalAsync(new VideoPage(videoUrl));
             (sender as CollectionView).SelectedItem = null;
         }
     }

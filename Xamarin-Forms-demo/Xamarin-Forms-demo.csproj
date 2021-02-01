@@ -81,7 +81,7 @@
     <Compile Update="Views\Trush\_ItemDetailPage.xaml.cs">
       <DependentUpon>_ItemDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\StudyPages\AudioPage.xaml.cs">
+    <Compile Update="Views\Trush\AudioPage.xaml.cs">
       <DependentUpon>AudioPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SNSPages\SendPostPage.xaml.cs">

@@ -6,25 +6,10 @@
              xmlns:LibVLCSharp="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.VideoPage"
-             Title="{Binding Title}"
-             x:Name="BrowseItemsPage">
+             Title="{Binding Title}">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-        <LibVLCSharp:MediaPlayerElement Grid.Column="0" Grid.Row="0" x:Name="VlcVideoView" EnableRendererDiscovery="True">
-            <LibVLCSharp:MediaPlayerElement.PlaybackControls>
-                <LibVLCSharp:PlaybackControls 
-                    KeepScreenOn="True"
-                    IsAudioTracksSelectionButtonVisible="False"
-                    IsCastButtonVisible="False"
-                    IsClippedToBounds="True"
-                    IsAspectRatioButtonVisible="False"
-                    IsRewindButtonVisible="False"/>
-            </LibVLCSharp:MediaPlayerElement.PlaybackControls>
+        <LibVLCSharp:MediaPlayerElement 
+            x:Name="VlcVideoView" EnableRendererDiscovery="True">
         </LibVLCSharp:MediaPlayerElement>
     </Grid>
 </ContentPage>

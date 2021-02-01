@@ -6,7 +6,7 @@
             mc:Ignorable="d"
             xmlns:views="clr-namespace:Xamarin_Forms_demo.Views"
             x:Class="Xamarin_Forms_demo.Views.MainPage"
-            Visual="Material">
+            Visual="">
 
     <FlyoutPage.Flyout>
         <views:MenuPage />

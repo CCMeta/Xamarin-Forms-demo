@@ -30,6 +30,7 @@ namespace Xamarin_Forms_demo.Views
             {
                 EnableHardwareDecoding = false,
                 Fullscreen = true,
+                Scale = 0,
             };
             media.Dispose();
             VlcVideoView.MediaPlayer.Play();
