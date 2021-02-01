@@ -12,19 +12,16 @@ namespace Xamarin_Forms_demo.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            //plugin init
-            //LibVLCSharp.Forms.Platforms.Android.Platform.Init(this);
-            LibVLCSharp.Forms.Shared.LibVLCSharpFormsRenderer.Init();
-
-
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
             base.OnCreate(savedInstanceState);
+
+            //plugin init
+            LibVLCSharp.Forms.Shared.LibVLCSharpFormsRenderer.Init();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
-
 
             LoadApplication(new App());
         }

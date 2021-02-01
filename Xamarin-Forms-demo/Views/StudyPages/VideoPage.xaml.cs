@@ -24,10 +24,12 @@ namespace Xamarin_Forms_demo.Views
         {
             base.OnAppearing();
             Core.Initialize();
-            using var media = new Media(new LibVLC(enableDebugLogs: false), new Uri(_videoUrl));
+            VlcVideoView.LibVLC = new LibVLC(enableDebugLogs: false);
+            using var media = new Media(VlcVideoView.LibVLC, new Uri(_videoUrl));
             VlcVideoView.MediaPlayer = new MediaPlayer(media)
             {
-                EnableHardwareDecoding = true, 
+                EnableHardwareDecoding = false,
+                Fullscreen = true,
             };
             media.Dispose();
             VlcVideoView.MediaPlayer.Play();

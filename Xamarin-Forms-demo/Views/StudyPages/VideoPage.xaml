@@ -3,12 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:vlc="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
+             xmlns:LibVLCSharp="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.VideoPage"
              Title="{Binding Title}"
              x:Name="BrowseItemsPage">
-    <StackLayout>
-        <vlc:MediaPlayerElement x:Name="VlcVideoView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <LibVLCSharp:MediaPlayerElement Grid.Column="0" Grid.Row="0" x:Name="VlcVideoView" EnableRendererDiscovery="True">
+            <LibVLCSharp:MediaPlayerElement.PlaybackControls>
+                <LibVLCSharp:PlaybackControls 
+                    KeepScreenOn="True"
+                    IsAudioTracksSelectionButtonVisible="False"
+                    IsCastButtonVisible="False"
+                    IsClippedToBounds="True"
+                    IsAspectRatioButtonVisible="False"
+                    IsRewindButtonVisible="False"/>
+            </LibVLCSharp:MediaPlayerElement.PlaybackControls>
+        </LibVLCSharp:MediaPlayerElement>
+    </Grid>
 </ContentPage>
