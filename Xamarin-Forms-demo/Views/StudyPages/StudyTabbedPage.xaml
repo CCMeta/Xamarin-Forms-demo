@@ -6,7 +6,11 @@
             x:Class="Xamarin_Forms_demo.Views.StudyTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
             Title="StudyTabbedPage">
-
+    <views:CanvasPage Title="Live">
+        <ContentPage.IconImageSource>
+            <FontImageSource Glyph="&#xf144;" FontFamily="FontAwesome5Solid" />
+        </ContentPage.IconImageSource>
+    </views:CanvasPage>
     <views:ClassIndexPage Title="Class">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" />

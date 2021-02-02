@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,7 +19,7 @@ namespace Xamarin_Forms_demo.Services
     public class WebSocketService
     {
         public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
-        public static StringDictionary sidList = new StringDictionary();
+        public static StringDictionary contacts = new StringDictionary();// online or offline
         public static RTCPeerConnection _pc;
         public static RTPSession localRtpSession;
 
@@ -31,57 +32,42 @@ namespace Xamarin_Forms_demo.Services
         private const string RTC_CERT_URL = "https://xamarin-web.ccmeta.com/ssl.pfx";
         public static readonly string FFPLAY_DEFAULT_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + "local.sdp";
 
+        public WebSocketService(Action<List<List<float>>> OnDrawCanvas, Action OnLocalRtpSession)
+        {
+            Task.Run(async () =>
+            {
+                await ClientWebSocket.ConnectAsync(new Uri(WS_URL), CancellationToken.None);
+                await ListeningWebSocketAsync(OnDrawCanvas, OnLocalRtpSession);
+            }).ContinueWith(_ => Debug.Fail(_.Exception.InnerException.Message), TaskContinuationOptions.OnlyOnFaulted);
+        }
+
         public async Task ListeningWebSocketAsync(Action<List<List<float>>> OnDrawCanvas, Action OnLocalRtpSession)
         {
-            var uri = new Uri(WS_URL);
-            var response_buffer = WebSocket.CreateClientBuffer(4096 * 20, 4096 * 20);
-            await ClientWebSocket.ConnectAsync(uri, CancellationToken.None);
             await ListeningWebRTCAsync(OnDrawCanvas, OnLocalRtpSession);
+            var publicBuffer = WebSocket.CreateClientBuffer(4096 * 20, 4096 * 20);
             while (true)
             {
-                WebSocketReceiveResult response = await ClientWebSocket.ReceiveAsync(response_buffer, CancellationToken.None);
+                WebSocketReceiveResult response = await ClientWebSocket.ReceiveAsync(publicBuffer, CancellationToken.None);
                 if (response.EndOfMessage)
                 {
-                    var fucksegment = response_buffer.Array;
-                    Array.Resize(ref fucksegment, response.Count);
-                    var response_string = System.Text.Encoding.UTF8.GetString(fucksegment);
-                    var response_json = JsonSerializer.Deserialize<Hashtable>(response_string);
-                    var action_type = response_json["type"].ToString();
-                    var action_data = response_json["data"].ToString();
+                    byte[] currentBuffer = publicBuffer.Array;
+                    Array.Resize(ref currentBuffer, response.Count);
+                    string responseText = System.Text.Encoding.UTF8.GetString(currentBuffer);
+                    Hashtable response_json = JsonSerializer.Deserialize<Hashtable>(responseText);
+                    string action_type = response_json["type"].ToString();
+                    string action_data = response_json["data"].ToString();
                     switch (action_type)
                     {
                         case "set-sid":
-                            sidList.Add("sid", action_data);
+                            //listening event when set-sid 
+                            contacts.Add("sid", action_data);
                             break;
                         case "description":
-                            var sdpWithType = JsonSerializer.Deserialize<Hashtable>(action_data);
+                            Hashtable sdpWithType = JsonSerializer.Deserialize<Hashtable>(action_data);
                             switch (sdpWithType["type"].ToString())
                             {
                                 case "offer":
-                                    //set remote offer
-                                    _pc.setRemoteDescription(new RTCSessionDescriptionInit()
-                                    {
-                                        sdp = sdpWithType["sdp"].ToString(),
-                                        type = RTCSdpType.offer,
-                                    });
-
-                                    //setLocalDescription
-                                    await _pc.setLocalDescription(_pc.createAnswer(new RTCAnswerOptions()));
-
-                                    //send answer to offer client
-                                    string request_json = JsonSerializer.Serialize(new
-                                    {
-                                        type = "description",
-                                        data = new
-                                        {
-                                            type = _pc.localDescription.type.ToString(),
-                                            sdp = _pc.localDescription.sdp.ToString(),
-                                        },
-                                    });
-
-                                    await ClientWebSocket.SendAsync(
-                                        new ArraySegment<byte>(System.Text.Encoding.ASCII.GetBytes(request_json)),
-                                        WebSocketMessageType.Binary, true, CancellationToken.None);
+                                    await NewMethod(sdpWithType);
                                     break;
                                 case "answer":
                                     _pc.setRemoteDescription(new RTCSessionDescriptionInit()
@@ -102,6 +88,34 @@ namespace Xamarin_Forms_demo.Services
                     } //end of switch
                 }//end of if
             }//end of while loop
+
+            static async Task NewMethod(Hashtable sdpWithType)
+            {
+                //set remote offer
+                _pc.setRemoteDescription(new RTCSessionDescriptionInit()
+                {
+                    sdp = sdpWithType["sdp"].ToString(),
+                    type = RTCSdpType.offer,
+                });
+
+                //setLocalDescription
+                await _pc.setLocalDescription(_pc.createAnswer(new RTCAnswerOptions()));
+
+                //send answer to offer client
+                string request_json = JsonSerializer.Serialize(new
+                {
+                    type = "description",
+                    data = new
+                    {
+                        type = _pc.localDescription.type.ToString(),
+                        sdp = _pc.localDescription.sdp.ToString(),
+                    },
+                });
+
+                await ClientWebSocket.SendAsync(
+                    new ArraySegment<byte>(System.Text.Encoding.ASCII.GetBytes(request_json)),
+                    WebSocketMessageType.Binary, true, CancellationToken.None);
+            }
         }
 
         private async Task ListeningWebRTCAsync(Action<List<List<float>>> OnDrawCanvas, Action OnLocalRtpSession)
@@ -117,7 +131,7 @@ namespace Xamarin_Forms_demo.Services
                 },
                 MediaStreamStatusEnum.SendRecv);
             _pc.addTrack(audioTrack);
-
+            _pc.OnRtpClosed += (info) => localRtpSession.Dispose();
             _pc.OnRtpPacketReceived += (IPEndPoint, media, rtpPkt) =>
             {
                 if (!_pc.IsDtlsNegotiationComplete)

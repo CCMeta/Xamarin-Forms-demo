@@ -7,8 +7,7 @@
              xmlns:LibVLCSharp="clr-namespace:LibVLCSharp.Forms.Shared;assembly=LibVLCSharp.Forms"
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.CanvasPage"
-             Title="{Binding Title}"
-             x:Name="BrowseCanvasPage">
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#2196F3</Color>

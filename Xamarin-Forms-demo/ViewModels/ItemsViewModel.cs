@@ -3,6 +3,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Xamarin_Forms_demo.ViewModels
     public class ItemsViewModel : BaseViewModel
     {
         public ObservableCollection<Item> Items { get; set; }
-        public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
+        public static StringDictionary Contacts => WebSocketService.contacts;
         public static Queue<List<List<float>>> drawPointsQueue = new Queue<List<List<float>>>();
         public event EventHandler OnDrawCanvas;
         public event EventHandler OnLocalRtpSession;
@@ -24,19 +25,14 @@ namespace Xamarin_Forms_demo.ViewModels
         {
             AddConsoleLogger();
 
-            var webSocketService = new WebSocketService();
-            var task = Task.Run(async () =>
+            var _ = new WebSocketService((pointsList) =>
             {
-                await webSocketService.ListeningWebSocketAsync((pointsList) =>
-                {
-                    drawPointsQueue.Enqueue(pointsList);
-                    OnDrawCanvas(this, EventArgs.Empty);
-                }, () =>
-                {
-                    OnLocalRtpSession(this, EventArgs.Empty);
-                });
-            }).ContinueWith(_ => Debug.Fail(_.Exception.InnerException.Message), TaskContinuationOptions.OnlyOnFaulted);
-
+                drawPointsQueue.Enqueue(pointsList);
+                OnDrawCanvas(this, EventArgs.Empty);
+            }, () =>
+            {
+                OnLocalRtpSession(this, EventArgs.Empty);
+            });
         }
 
         private static void AddConsoleLogger()
