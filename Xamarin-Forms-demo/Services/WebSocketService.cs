@@ -18,7 +18,7 @@ namespace Xamarin_Forms_demo.Services
 {
     public class WebSocketService
     {
-        public static ClientWebSocket ClientWebSocket = new ClientWebSocket();
+        public static ClientWebSocket _clientWebSocket = new ClientWebSocket();
         public static StringDictionary contacts = new StringDictionary();// online or offline
         public static RTCPeerConnection _pc;
         public static RTPSession localRtpSession;
@@ -36,7 +36,7 @@ namespace Xamarin_Forms_demo.Services
         {
             Task.Run(async () =>
             {
-                await ClientWebSocket.ConnectAsync(new Uri(WS_URL), CancellationToken.None);
+                await _clientWebSocket.ConnectAsync(new Uri(WS_URL), CancellationToken.None);
                 await ListeningWebSocketAsync(OnDrawCanvas, OnLocalRtpSession);
             }).ContinueWith(_ => Debug.Fail(_.Exception.InnerException.Message), TaskContinuationOptions.OnlyOnFaulted);
         }
@@ -47,7 +47,7 @@ namespace Xamarin_Forms_demo.Services
             var publicBuffer = WebSocket.CreateClientBuffer(4096 * 20, 4096 * 20);
             while (true)
             {
-                WebSocketReceiveResult response = await ClientWebSocket.ReceiveAsync(publicBuffer, CancellationToken.None);
+                WebSocketReceiveResult response = await _clientWebSocket.ReceiveAsync(publicBuffer, CancellationToken.None);
                 if (response.EndOfMessage)
                 {
                     byte[] currentBuffer = publicBuffer.Array;
@@ -67,7 +67,30 @@ namespace Xamarin_Forms_demo.Services
                             switch (sdpWithType["type"].ToString())
                             {
                                 case "offer":
-                                    await NewMethod(sdpWithType);
+                                    //set remote offer
+                                    _pc.setRemoteDescription(new RTCSessionDescriptionInit()
+                                    {
+                                        sdp = sdpWithType["sdp"].ToString(),
+                                        type = RTCSdpType.offer,
+                                    });
+
+                                    //setLocalDescription
+                                    await _pc.setLocalDescription(_pc.createAnswer(new RTCAnswerOptions()));
+
+                                    //send answer to offer client
+                                    string request_json = JsonSerializer.Serialize(new
+                                    {
+                                        type = "description",
+                                        data = new
+                                        {
+                                            type = _pc.localDescription.type.ToString(),
+                                            sdp = _pc.localDescription.sdp.ToString(),
+                                        },
+                                    });
+
+                                    await _clientWebSocket.SendAsync(
+                                        new ArraySegment<byte>(System.Text.Encoding.ASCII.GetBytes(request_json)),
+                                        WebSocketMessageType.Binary, true, CancellationToken.None);
                                     break;
                                 case "answer":
                                     _pc.setRemoteDescription(new RTCSessionDescriptionInit()
@@ -88,34 +111,6 @@ namespace Xamarin_Forms_demo.Services
                     } //end of switch
                 }//end of if
             }//end of while loop
-
-            static async Task NewMethod(Hashtable sdpWithType)
-            {
-                //set remote offer
-                _pc.setRemoteDescription(new RTCSessionDescriptionInit()
-                {
-                    sdp = sdpWithType["sdp"].ToString(),
-                    type = RTCSdpType.offer,
-                });
-
-                //setLocalDescription
-                await _pc.setLocalDescription(_pc.createAnswer(new RTCAnswerOptions()));
-
-                //send answer to offer client
-                string request_json = JsonSerializer.Serialize(new
-                {
-                    type = "description",
-                    data = new
-                    {
-                        type = _pc.localDescription.type.ToString(),
-                        sdp = _pc.localDescription.sdp.ToString(),
-                    },
-                });
-
-                await ClientWebSocket.SendAsync(
-                    new ArraySegment<byte>(System.Text.Encoding.ASCII.GetBytes(request_json)),
-                    WebSocketMessageType.Binary, true, CancellationToken.None);
-            }
         }
 
         private async Task ListeningWebRTCAsync(Action<List<List<float>>> OnDrawCanvas, Action OnLocalRtpSession)
@@ -175,7 +170,7 @@ namespace Xamarin_Forms_demo.Services
                         type = "ice-candidate",
                         data = localCandidate
                     });
-                    await ClientWebSocket.SendAsync(
+                    await _clientWebSocket.SendAsync(
                         new ArraySegment<byte>(System.Text.Encoding.ASCII.GetBytes(request_json)),
                         WebSocketMessageType.Binary, true, CancellationToken.None);
                 }

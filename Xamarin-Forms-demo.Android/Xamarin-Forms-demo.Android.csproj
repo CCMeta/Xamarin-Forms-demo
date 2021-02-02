@@ -49,6 +49,8 @@
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <DocumentationFile>
     </DocumentationFile>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

@@ -4,6 +4,7 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.ViewModels;
 
@@ -72,5 +73,6 @@ namespace Xamarin_Forms_demo.Views
                     throw new Exception("VlcVideoView.MediaPlayer.Play failed");
             };
         }
+
     }
 }

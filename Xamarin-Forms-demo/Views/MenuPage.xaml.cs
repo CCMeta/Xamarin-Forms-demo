@@ -18,6 +18,7 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             BindingContext = new BaseViewModel().Me;
+            WebSocketStateLabel.BindingContext = ItemsViewModel.WebSocketState;
 
             foreach (var item in Enum.GetValues(typeof(MenuItemType)))
             {
