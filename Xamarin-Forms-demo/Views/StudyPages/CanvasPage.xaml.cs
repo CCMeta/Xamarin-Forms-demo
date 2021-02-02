@@ -57,13 +57,13 @@ namespace Xamarin_Forms_demo.Views
                 path.QuadTo(new SKPoint(_SKPoints[1][0], _SKPoints[1][1]),
                     new SKPoint(_SKPoints[2][0], _SKPoints[2][1]));
                 args.Surface.Canvas.DrawPath(path, _brush);
-                args.Surface.Canvas.DrawText("fuck", new SKPoint(_SKPoints[0][0], _SKPoints[0][1]), _brush);
             }
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            //args.Surface.Canvas.DrawText("fuck", new SKPoint(_SKPoints[0][0], _SKPoints[0][1]), _brush);
             itemsViewModel.OnDrawCanvas += (object sender, EventArgs e) =>
             {
                 canvasView.InvalidateSurface();
