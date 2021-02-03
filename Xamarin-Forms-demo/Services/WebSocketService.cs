@@ -192,8 +192,7 @@ namespace Xamarin_Forms_demo.Services
                     switch (receviceData["type"].ToString())
                     {
                         case "draw-canvas":
-                            OnDrawCanvas.Invoke(
-                                JsonSerializer.Deserialize<List<List<float>>>(receviceData["data"].ToString()));
+                            OnDrawCanvas.Invoke(JsonSerializer.Deserialize<List<List<float>>>(receviceData["data"].ToString()));
                             break;
                         default:
                             break;

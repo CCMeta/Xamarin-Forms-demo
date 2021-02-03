@@ -4,6 +4,7 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.ViewModels;
@@ -16,7 +17,7 @@ namespace Xamarin_Forms_demo.Views
         //SKPaint configure
         private readonly SKPaint _brush = new SKPaint
         {
-            Style = SKPaintStyle.Stroke,
+            Style = SKPaintStyle.StrokeAndFill,
             Color = Color.Red.ToSKColor(),
             StrokeWidth = 5
         };
@@ -25,10 +26,9 @@ namespace Xamarin_Forms_demo.Views
         //VLC configure
         private readonly LibVLC _libVLC;
         private readonly string[] _libVLCOptions = new string[] {
-                "--rtsp-caching=100", " --file-caching=100", "--live-caching=100",
-            "--realrtsp-caching=100",  "--network-caching=0",
-            "--skip-frames", "--sout-keep", "--sout-all",
-            "--drop-late-frames","--rtsp-tcp"};
+            " --file-caching=100", "--live-caching=100", "--network-caching=0",
+            "--skip-frames", "--sout-keep", "--sout-all", "--drop-late-frames","--rtsp-tcp"
+        };
 
         public CanvasPage()
         {
@@ -63,10 +63,10 @@ namespace Xamarin_Forms_demo.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //args.Surface.Canvas.DrawText("fuck", new SKPoint(_SKPoints[0][0], _SKPoints[0][1]), _brush);
             itemsViewModel.OnDrawCanvas += (object sender, EventArgs e) =>
             {
-                canvasView.InvalidateSurface();
+                //this is the fucking point in ios with fucking exception
+                Device.BeginInvokeOnMainThread(canvasView.InvalidateSurface);
             };
             itemsViewModel.OnLocalRtpSession += (object sender, EventArgs e) =>
             {

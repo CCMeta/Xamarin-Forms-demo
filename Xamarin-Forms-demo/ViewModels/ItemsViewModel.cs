@@ -20,12 +20,13 @@ namespace Xamarin_Forms_demo.ViewModels
         public static Queue<List<List<float>>> drawPointsQueue = new Queue<List<List<float>>>();
         public event EventHandler OnDrawCanvas;
         public event EventHandler OnLocalRtpSession;
+        public static WebSocketService webSocketService;
 
         public ItemsViewModel() : base()
         {
             AddConsoleLogger();
             //Func<int,int> shit = (s) => 1;
-            new WebSocketService((pointsList) =>
+            webSocketService = new WebSocketService((pointsList) =>
             {
                 drawPointsQueue.Enqueue(pointsList);
                 OnDrawCanvas(this, EventArgs.Empty);
