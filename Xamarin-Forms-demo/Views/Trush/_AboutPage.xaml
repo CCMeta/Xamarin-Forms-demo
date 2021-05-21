@@ -7,10 +7,7 @@
              x:Class="Xamarin_Forms_demo.Views.AboutPage"
              xmlns:vm="clr-namespace:Xamarin_Forms_demo.ViewModels"
              Title="{Binding Title}">
-    
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext>
+
     
     <ContentPage.Resources>
         <ResourceDictionary>
