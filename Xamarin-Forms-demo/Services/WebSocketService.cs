@@ -27,8 +27,8 @@ namespace Xamarin_Forms_demo.Services
         private const int FFPLAY_DEFAULT_AUDIO_PORT = 15016;
         private const int FFPLAY_DEFAULT_VIDEO_PORT = 15018;
         private const string WS_URL = "wss://ccmeta.com:9502/websocket";
-        private const string STUN_URL = "stun:23.225.165.212:13333";
-        private const string TURN_URL = "turn:23.225.165.212:13333";
+        private const string STUN_URL = "stun:137.220.233.101:13333";
+        private const string TURN_URL = "turn:137.220.233.101:13333";
         private const string RTC_CERT_URL = "https://xamarin-web.ccmeta.com/ssl.pfx";
         public static readonly string FFPLAY_DEFAULT_SDP_PATH = Xamarin.Essentials.FileSystem.CacheDirectory + "/" + "local.sdp";
 

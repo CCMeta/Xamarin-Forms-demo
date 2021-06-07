@@ -13,8 +13,8 @@
         <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True" Padding="15">
             <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding avatar}" HeightRequest="50"/>
-                <Label Text="{Binding username}" FontSize="25" VerticalOptions="Center"/>
-                <Label x:Name="WebSocketStateLabel" Text="{Binding .}" FontSize="25" VerticalOptions="Center"/>
+                <Label Text="{Binding username}" FontSize="Medium" VerticalOptions="Center"/>
+                <Button x:Name="WebSocketStateLabel" Text="{Binding .}" FontSize="Medium" VerticalOptions="Center"/>
                 <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
             </StackLayout>
         </Frame>
