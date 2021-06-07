@@ -27,5 +27,22 @@ namespace Xamarin_Forms_demo.Views
             (sender as CollectionView).SelectedItem = null;
             await Navigation.PushAsync(new ExamQuestionsPage(selected_id));
         }
+
+        private void Type_Toggle(object sender, EventArgs e)
+        {
+            //make all box to transparent.
+            BoxView boxView;
+            foreach (var child in listTabNavbar.Children)
+            {
+                boxView = ((StackLayout)child).Children[1] as BoxView;
+                boxView.Color = Color.Transparent;
+            }
+
+            //this is a important thing to get a element in a event just remeber the |as| act
+            boxView = (((Button)sender).Parent as StackLayout).Children[1] as BoxView;
+            Console.WriteLine(boxView.ClassId);
+            boxView.Color = Color.Red;
+            //DisplayAlert("Success", "Label_Unfocused", "OK");
+        }
     }
 }

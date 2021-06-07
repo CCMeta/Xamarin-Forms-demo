@@ -6,7 +6,34 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.TestIndexPage"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <StyleSheet>
+            <![CDATA[
+            Button~BoxView {
+                color: transparent;
+            }
+            ]]>
+        </StyleSheet>
+    </ContentPage.Resources>
     <StackLayout>
+        <StackLayout x:Name="listTabNavbar" Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
+                <Button Text="真题" BackgroundColor="White" Clicked="Type_Toggle" />
+                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" >
+                <Button Text="知识点" BackgroundColor="White" Clicked="Type_Toggle"/>
+                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
+                <Button Text="错题本" BackgroundColor="White" Clicked="Type_Toggle" />
+                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
+                <Button Text="复习" BackgroundColor="White" Clicked="Type_Toggle" />
+                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+            </StackLayout>
+        </StackLayout>
         <Label Text="按知识点选择测试"/>
         <Label Text="按大考章节选择测试"/>
         <Label Text="按中高考真题选择测试"/>
