@@ -19,11 +19,28 @@ namespace Xamarin_Forms_demo.Views
             BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(currentExam.id);
             _examQuestionsViewModel.GetListAsync();
         }
-
+        private void OnAnswerSelected2(object sender, CheckedChangedEventArgs e)
+        {
+            if (e.Value == false)
+            {
+                return;
+            }
+            StackLayout baba = ((CheckBox)sender).Parent as StackLayout;
+            StackLayout yeye = baba.Parent as StackLayout;
+            foreach (StackLayout shushu in yeye.Children)
+            {
+                if (!shushu.Equals(baba))
+                {
+                    (shushu.Children[0] as CheckBox).IsChecked = false;
+                }
+            }
+            string checkBoxValue = (baba.Children[1] as Entry).Text;
+            Console.WriteLine($"{checkBoxValue}");
+        }
         private void OnAnswerSelected(object sender, CheckedChangedEventArgs e)
         {
             int current_id = ((ExamQuestions)ExamQuestionsView.CurrentItem).id;
-            string answer = (sender as RadioButton).Value.ToString(); 
+            string answer = (sender as RadioButton).Value.ToString();
             if (e.Value == false)
             {
                 Console.WriteLine($"Cancel current_id={current_id} and answer={answer}");
