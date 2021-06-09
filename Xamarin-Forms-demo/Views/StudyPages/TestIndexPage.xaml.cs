@@ -41,8 +41,7 @@ namespace Xamarin_Forms_demo.Views
             //this is a important thing to get a element in a event just remeber the |as| act
             boxView = (((Button)sender).Parent as StackLayout).Children[1] as BoxView;
             Console.WriteLine(boxView.ClassId);
-            boxView.Color = Color.Red;
-            //DisplayAlert("Success", "Label_Unfocused", "OK");
+            boxView.Color = Color.FromHex("#00cccc");
         }
     }
 }

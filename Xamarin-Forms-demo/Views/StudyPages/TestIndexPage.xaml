@@ -19,43 +19,42 @@
         <StackLayout x:Name="listTabNavbar" Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
                 <Button Text="真题" BackgroundColor="White" Clicked="Type_Toggle" />
-                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" >
                 <Button Text="知识点" BackgroundColor="White" Clicked="Type_Toggle"/>
-                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
                 <Button Text="错题本" BackgroundColor="White" Clicked="Type_Toggle" />
-                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
                 <Button Text="复习" BackgroundColor="White" Clicked="Type_Toggle" />
-                <BoxView ClassId="fuck" HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
+                <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
         </StackLayout>
-        <Label Text="按知识点选择测试"/>
-        <Label Text="按大考章节选择测试"/>
-        <Label Text="按中高考真题选择测试"/>
-        <Label Text="按期中期末选择测试"/>
-        <Label Text="按薄弱点错题本随机生成试卷综合测试"/>
-        <Label Text="按本学年已学过随机生成试卷综合测试"/>
         <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
             <CollectionView  x:Name="collectionView" ItemsSource="{Binding Exams}" 
                          VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset"
                          SelectionMode="Single" SelectionChanged="OnEnterExamQuestionsPageAsync">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="20,10">
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding title, StringFormat='{0}'}"/>
-                                        <Span Text=" / 共计11道题目 / 共计55分 / 平均分45分"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </Grid>
+                        <Frame Padding="20,10">
+                            <Frame HasShadow="False" BorderColor="#DDD" CornerRadius="5" Padding="20">
+                                <StackLayout>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding id, StringFormat='试卷编号 {0}'}"/>
+                                        <Label Text="已测试" TextColor="Red" HorizontalOptions="EndAndExpand" />
+                                    </StackLayout>
+                                    <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                                    <Label Text="{Binding title, StringFormat='{0}'}" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="{Binding created_at, StringFormat='上传时间 {0}'}"/>
+                                    <Label Text="平均分 105"/>
+                                    <Button Padding="0" HeightRequest="30" Text="答题" TextColor="White" BackgroundColor="#00cccc" HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                            </Frame>
+                        </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
