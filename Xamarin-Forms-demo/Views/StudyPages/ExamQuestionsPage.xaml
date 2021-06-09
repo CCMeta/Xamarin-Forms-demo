@@ -17,30 +17,8 @@
         <CarouselView x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="20">
+                    <StackLayout Padding="20" RadioButtonGroup.SelectedValue="{Binding answer}">
                         <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
-                        <StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <CheckBox CheckedChanged="OnAnswerSelected2" />
-                                <Entry Text="A" IsVisible="false"/>
-                                <Label Text="{Binding op_a}" FontSize="Medium" VerticalOptions="Center"/>
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <CheckBox CheckedChanged="OnAnswerSelected2" />
-                                <Entry Text="B" IsVisible="false"/>
-                                <Label Text="{Binding op_b}" FontSize="Medium" VerticalOptions="Center"/>
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <CheckBox CheckedChanged="OnAnswerSelected2" />
-                                <Entry Text="C" IsVisible="false"/>
-                                <Label Text="{Binding op_c}" FontSize="Medium" VerticalOptions="Center"/>
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <CheckBox CheckedChanged="OnAnswerSelected2" />
-                                <Entry Text="D" IsVisible="false"/>
-                                <Label Text="{Binding op_d}" FontSize="Medium" VerticalOptions="Center"/>
-                            </StackLayout>
-                        </StackLayout>
                         <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
                         <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>

@@ -18,6 +18,7 @@ namespace Xamarin_Forms_demo.Views
             Title = currentExam.title;
             BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(currentExam.id);
             _examQuestionsViewModel.GetListAsync();
+            //ExamQuestionsView.ItemsSource = _examQuestionsViewModel.ExamQuestions;
         }
         private void OnAnswerSelected2(object sender, CheckedChangedEventArgs e)
         {
