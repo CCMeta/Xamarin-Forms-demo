@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Xamarin_Forms_demo.Views.ExamQuestionsPage" Visual="">
+             x:Class="Xamarin_Forms_demo.Views.ExamQuestionsPage"
+             Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="ToolbarItem_ClickedAsync">
             <ToolbarItem.IconImageSource>
@@ -13,18 +14,18 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <CarouselView x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
+        <CarouselView Loop="False"  x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="20">
+                    <StackLayout RadioButtonGroup.GroupName="{Binding id, StringFormat='CheckGroupName{0}'}" Padding="20">
                         <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" GroupName="GroupName" TextColor="Red"/>
-                        <Line X2="1000" Stroke="Red" StrokeThickness="1" Opacity="0.5" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" GroupName="GroupName" TextColor="Red"/>
-                        <Line X2="1000" Stroke="Red" StrokeThickness="1" Opacity="0.5" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_c}" Value="C" GroupName="GroupName" TextColor="Red"/>
-                        <Line X2="1000" Stroke="Red" StrokeThickness="1" Opacity="0.5" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_d}" Value="D" GroupName="GroupName" TextColor="Red"/>
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
+                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
+                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
+                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
                     </StackLayout>
                 </DataTemplate>
             </CarouselView.ItemTemplate>

@@ -18,19 +18,19 @@
     <StackLayout>
         <StackLayout x:Name="listTabNavbar" Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
-                <Button Text="真题" BackgroundColor="White" Clicked="Type_Toggle" />
+                <Button Text="真题" BackgroundColor="White" Clicked="OnTypeButtonToggle" />
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" >
-                <Button Text="知识点" BackgroundColor="White" Clicked="Type_Toggle"/>
+                <Button Text="知识点" BackgroundColor="White" Clicked="OnTypeButtonToggle"/>
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
-                <Button Text="错题本" BackgroundColor="White" Clicked="Type_Toggle" />
+                <Button Text="错题本" BackgroundColor="White" Clicked="OnTypeButtonToggle" />
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
-                <Button Text="复习" BackgroundColor="White" Clicked="Type_Toggle" />
+                <Button Text="复习" BackgroundColor="White" Clicked="OnTypeButtonToggle" />
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
         </StackLayout>

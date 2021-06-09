@@ -11,17 +11,18 @@ namespace Xamarin_Forms_demo.Views
     public partial class ExamQuestionsPage : ContentPage
     {
         private readonly ExamQuestionsViewModel _examQuestionsViewModel;
-        public ExamQuestionsPage(int exam_id)
+        public ExamQuestionsPage(Exams currentExam)
         {
             InitializeComponent();
-            BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(exam_id);
+            Title = currentExam.title;
+            BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(currentExam.id);
             _examQuestionsViewModel.GetListAsync();
         }
 
         private void OnAnswerSelected(object sender, CheckedChangedEventArgs e)
         {
-            var current_id = ((ExamQuestions)ExamQuestionsView.CurrentItem).id;
-            var answer = (sender as RadioButton).Value.ToString();
+            int current_id = ((ExamQuestions)ExamQuestionsView.CurrentItem).id;
+            string answer = (sender as RadioButton).Value.ToString();
             _examQuestionsViewModel.OnAnswerClick(current_id, answer);
         }
 

@@ -23,12 +23,13 @@ namespace Xamarin_Forms_demo.Views
         {
             if (e.CurrentSelection.Count < 1)
                 return;
-            int selected_id = ((Exams)e.CurrentSelection[0]).id;
             (sender as CollectionView).SelectedItem = null;
-            await Navigation.PushAsync(new ExamQuestionsPage(selected_id));
+            //int selected_id = ((Exams)e.CurrentSelection[0]).id;
+            var selected = (Exams)e.CurrentSelection[0];
+            await Navigation.PushAsync(new ExamQuestionsPage(selected));
         }
 
-        private void Type_Toggle(object sender, EventArgs e)
+        private void OnTypeButtonToggle(object sender, EventArgs e)
         {
             //make all box to transparent.
             BoxView boxView;
