@@ -25,7 +25,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.Footer>
-                <Button Text="Commit Test Paper" Clicked="OnCommitPaperAsync" />
+                <Button Text="提交测试" Clicked="OnCommitPaperAsync" />
             </CollectionView.Footer>
         </CollectionView>
     </StackLayout>

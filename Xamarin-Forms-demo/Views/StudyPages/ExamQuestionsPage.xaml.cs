@@ -11,6 +11,7 @@ namespace Xamarin_Forms_demo.Views
     public partial class ExamQuestionsPage : ContentPage
     {
         private readonly ExamQuestionsViewModel _examQuestionsViewModel;
+
         public ExamQuestionsPage(Exams currentExam)
         {
             InitializeComponent();
@@ -22,7 +23,12 @@ namespace Xamarin_Forms_demo.Views
         private void OnAnswerSelected(object sender, CheckedChangedEventArgs e)
         {
             int current_id = ((ExamQuestions)ExamQuestionsView.CurrentItem).id;
-            string answer = (sender as RadioButton).Value.ToString();
+            string answer = (sender as RadioButton).Value.ToString(); 
+            if (e.Value == false)
+            {
+                Console.WriteLine($"Cancel current_id={current_id} and answer={answer}");
+                return;
+            }
             _examQuestionsViewModel.OnAnswerClick(current_id, answer);
         }
 

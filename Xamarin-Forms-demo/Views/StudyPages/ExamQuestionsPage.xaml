@@ -14,10 +14,10 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <CarouselView Loop="False"  x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
+        <CarouselView x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout RadioButtonGroup.GroupName="{Binding id, StringFormat='CheckGroupName{0}'}" Padding="20">
+                    <StackLayout Padding="20">
                         <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
                         <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
