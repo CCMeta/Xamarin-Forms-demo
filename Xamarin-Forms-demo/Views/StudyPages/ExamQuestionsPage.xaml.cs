@@ -54,5 +54,6 @@ namespace Xamarin_Forms_demo.Views
         {
             await Navigation.PushAsync(new ExamAnswersPage(_examQuestionsViewModel));
         }
+
     }
 }

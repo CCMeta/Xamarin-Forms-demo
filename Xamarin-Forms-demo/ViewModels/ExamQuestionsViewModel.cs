@@ -15,7 +15,11 @@ namespace Xamarin_Forms_demo.ViewModels
         public readonly int _exam_id;
         private readonly string path = "/api/exams/{0}/questions";//i should take exam_id to query not path
         public List<ExamAnswers> examAnswers = new List<ExamAnswers>();
-        
+        public bool op_a = true;
+        public bool op_b = false;
+        public bool op_c = false;
+        public bool op_d = false;
+
         public ObservableCollection<ExamQuestions> examQuestions = new ObservableCollection<ExamQuestions>();
         public ObservableCollection<ExamQuestions> ExamQuestions
         {

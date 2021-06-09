@@ -17,15 +17,15 @@
         <CarouselView x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="20" RadioButtonGroup.SelectedValue="{Binding answer}">
+                    <StackLayout Padding="20">
                         <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding cca}" CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding ccb}" CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding ccc}" CheckedChanged="OnAnswerSelected" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton CheckedChanged="OnAnswerSelected" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding ccd}" CheckedChanged="OnAnswerSelected" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
                     </StackLayout>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
