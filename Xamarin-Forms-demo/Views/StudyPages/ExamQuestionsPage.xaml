@@ -14,14 +14,23 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <StackLayout>
-        <Frame>
-            <Entry x:Name="durationLabel" Text="{Binding Duration}"/>
-        </Frame>
-        <CarouselView x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
+        <StackLayout Padding="30" Orientation="Horizontal">
+            <Label Text="{Binding Duration}" FontSize="Medium" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+            <Label VerticalTextAlignment="Center" Text="&#xf163;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
+                        <Span x:Name="CurrentPositionSpan" FontSize="Medium"/>
+                        <Span x:Name="TotalCountSpan" FontSize="Medium"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+        <CarouselView x:Name="ExamQuestionsView" PositionChanged="OnOrderNumberChanged" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="20">
-                        <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
+                        <Label Margin="0,20" Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
                         <RadioButton IsChecked="{Binding isCheckA}" CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
                         <RadioButton IsChecked="{Binding isCheckB}" CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>

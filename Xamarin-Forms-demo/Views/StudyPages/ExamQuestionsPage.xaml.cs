@@ -17,7 +17,20 @@ namespace Xamarin_Forms_demo.Views
             InitializeComponent();
             Title = currentExam.title;
             BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(currentExam.id);
-            _examQuestionsViewModel.GetListAsync();
+            try
+            {
+                Task.Run(() =>
+                {
+                    _examQuestionsViewModel.GetListAsync().Wait();
+                    TotalCountSpan.Text = $"{ _examQuestionsViewModel.ExamQuestions.Count:D2}";
+                    SetCurrentPositionText(position: 0);
+                    throw new Exception("bad mother fucker");
+                });
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         private void OnAnswerSelected2(object sender, CheckedChangedEventArgs e)
@@ -38,7 +51,7 @@ namespace Xamarin_Forms_demo.Views
             string checkBoxValue = (baba.Children[1] as Entry).Text;
             Console.WriteLine($"{checkBoxValue}");
         }
-        
+
         private void OnAnswerSelected(object sender, CheckedChangedEventArgs e)
         {
             int current_id = ((ExamQuestions)ExamQuestionsView.CurrentItem).id;
@@ -56,5 +69,19 @@ namespace Xamarin_Forms_demo.Views
             await Navigation.PushAsync(new ExamAnswersPage(_examQuestionsViewModel));
         }
 
+        private void OnOrderNumberChanged(object sender, PositionChangedEventArgs e)
+        {
+            SetCurrentPositionText(e.CurrentPosition);
+        }
+
+        private void SetCurrentPositionText(int position)
+        {
+            CurrentPositionSpan.Text = $"  {++position:D2} /  ";
+        }
+
+        public void SetCurrentPosition(int position)
+        {
+            ExamQuestionsView.Position = position;
+        }
     }
 }

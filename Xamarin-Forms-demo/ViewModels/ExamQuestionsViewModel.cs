@@ -71,7 +71,7 @@ namespace Xamarin_Forms_demo.ViewModels
             examAnswers.First(answer => answer.questionId == questionId).answer = answer;
         }
 
-        public async void GetListAsync()
+        public async Task GetListAsync()
         {
             var queryParams = new Dictionary<string, string>() { };
             ExamQuestions = await HttpRequest.GetAsync<ObservableCollection<ExamQuestions>>(string.Format(path, _exam_id), queryParams: queryParams);
