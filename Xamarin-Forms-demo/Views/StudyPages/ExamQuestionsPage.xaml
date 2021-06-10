@@ -7,25 +7,28 @@
              x:Class="Xamarin_Forms_demo.Views.ExamQuestionsPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="ToolbarItem_ClickedAsync">
+        <ToolbarItem Clicked="OnEnterAnswerCard">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xf573;" FontFamily="FontAwesome5Solid" Size="Medium" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <StackLayout>
+        <Frame>
+            <Entry x:Name="durationLabel" Text="{Binding Duration}"/>
+        </Frame>
         <CarouselView x:Name="ExamQuestionsView" ItemsSource="{Binding ExamQuestions}" IndicatorView="indicatorView">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="20">
                         <Label Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
-                        <RadioButton IsChecked="{Binding cca}" CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding isCheckA}" CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsChecked="{Binding ccb}" CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding isCheckB}" CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsChecked="{Binding ccc}" CheckedChanged="OnAnswerSelected" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding isCheckC}" CheckedChanged="OnAnswerSelected" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsChecked="{Binding ccd}" CheckedChanged="OnAnswerSelected" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
+                        <RadioButton IsChecked="{Binding isCheckD}" CheckedChanged="OnAnswerSelected" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
                     </StackLayout>
                 </DataTemplate>
             </CarouselView.ItemTemplate>

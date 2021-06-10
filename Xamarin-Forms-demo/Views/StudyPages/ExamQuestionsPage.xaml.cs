@@ -18,8 +18,8 @@ namespace Xamarin_Forms_demo.Views
             Title = currentExam.title;
             BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(currentExam.id);
             _examQuestionsViewModel.GetListAsync();
-            //ExamQuestionsView.ItemsSource = _examQuestionsViewModel.ExamQuestions;
         }
+
         private void OnAnswerSelected2(object sender, CheckedChangedEventArgs e)
         {
             if (e.Value == false)
@@ -38,6 +38,7 @@ namespace Xamarin_Forms_demo.Views
             string checkBoxValue = (baba.Children[1] as Entry).Text;
             Console.WriteLine($"{checkBoxValue}");
         }
+        
         private void OnAnswerSelected(object sender, CheckedChangedEventArgs e)
         {
             int current_id = ((ExamQuestions)ExamQuestionsView.CurrentItem).id;
@@ -50,7 +51,7 @@ namespace Xamarin_Forms_demo.Views
             _examQuestionsViewModel.OnAnswerClick(current_id, answer);
         }
 
-        private async void ToolbarItem_ClickedAsync(object sender, EventArgs e)
+        private async void OnEnterAnswerCard(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ExamAnswersPage(_examQuestionsViewModel));
         }

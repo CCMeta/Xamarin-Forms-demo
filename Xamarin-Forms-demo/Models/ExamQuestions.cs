@@ -13,9 +13,9 @@
         public string op_b { get; set; }
         public string op_c { get; set; }
         public string op_d { get; set; }
-        public bool cca { get; set; }
-        public bool ccb { get; set; }
-        public bool ccc { get; set; }
-        public bool ccd { get; set; }
+        public bool isCheckA { get; set; }
+        public bool isCheckB { get; set; }
+        public bool isCheckC { get; set; }
+        public bool isCheckD { get; set; }
     }
 }
