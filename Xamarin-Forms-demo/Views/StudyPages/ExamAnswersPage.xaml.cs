@@ -24,8 +24,8 @@ namespace Xamarin_Forms_demo.Views
                 return;
             //int current_id = ((ExamQuestions)e.CurrentSelection[0]).id;
             int position = _examQuestionsViewModel.ExamQuestions.IndexOf((ExamQuestions)e.CurrentSelection[0]);
-            var fuck = Navigation.NavigationStack.First(q => q.GetType() == typeof(ExamQuestionsPage)) as ExamQuestionsPage;
-            fuck.SetCurrentPosition(position);
+            var ExamQuestionsPage = Navigation.NavigationStack.First(q => q.GetType() == typeof(ExamQuestionsPage)) as ExamQuestionsPage;
+            ExamQuestionsPage.SetCurrentPosition(position);
             Navigation.PopAsync();
             (sender as CollectionView).SelectedItem = null;
         }
