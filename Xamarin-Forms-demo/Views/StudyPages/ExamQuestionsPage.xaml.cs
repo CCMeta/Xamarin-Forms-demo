@@ -12,25 +12,22 @@ namespace Xamarin_Forms_demo.Views
     {
         private readonly ExamQuestionsViewModel _examQuestionsViewModel;
 
-        public ExamQuestionsPage(Exams currentExam)
+        internal ExamQuestionsPage(Exams currentExam)
         {
+            //[RecyclerView] Cannot scroll to position a LayoutManager set. Call setLayoutManager with a non-null argument.
+            //var fuck = new CarouselView();
+
+
+
             InitializeComponent();
             Title = currentExam.title;
             BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(currentExam.id);
-            try
+            Task.Run(async () =>
             {
-                Task.Run(() =>
-                {
-                    _examQuestionsViewModel.GetListAsync().Wait();
-                    TotalCountSpan.Text = $"{ _examQuestionsViewModel.ExamQuestions.Count:D2}";
-                    SetCurrentPositionText(position: 0);
-                    throw new Exception("bad mother fucker");
-                });
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+                await _examQuestionsViewModel.GetListAsync();
+                //TotalCountSpan.Text = $"{ _examQuestionsViewModel.ExamQuestions.Count:D2}";
+                //SetCurrentPositionText(position: 0);
+            });
         }
 
         private void OnAnswerSelected2(object sender, CheckedChangedEventArgs e)
@@ -82,6 +79,32 @@ namespace Xamarin_Forms_demo.Views
         public void SetCurrentPosition(int position)
         {
             ExamQuestionsView.Position = position;
+        }
+    }
+
+    public class MyCarouselView : CarouselView
+    {
+        public MyCarouselView()
+        {
+            return;
+        }
+
+        protected override void OnScrolled(ItemsViewScrolledEventArgs e)
+        {
+            base.OnScrolled(e);
+        }
+
+        protected override void OnCurrentItemChanged(EventArgs args)
+        {
+            base.OnCurrentItemChanged(args);
+        }
+
+        protected override void OnScrollToRequested(ScrollToRequestEventArgs e)
+        {
+            if (e.Item != null)
+            {
+                //base.OnScrollToRequested(e);
+            }
         }
     }
 }
