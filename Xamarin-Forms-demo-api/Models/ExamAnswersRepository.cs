@@ -25,13 +25,13 @@ namespace Xamarin_Forms_demo_api.Models
 
         public async Task<bool> Post(ExamAnswers[] itemList, int uid)
         {
-            string sql = "INSERT INTO exam_answers SET transcriptId = @transcriptId, point = @point, questionId = @questionId, answer = @answer, uid = @uid";
+            var sql = "INSERT INTO exam_answers SET point = @point, questionId = @questionId, answer = @answer, uid = @uid";
             return await WithConnection(async conn =>
             {
                 var transaction = conn.BeginTransaction();
                 foreach (var item in itemList)
                 {
-                    if (await conn.ExecuteAsync(sql, new { item.transcriptId, item.point, item.answer, item.questionId, uid }, transaction) != 1)
+                    if (await conn.ExecuteAsync(sql, new { item.point, item.answer, item.questionId, uid }, transaction) != 1)
                     {
                         transaction.Rollback();
                         return false;

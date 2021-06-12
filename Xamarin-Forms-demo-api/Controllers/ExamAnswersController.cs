@@ -12,19 +12,15 @@ namespace Xamarin_Forms_demo_api.Controllers
     [ApiController]
     public class ExamAnswersController : DefaultController
     {
-        private readonly ExamsRepository _examsRepository;
         private readonly ExamAnswersRepository _repository;
         private readonly ExamQuestionsRepository _examQuestionsRepository;
         private readonly ExamTranscriptsRepository _examTranscriptsRepository;
 
         public ExamAnswersController(
-            ExamsRepository ExamsRepository,
-            ExamAnswersRepository ExamAnswersRepository,
-            ExamQuestionsRepository ExamQuestionsRepository,
+            ExamAnswersRepository ExamAnswersRepository, ExamQuestionsRepository ExamQuestionsRepository,
             ExamTranscriptsRepository ExamTranscriptsRepository
             , IHttpContextAccessor context) : base(context)
         {
-            _examsRepository = ExamsRepository;
             _repository = ExamAnswersRepository;
             _examQuestionsRepository = ExamQuestionsRepository;
             _examTranscriptsRepository = ExamTranscriptsRepository;
@@ -47,33 +43,25 @@ namespace Xamarin_Forms_demo_api.Controllers
         {
             int[] questionIdList = examAnswers.Select(examAnswer => examAnswer.questionId).ToArray();
             var examQuestions = await _examQuestionsRepository.GetListByQuestionIdList(questionIdList);
-
-            //count&&set each item score
             foreach (ExamAnswers examAnswer in examAnswers)
             {
                 string regularAnswer = examQuestions.First(examQuestion => examQuestion.id == examAnswer.questionId).answer;
                 examAnswer.point = (examAnswer.answer == regularAnswer) ? 5 : 0;
             }
 
-            //
-            int exam_id = examQuestions.First().exam_id;
-            var exam = await _examsRepository.Get(exam_id);
             var examTranscript = new ExamTranscripts
             {
                 uid = _uid,
-                duration = 2223,//to be continue
+                duration = 2223,
+                major = "History",
                 score = examAnswers.Sum((examAnswer) => examAnswer.point),
-                major = exam.major,
-                title = exam.title,
+                title = "2021 History global testing",
             };
             int examTranscriptId = await _examTranscriptsRepository.Post(examTranscript);
-
-            //load each item examTranscriptId
             foreach (ExamAnswers examAnswer in examAnswers)
             {
                 examAnswer.transcriptId = examTranscriptId;
             }
-
             //exam_ids select all of questions take the regular answers and compute points , then take points to examAnswers model
             if (await _repository.Post(examAnswers, uid: _uid))
                 return Ok(examAnswers);
