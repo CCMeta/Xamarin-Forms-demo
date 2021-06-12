@@ -12,7 +12,7 @@ namespace Xamarin_Forms_demo.Views
     {
         private readonly ExamQuestionsViewModel _examQuestionsViewModel;
 
-        internal ExamQuestionsPage(Exams currentExam)
+        public ExamQuestionsPage(Exams currentExam)
         {
             //[RecyclerView] Cannot scroll to position a LayoutManager set. Call setLayoutManager with a non-null argument.
             //var fuck = new CarouselView();
@@ -23,11 +23,10 @@ namespace Xamarin_Forms_demo.Views
             Title = currentExam.title;
             BindingContext = _examQuestionsViewModel = new ExamQuestionsViewModel(currentExam.id);
             Task.Run(async () =>
-            {
-                await _examQuestionsViewModel.GetListAsync();
-                //TotalCountSpan.Text = $"{ _examQuestionsViewModel.ExamQuestions.Count:D2}";
-                //SetCurrentPositionText(position: 0);
-            });
+                await _examQuestionsViewModel.GetListAsync()
+            ).Wait();
+            TotalCountSpan.Text = $"{ _examQuestionsViewModel.ExamQuestions.Count:D2}";
+            SetCurrentPositionText(position: 0);
         }
 
         private void OnAnswerSelected2(object sender, CheckedChangedEventArgs e)

@@ -42,6 +42,5 @@
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>
-        <IndicatorView x:Name="indicatorView" IndicatorColor="LightGray" SelectedIndicatorColor="DarkGray" HorizontalOptions="FillAndExpand" />
     </StackLayout>
 </ContentPage>
