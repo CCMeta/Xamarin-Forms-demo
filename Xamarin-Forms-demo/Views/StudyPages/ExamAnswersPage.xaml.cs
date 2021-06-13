@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.ViewModels;
@@ -48,8 +49,10 @@ namespace Xamarin_Forms_demo.Views
             }
             await DisplayAlert("Result", "Success", "OK");
             Content.IsEnabled = true;
-            //await Navigation.PopToRootAsync(animated: false);
-            await Navigation.PushAsync(new ExamTranscriptsPage());
+
+            Page MainPage = Navigation.NavigationStack.ElementAt(0);
+            await Navigation.PopToRootAsync(animated: false);
+            await MainPage.Navigation.PushAsync(new ExamTranscriptsPage());
         }
     }
 }

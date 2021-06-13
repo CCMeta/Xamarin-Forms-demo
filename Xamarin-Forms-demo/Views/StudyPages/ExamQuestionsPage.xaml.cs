@@ -80,30 +80,4 @@ namespace Xamarin_Forms_demo.Views
             ExamQuestionsView.Position = position;
         }
     }
-
-    public class MyCarouselView : CarouselView
-    {
-        public MyCarouselView()
-        {
-            return;
-        }
-
-        protected override void OnScrolled(ItemsViewScrolledEventArgs e)
-        {
-            base.OnScrolled(e);
-        }
-
-        protected override void OnCurrentItemChanged(EventArgs args)
-        {
-            base.OnCurrentItemChanged(args);
-        }
-
-        protected override void OnScrollToRequested(ScrollToRequestEventArgs e)
-        {
-            if (e.Item != null)
-            {
-                //base.OnScrollToRequested(e);
-            }
-        }
-    }
 }
