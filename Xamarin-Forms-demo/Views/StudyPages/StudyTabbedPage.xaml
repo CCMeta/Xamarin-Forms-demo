@@ -5,25 +5,32 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             x:Class="Xamarin_Forms_demo.Views.StudyTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            Title="StudyTabbedPage">
-    <views:CanvasPage Title="Live">
+            Title="{Binding Title}">
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem>
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xf14b;" FontFamily="FontAwesome5Solid" Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </TabbedPage.ToolbarItems>
+    <views:ClassIndexPage Title="视频课堂">
+        <ContentPage.IconImageSource> 
+            <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" Size="Medium" />
+        </ContentPage.IconImageSource>
+    </views:ClassIndexPage>
+    <views:TestIndexPage Title="智能测试">
+        <ContentPage.IconImageSource>
+            <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid" Size="Small" />
+        </ContentPage.IconImageSource>
+    </views:TestIndexPage>
+    <views:DataIndexPage Title="数据中心">
+        <ContentPage.IconImageSource>
+            <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid" Size="Caption" />
+        </ContentPage.IconImageSource>
+    </views:DataIndexPage>
+    <views:CanvasPage Title="直播课堂">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf144;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:CanvasPage>
-    <views:ClassIndexPage Title="Class">
-        <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" />
-        </ContentPage.IconImageSource>
-    </views:ClassIndexPage>
-    <views:TestIndexPage Title="Test">
-        <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid" />
-        </ContentPage.IconImageSource>
-    </views:TestIndexPage>
-    <views:DataIndexPage Title="Data">
-        <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid" />
-        </ContentPage.IconImageSource>
-    </views:DataIndexPage>
 </TabbedPage>

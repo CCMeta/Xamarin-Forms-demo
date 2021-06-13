@@ -47,7 +47,7 @@ namespace Xamarin_Forms_demo.Views
             {
                 throw new Exception("ExamAnswersViewModel.PostListAsync");
             }
-            await DisplayAlert("Result", "Success", "OK");
+            await DisplayAlert("提交结果", "提交成功", "确定");
             Content.IsEnabled = true;
 
             Page MainPage = Navigation.NavigationStack.ElementAt(0);

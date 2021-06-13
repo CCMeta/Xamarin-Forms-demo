@@ -10,11 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace Xamarin_Forms_demo.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class StudyTabbedPage : TabbedPage
-{
-    public StudyTabbedPage()
+    public partial class StudyTabbedPage : TabbedPage
     {
-        InitializeComponent();
+        public StudyTabbedPage()
+        {
+            InitializeComponent();
+            Title = "学习模式";
+        }
     }
-}
 }
