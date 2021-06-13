@@ -11,6 +11,7 @@ namespace Xamarin_Forms_demo.Views
     public partial class ExamTranscriptsPage : ContentPage
     {
         private readonly ExamAnswersViewModel _examAnswersViewModel;
+        
         public ExamTranscriptsPage(int examTranscriptId)
         {
             InitializeComponent();

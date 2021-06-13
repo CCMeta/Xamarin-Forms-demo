@@ -30,6 +30,7 @@ namespace Xamarin_Forms_demo.Views
             await Navigation.PushAsync(new ExamTranscriptsPage((e.CurrentSelection[0] as ExamTranscripts).id));
             (sender as CollectionView).SelectedItem = null;
         }
+
         private void OnTypeButtonToggle(object sender, EventArgs e)
         {
             //make all box to transparent.

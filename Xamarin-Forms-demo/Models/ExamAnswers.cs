@@ -7,6 +7,7 @@
         public int questionId { get; set; }
         public int transcriptId { get; set; }
         public string answer { get; set; }
+        public string true_answer { get; set; }
         public double point { get; set; }
         public string created_at { get; set; }
         public string content { get; set; }

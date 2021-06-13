@@ -16,7 +16,7 @@ namespace Xamarin_Forms_demo_api.Models
 
         public async Task<IEnumerable<ExamAnswers>> GetListByTranscriptsId(int uid, int transcriptId)
         {
-            var sql = "SELECT exam_answers.*, exam_questions.* exam_answers FROM exam_answers LEFT JOIN exam_questions ON exam_answers.questionId = exam_questions.id WHERE uid = @uid AND exam_answers.transcriptId = @transcriptId";
+            var sql = "SELECT exam_answers.*, exam_questions.* FROM exam_answers LEFT JOIN exam_questions ON exam_answers.questionId = exam_questions.id WHERE uid = @uid AND exam_answers.transcriptId = @transcriptId";
             return await WithConnection(async conn =>
             {
                 return await conn.QueryAsync<ExamAnswers>(sql, new { uid, transcriptId });

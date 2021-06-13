@@ -12,7 +12,7 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class ExamAnswersViewModel : BaseViewModel
     {
-        private readonly string path = "/api/ExamTranscripts/answers";
+        private readonly string path = "/api/ExamTranscripts/Answers";
 
         public ICommand GetListCommand { protected set; get; }
 
@@ -28,10 +28,10 @@ namespace Xamarin_Forms_demo.ViewModels
             return -1;
         }
 
-        public async Task<ObservableCollection<ExamAnswers>> GetListByTranscriptIdAsync(int examTranscriptId)
+        public async Task<ObservableCollection<ExamAnswers>> GetListByTranscriptIdAsync(int transcriptId)
         {
             var queryParams = new Dictionary<string, string>() {
-                { "examTranscriptId", examTranscriptId.ToString() },
+                { "transcriptId", transcriptId.ToString() },
             };
             var examAnswers = await HttpRequest.GetAsync<ObservableCollection<ExamAnswers>>(path, queryParams: queryParams);
 

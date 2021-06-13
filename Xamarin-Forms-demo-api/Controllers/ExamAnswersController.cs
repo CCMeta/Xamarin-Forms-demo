@@ -33,6 +33,8 @@ namespace Xamarin_Forms_demo_api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAsync([FromQuery] int transcriptId)
         {
+            if (transcriptId < 1)
+                return BadRequest("transcriptId is fucked");
             var examAnswers = await _repository.GetListByTranscriptsId(uid: _uid, transcriptId: transcriptId);
             return Ok(examAnswers);
         }
@@ -52,8 +54,8 @@ namespace Xamarin_Forms_demo_api.Controllers
             //count&&set each item score
             foreach (ExamAnswers examAnswer in examAnswers)
             {
-                string regularAnswer = examQuestions.First(examQuestion => examQuestion.id == examAnswer.questionId).answer;
-                examAnswer.point = (examAnswer.answer == regularAnswer) ? 5 : 0;
+                string true_answer = examQuestions.First(examQuestion => examQuestion.id == examAnswer.questionId).true_answer;
+                examAnswer.point = (examAnswer.answer == true_answer) ? 5 : 0;
             }
 
             //
