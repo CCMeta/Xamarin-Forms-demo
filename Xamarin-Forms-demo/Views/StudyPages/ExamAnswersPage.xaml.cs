@@ -39,20 +39,17 @@ namespace Xamarin_Forms_demo.Views
         {
             Content.IsEnabled = false;
             var examAnswers = _examQuestionsViewModel.examAnswers;
-            var _examAnswersViewModel = new ExamAnswersViewModel(_examQuestionsViewModel._exam_id);
+            var _examAnswersViewModel = new ExamAnswersViewModel();
 
             //This using is super cool for async var to go with life before not async expressions.
-            using var result = _examAnswersViewModel.PostListAsync(examAnswers.ToArray());
-            if (!await result)
-            {
-                throw new Exception("ExamAnswersViewModel.PostListAsync");
-            }
+            using Task<int> result = _examAnswersViewModel.PostListAsync(examAnswers.ToArray());
+            int examTranscriptId = ((await result) < 0) ? throw new Exception("ExamAnswersViewModel.PostListAsync") : await result;
             await DisplayAlert("提交结果", "提交成功", "确定");
             Content.IsEnabled = true;
 
             Page MainPage = Navigation.NavigationStack.ElementAt(0);
             await Navigation.PopToRootAsync(animated: false);
-            await MainPage.Navigation.PushAsync(new ExamTranscriptsPage());
+            await MainPage.Navigation.PushAsync(new ExamTranscriptsPage(examTranscriptId: examTranscriptId));
         }
     }
 }

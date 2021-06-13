@@ -14,24 +14,24 @@ namespace Xamarin_Forms_demo_api.Models
 
         }
 
-        public async Task<IEnumerable<ExamAnswers>> GetList(int uid, int questionId)
+        public async Task<IEnumerable<ExamAnswers>> GetListByTranscriptsId(int uid, int transcriptId)
         {
-            var sql = "SELECT * FROM exam_answers WHERE uid = @uid AND questionId = @questionId";
+            var sql = "SELECT exam_answers.*, exam_questions.* exam_answers FROM exam_answers LEFT JOIN exam_questions ON exam_answers.questionId = exam_questions.id WHERE uid = @uid AND exam_answers.transcriptId = @transcriptId";
             return await WithConnection(async conn =>
             {
-                return await conn.QueryAsync<ExamAnswers>(sql, new { uid, questionId });
+                return await conn.QueryAsync<ExamAnswers>(sql, new { uid, transcriptId });
             });
         }
 
         public async Task<bool> Post(ExamAnswers[] itemList, int uid)
         {
-            var sql = "INSERT INTO exam_answers SET point = @point, questionId = @questionId, answer = @answer, uid = @uid";
+            string sql = "INSERT INTO exam_answers SET transcriptId = @transcriptId, point = @point, questionId = @questionId, answer = @answer, uid = @uid";
             return await WithConnection(async conn =>
             {
                 var transaction = conn.BeginTransaction();
                 foreach (var item in itemList)
                 {
-                    if (await conn.ExecuteAsync(sql, new { item.point, item.answer, item.questionId, uid }, transaction) != 1)
+                    if (await conn.ExecuteAsync(sql, new { item.transcriptId, item.point, item.answer, item.questionId, uid }, transaction) != 1)
                     {
                         transaction.Rollback();
                         return false;

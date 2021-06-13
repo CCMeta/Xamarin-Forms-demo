@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
@@ -44,6 +45,5 @@ namespace Xamarin_Forms_demo.ViewModels
             ExamTranscripts = await HttpRequest.GetAsync<ObservableCollection<ExamTranscripts>>(path, queryParams: queryParams);
             IsBusy = false;
         }
-
     }
 }

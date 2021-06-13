@@ -27,8 +27,7 @@ namespace Xamarin_Forms_demo.Views
         {
             if (e.CurrentSelection.Count < 1)
                 return;
-            var selected_id = ((ExamTranscripts)e.CurrentSelection[0]).id;
-            await Navigation.PushAsync(new ExamTranscriptsPage(selected_id));
+            await Navigation.PushAsync(new ExamTranscriptsPage((e.CurrentSelection[0] as ExamTranscripts).id));
             (sender as CollectionView).SelectedItem = null;
         }
         private void OnTypeButtonToggle(object sender, EventArgs e)

@@ -19,6 +19,6 @@
         public bool isCheckD { get; set; }
 
         public bool IsAnswered => isCheckA || isCheckB || isCheckC || isCheckD;
-        public bool IsUnanswered => !(isCheckA || isCheckB || isCheckC || isCheckD);
+        public bool IsUnanswered => !IsAnswered;
     }
 }

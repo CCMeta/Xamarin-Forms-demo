@@ -52,7 +52,7 @@
                                     <Label Text="{Binding title, StringFormat='{0}'}" FontSize="Medium" FontAttributes="Bold" />
                                     <Label Text="{Binding created_at, StringFormat='提交时间 {0}'}"/>
                                     <Label Text="{Binding score, StringFormat='总得分 {0}'}"/>
-                                    <Button Padding="0" HeightRequest="30" Text="答题" TextColor="White" BackgroundColor="#00cccc" HorizontalOptions="EndAndExpand"/>
+                                    <Button Padding="0" HeightRequest="30" Text="查看" TextColor="White" BackgroundColor="#00cccc" HorizontalOptions="EndAndExpand"/>
                                 </StackLayout>
                             </Frame>
                         </Frame>

@@ -12,22 +12,31 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class ExamAnswersViewModel : BaseViewModel
     {
-        private readonly int _exam_id;
-        private readonly string path = "/api/exams/{0}/answers";
+        private readonly string path = "/api/ExamTranscripts/answers";
 
         public ICommand GetListCommand { protected set; get; }
 
-        public ExamAnswersViewModel(int exam_id) : base()
+        public ExamAnswersViewModel() : base()
         {
-            _exam_id = exam_id;
         }
 
-        public async Task<bool> PostListAsync(ExamAnswers[] examAnswers)
+        public async Task<int> PostListAsync(ExamAnswers[] examAnswers)
         {
             var result = await HttpRequest.PostAsync(path, examAnswers.ToArray());
-            if (result is ExamAnswers[])
-                return true;
-            return false;
+            if (result is ExamAnswers[] && result.Length > 0)
+                return result[0].transcriptId;
+            return -1;
+        }
+
+        public async Task<ObservableCollection<ExamAnswers>> GetListByTranscriptIdAsync(int examTranscriptId)
+        {
+            var queryParams = new Dictionary<string, string>() {
+                { "examTranscriptId", examTranscriptId.ToString() },
+            };
+            var examAnswers = await HttpRequest.GetAsync<ObservableCollection<ExamAnswers>>(path, queryParams: queryParams);
+
+            IsBusy = false;
+            return examAnswers;
         }
     }
 }
