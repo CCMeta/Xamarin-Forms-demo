@@ -11,18 +11,44 @@ namespace Xamarin_Forms_demo.Views
     public partial class ExamTranscriptsPage : ContentPage
     {
         private readonly ExamAnswersViewModel _examAnswersViewModel;
-        
-        public ExamTranscriptsPage(int examTranscriptId)
+
+        public ExamTranscriptsPage(int transcriptId, string title = "")
         {
             InitializeComponent();
-            BindingContext = _examAnswersViewModel = new ExamAnswersViewModel();
-            var _ =Task.Run(async () => await _examAnswersViewModel.GetListByTranscriptIdAsync(examTranscriptId)).Result;
 
+            Title = title;
+            BindingContext = _examAnswersViewModel = new ExamAnswersViewModel();
+            Task.Run(async () => await _examAnswersViewModel.GetListByTranscriptIdAsync(transcriptId)).Wait();
+            var _ = _examAnswersViewModel.ExamAnswers;
+
+            TotalCountSpan.Text = $"{ _examAnswersViewModel.ExamAnswers.Count:D2}";
+            SetCurrentPositionText(position: 0);
         }
 
         protected override async void OnDisappearing()
         {
             await Navigation.PopToRootAsync();
         }
+        
+        private void OnEnterAnswerCard(object sender, EventArgs e)
+        {
+            //await Navigation.PushAsync(new ExamAnswersPage(_examAnswersViewModel));
+        }
+
+        private void OnOrderNumberChanged(object sender, PositionChangedEventArgs e)
+        {
+            SetCurrentPositionText(e.CurrentPosition);
+        }
+
+        private void SetCurrentPositionText(int position)
+        {
+            CurrentPositionSpan.Text = $"  {++position:D2} /  ";
+        }
+
+        public void SetCurrentPosition(int position)
+        {
+            ExamQuestionsView.Position = position;
+        }
+
     }
 }

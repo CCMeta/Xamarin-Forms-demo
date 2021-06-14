@@ -2,33 +2,44 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ExamTranscriptsPage"
-             Title="{Binding Title}" Visual="">
-    <StackLayout Padding="20">
-        <Label Text="时间：21：44"/>
-        <Label Text="选择题 5 x 5分 = 25分"/>
-        <Label Text="问答题 2 x 10分 = 30分"/>
-        <Label Text="总分 = 55分"/>
-        <Line Stroke="Gray" X2="1000" VerticalOptions="CenterAndExpand"/>
-        <Label Text="戊戌变法 (+ 5)"/>
-        <ProgressBar Progress="0.5" ProgressColor="Blue"  />
-        <Label Text="辛亥革命 (+ 30)"/>
-        <ProgressBar Progress="0.8"  ProgressColor="Red" />
-        <Label Text="戊戌变法 (+ 5)"/>
-        <ProgressBar Progress="0.5" ProgressColor="Blue"  />
-        <Label Text="辛亥革命 (+ 30)"/>
-        <ProgressBar Progress="0.8"  ProgressColor="Red" />
-        <Label Text="戊戌变法 (+ 5)"/>
-        <ProgressBar Progress="0.5" ProgressColor="Blue"  />
-        <Label Text="辛亥革命 (+ 30)"/>
-        <ProgressBar Progress="0.8"  ProgressColor="Red" />
-        <Label Text="戊戌变法 (+ 5)"/>
-        <ProgressBar Progress="0.5" ProgressColor="Blue"  />
-        <Label Text="辛亥革命 (+ 30)"/>
-        <ProgressBar Progress="0.8"  ProgressColor="Red" />
-        <Line Stroke="Gray" X2="1000" VerticalOptions="CenterAndExpand"/>
-        <Label Text="总计 EXP +35" HorizontalOptions="CenterAndExpand"/>
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnEnterAnswerCard">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xf573;" FontFamily="FontAwesome5Solid" Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <StackLayout Padding="30" Orientation="Horizontal">
+            <Label VerticalTextAlignment="Center" Text="&#xf163;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
+                        <Span x:Name="CurrentPositionSpan" FontSize="Medium"/>
+                        <Span x:Name="TotalCountSpan" FontSize="Medium"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </StackLayout>
+        <CarouselView Loop="False" x:Name="ExamQuestionsView" PositionChanged="OnOrderNumberChanged" ItemsSource="{Binding ExamAnswers}">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="20">
+                        <Label Margin="0,20" Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
+                        <RadioButton IsChecked="{Binding isCheckA}" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
+                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                        <RadioButton IsChecked="{Binding isCheckB}" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
+                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                        <RadioButton IsChecked="{Binding isCheckC}" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
+                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                        <RadioButton IsChecked="{Binding isCheckD}" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
+                    </StackLayout>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
     </StackLayout>
 </ContentPage>

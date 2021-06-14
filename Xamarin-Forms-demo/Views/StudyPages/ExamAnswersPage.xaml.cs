@@ -43,13 +43,14 @@ namespace Xamarin_Forms_demo.Views
 
             //This using is super cool for async var to go with life before not async expressions.
             using Task<int> result = _examAnswersViewModel.PostListAsync(examAnswers.ToArray());
-            int examTranscriptId = ((await result) < 0) ? throw new Exception("ExamAnswersViewModel.PostListAsync") : await result;
+            int transcriptId = ((await result) < 0) ? throw new Exception("ExamAnswersViewModel.PostListAsync") : await result;
+
             await DisplayAlert("提交结果", "提交成功", "确定");
             Content.IsEnabled = true;
 
             Page MainPage = Navigation.NavigationStack.ElementAt(0);
             await Navigation.PopToRootAsync(animated: false);
-            await MainPage.Navigation.PushAsync(new ExamTranscriptsPage(examTranscriptId: examTranscriptId));
+            await MainPage.Navigation.PushAsync(new ExamTranscriptsPage(transcriptId, _examQuestionsViewModel.Title));
         }
     }
 }

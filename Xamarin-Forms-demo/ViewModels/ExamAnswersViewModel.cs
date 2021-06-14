@@ -13,6 +13,18 @@ namespace Xamarin_Forms_demo.ViewModels
     public class ExamAnswersViewModel : BaseViewModel
     {
         private readonly string path = "/api/ExamTranscripts/Answers";
+        private ObservableCollection<ExamAnswers> examAnswers = new ObservableCollection<ExamAnswers>();
+        public ObservableCollection<ExamAnswers> ExamAnswers
+        {
+            get => examAnswers;
+            set
+            {
+                foreach (var item in value)
+                {
+                    examAnswers.Add(item);
+                }
+            }
+        }
 
         public ICommand GetListCommand { protected set; get; }
 
@@ -28,15 +40,13 @@ namespace Xamarin_Forms_demo.ViewModels
             return -1;
         }
 
-        public async Task<ObservableCollection<ExamAnswers>> GetListByTranscriptIdAsync(int transcriptId)
+        public async Task GetListByTranscriptIdAsync(int transcriptId)
         {
             var queryParams = new Dictionary<string, string>() {
                 { "transcriptId", transcriptId.ToString() },
             };
-            var examAnswers = await HttpRequest.GetAsync<ObservableCollection<ExamAnswers>>(path, queryParams: queryParams);
-
+            ExamAnswers = await HttpRequest.GetAsync<ObservableCollection<ExamAnswers>>(path, queryParams: queryParams);
             IsBusy = false;
-            return examAnswers;
         }
     }
 }
