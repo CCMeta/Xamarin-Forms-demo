@@ -5,19 +5,23 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             x:Class="Xamarin_Forms_demo.Views.SNSTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            Title="SNSTabbedPage">
-
-    <views:PostsPage Title="Posts">
+            Title="社交模式">
+    <views:PostsPage Title="好友动态">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf0a1;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:PostsPage>
-    <views:GroupsPage Title="Groups">
+    <views:GroupsPage Title="聊天列表">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf0c0;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:GroupsPage>
-    <views:SubjectsPage Title="Subjects">
+    <views:SubjectsPage Title="兴趣爱好">
+        <ContentPage.IconImageSource>
+            <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" />
+        </ContentPage.IconImageSource>
+    </views:SubjectsPage>
+    <views:SubjectsPage Title="更多内容">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>

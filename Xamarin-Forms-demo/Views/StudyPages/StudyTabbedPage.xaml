@@ -15,17 +15,17 @@
     </TabbedPage.ToolbarItems>
     <views:ClassIndexPage Title="视频课堂">
         <ContentPage.IconImageSource> 
-            <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid" Size="Medium" />
+            <FontImageSource Glyph="&#xf7f2;" FontFamily="FontAwesome5Solid"/>
         </ContentPage.IconImageSource>
     </views:ClassIndexPage>
     <views:TestIndexPage Title="智能测试">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid" Size="Small" />
+            <FontImageSource Glyph="&#xf5ae;" FontFamily="FontAwesome5Solid"/>
         </ContentPage.IconImageSource>
     </views:TestIndexPage>
     <views:DataIndexPage Title="数据中心">
         <ContentPage.IconImageSource>
-            <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid" Size="Caption" />
+            <FontImageSource Glyph="&#xf1c0;" FontFamily="FontAwesome5Solid"/>
         </ContentPage.IconImageSource>
     </views:DataIndexPage>
     <views:CanvasPage Title="直播课堂">
