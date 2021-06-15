@@ -7,7 +7,7 @@
              x:Class="Xamarin_Forms_demo.Views.TranscriptAnswersPage"
              Title="{Binding Title}">
     <StackLayout>
-        <CollectionView ItemsSource="{Binding ExamQuestions}" ItemsLayout="VerticalGrid, 5"
+        <CollectionView ItemsSource="{Binding ExamAnswers}" ItemsLayout="VerticalGrid, 5"
                     SelectionMode="Single" SelectionChanged="OnItemSelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -30,7 +30,20 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.Footer>
-                <Button Text="提交测试" />
+                <Frame Margin="20">
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="00:00" HorizontalOptions="StartAndExpand"/>
+                            <Label Text="80%" HorizontalOptions="CenterAndExpand"/>
+                            <Label Text="21 / 22" HorizontalOptions="EndAndExpand"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Text="选择题 / 4X2=8"/>
+                            <Label Text="问答题 / 4X2=8"/>
+                            <Label Text="总分 / 4X2=8"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
             </CollectionView.Footer>
         </CollectionView>
     </StackLayout>

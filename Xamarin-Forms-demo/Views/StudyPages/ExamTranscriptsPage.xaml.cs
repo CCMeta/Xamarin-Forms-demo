@@ -25,11 +25,6 @@ namespace Xamarin_Forms_demo.Views
             SetCurrentPositionText(position: 0);
         }
 
-        protected override async void OnDisappearing()
-        {
-            await Navigation.PopToRootAsync();
-        }
-
         private async void OnEnterAnswerCard(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new TranscriptAnswersPage(_examAnswersViewModel));
