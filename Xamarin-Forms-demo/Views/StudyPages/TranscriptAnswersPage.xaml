@@ -30,7 +30,7 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.Footer>
-                <Button Text="提交测试" Clicked="OnCommitPaperAsync" />
+                <Button Text="提交测试" />
             </CollectionView.Footer>
         </CollectionView>
     </StackLayout>
