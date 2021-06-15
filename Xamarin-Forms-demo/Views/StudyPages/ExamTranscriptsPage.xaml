@@ -41,6 +41,8 @@
                         </StackLayout>
                         <Frame IsVisible="false" Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
                             <StackLayout>
+                                <Label FontSize="Medium" Text="题目解析"/>
+                                <BoxView Margin="-20,10" Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
                                 <Label Text="{Binding analysis}" />
                             </StackLayout>
                         </Frame>
