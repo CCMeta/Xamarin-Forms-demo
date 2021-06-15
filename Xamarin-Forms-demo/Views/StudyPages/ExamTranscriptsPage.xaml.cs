@@ -30,9 +30,9 @@ namespace Xamarin_Forms_demo.Views
             await Navigation.PopToRootAsync();
         }
         
-        private void OnEnterAnswerCard(object sender, EventArgs e)
+        private async void OnEnterAnswerCard(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new ExamAnswersPage(_examAnswersViewModel));
+            await Navigation.PushAsync(new TranscriptAnswersPage(_examAnswersViewModel));
         }
 
         private void OnOrderNumberChanged(object sender, PositionChangedEventArgs e)

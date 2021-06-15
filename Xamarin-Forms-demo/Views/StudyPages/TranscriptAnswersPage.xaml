@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Xamarin_Forms_demo.Views.TranscriptAnswersPage"
+             Title="{Binding Title}">
+    <StackLayout>
+        <CollectionView ItemsSource="{Binding ExamQuestions}" ItemsLayout="VerticalGrid, 5"
+                    SelectionMode="Single" SelectionChanged="OnItemSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Frame BackgroundColor="Transparent" IsVisible="{Binding IsUnanswered}" CornerRadius="50" BorderColor="#00cccc"
+                            WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Padding="0">
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding id}" FontSize="Medium"/>
+                        </Frame>
+                        <Frame BackgroundColor="#00cccc" IsVisible="{Binding IsAnswered}" CornerRadius="50" BorderColor="#00cccc"
+                            WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Padding="0">
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" Text="{Binding id}" FontSize="Medium"/>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.Footer>
+                <Button Text="提交测试" Clicked="OnCommitPaperAsync" />
+            </CollectionView.Footer>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
