@@ -28,16 +28,25 @@
         <CarouselView Loop="False" x:Name="ExamQuestionsView" PositionChanged="OnOrderNumberChanged" ItemsSource="{Binding ExamAnswers}">
             <CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="20">
-                        <Label Margin="0,20" Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
-                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckA}" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
-                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckB}" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
-                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckC}" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
-                        <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckD}" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
-                    </StackLayout>
+                    <AbsoluteLayout>
+                        <StackLayout Padding="20">
+                            <Label Margin="0,20" Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
+                            <RadioButton IsEnabled="False" IsChecked="{Binding isCheckA}" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
+                            <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                            <RadioButton IsEnabled="False" IsChecked="{Binding isCheckB}" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
+                            <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                            <RadioButton IsEnabled="False" IsChecked="{Binding isCheckC}" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
+                            <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                            <RadioButton IsEnabled="False" IsChecked="{Binding isCheckD}" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
+                        </StackLayout>
+                        <Frame IsVisible="false" Margin="20" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="SizeProportional">
+                            <StackLayout>
+                                <Label Text="{Binding analysis}" />
+                            </StackLayout>
+                        </Frame>
+                        <Button Text="查看解析" Clicked="OnShowAnalysisModal" TextColor="#FFF" BackgroundColor="#00CCCC"
+                                AbsoluteLayout.LayoutBounds="0.5,0.9" AbsoluteLayout.LayoutFlags="PositionProportional"/>
+                    </AbsoluteLayout>
                 </DataTemplate>
             </CarouselView.ItemTemplate>
         </CarouselView>

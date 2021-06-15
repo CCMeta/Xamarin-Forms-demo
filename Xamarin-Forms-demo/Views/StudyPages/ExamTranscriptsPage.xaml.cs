@@ -29,7 +29,7 @@ namespace Xamarin_Forms_demo.Views
         {
             await Navigation.PopToRootAsync();
         }
-        
+
         private async void OnEnterAnswerCard(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new TranscriptAnswersPage(_examAnswersViewModel));
@@ -50,5 +50,10 @@ namespace Xamarin_Forms_demo.Views
             ExamQuestionsView.Position = position;
         }
 
+        private void OnShowAnalysisModal(object sender, EventArgs e)
+        {
+            var currentLayout = ExamQuestionsView.VisibleViews[0] as AbsoluteLayout;
+            currentLayout.Children[1].IsVisible = !currentLayout.Children[1].IsVisible;
+        }
     }
 }
