@@ -30,13 +30,13 @@
                 <DataTemplate>
                     <StackLayout Padding="20">
                         <Label Margin="0,20" Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
-                        <RadioButton IsChecked="{Binding isCheckA}" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
+                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckA}" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsChecked="{Binding isCheckB}" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
+                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckB}" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsChecked="{Binding isCheckC}" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
+                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckC}" Content="{Binding op_c}" Value="C" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                        <RadioButton IsChecked="{Binding isCheckD}" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
+                        <RadioButton IsEnabled="False" IsChecked="{Binding isCheckD}" Content="{Binding op_d}" Value="D" TextColor="#00CCCC"/>
                     </StackLayout>
                 </DataTemplate>
             </CarouselView.ItemTemplate>

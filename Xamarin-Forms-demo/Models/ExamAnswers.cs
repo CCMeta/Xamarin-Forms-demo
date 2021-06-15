@@ -18,10 +18,10 @@
         public string op_b { get; set; }
         public string op_c { get; set; }
         public string op_d { get; set; }
-        public bool isCheckA { get; set; }
-        public bool isCheckB { get; set; }
-        public bool isCheckC { get; set; }
-        public bool isCheckD { get; set; }
+        public bool isCheckA { get => answer == "A"; set => answer = value ? "A" : answer; }
+        public bool isCheckB { get => answer == "B"; set => answer = value ? "B" : answer; }
+        public bool isCheckC { get => answer == "C"; set => answer = value ? "C" : answer; }
+        public bool isCheckD { get => answer == "D"; set => answer = value ? "D" : answer; }
 
         public bool IsAnswered => isCheckA || isCheckB || isCheckC || isCheckD;
         public bool IsUnanswered => !IsAnswered;
