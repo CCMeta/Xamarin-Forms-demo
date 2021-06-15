@@ -25,5 +25,7 @@
 
         public bool IsAnswered => isCheckA || isCheckB || isCheckC || isCheckD;
         public bool IsUnanswered => !IsAnswered;
+        public bool IsCorrect => answer == true_answer;
+        public bool IsWrong => !IsCorrect;
     }
 }

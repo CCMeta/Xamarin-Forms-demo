@@ -43,6 +43,7 @@
                             <StackLayout>
                                 <Label FontSize="Medium" Text="题目解析"/>
                                 <BoxView Margin="-20,10" Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
+                                <Label Text="{Binding true_answer,StringFormat='正确答案：{0}'}" />
                                 <Label Text="{Binding analysis}" />
                             </StackLayout>
                         </Frame>
