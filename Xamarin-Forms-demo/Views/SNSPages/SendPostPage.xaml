@@ -14,5 +14,15 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <Editor Placeholder="请输入要发送的状态 最大长度140" MaxLength="140" x:Name="PostEditor"></Editor>
+    <StackLayout Padding="20">
+        <Editor Placeholder="请输入要发送的状态 最大长度140" MaxLength="140" x:Name="PostEditor"
+                HeightRequest="240"/>
+        <StackLayout Orientation="Horizontal" Spacing="0">
+            <Button Text="图" WidthRequest="50" HeightRequest="50"/>
+            <Button Text="提" WidthRequest="50" HeightRequest="50"/>
+            <Button Text="话" WidthRequest="50" HeightRequest="50"/>
+            <Button Text="表" WidthRequest="50" HeightRequest="50"/>
+            <Button Text="公开↓" HorizontalOptions="EndAndExpand"/>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>

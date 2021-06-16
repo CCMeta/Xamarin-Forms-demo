@@ -13,13 +13,15 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             BindingContext = _postsViewModel = new PostsViewModel();
+            //var _ = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height;
+            //PostEditor.HeightRequest = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Height / 2;
         }
 
         async void ToolbarItem_ClickedAsync(object sender, EventArgs e)
         {
             var result = await _postsViewModel.PostAsync(PostEditor.Text);
             if (result)
-                await DisplayAlert("Success", "You have been Success", "OK");
+                await DisplayAlert("提交", "提交動態成功", "確定");
             await Navigation.PopAsync();
         }
     }
