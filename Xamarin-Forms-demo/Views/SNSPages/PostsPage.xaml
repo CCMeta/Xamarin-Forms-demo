@@ -48,7 +48,7 @@
                                         <Image Source="https://img9.doubanio.com/icon/ul56537265-26.jpg"/>
                                         <StackLayout Padding="10,0">
                                             <Label Text="CCMeta" FontSize="Large" VerticalOptions="Start"/>
-                                            <Label LineBreakMode="NoWrap" Text="我从来都没认输 并不代表我没有输" FontSize="Default" VerticalOptions="EndAndExpand"/>
+                                            <Label LineBreakMode="NoWrap" Text="我从来都没认输 并不代表我没有输" FontSize="Default" VerticalOptions="End"/>
                                         </StackLayout>
                                         <Button FontSize="Medium" CornerRadius="2" BorderColor="#00cccc" TextColor="#00cccc" BorderWidth="1" BackgroundColor="Transparent" Text="关注" HorizontalOptions="EndAndExpand" VerticalOptions="Start"/>
                                     </StackLayout>

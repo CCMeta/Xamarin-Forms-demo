@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Xamarin_Forms_demo.Views.ContectsPage"
+             x:Class="Xamarin_Forms_demo.Views.ContactsPage"
              Title="{Binding Title}">
     <StackLayout>
         <Label Text="好友当前状态-正在答题？/忙碌/等"/>

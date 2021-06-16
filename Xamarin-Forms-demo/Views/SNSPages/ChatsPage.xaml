@@ -6,5 +6,43 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ChatsPage"
              Title="{Binding Title}">
-    
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="HasShadow">false</Setter>
+            <Setter Property="Margin">0</Setter>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnEnterContacts">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xf2b9;" FontFamily="FontAwesome5Solid" Size="Medium" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <StackLayout Spacing="1">
+        <Frame>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="https://img9.doubanio.com/icon/ul56537265-26.jpg"/>
+                <StackLayout Padding="10,0">
+                    <Label Text="趙雲鵬" FontSize="Large" VerticalOptions="Start"/>
+                    <Label LineBreakMode="NoWrap" Text="我从来都没认输 并不代表我没有输" FontSize="Default" VerticalOptions="End"/>
+                </StackLayout>
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Label Text="昨天" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+        <Frame>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="https://img9.doubanio.com/icon/ul56537265-26.jpg"/>
+                <StackLayout Padding="10,0">
+                    <Label Text="王野" FontSize="Large" VerticalOptions="Start"/>
+                    <Label LineBreakMode="NoWrap" Text="三天之内我就幹死你" FontSize="Default" VerticalOptions="End"/>
+                </StackLayout>
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Label Text="昨天" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
 </ContentPage>

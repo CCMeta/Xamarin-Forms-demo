@@ -5,9 +5,9 @@ using Xamarin.Forms;
 namespace Xamarin_Forms_demo.Views
 {
     [DesignTimeVisible(false)]
-    public partial class ContectsPage : ContentPage
+    public partial class ContactsPage : ContentPage
     {
-        public ContectsPage()
+        public ContactsPage()
         {
             InitializeComponent();
         }
