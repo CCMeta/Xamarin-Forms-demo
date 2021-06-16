@@ -13,7 +13,7 @@
         </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnEnterContacts">
+        <ToolbarItem Clicked="OnEnterContactsAsync">
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xf2b9;" FontFamily="FontAwesome5Solid" Size="Medium" />
             </ToolbarItem.IconImageSource>

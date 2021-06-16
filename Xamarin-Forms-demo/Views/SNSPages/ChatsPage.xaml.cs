@@ -13,7 +13,7 @@ namespace Xamarin_Forms_demo.Views
             InitializeComponent();
         }
 
-        private async Task OnEnterContactsAsync(object sender, EventArgs e)
+        private async void OnEnterContactsAsync(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ContactsPage());
         }

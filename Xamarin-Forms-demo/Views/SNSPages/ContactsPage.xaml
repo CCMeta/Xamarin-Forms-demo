@@ -6,7 +6,23 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ContactsPage"
              Title="{Binding Title}">
-    <StackLayout>
-        <Label Text="好友当前状态-正在答题？/忙碌/等"/>
+    <StackLayout Spacing="1">
+        <Frame HasShadow="False">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="https://img2.doubanio.com/icon/ul75914903-3.jpg" Aspect="AspectFill"/>
+                    <StackLayout Padding="10,0">
+                        <Label Text="匣子" FontSize="Large" TextColor="Black"/>
+                        <Label Text="残空小虫 人中之龙🐉" FontSize="Medium"/>
+                    </StackLayout>
+                    <Label Text="在线" FontSize="Medium" BackgroundColor="Transparent" TextColor="Green" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="111" WidthRequest="70" VerticalTextAlignment="Center">
+                    </Label>
+                    <Label FontSize="Medium" Text="正在学习 历史" TextColor="#00cccc"/>
+                </StackLayout>
+            </StackLayout>
+        </Frame>
     </StackLayout>
 </ContentPage>
