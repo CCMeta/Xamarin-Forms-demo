@@ -54,7 +54,7 @@
                     </TableSection>
                     <TableSection>
                         <ViewCell>
-                            <Button Text="Dismiss" VerticalOptions="End"/>
+                            <Button Text="退出登录" VerticalOptions="End"/>
                         </ViewCell>
                     </TableSection>
                 </TableRoot>
