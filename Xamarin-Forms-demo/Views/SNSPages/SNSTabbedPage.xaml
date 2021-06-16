@@ -11,19 +11,19 @@
             <FontImageSource Glyph="&#xf0a1;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:PostsPage>
-    <views:GroupsPage Title="聊天列表">
+    <views:ChatsPage Title="聊天列表">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf0c0;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
-    </views:GroupsPage>
+    </views:ChatsPage>
     <views:SubjectsPage Title="兴趣爱好">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
     </views:SubjectsPage>
-    <views:SubjectsPage Title="更多内容">
+    <views:GroupsPage Title="更多内容">
         <ContentPage.IconImageSource>
             <FontImageSource Glyph="&#xf004;" FontFamily="FontAwesome5Solid" />
         </ContentPage.IconImageSource>
-    </views:SubjectsPage>
+    </views:GroupsPage>
 </TabbedPage>

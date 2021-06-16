@@ -59,6 +59,9 @@
     <Compile Update="Views\SNSPages\ContectsPage.xaml.cs">
       <DependentUpon>ContectsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\SNSPages\ChatsPage.xaml.cs">
+      <DependentUpon>ChatsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\StudyPages\TranscriptAnswersPage.xaml.cs">
       <DependentUpon>TranscriptAnswersPage.xaml</DependentUpon>
     </Compile>
