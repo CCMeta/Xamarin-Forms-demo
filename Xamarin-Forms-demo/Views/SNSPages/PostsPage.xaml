@@ -45,15 +45,15 @@
                             <Frame HasShadow="False" Padding="20,30,20,10" Margin="0,0,0,5">
                                 <StackLayout>
                                     <StackLayout Orientation="Horizontal">
-                                        <Image Source="https://img9.doubanio.com/icon/ul56537265-26.jpg"/>
+                                        <Image Source="{Binding avatar}"/>
                                         <StackLayout Padding="10,0">
-                                            <Label Text="CCMeta" FontSize="Large" VerticalOptions="Start"/>
+                                            <Label TextColor="Black" Text="{Binding nickname}" VerticalOptions="Start"/>
                                             <Label LineBreakMode="NoWrap" Text="我从来都没认输 并不代表我没有输" FontSize="Caption" VerticalOptions="End"/>
                                         </StackLayout>
-                                        <Button FontSize="Medium" CornerRadius="2" BorderColor="#00cccc" TextColor="#00cccc" BorderWidth="1" BackgroundColor="Transparent" Text="关注" HorizontalOptions="EndAndExpand" VerticalOptions="Start"/>
+                                        <Button CornerRadius="2" BorderColor="#00cccc" TextColor="#00cccc" BorderWidth="1" BackgroundColor="Transparent" Text="关注" HorizontalOptions="End" VerticalOptions="Start"/>
                                     </StackLayout>
-                                    <Label FontSize="Body" Padding="0,10" Text="{Binding content}"/>
-                                    <Label Text="{Binding created_at,StringFormat='{0}'}" 
+                                    <Label TextColor="Black" FontSize="Body" Padding="0,10" Text="{Binding content}"/>
+                                    <Label FontSize="Caption" Text="{Binding created_at,StringFormat='{0}'}" 
                                        HorizontalOptions="Start" VerticalOptions="End"/>
                                     <BoxView HeightRequest="1" Color="#DDD" HorizontalOptions="FillAndExpand"/>
                                     <StackLayout Spacing="0" Orientation="Horizontal">
