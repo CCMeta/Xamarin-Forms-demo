@@ -14,7 +14,7 @@
             <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding avatar}" HeightRequest="50"/>
                 <Label Text="{Binding nickname}" FontSize="Medium" VerticalOptions="Center"/>
-                <Button x:Name="WebSocketStateLabel" Text="{Binding .}" FontSize="Medium" VerticalOptions="Center"/>
+                <Button x:Name="WebSocketStateLabel" FontSize="Medium" VerticalOptions="Center"/>
                 <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
             </StackLayout>
         </Frame>

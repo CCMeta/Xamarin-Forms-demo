@@ -45,7 +45,7 @@ namespace Xamarin_Forms_demo.Services
         {
             await ListeningWebRTCAsync(OnDrawCanvas, OnLocalRtpSession);
             var publicBuffer = WebSocket.CreateClientBuffer(4096 * 20, 4096 * 20);
-            while (true)
+            while (_clientWebSocket.State.HasFlag(WebSocketState.Open))
             {
                 WebSocketReceiveResult response = await _clientWebSocket.ReceiveAsync(publicBuffer, CancellationToken.None);
                 if (response.EndOfMessage)
