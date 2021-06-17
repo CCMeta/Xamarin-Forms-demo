@@ -15,13 +15,13 @@
     </ContentPage.ToolbarItems>
     <StackLayout>
         <StackLayout Padding="30" Orientation="Horizontal">
-            <Label Text="{Binding Duration}" FontSize="Medium" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
-            <Label VerticalTextAlignment="Center" Text="&#xf163;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand">
+            <Label Text="{Binding Duration}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand"/>
+            <Label TextColor="#00CCCC" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
-                        <Span x:Name="CurrentPositionSpan" FontSize="Medium"/>
-                        <Span x:Name="TotalCountSpan" FontSize="Medium"/>
+                        <Span Text="&#xf5da;" FontFamily="FontAwesome5Solid"/>
+                        <Span x:Name="CurrentPositionSpan"/>
+                        <Span x:Name="TotalCountSpan"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -30,7 +30,7 @@
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="20">
-                        <Label Margin="0,20" Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
+                        <Label TextColor="Black" Margin="0,20" Text="{Binding content}" FontSize="Body" HorizontalOptions="Center" />
                         <RadioButton IsChecked="{Binding isCheckA}" CheckedChanged="OnAnswerSelected" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                         <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
                         <RadioButton IsChecked="{Binding isCheckB}" CheckedChanged="OnAnswerSelected" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>

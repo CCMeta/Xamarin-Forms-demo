@@ -15,12 +15,12 @@
     </ContentPage.ToolbarItems>
     <StackLayout>
         <StackLayout Padding="30" Orientation="Horizontal">
-            <Label VerticalTextAlignment="Center" Text="&#xf163;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand">
+            <Label TextColor="#00CCCC" VerticalTextAlignment="Center" HorizontalOptions="EndAndExpand">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"/>
-                        <Span x:Name="CurrentPositionSpan" FontSize="Medium"/>
-                        <Span x:Name="TotalCountSpan" FontSize="Medium"/>
+                        <Span Text="&#xf5da;" FontFamily="FontAwesome5Solid"/>
+                        <Span x:Name="CurrentPositionSpan"/>
+                        <Span x:Name="TotalCountSpan"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -29,8 +29,10 @@
             <CarouselView.ItemTemplate>
                 <DataTemplate>
                     <AbsoluteLayout>
-                        <StackLayout Padding="20">
-                            <Label Margin="0,20" Text="{Binding content}" FontSize="Medium" HorizontalOptions="Center" />
+                        <StackLayout Padding="20"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                            AbsoluteLayout.LayoutFlags="SizeProportional">
+                            <Label TextColor="Black" Margin="0,20" Text="{Binding content}" FontSize="Body" HorizontalOptions="CenterAndExpand" />
                             <RadioButton IsEnabled="False" IsChecked="{Binding isCheckA}" Content="{Binding op_a}" Value="A" TextColor="#00CCCC"/>
                             <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
                             <RadioButton IsEnabled="False" IsChecked="{Binding isCheckB}" Content="{Binding op_b}" Value="B" TextColor="#00CCCC"/>

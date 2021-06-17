@@ -28,7 +28,7 @@
                     <Label LineBreakMode="NoWrap" Text="我从来都没认输 并不代表我没有输" FontSize="Default" VerticalOptions="End"/>
                 </StackLayout>
                 <StackLayout HorizontalOptions="EndAndExpand">
-                    <Label Text="昨天" />
+                    <Label Text="昨天" LineBreakMode="NoWrap" />
                 </StackLayout>
             </StackLayout>
         </Frame>
@@ -40,7 +40,7 @@
                     <Label LineBreakMode="NoWrap" Text="三天之内我就幹死你" FontSize="Default" VerticalOptions="End"/>
                 </StackLayout>
                 <StackLayout HorizontalOptions="EndAndExpand">
-                    <Label Text="昨天" />
+                    <Label Text="昨天" LineBreakMode="NoWrap" />
                 </StackLayout>
             </StackLayout>
         </Frame>

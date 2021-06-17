@@ -13,8 +13,8 @@
         <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True" Padding="15">
             <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding avatar}" HeightRequest="50"/>
-                <Label Text="{Binding nickname}" FontSize="Medium" VerticalOptions="Center"/>
-                <Button x:Name="WebSocketStateLabel" FontSize="Medium" VerticalOptions="Center"/>
+                <Label Text="{Binding nickname}" FontSize="Subtitle" VerticalOptions="Center"/>
+                <Button x:Name="WebSocketStateLabel" VerticalOptions="Center"/>
                 <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
             </StackLayout>
         </Frame>
@@ -25,16 +25,16 @@
                     <TableSection Title="NAVIGATION">
                         <ViewCell x:Name="NavStudyViewCell">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="&#xf5da;" FontSize="Medium" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
-                                <Label Text="学习模式" FontSize="Medium" VerticalOptions="Center" />
-                                <Label Text="&#xf054;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                                <Label Text="&#xf5da;" TextColor="Red" FontSize="Body" WidthRequest="20" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
+                                <Label TextColor="#000" Text="学习模式" FontSize="Body" VerticalOptions="Center" />
+                                <Label Text="&#xf054;" FontSize="Body" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                             </StackLayout>
                         </ViewCell>
                         <ViewCell x:Name="NavSNSViewCell">
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="&#xf086;" FontSize="Medium" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
-                                <Label Text="社交模式" FontSize="Medium" VerticalOptions="Center" />
-                                <Label Text="&#xf054;" FontSize="Medium" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                                <Label Text="&#xf086;" TextColor="DarkCyan" FontSize="Body"  WidthRequest="20" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
+                                <Label TextColor="#000" Text="社交模式" FontSize="Body" VerticalOptions="Center" />
+                                <Label Text="&#xf054;" FontSize="Body" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                             </StackLayout>
                         </ViewCell>
                     </TableSection>

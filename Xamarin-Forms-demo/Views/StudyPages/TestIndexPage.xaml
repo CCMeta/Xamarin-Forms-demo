@@ -41,17 +41,19 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Padding="20,10">
-                            <Frame HasShadow="False" BorderColor="#DDD" CornerRadius="5" Padding="20">
+                            <Frame Padding="20">
                                 <StackLayout>
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding id, StringFormat='试卷编号 {0}'}"/>
-                                        <Label Text="已测试" TextColor="Red" HorizontalOptions="EndAndExpand" />
+                                        <Label FontSize="Caption" Text="{Binding id, StringFormat='试卷编号 {0}'}"/>
+                                        <Label FontSize="Caption" Text="未测试" TextColor="Red" HorizontalOptions="EndAndExpand" />
                                     </StackLayout>
                                     <BoxView Color="#DDD" HeightRequest="1" HorizontalOptions="Fill" />
-                                    <Label Text="{Binding title, StringFormat='{0}'}" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label TextColor="Black" Text="{Binding title, StringFormat='{0}'}" FontSize="Body" />
                                     <Label Text="{Binding created_at, StringFormat='上传时间 {0}'}"/>
-                                    <Label Text="平均分 105"/>
-                                    <Button Padding="0" HeightRequest="30" Text="答题" TextColor="White" BackgroundColor="#00cccc" HorizontalOptions="EndAndExpand"/>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label TextColor="#00cccc" Text="平均分 105" VerticalOptions="Center"/>
+                                        <Button Padding="0" HeightRequest="30" Text="答题" TextColor="White" BackgroundColor="#00cccc" HorizontalOptions="EndAndExpand"/>
+                                    </StackLayout>
                                 </StackLayout>
                             </Frame>
                         </Frame>

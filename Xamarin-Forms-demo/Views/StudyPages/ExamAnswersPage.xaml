@@ -20,17 +20,17 @@
                         </Grid.ColumnDefinitions>
                         <Frame BackgroundColor="Transparent" IsVisible="{Binding IsUnanswered}" CornerRadius="50" BorderColor="#00cccc"
                             WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Padding="0">
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding id}" FontSize="Medium"/>
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding id}" FontSize="Body"/>
                         </Frame>
                         <Frame BackgroundColor="#00cccc" IsVisible="{Binding IsAnswered}" CornerRadius="50" BorderColor="#00cccc"
                             WidthRequest="50" HeightRequest="50" VerticalOptions="Center" HorizontalOptions="Center" Padding="0">
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" Text="{Binding id}" FontSize="Medium"/>
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" TextColor="White" Text="{Binding id}" FontSize="Body"/>
                         </Frame>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
             <CollectionView.Footer>
-                <Button Text="提交测试" Clicked="OnCommitPaperAsync" />
+                <Button BackgroundColor="#00cccc" TextColor="#FFFFFF" Text="提交测试" Clicked="OnCommitPaperAsync" />
             </CollectionView.Footer>
         </CollectionView>
     </StackLayout>
