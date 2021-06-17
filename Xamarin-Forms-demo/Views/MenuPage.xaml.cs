@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.WebSockets;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.ViewModels;
@@ -18,17 +19,18 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             BindingContext = new BaseViewModel().Me;
-            WebSocketStateLabel.BindingContext = ItemsViewModel.WebSocketState;
 
             foreach (var item in Enum.GetValues(typeof(MenuItemType)))
             {
                 flyoutPageItems.Add(new FlyoutPageItem { Id = Convert.ToInt32(item), Title = item.ToString(), IconSource = "" });
             }
 
-            NavSNSViewCell.Tapped += async (sender, e) => {
+            NavSNSViewCell.Tapped += async (sender, e) =>
+            {
                 await RootPage.NavigateFromMenu(MenuItemType.SNSTabbed);
             };
-            NavStudyViewCell.Tapped += async (sender, e) => {
+            NavStudyViewCell.Tapped += async (sender, e) =>
+            {
                 await RootPage.NavigateFromMenu(MenuItemType.StudyTabbed);
             };
             //ListViewMenu.ItemsSource = flyoutPageItems;
@@ -41,5 +43,10 @@ namespace Xamarin_Forms_demo.Views
             //};
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            WebSocketStateLabel.Text = ItemsViewModel.WebSocketState.ToString();
+        }
     }
 }
