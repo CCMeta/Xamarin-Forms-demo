@@ -13,11 +13,11 @@
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand" >
-                <Button Text="高中" BackgroundColor="White" Clicked="OnTypeButtonToggle"/>
+                <Button Text="初中六班" BackgroundColor="White" Clicked="OnTypeButtonToggle"/>
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
-                <Button Text="井冈山" BackgroundColor="White" Clicked="OnTypeButtonToggle" />
+                <Button Text="高中三班" BackgroundColor="White" Clicked="OnTypeButtonToggle" />
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
