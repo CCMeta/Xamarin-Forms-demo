@@ -28,19 +28,21 @@
         <Frame HasShadow="False" Padding="20,15">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="https://img9.doubanio.com/icon/ul56537265-26.jpg" Aspect="AspectFill"/>
+                    <Image WidthRequest="50" HeightRequest="50" Source="https://img9.doubanio.com/icon/ul56537265-26.jpg" Aspect="AspectFill"/>
                     <StackLayout Padding="10,0">
-                        <Label Text="赵云鹏" FontSize="Large" TextColor="Black"/>
-                        <Label Text="Try To Build A Better World" LineBreakMode="NoWrap" FontSize="Medium"/>
+                        <Label Text="赵云鹏" FontSize="Body" TextColor="Black"/>
+                        <Label Text="Try To Build A Better World" LineBreakMode="NoWrap" FontSize="Caption"/>
                     </StackLayout>
-                    <Label Text="在线" LineBreakMode="NoWrap" BackgroundColor="Transparent" TextColor="Green" HorizontalOptions="EndAndExpand"/>
+                    <Label FontSize="Caption" Text="在线" LineBreakMode="NoWrap" BackgroundColor="Transparent"
+                           TextColor="Green" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Label WidthRequest="70" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
+                    <Label FontSize="Caption" WidthRequest="50" Margin="0,0,10,0"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="&#xf0c0;" TextColor="#00cccc" FontFamily="FontAwesome5Solid"/>
-                                <Span Text=" 22" TextColor="#00cccc"/>
+                                <Span FontSize="Caption" Text="&#xf0c0;" TextColor="#00cccc" FontFamily="FontAwesome5Solid"/>
+                                <Span FontSize="Caption" Text=" 22  " TextColor="#00cccc"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -51,12 +53,13 @@
         <Frame HasShadow="False" Padding="20,10">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="https://img2.doubanio.com/icon/ul75914903-3.jpg" Aspect="AspectFill"/>
+                    <Image WidthRequest="50" HeightRequest="50" Source="https://img2.doubanio.com/icon/ul75914903-3.jpg" Aspect="AspectFill"/>
                     <StackLayout Padding="10,0">
-                        <Label Text="匣子" FontSize="Large" TextColor="Black"/>
-                        <Label Text="残空小虫 人中之龙🐉" LineBreakMode="NoWrap" FontSize="Medium"/>
+                        <Label Text="匣子" FontSize="Body" TextColor="Black"/>
+                        <Label Text="残空小虫 人中之龙🐉" LineBreakMode="NoWrap" FontSize="Caption"/>
                     </StackLayout>
-                    <Label Text="在线" LineBreakMode="NoWrap" BackgroundColor="Transparent" TextColor="Green" HorizontalOptions="EndAndExpand"/>
+                    <Label FontSize="Caption" Text="在线" LineBreakMode="NoWrap" BackgroundColor="Transparent"
+                           TextColor="Green" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Label WidthRequest="70" HorizontalTextAlignment="Center" VerticalTextAlignment="Center">

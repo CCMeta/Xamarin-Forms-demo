@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin_Forms_demo_api.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,13 +12,21 @@ namespace Xamarin_Forms_demo_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ContactsController : ControllerBase
+    public class ContactsController : DefaultController
     {
+        private readonly ContactsRepository _contactsRepository;
+
+        public ContactsController(ContactsRepository contactsRepository, IHttpContextAccessor context) : base(context)
+        {
+            _contactsRepository = contactsRepository;
+        }
+
         // GET: api/<ContactsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult> GetAsync()
         {
-            return new string[] { "value1", "value2" };
+            var result = await _contactsRepository.GetList(_uid);
+            return Ok(result);
         }
 
         // GET api/<ContactsController>/5
