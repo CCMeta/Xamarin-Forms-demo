@@ -32,6 +32,7 @@ namespace Xamarin_Forms_demo_api
                 .AddTransient<SubjectsRepository>()
                 .AddTransient<CoursesRepository>()
                 .AddTransient<ContactsRepository>()
+                .AddTransient<ChatsRepository>()
                 .AddTransient<UsersRepository>()
                 .AddTransient<PostsRepository>();
             services.AddHttpContextAccessor();
