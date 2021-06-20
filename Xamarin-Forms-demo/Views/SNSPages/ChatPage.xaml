@@ -20,7 +20,7 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <StackLayout Spacing="0">
-        <CollectionView x:Name="collectionView" ItemsSource="{Binding Chats}" VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset">
+        <CollectionView x:Name="collectionView" ItemsSource="{Binding Chats}" VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepLastItemInView">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>
@@ -43,8 +43,16 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <StackLayout Orientation="Horizontal">
-            <Entry Completed="OnSendMessage" Focused="Entry_Focused" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
-        </StackLayout>
+        <BoxView Color="#EEE" HeightRequest="1" HorizontalOptions="Fill"/>
+        <Frame Padding="10">
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Entry BackgroundColor="White" Completed="OnSendMessage" Focused="Entry_Focused" HorizontalOptions="FillAndExpand"/>
+                <Button BackgroundColor="Transparent" WidthRequest="25" HeightRequest="25">
+                    <Button.ImageSource>
+                        <FontImageSource Size="25" Color="#00cccc" Glyph="&#xf055;" FontFamily="FontAwesome5Solid"/>
+                    </Button.ImageSource>
+                </Button>
+            </StackLayout>
+        </Frame>
     </StackLayout>
 </ContentPage>

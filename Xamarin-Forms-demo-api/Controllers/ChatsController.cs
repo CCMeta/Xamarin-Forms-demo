@@ -36,8 +36,16 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // POST api/<ChatsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult> Post([FromBody] Chats chat)
         {
+            chat.uid = _uid;
+            int lastInsertId = await _chatsRepository.Post(chat);
+            if (lastInsertId <= 0)
+            {
+                return BadRequest(chat);
+            }
+            var lastInsertItem = await _chatsRepository.Get(_uid, lastInsertId);
+            return Ok(lastInsertItem);
         }
 
         // PUT api/<ChatsController>/5

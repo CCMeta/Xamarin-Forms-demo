@@ -16,8 +16,8 @@ namespace Xamarin_Forms_demo.Views
         public ChatPage(Contacts partner)
         {
             InitializeComponent();
-            Title = "梁子";
             _partner = partner;
+            Title = _partner.nickname;
             BindingContext = _chatsViewModel = new ChatsViewModel(_partner);
             _chatsViewModel.GetListAsync();
         }
@@ -40,6 +40,7 @@ namespace Xamarin_Forms_demo.Views
         private async void OnSendMessage(object sender, EventArgs e)
         {
             await _chatsViewModel.PostAsync(_partner.partner_id, ((Entry)sender).Text);
+            ((Entry)sender).Text = null;
         }
     }
 }

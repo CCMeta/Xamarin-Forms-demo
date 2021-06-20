@@ -22,15 +22,15 @@ namespace Xamarin_Forms_demo.ViewModels
             {
                 foreach (var item in value)
                 {
-                    if (item.partner_id == _partner.partner_id)
+                    if (item.uid == _partner.partner_id)
                     {
-                        //by myself
-                        item.isMine = true;
+                        //by other
+                        item.isMine = false;
                     }
                     else
                     {
-                        // by other
-                        item.isMine = false;
+                        // by myself
+                        item.isMine = true;
                     }
                     chats.Add(item);
                 }
@@ -63,9 +63,13 @@ namespace Xamarin_Forms_demo.ViewModels
                 content = content,
                 partner_id = partner_id
             };
-            var result = await HttpRequest.PostAsync(path, queryParams);
+            Chats result = await HttpRequest.PostAsync(path, queryParams);
             if (result is Chats)
+            {
+                result.isMine = true;
+                chats.Add(result);
                 return true;
+            }
             return false;
         }
 
