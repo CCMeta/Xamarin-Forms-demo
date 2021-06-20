@@ -20,19 +20,31 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <StackLayout Spacing="0">
-        <StackLayout Orientation="Horizontal" Padding="10,5">
-            <Image VerticalOptions="Start" WidthRequest="50" HeightRequest="50" Source="https://img9.doubanio.com/icon/ul56537265-26.jpg" Aspect="AspectFit"/>
-            <BoxView Margin="5,20,-20,0" Color="#00cccc" VerticalOptions="Start" WidthRequest="16" HeightRequest="16" Rotation="45"/>
-            <Frame BorderColor="#00cccc" CornerRadius="2" HorizontalOptions="FillAndExpand" Padding="10" Margin="5,0,68,0">
-                <Label TextColor="Black" Text="不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐" FontSize="Body" />
-            </Frame>
-        </StackLayout>
-        <StackLayout Orientation="Horizontal" Padding="10,5">
-            <Frame BackgroundColor="#00cccc" BorderColor="#00cccc" CornerRadius="2" HorizontalOptions="FillAndExpand" Padding="10" Margin="68,0,5,0">
-                <Label TextColor="Black" Text="不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐不知道咋推荐" FontSize="Body" />
-            </Frame>
-            <BoxView Margin="-20,20,5,0" Color="#00cccc" VerticalOptions="Start" WidthRequest="16" HeightRequest="16" Rotation="45"/>
-            <Image VerticalOptions="Start" HorizontalOptions="End" WidthRequest="50" HeightRequest="50" Source="https://img9.doubanio.com/icon/ul56537265-26.jpg" Aspect="AspectFit"/>
+        <CollectionView x:Name="collectionView" ItemsSource="{Binding Chats}" VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding created_at}" HorizontalOptions="CenterAndExpand"/>
+                        <StackLayout IsVisible="{Binding isPartner}" Orientation="Horizontal" Padding="10,5">
+                            <Image VerticalOptions="Start" WidthRequest="50" HeightRequest="50" Source="{Binding avatar}" Aspect="AspectFit"/>
+                            <BoxView Margin="5,20,-20,0" Color="#00cccc" VerticalOptions="Start" WidthRequest="16" HeightRequest="16" Rotation="45"/>
+                            <Frame BorderColor="#00cccc" CornerRadius="2" HorizontalOptions="FillAndExpand" Padding="10" Margin="5,0,68,0">
+                                <Label TextColor="Black" Text="{Binding content}" FontSize="Body" />
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout IsVisible="{Binding isMine}" Orientation="Horizontal" Padding="10,5">
+                            <Frame BackgroundColor="#00cccc" BorderColor="#00cccc" CornerRadius="2" HorizontalOptions="FillAndExpand" Padding="10" Margin="68,0,5,0">
+                                <Label TextColor="Black" Text="{Binding content}" FontSize="Body" />
+                            </Frame>
+                            <BoxView Margin="-20,20,5,0" Color="#00cccc" VerticalOptions="Start" WidthRequest="16" HeightRequest="16" Rotation="45"/>
+                            <Image VerticalOptions="Start" HorizontalOptions="End" WidthRequest="50" HeightRequest="50" Source="{Binding avatar}" Aspect="AspectFit"/>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout Orientation="Horizontal">
+            <Entry Completed="OnSendMessage" Focused="Entry_Focused" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
         </StackLayout>
     </StackLayout>
 </ContentPage>

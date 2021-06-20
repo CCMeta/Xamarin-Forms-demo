@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
+using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.ViewModels;
 
 namespace Xamarin_Forms_demo.Views
@@ -9,18 +10,18 @@ namespace Xamarin_Forms_demo.Views
     public partial class ContactsPage : ContentPage
     {
         private readonly ContactsViewModel _contactsViewModel;
-        
+
         public ContactsPage()
         {
             InitializeComponent();
             BindingContext = _contactsViewModel = new ContactsViewModel();
+            IsBusy = true;
+            _contactsViewModel.GetListAsync();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            IsBusy = true;
-            _contactsViewModel.GetListAsync();
         }
 
         private void OnTypeButtonToggle(object sender, EventArgs e)
@@ -37,6 +38,13 @@ namespace Xamarin_Forms_demo.Views
             boxView = (((Button)sender).Parent as StackLayout).Children[1] as BoxView;
             Console.WriteLine(boxView.ClassId);
             boxView.Color = Color.FromHex("#00cccc");
+        }
+
+        private async void OnContactsSelected(object sender, SelectionChangedEventArgs e)
+        {
+            var partner = e.CurrentSelection[0] as Contacts;
+            //(sender as CollectionView).SelectedItem = null;
+            await Navigation.PushAsync(new ChatPage(partner));
         }
     }
 }

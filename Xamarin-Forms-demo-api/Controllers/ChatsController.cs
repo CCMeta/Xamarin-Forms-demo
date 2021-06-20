@@ -12,7 +12,7 @@ namespace Xamarin_Forms_demo_api.Controllers
     [ApiController]
     public class ChatsController : DefaultController
     {
-        private readonly ChatsRepository  _chatsRepository;
+        private readonly ChatsRepository _chatsRepository;
 
         public ChatsController(ChatsRepository chatsRepository, IHttpContextAccessor context) : base(context)
         {
@@ -21,9 +21,9 @@ namespace Xamarin_Forms_demo_api.Controllers
 
         // GET: api/<ChatsController> 在线的时候websocketPush 那么没在线的留言怎么办呢 一开始连结WS后主动拉取吗？
         [HttpGet]
-        public async Task<ActionResult> GetAsync()
+        public async Task<ActionResult> GetAsync([FromQuery] int partner_id)
         {
-            var result = await _chatsRepository.GetList(_uid);
+            var result = await _chatsRepository.GetList(_uid, partner_id);
             return Ok(result);
         }
 

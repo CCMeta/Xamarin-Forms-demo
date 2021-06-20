@@ -15,8 +15,8 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnEnterContactsAsync(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ChatPage());
-            //await Navigation.PushAsync(new ContactsPage());
+            //await Navigation.PushAsync(new ChatPage(partner_id: 2));
+            await Navigation.PushAsync(new ContactsPage());
         }
     }
 }

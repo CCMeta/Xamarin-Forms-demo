@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Xamarin_Forms_demo_api.Models
+namespace Xamarin_Forms_demo.Models
 {
     public class Chats
     {
@@ -14,6 +14,7 @@ namespace Xamarin_Forms_demo_api.Models
         public string created_at { get; set; }
         public string content { get; set; }
         public string avatar { get; set; }
-
+        public bool isMine { get; set; }
+        public bool isPartner { get => !isMine; }
     }
 }
