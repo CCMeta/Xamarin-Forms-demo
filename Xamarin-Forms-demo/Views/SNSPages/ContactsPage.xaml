@@ -6,7 +6,7 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.ContactsPage"
              Title="好友">
-    <StackLayout Spacing="2">
+    <StackLayout Spacing="1">
         <StackLayout x:Name="listTabNavbar" Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical" Spacing="0" HorizontalOptions="FillAndExpand">
                 <Button Text="全部" BackgroundColor="White" Clicked="OnTypeButtonToggle" />
@@ -28,31 +28,31 @@
         <CollectionView x:Name="collectionView" ItemsSource="{Binding Contacts}" VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame HasShadow="False" Padding="20,15">
-                        <StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <Image WidthRequest="50" HeightRequest="50" 
+                    <Frame Padding="0" BackgroundColor="#EEE">
+                        <StackLayout Padding="10" Margin="0,0,0,1" BackgroundColor="White">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image WidthRequest="50" HeightRequest="50" 
                                            Source="{Binding avatar}" Aspect="AspectFill"/>
-                                <StackLayout Padding="10,0">
-                                    <Label Text="{Binding nickname}" FontSize="Body" TextColor="Black"/>
-                                    <Label Text="{Binding intro}" LineBreakMode="NoWrap" FontSize="Caption"/>
-                                </StackLayout>
-                                <Label FontSize="Caption" Text="在线" LineBreakMode="NoWrap" BackgroundColor="Transparent"
+                                    <StackLayout Padding="10,0">
+                                        <Label Text="{Binding nickname}" FontSize="Body" TextColor="Black"/>
+                                        <Label Text="{Binding intro}" LineBreakMode="NoWrap" FontSize="Caption"/>
+                                    </StackLayout>
+                                    <Label FontSize="Caption" Text="在线" LineBreakMode="NoWrap" BackgroundColor="Transparent"
                            TextColor="Green" HorizontalOptions="EndAndExpand"/>
-                            </StackLayout>
-                            <StackLayout Orientation="Horizontal">
-                                <Label FontSize="Caption" WidthRequest="50" Margin="0,0,10,0"
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label FontSize="Caption" WidthRequest="50" Margin="0,0,10,0"
                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span FontSize="Caption" Text="&#xf0c0;" TextColor="#00cccc" FontFamily="FontAwesome5Solid"/>
-                                            <Span FontSize="Caption" Text=" 22" TextColor="#00cccc"/>
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Label Text="正在学习 数学" TextColor="#00cccc"/>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontSize="Caption" Text="&#xf0c0;" TextColor="#00cccc" FontFamily="FontAwesome5Solid"/>
+                                                <Span FontSize="Caption" Text=" 22" TextColor="#00cccc"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="Caption" Text="正在学习 数学" TextColor="#00cccc"/>
+                                </StackLayout>
                             </StackLayout>
-                        </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
