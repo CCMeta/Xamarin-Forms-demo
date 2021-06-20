@@ -11,6 +11,7 @@ namespace Xamarin_Forms_demo.Views
         public ChatPage()
         {
             InitializeComponent();
+            Title = "梁子";
         }
 
         private async void OnEnterContactsAsync(object sender, EventArgs e)
