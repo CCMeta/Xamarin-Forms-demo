@@ -6,17 +6,16 @@ using Xamarin.Forms;
 namespace Xamarin_Forms_demo.Views
 {
     [DesignTimeVisible(false)]
-    public partial class ChatsPage : ContentPage
+    public partial class ChatPage : ContentPage
     {
-        public ChatsPage()
+        public ChatPage()
         {
             InitializeComponent();
         }
 
         private async void OnEnterContactsAsync(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ChatPage());
-            //await Navigation.PushAsync(new ContactsPage());
+            await Navigation.PushAsync(new ContactsPage());
         }
     }
 }

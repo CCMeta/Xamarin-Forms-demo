@@ -50,6 +50,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\SNSPages\ChatPage.xaml.cs">
+      <DependentUpon>ChatPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SNSPages\SNSTabbedPage.xaml.cs">
       <DependentUpon>SNSTabbedPage.xaml</DependentUpon>
     </Compile>
