@@ -23,9 +23,16 @@ namespace Xamarin_Forms_demo.Services
                 var newMessage = $"{user}: {message}";
                 Console.WriteLine(newMessage);
             });
+            connection.On<string, string>("SendMessage", (user, message) =>
+            {
+                Console.WriteLine("ChatHub SendMessage OnConnectedAsync");
+                var newMessage = $"{user}: {message}";
+                Console.WriteLine(newMessage);
+            });
             try
             {
                 Task.Run(async () => await connection.StartAsync()).Wait();
+                Task.Run(() => sendButton_Click());
             }
             catch (Exception ex)
             {

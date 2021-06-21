@@ -11,10 +11,18 @@ namespace Xamarin_Forms_demo_api.Services
 
         public override async Task OnConnectedAsync()
         {
-            await base.OnConnectedAsync();
-            Console.WriteLine("ChatHubOnConnectedAsync");
+            Console.WriteLine("ChatHubOnConnectedAsync"+Context.User);
             await Clients.All.SendAsync("ReceiveMessage","fuck");
-            //await Groups.AddToGroupAsync(Context.ConnectionId, "SignalR Users");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            await base.OnConnectedAsync();
         }
 
         public override Task OnDisconnectedAsync(Exception exception)
@@ -24,7 +32,7 @@ namespace Xamarin_Forms_demo_api.Services
 
         public Task SendMessage(string user, string message)
         {
-            return Clients.All.SendAsync("ReceiveMessage", user, message);
+            return Clients.All.SendAsync("ReceiveMessage", user+"fuck", message);
         }
 
         public Task SendMessageToCaller(string user, string message)
