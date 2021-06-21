@@ -3,11 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin_Forms_demo_api.Models;
 
 namespace Xamarin_Forms_demo_api.Services
 {
     public class ChatHub : Hub
     {
+        public readonly Dictionary<MessageType, Action<string, string>> _mapper;
+        private readonly ContactsRepository _ContactsRepository;
+
+        public ChatHub(ContactsRepository ContactsRepository)
+        {
+            _ContactsRepository = ContactsRepository;
+        }
+
         public override async Task OnConnectedAsync()
         {
             Console.WriteLine("ChatHubOnConnectedAsync" + Context.User);
@@ -19,10 +28,22 @@ namespace Xamarin_Forms_demo_api.Services
             return base.OnDisconnectedAsync(exception);
         }
 
-        public Task SendMessage(string user, string message)
+        public async Task<Task> OnEventOnline(string user, string message)
         {
-            Console.WriteLine(Context.UserIdentifier);
-            return Clients.All.SendAsync("ReceiveMessage", user, message + $"{Context.UserIdentifier}");
+            //select users
+            var contacts = await _ContactsRepository.GetList(int.Parse(Context.UserIdentifier));
+            var users = contacts.Select(i => i.partner_id.ToString()).ToList();
+            Console.WriteLine("[fuck] Start OnEventOnline");
+            return SendAsync(MessageType.OnEventOnline.ToString(), user, message, users);
+        }
+
+        private Task SendAsync(string messageType, string user, string message, List<string> users = null)
+        {
+            if (users is not null)
+            {
+                return Clients.Users(users).SendAsync(messageType, user, message + $"UserIdentifier = {Context.UserIdentifier}");
+            }
+            return Clients.All.SendAsync(messageType, user, message + $"UserIdentifier = {Context.UserIdentifier}");
         }
 
         public Task SendMessageToCaller(string user, string message)
@@ -34,5 +55,11 @@ namespace Xamarin_Forms_demo_api.Services
         {
             return Clients.Group("SignalR Users").SendAsync("ReceiveMessage", user, message);
         }
+    }
+
+    public enum MessageType
+    {
+        OnEventOnline,
+        OnEventChatSend
     }
 }

@@ -7,7 +7,7 @@ namespace Xamarin_Forms_demo.Services
 {
     public class ChatHub
     {
-        HubConnection connection;
+        private readonly HubConnection connection;
 
         public ChatHub(string url, string _myAccessToken)
         {
@@ -17,12 +17,16 @@ namespace Xamarin_Forms_demo.Services
             }).Build();
 
             connection.Closed += OnConnectionClosed();
-            connection.On("ReceiveMessage", OnReceiveMessage());
+
+            foreach (var item in Enum.GetValues(typeof(MessageType)))
+            {
+                connection.On(item.ToString(), OnReceiveMessage());
+            }
 
             try
             {
                 Task.Run(async () => await connection.StartAsync()).Wait();
-                Task.Run(() => SendMessage());
+                Task.Run(() => SendMessage(MessageType.OnEventOnline, "", "")); // i am online !
             }
             catch (Exception ex)
             {
@@ -39,19 +43,25 @@ namespace Xamarin_Forms_demo.Services
             };
         }
 
-        private static Action<string, string> OnReceiveMessage()
+        private Action<string, string> OnReceiveMessage()
         {
             return (user, message) =>
             {
-                Console.WriteLine("ChatHub ReceiveMessage OnConnectedAsync");
-                var newMessage = $"{user}: {message}";
+                var newMessage = $"fuck{user}: {message}";
                 Console.WriteLine(newMessage);
             };
         }
 
-        private async void SendMessage()
+        private async void SendMessage(MessageType messageType, string user, string message)
         {
-            await connection.InvokeAsync("SendMessage", "content", "content2");
+            await connection.InvokeAsync(messageType.ToString(), user, message);
         }
     }
+
+    public enum MessageType
+    {
+        OnEventOnline,
+        OnEventChatSend
+    }
+
 }
