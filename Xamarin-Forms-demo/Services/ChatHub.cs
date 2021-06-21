@@ -13,7 +13,7 @@ namespace Xamarin_Forms_demo.Services
         {
             connection = new HubConnectionBuilder().WithUrl(url, options =>
             {
-                options.AccessTokenProvider = () => Task.FromResult(_myAccessToken);
+                options.Headers.Add("Authorization", _myAccessToken);
             }).Build();
 
             connection.Closed += OnConnectionClosed();
