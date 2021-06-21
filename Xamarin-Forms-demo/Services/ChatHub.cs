@@ -9,29 +9,13 @@ namespace Xamarin_Forms_demo.Services
     {
         HubConnection connection;
 
-        public ChatHub(string _myAccessToken)
+        public ChatHub(string url, string token)
         {
-            connection = new HubConnectionBuilder().WithUrl("https://xamarin.ccmeta.com/chathub", options =>
-            {
-                options.AccessTokenProvider = () => Task.FromResult(_myAccessToken);
-            }).Build();
-            connection.Closed += async (error) =>
-            {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await connection.StartAsync();
-            };
-            connection.On<string, string>("ReceiveMessage", (user, message) =>
-            {
-                Console.WriteLine("ChatHub ReceiveMessage OnConnectedAsync");
-                var newMessage = $"{user}: {message}";
-                Console.WriteLine(newMessage);
-            });
-            connection.On<string, string>("SendMessage", (user, message) =>
-            {
-                Console.WriteLine("ChatHub SendMessage OnConnectedAsync");
-                var newMessage = $"{user}: {message}";
-                Console.WriteLine(newMessage);
-            });
+            connection = new HubConnectionBuilder().WithUrl(url).Build();
+
+            connection.Closed += OnConnectionClosed();
+            connection.On("ReceiveMessage", OnReceiveMessage());
+
             try
             {
                 Task.Run(async () => await connection.StartAsync()).Wait();
@@ -41,6 +25,25 @@ namespace Xamarin_Forms_demo.Services
             {
                 throw ex;
             }
+        }
+
+        private Func<Exception, Task> OnConnectionClosed()
+        {
+            return async (error) =>
+            {
+                await Task.Delay(new Random().Next(0, 5) * 1000);
+                await connection.StartAsync();
+            };
+        }
+
+        private static Action<string, string> OnReceiveMessage()
+        {
+            return (user, message) =>
+            {
+                Console.WriteLine("ChatHub ReceiveMessage OnConnectedAsync");
+                var newMessage = $"{user}: {message}";
+                Console.WriteLine(newMessage);
+            };
         }
 
         private async void SendMessage()

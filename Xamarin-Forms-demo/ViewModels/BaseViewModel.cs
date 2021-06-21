@@ -55,17 +55,12 @@ namespace Xamarin_Forms_demo.ViewModels
                 return;
             var identity = new Users { username = username, password = password };
 
-            var user = Task.Run(async () =>
-                 await HttpRequest.PostAsync("/api/token", identity)
-            ).Result;
-            if (!string.IsNullOrEmpty(user.username))
-            {
-                HttpRequest.Token = user.token;
-                Me = user;
-                _chatHub = new ChatHub(Me.id.ToString());
-                return;
-            }
-            throw new Exception($"No token responsed result = {user}");
+            var user = Task.Run(async () => await HttpRequest.PostAsync("/api/token", identity)).Result;
+            if (string.IsNullOrEmpty(user.username))
+                throw new Exception($"No token responsed result = {user}");
+            HttpRequest.Token = user.token;
+            Me = user;
+            _chatHub = new ChatHub(AppConfiguration.GetValue<string>("Host") + "/chathub", Me.token);
         }
 
         //Tookit region begin
