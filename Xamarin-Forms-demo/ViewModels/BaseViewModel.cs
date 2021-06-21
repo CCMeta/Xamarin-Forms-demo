@@ -12,6 +12,7 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
+        private readonly static ChatHub _chatHub = new ChatHub();
         //public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         private readonly static IConfiguration _appConfiguration = Services.AppConfiguration.GetInstence();
         public static IConfiguration AppConfiguration => _appConfiguration;

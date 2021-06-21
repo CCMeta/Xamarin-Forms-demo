@@ -8,6 +8,7 @@ using Xamarin_Forms_demo_api.Models;
 using System.Text.Encodings.Web;
 using Xamarin_Forms_demo_api.Services;
 using System.Reflection;
+using System;
 
 namespace Xamarin_Forms_demo_api
 {
@@ -35,6 +36,7 @@ namespace Xamarin_Forms_demo_api
                 .AddTransient<ChatsRepository>()
                 .AddTransient<UsersRepository>()
                 .AddTransient<PostsRepository>();
+            services.AddSignalR();
             services.AddHttpContextAccessor();
             services.AddControllers().AddJsonOptions(options =>
             {
@@ -68,24 +70,26 @@ namespace Xamarin_Forms_demo_api
             //SESSION 
             app.UseMiddleware<AuthMiddleware>();
             //SESSION CHECK
-            app.UseWhen(context => !context.Request.Path.Value.ToLower().Contains("/token"), static (IApplicationBuilder app) =>
-              {
-                  app.Use(async (context, next) =>
-                  {
-                      if (!context.Items.ContainsKey("uid"))
-                      {
-                          context.Response.StatusCode = 401;
-                          await context.Response.CompleteAsync();
-                      }
-                      else
-                      {
-                          await next.Invoke();
-                      }
-                  });
-              });
+            app.UseWhen(context => context.Request.Path.Value.ToLower().Contains("/api") && context.Request.Path.Value.ToLower() != "/api/token",
+                static (IApplicationBuilder app) =>
+            {
+                app.Use(async (context, next) =>
+                {
+                    if (!context.Items.ContainsKey("uid"))
+                    {
+                        context.Response.StatusCode = 401;
+                        await context.Response.CompleteAsync();
+                    }
+                    else
+                    {
+                        await next.Invoke();
+                    }
+                });
+            });
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chathub");
                 endpoints.MapControllers();
             });
         }
