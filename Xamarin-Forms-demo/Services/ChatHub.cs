@@ -9,9 +9,12 @@ namespace Xamarin_Forms_demo.Services
     {
         HubConnection connection;
 
-        public ChatHub()
+        public ChatHub(string _myAccessToken)
         {
-            connection = new HubConnectionBuilder().WithUrl("https://xamarin.ccmeta.com/chathub").Build();
+            connection = new HubConnectionBuilder().WithUrl("https://xamarin.ccmeta.com/chathub", options =>
+            {
+                options.AccessTokenProvider = () => Task.FromResult(_myAccessToken);
+            }).Build();
             connection.Closed += async (error) =>
             {
                 await Task.Delay(new Random().Next(0, 5) * 1000);
@@ -32,7 +35,7 @@ namespace Xamarin_Forms_demo.Services
             try
             {
                 Task.Run(async () => await connection.StartAsync()).Wait();
-                Task.Run(() => sendButton_Click());
+                Task.Run(() => SendMessage());
             }
             catch (Exception ex)
             {
@@ -40,16 +43,7 @@ namespace Xamarin_Forms_demo.Services
             }
         }
 
-        private async void connectButton_Click()
-        {
-            connection.On<string, string>("ReceiveMessage", (user, message) =>
-            {
-                var newMessage = $"{user}: {message}";
-                Console.WriteLine(newMessage);
-            });
-        }
-
-        private async void sendButton_Click()
+        private async void SendMessage()
         {
             await connection.InvokeAsync("SendMessage", "content", "content2");
         }

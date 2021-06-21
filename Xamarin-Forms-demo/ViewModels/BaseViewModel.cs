@@ -12,7 +12,7 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        private readonly static ChatHub _chatHub = new ChatHub();
+        public static ChatHub _chatHub;
         //public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         private readonly static IConfiguration _appConfiguration = Services.AppConfiguration.GetInstence();
         public static IConfiguration AppConfiguration => _appConfiguration;
@@ -46,6 +46,7 @@ namespace Xamarin_Forms_demo.ViewModels
             var username = AppConfiguration.GetValue<string>("Identity:Username");
             var password = AppConfiguration.GetValue<string>("Identity:Password");
             Login(username, password);
+
         }
 
         protected void Login(string username, string password)
@@ -61,6 +62,7 @@ namespace Xamarin_Forms_demo.ViewModels
             {
                 HttpRequest.Token = user.token;
                 Me = user;
+                _chatHub = new ChatHub(Me.id.ToString());
                 return;
             }
             throw new Exception($"No token responsed result = {user}");

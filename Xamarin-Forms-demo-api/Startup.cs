@@ -9,6 +9,7 @@ using System.Text.Encodings.Web;
 using Xamarin_Forms_demo_api.Services;
 using System.Reflection;
 using System;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Xamarin_Forms_demo_api
 {
@@ -36,6 +37,7 @@ namespace Xamarin_Forms_demo_api
                 .AddTransient<ChatsRepository>()
                 .AddTransient<UsersRepository>()
                 .AddTransient<PostsRepository>();
+            services.AddSingleton(typeof(IUserIdProvider), typeof(ChatHubUserProvider));
             services.AddSignalR();
             services.AddHttpContextAccessor();
             services.AddControllers().AddJsonOptions(options =>
@@ -63,6 +65,7 @@ namespace Xamarin_Forms_demo_api
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
             //app.UseResponseCaching();
             //app.UseResponseCompression();
             //app.UseStaticFiles();

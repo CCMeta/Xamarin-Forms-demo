@@ -11,17 +11,7 @@ namespace Xamarin_Forms_demo_api.Services
 
         public override async Task OnConnectedAsync()
         {
-            Console.WriteLine("ChatHubOnConnectedAsync"+Context.User);
-            await Clients.All.SendAsync("ReceiveMessage","fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
-            await Clients.Caller.SendAsync("ReceiveMessage", "fuck");
+            Console.WriteLine("ChatHubOnConnectedAsync" + Context.User);
             await base.OnConnectedAsync();
         }
 
@@ -32,7 +22,10 @@ namespace Xamarin_Forms_demo_api.Services
 
         public Task SendMessage(string user, string message)
         {
-            return Clients.All.SendAsync("ReceiveMessage", user+"fuck", message);
+            Console.WriteLine(Context.UserIdentifier);
+            Console.WriteLine(Context.User.Identities.Count());
+            Console.WriteLine(Context.User.Claims.Count());
+            return Clients.All.SendAsync("ReceiveMessage", user, message + $"{Context.UserIdentifier}");
         }
 
         public Task SendMessageToCaller(string user, string message)
