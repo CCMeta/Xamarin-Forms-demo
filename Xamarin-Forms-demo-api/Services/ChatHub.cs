@@ -8,7 +8,6 @@ namespace Xamarin_Forms_demo_api.Services
 {
     public class ChatHub : Hub
     {
-
         public override async Task OnConnectedAsync()
         {
             Console.WriteLine("ChatHubOnConnectedAsync" + Context.User);
@@ -23,8 +22,6 @@ namespace Xamarin_Forms_demo_api.Services
         public Task SendMessage(string user, string message)
         {
             Console.WriteLine(Context.UserIdentifier);
-            Console.WriteLine(Context.User.Identities.Count());
-            Console.WriteLine(Context.User.Claims.Count());
             return Clients.All.SendAsync("ReceiveMessage", user, message + $"{Context.UserIdentifier}");
         }
 

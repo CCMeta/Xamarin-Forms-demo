@@ -37,7 +37,7 @@ namespace Xamarin_Forms_demo_api
                 .AddTransient<ChatsRepository>()
                 .AddTransient<UsersRepository>()
                 .AddTransient<PostsRepository>();
-            services.AddSingleton(typeof(IUserIdProvider), typeof(ChatHubUserProvider));
+            services.AddSingleton<IUserIdProvider, ChatHubUserProvider>();
             services.AddSignalR();
             services.AddHttpContextAccessor();
             services.AddControllers().AddJsonOptions(options =>

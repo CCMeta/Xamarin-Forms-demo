@@ -9,9 +9,12 @@ namespace Xamarin_Forms_demo.Services
     {
         HubConnection connection;
 
-        public ChatHub(string url, string token)
+        public ChatHub(string url, string _myAccessToken)
         {
-            connection = new HubConnectionBuilder().WithUrl(url).Build();
+            connection = new HubConnectionBuilder().WithUrl(url, options =>
+            {
+                options.AccessTokenProvider = () => Task.FromResult(_myAccessToken);
+            }).Build();
 
             connection.Closed += OnConnectionClosed();
             connection.On("ReceiveMessage", OnReceiveMessage());
