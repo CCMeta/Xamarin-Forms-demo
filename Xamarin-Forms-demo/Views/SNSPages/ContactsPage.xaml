@@ -37,7 +37,7 @@
                                         <Label Text="{Binding nickname}" FontSize="Body" TextColor="Black"/>
                                         <Label Text="{Binding intro}" LineBreakMode="NoWrap" FontSize="Caption"/>
                                     </StackLayout>
-                                    <Label FontSize="Caption" Text="在线" LineBreakMode="NoWrap" BackgroundColor="Transparent"
+                                    <Label FontSize="Caption" Text="{Binding state}" LineBreakMode="NoWrap" BackgroundColor="Transparent"
                            TextColor="Green" HorizontalOptions="EndAndExpand"/>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">

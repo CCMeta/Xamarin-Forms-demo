@@ -19,7 +19,7 @@ namespace Xamarin_Forms_demo_api.Services
 
         public override async Task OnConnectedAsync()
         {
-            Console.WriteLine("ChatHubOnConnectedAsync" + Context.User);
+            Console.WriteLine($"[fuck]{Context.UserIdentifier} is OnConnectedAsync");
             await base.OnConnectedAsync();
         }
 
@@ -31,19 +31,18 @@ namespace Xamarin_Forms_demo_api.Services
         public async Task<Task> OnEventOnline(string user, string message)
         {
             //select users
-            var contacts = await _ContactsRepository.GetList(int.Parse(Context.UserIdentifier));
+            var callerId = Context.UserIdentifier;
+            var contacts = await _ContactsRepository.GetList(int.Parse(callerId));
             var users = contacts.Select(i => i.partner_id.ToString()).ToList();
-            Console.WriteLine("[fuck] Start OnEventOnline");
-            return SendAsync(MessageType.OnEventOnline.ToString(), user, message, users);
+            Console.WriteLine($"[fuck]{Context.UserIdentifier} is Start OnEventOnline user={user} message={message}");
+            return SendAsync(MessageType.OnEventOnline.ToString(), callerId, message, users);
         }
 
         private Task SendAsync(string messageType, string user, string message, List<string> users = null)
         {
             if (users is not null)
-            {
-                return Clients.Users(users).SendAsync(messageType, user, message + $"UserIdentifier = {Context.UserIdentifier}");
-            }
-            return Clients.All.SendAsync(messageType, user, message + $"UserIdentifier = {Context.UserIdentifier}");
+                return Clients.Users(users).SendAsync(messageType, user, message);
+            return Clients.All.SendAsync(messageType, user, message);
         }
 
         public Task SendMessageToCaller(string user, string message)

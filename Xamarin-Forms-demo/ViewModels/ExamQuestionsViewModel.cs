@@ -35,10 +35,7 @@ namespace Xamarin_Forms_demo.ViewModels
             get => duration;
             set
             {
-                if (SetProperty(ref duration, value))
-                {
-                    OnPropertyChanged();
-                }
+                SetProperty(ref duration, value);
             }
         }
 

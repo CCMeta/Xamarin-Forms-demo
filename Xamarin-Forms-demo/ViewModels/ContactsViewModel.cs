@@ -29,16 +29,24 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public ContactsViewModel() : base()
         {
-            Title = "通讯录";
-            GetListCommand = new Command(() =>
-            {
-                GetListAsync();
-            });
+
+            MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventOnline.ToString(),
+                (sender, arg) => OnEventOnlinehandler(arg.Key, arg.Value));
+
+            GetListCommand = new Command(() => GetListAsync());
+        }
+
+        private void OnEventOnlinehandler(string caller, string message)
+        {
+            var item = Contacts.FirstOrDefault(i => i.partner_id == int.Parse(caller));
+            var index = Contacts.IndexOf(item);
+            item.state = message;
+            Contacts[index] = item;
         }
 
         public async void GetListAsync()
         {
-            var queryParams = new Dictionary<string, string>() {};
+            var queryParams = new Dictionary<string, string>() { };
             using var _ = HttpRequest.GetAsync<ObservableCollection<Contacts>>(path, queryParams: queryParams);
             Contacts = await _;
             IsBusy = false;
