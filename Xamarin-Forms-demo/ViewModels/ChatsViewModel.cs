@@ -40,17 +40,22 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public ChatsViewModel(Contacts partner) : base()
         {
-            Title = "聊天会话";
             _partner = partner;
             GetListCommand = new Command(() =>
             {
                 GetListAsync();
             });
+
+            MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(), (sender, arg) => OnEventChatSendhandler(arg.Key, arg.Value));
         }
 
         public async void GetListAsync()
         {
-            var queryParams = new Dictionary<string, string>() { { "partner_id", _partner.partner_id.ToString() } };
+            var max_id = Chats.LastOrDefault() is null ? 0 : Chats.LastOrDefault().id;
+            var queryParams = new Dictionary<string, string>() {
+                { "partner_id", _partner.partner_id.ToString() },
+                { "max_id", max_id.ToString() },
+            };
             using var _ = HttpRequest.GetAsync<ObservableCollection<Chats>>(path, queryParams: queryParams);
             Chats = await _;
             IsBusy = false;
@@ -73,5 +78,10 @@ namespace Xamarin_Forms_demo.ViewModels
             return false;
         }
 
+        private void OnEventChatSendhandler(string caller, string message)
+        {
+            //go update this partner chat log;
+            GetListAsync();
+        }
     }
 }
