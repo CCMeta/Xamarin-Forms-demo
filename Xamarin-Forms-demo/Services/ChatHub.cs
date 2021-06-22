@@ -16,6 +16,7 @@ namespace Xamarin_Forms_demo.Services
         {
             connection = new HubConnectionBuilder().WithUrl(url, options =>
             {
+                //options.AccessTokenProvider = () => Task.FromResult(_myAccessToken);
                 options.Headers.Add("Authorization", _myAccessToken);
             }).Build();
             connection.Closed += OnConnectionClosed();
@@ -31,7 +32,8 @@ namespace Xamarin_Forms_demo.Services
             try
             {
                 Task.Run(async () => await connection.StartAsync()).Wait();
-                Task.Run(() => SendMessage(MessageType.OnEventOnline, "", "online")); // i am online !
+                // no need call from client i am whoops.
+                //Task.Run(() => SendMessage(MessageType.OnEventOnline, "", "online")); // i am online !
             }
             catch (Exception Exception)
             {
@@ -59,10 +61,9 @@ namespace Xamarin_Forms_demo.Services
 
         private Action<string, string> OnEventChatSend()
         {
-            return (user, message) =>
+            return (caller, message) =>
             {
-                var newMessage = $"fuck{user}: {message}";
-                Console.WriteLine(newMessage);
+                MessagingCenter.Send(this, MessageType.OnEventChatSend.ToString(), KeyValuePair.Create(caller, message));
             };
         }
 
@@ -70,14 +71,7 @@ namespace Xamarin_Forms_demo.Services
         {
             return (caller, message) =>
             {
-                var newMessage = $"fuck{caller}: {message}";
-                // go update caller online state
                 MessagingCenter.Send(this, MessageType.OnEventOnline.ToString(), KeyValuePair.Create(caller, message));
-                if (message == "online")
-                {
-                    // this is online not offline
-                }
-                //Console.WriteLine(newMessage);
             };
         }
 

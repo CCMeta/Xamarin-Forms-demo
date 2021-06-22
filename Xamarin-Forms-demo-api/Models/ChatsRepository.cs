@@ -14,7 +14,7 @@ namespace Xamarin_Forms_demo_api.Models
         public async Task<IEnumerable<Chats>> GetList(int uid, int partner_id)
         {
             //select two guys send messages, so we use 2 condition for where 
-            string sql = "SELECT * FROM chats LEFT JOIN users ON users.id = chats.uid WHERE (chats.uid = @uid AND chats.partner_id = @partner_id) OR (chats.uid = @partner_id AND chats.partner_id = @uid)";
+            string sql = "( SELECT chats.*,users.nickname,users.avatar,users.intro FROM chats LEFT JOIN users ON users.id = chats.uid WHERE ( chats.uid = @uid AND chats.partner_id = @partner_id ) OR ( chats.uid = @partner_id AND chats.partner_id = @uid ) ORDER BY id DESC LIMIT 10 ) ORDER BY id";
             return await WithConnection(async conn =>
             {
                 return await conn.QueryAsync<Chats>(sql, new { uid, partner_id });

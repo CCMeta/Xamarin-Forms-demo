@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,8 @@ namespace Xamarin_Forms_demo_api.Services
 
         public override async Task OnConnectedAsync()
         {
-            Console.WriteLine($"[fuck]{Context.UserIdentifier} is OnConnectedAsync");
+            Console.WriteLine($"[fuck] user:{Context.UserIdentifier} is OnConnectedAsync");
+            await await OnEventOnline(Context.UserIdentifier, "online"); // call for contacts i am online
             await base.OnConnectedAsync();
         }
 
@@ -28,21 +30,29 @@ namespace Xamarin_Forms_demo_api.Services
             return base.OnDisconnectedAsync(exception);
         }
 
-        public async Task<Task> OnEventOnline(string user, string message)
+        public async Task<Task> OnEventOnline(string caller, string message)
         {
             //select users
-            var callerId = Context.UserIdentifier;
-            var contacts = await _ContactsRepository.GetList(int.Parse(callerId));
-            var users = contacts.Select(i => i.partner_id.ToString()).ToList();
-            Console.WriteLine($"[fuck]{Context.UserIdentifier} is Start OnEventOnline user={user} message={message}");
-            return SendAsync(MessageType.OnEventOnline.ToString(), callerId, message, users);
+            var contacts = await _ContactsRepository.GetList(int.Parse(caller));
+            List<string> users = contacts.Select(i => i.partner_id.ToString()).ToList();
+            Console.WriteLine($"[fuck] UserIdentifier={Context.UserIdentifier} is Start OnEventOnline caller={caller} message={message}");
+            return SendAsync(MessageType.OnEventOnline.ToString(), caller, message, users);
         }
 
-        private Task SendAsync(string messageType, string user, string message, List<string> users = null)
+        public async Task<Task> OnEventChatSend(string caller, string partner, string message)
+        {
+            //select users
+            Console.WriteLine($"[fuck] UserIdentifier={Context.UserIdentifier} is Start OnEventChatSend caller={caller} message={message}");
+            var contacts = await _ContactsRepository.GetByPartnerId(int.Parse(caller), int.Parse(partner));
+            var users = contacts.Select(i => i.partner_id.ToString()).ToList();
+            return SendAsync(MessageType.OnEventChatSend.ToString(), caller, message, users);
+        }
+
+        private Task SendAsync(string messageType, string caller, string message, List<string> users = null)
         {
             if (users is not null)
-                return Clients.Users(users).SendAsync(messageType, user, message);
-            return Clients.All.SendAsync(messageType, user, message);
+                return Clients.Users(users).SendAsync(messageType, caller, message);
+            return Clients.All.SendAsync(messageType, caller, message);
         }
 
         public Task SendMessageToCaller(string user, string message)

@@ -15,12 +15,14 @@ namespace Xamarin_Forms_demo_api.Controllers
     public class ChatsController : DefaultController
     {
         private readonly IHubContext<ChatHub> _chatHubContext;
+        private readonly ChatHub _chatHub;
         private readonly ChatsRepository _chatsRepository;
 
-        public ChatsController(IHubContext<ChatHub> chatHubContext,
+        public ChatsController(IHubContext<ChatHub> chatHubContext, ChatHub chatHub,
             ChatsRepository chatsRepository, IHttpContextAccessor context) : base(context)
         {
             _chatHubContext = chatHubContext;
+            _chatHub = chatHub;
             _chatsRepository = chatsRepository;
         }
 
@@ -49,8 +51,13 @@ namespace Xamarin_Forms_demo_api.Controllers
             {
                 return BadRequest(chat);
             }
-            await _chatHubContext.Clients.All.SendAsync("Notify", $"Home page loaded at: {DateTime.Now}");
             var lastInsertItem = await _chatsRepository.Get(_uid, lastInsertId);
+
+            //send to partner if he is online
+            //await _chatHubContext.Clients.All.SendAsync("Notify", $"Home page loaded at: {DateTime.Now}");
+            _ = Task.Run(async () =>
+                  await await _chatHub.OnEventChatSend(_uid.ToString(), lastInsertItem.partner_id.ToString(), MessageType.OnEventChatSend.ToString()));
+
             return Ok(lastInsertItem);
         }
 
