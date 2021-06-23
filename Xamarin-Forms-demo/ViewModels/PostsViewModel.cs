@@ -35,6 +35,7 @@ namespace Xamarin_Forms_demo.ViewModels
             {
                 GetListAsync();
             });
+            var _ = new BaseRepository();
         }
 
         public async void GetListAsync()
