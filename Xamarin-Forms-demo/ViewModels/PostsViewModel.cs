@@ -20,17 +20,7 @@ namespace Xamarin_Forms_demo.ViewModels
         public MyStack<Posts> Posts
         {
             get { return posts; }
-            set
-            {
-                //var fuck = posts;
-                foreach (var item in value)
-                {
-                    //posts.Add(item);// 
-                    posts.MyPush(item);
-                }
-                //SetProperty(ref posts, value);
 
-            }
         }
 
         public ICommand GetListCommand { protected set; get; }
@@ -52,7 +42,8 @@ namespace Xamarin_Forms_demo.ViewModels
             var queryParams = new Dictionary<string, string>() {
                     { "p",maxId.ToString() }
             };
-            Posts = await HttpRequest.GetAsync<MyStack<Posts>>(path, queryParams: queryParams);
+            var result = await HttpRequest.GetAsync<List<Posts>>(path, queryParams: queryParams);
+            posts.MyPushRange(result);
             IsBusy = false;
         }
 
@@ -83,14 +74,17 @@ namespace Xamarin_Forms_demo.ViewModels
         {
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, q));
         }
-        public void MyPush(T q)
+        public void MyPushRange(IEnumerable<T> range)
         {
-            base.Push(q);
+            foreach (var i in range)
+            {
+                base.Push(i);
+            }
             //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(T)));
 
             OnCountPropertyChanged();
             OnIndexerPropertyChanged();
-            OnCollectionChanged(NotifyCollectionChangedAction.Add, q);
+            OnCollectionChanged(NotifyCollectionChangedAction.Add, range);
         }
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {

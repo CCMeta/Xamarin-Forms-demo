@@ -35,7 +35,7 @@
         </StackLayout>
          <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
             <CollectionView  x:Name="collectionView" ItemsSource="{Binding Posts}" VerticalScrollBarVisibility="Always" 
-                             ItemsUpdatingScrollMode="KeepLastItemInView">
+                             ItemsUpdatingScrollMode="KeepScrollOffset">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame BorderColor="Transparent" HasShadow="False" BackgroundColor="#EEE" Padding="0" Margin="0">
