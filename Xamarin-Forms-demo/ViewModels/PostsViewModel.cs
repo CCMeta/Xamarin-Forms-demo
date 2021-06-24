@@ -16,11 +16,17 @@ namespace Xamarin_Forms_demo.ViewModels
     {
 
         private readonly string path = "/api/posts";
-        public MyStack<Posts> posts = new MyStack<Posts>();
-        public MyStack<Posts> Posts
+        public List<Posts> posts = new List<Posts>();
+        public List<Posts> Posts
         {
             get { return posts; }
-
+            set
+            {
+                posts.Reverse();
+                posts.AddRange(value);
+                posts.Reverse();
+                SetProperty(ref posts, posts);
+            }
         }
 
         public ICommand GetListCommand { protected set; get; }
@@ -37,13 +43,13 @@ namespace Xamarin_Forms_demo.ViewModels
         public async void GetListAsync()
         {
             //int maxId = Posts.Count > 0 ? Posts[0].id : 0;
-            int maxId = Posts.Count > 0 ? posts.Peek().id : 0;
+            int maxId = Posts.Count > 0 ? posts[0].id : 0;
 
             var queryParams = new Dictionary<string, string>() {
                     { "p",maxId.ToString() }
             };
-            var result = await HttpRequest.GetAsync<List<Posts>>(path, queryParams: queryParams);
-            posts.MyPushRange(result);
+            Posts = await HttpRequest.GetAsync<List<Posts>>(path, queryParams: queryParams);
+            //posts.MyPushRange(result);
             IsBusy = false;
         }
 

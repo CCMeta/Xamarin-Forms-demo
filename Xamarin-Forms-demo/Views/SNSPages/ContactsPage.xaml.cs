@@ -14,9 +14,10 @@ namespace Xamarin_Forms_demo.Views
         public ContactsPage()
         {
             InitializeComponent();
-            BindingContext = _contactsViewModel = new ContactsViewModel();
-            IsBusy = true;
-            _contactsViewModel.GetListAsync();
+            collectionView.BindingContext = ContactsViewModel.Contacts;
+            //BindingContext = _contactsViewModel = new ContactsViewModel();
+            //IsBusy = true;
+            //_contactsViewModel.GetListAsync();
         }
 
         protected override void OnAppearing()

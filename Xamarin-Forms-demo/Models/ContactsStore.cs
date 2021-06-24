@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace Xamarin_Forms_demo.Models
 {
-    public class ChatSessionsStore : BaseStore
+    public class ContactsStore : BaseStore
     {
 
-        public ChatSessionsStore()
+        public ContactsStore()
         {
             Task.Run(async () =>
             {
-                if (db.TableMappings.Count(i => i.TableName == "ChatSessions") < 1)
-                    await db.CreateTableAsync<ChatSessions>();
+                if (db.TableMappings.Count(i => i.TableName == nameof(Contacts)) < 1)
+                    await db.CreateTableAsync<Contacts>();
 
                 await SaveAsync(new ChatSessions() { Partner = 3, Unread = 2 });
                 var result = await ListAsync();

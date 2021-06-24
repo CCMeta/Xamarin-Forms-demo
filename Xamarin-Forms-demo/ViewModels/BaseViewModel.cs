@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -17,8 +18,8 @@ namespace Xamarin_Forms_demo.ViewModels
         private readonly static IConfiguration _appConfiguration = Services.AppConfiguration.GetInstence();
         public static IConfiguration AppConfiguration => _appConfiguration;
 
-        private readonly HttpRequest _httpRequest = new HttpRequest(AppConfiguration.GetValue<string>("Host"));
-        public HttpRequest HttpRequest { get => _httpRequest; }
+        private static readonly HttpRequest _httpRequest = new HttpRequest(AppConfiguration.GetValue<string>("Host"));
+        public static HttpRequest HttpRequest { get => _httpRequest; }
 
         private bool isBusy = false;
         public bool IsBusy
@@ -58,9 +59,16 @@ namespace Xamarin_Forms_demo.ViewModels
             var user = Task.Run(async () => await HttpRequest.PostAsync("/api/token", identity)).Result;
             if (string.IsNullOrEmpty(user.username))
                 throw new Exception($"No token responsed result = {user}");
+
+            //check success setting token 
             HttpRequest.Token = user.token;
             Me = user;
+
+            //init local message signalr
             _chatHub = new ChatHub(AppConfiguration.GetValue<string>("Host") + "/chathub", Me.token);
+
+            //init contacts
+            ContactsViewModel.GetListAsync();
         }
 
         //Tookit region begin

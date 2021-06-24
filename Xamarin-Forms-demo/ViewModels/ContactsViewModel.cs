@@ -12,9 +12,9 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class ContactsViewModel : BaseViewModel
     {
-        private readonly string path = "/api/contacts";
-        public ObservableCollection<Contacts> contacts = new ObservableCollection<Contacts>();
-        public ObservableCollection<Contacts> Contacts
+        private static readonly string path = "/api/contacts";
+        public static ObservableCollection<Contacts> contacts = new ObservableCollection<Contacts>();
+        public static ObservableCollection<Contacts> Contacts
         {
             get { return contacts; }
             set
@@ -25,9 +25,9 @@ namespace Xamarin_Forms_demo.ViewModels
                 }
             }
         }
-        public ICommand GetListCommand { protected set; get; }
+        public static ICommand GetListCommand { protected set; get; }
 
-        public ContactsViewModel() : base()
+        static ContactsViewModel()
         {
 
             MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventOnline.ToString(),
@@ -36,7 +36,7 @@ namespace Xamarin_Forms_demo.ViewModels
             GetListCommand = new Command(() => GetListAsync());
         }
 
-        private void OnEventOnlinehandler(string caller, string message)
+        private static void OnEventOnlinehandler(string caller, string message)
         {
             var item = Contacts.FirstOrDefault(i => i.partner_id == int.Parse(caller));
             var index = Contacts.IndexOf(item);
@@ -44,12 +44,11 @@ namespace Xamarin_Forms_demo.ViewModels
             Contacts[index] = item;
         }
 
-        public async void GetListAsync()
+        public static async void GetListAsync()
         {
             var queryParams = new Dictionary<string, string>() { };
             using var _ = HttpRequest.GetAsync<ObservableCollection<Contacts>>(path, queryParams: queryParams);
             Contacts = await _;
-            IsBusy = false;
         }
 
     }
