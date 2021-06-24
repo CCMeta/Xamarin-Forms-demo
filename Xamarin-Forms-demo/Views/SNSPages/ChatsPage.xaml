@@ -19,19 +19,26 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <StackLayout Spacing="1">
-        <Frame Padding="0" BackgroundColor="#EEE">
-            <StackLayout Padding="10" Margin="0,0,0,1" BackgroundColor="White">
-                <StackLayout Orientation="Horizontal">
-                    <Image WidthRequest="50" HeightRequest="50" Source="https://img9.doubanio.com/icon/ul56537265-26.jpg" Aspect="AspectFill"/>
-                    <StackLayout Padding="10,0">
-                        <Label Text="趙雲鵬" FontSize="Body" TextColor="Black"/>
-                        <Label Text="并不代表我没有输" LineBreakMode="NoWrap" FontSize="Caption"/>
-                    </StackLayout>
-                    <Label FontSize="Caption" Text="昨天" LineBreakMode="NoWrap" BackgroundColor="Transparent"
+
+    <CollectionView x:Name="collectionView" SelectionMode="Single" SelectionChanged="OnItemSelected" ItemsSource="{Binding ChatSessions}" VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <StackLayout Spacing="1">
+                    <Frame Padding="0" BackgroundColor="#EEE">
+                        <StackLayout Padding="10" Margin="0,0,0,1" BackgroundColor="White">
+                            <StackLayout Orientation="Horizontal">
+                                <Image WidthRequest="50" HeightRequest="50" Source="https://img9.doubanio.com/icon/ul56537265-26.jpg" Aspect="AspectFill"/>
+                                <StackLayout Padding="10,0">
+                                    <Label Text="趙雲鵬" FontSize="Body" TextColor="Black"/>
+                                    <Label Text="并不代表我没有输" LineBreakMode="NoWrap" FontSize="Caption"/>
+                                </StackLayout>
+                                <Label FontSize="Caption" Text="昨天" LineBreakMode="NoWrap" BackgroundColor="Transparent"
                            TextColor="Green" HorizontalOptions="EndAndExpand"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
                 </StackLayout>
-            </StackLayout>
-        </Frame>
-    </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentPage>

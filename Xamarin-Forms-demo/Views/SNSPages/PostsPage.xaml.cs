@@ -16,6 +16,9 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             BindingContext = _postsViewModel = new PostsViewModel();
+            //collectionView.RemainingItemsThresholdDirection;
+            //linearLayoutManager
+            //LinearItemsLayout.Vertical.
         }
 
         protected override void OnAppearing()

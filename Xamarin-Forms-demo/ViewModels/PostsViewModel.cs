@@ -14,28 +14,25 @@ namespace Xamarin_Forms_demo.ViewModels
     {
 
         private readonly string path = "/api/posts";
-        public ObservableCollection<Posts> posts = new ObservableCollection<Posts>();
-        public ObservableCollection<Posts> Posts
+        public List<Posts> posts = new List<Posts>();
+        public List<Posts> Posts
         {
-            get { return posts; }
+            get => posts;
             set
             {
-                foreach (var item in value)
-                {
-                    posts.Insert(0, item);
-                }
+                value.AddRange(posts);
+                SetProperty(ref posts, value);
             }
         }
         public ICommand GetListCommand { protected set; get; }
 
         public PostsViewModel() : base()
         {
-            Title = "Posts";
             GetListCommand = new Command(() =>
             {
                 GetListAsync();
             });
-            var _ = new BaseRepository();
+            var _ = new ChatSessionsStore();
         }
 
         public async void GetListAsync()
@@ -44,7 +41,7 @@ namespace Xamarin_Forms_demo.ViewModels
             var queryParams = new Dictionary<string, string>() {
                     { "p",maxId.ToString() }
             };
-            Posts = await HttpRequest.GetAsync<ObservableCollection<Posts>>(path, queryParams: queryParams);
+            Posts = await HttpRequest.GetAsync<List<Posts>>(path, queryParams: queryParams);
             IsBusy = false;
         }
 
