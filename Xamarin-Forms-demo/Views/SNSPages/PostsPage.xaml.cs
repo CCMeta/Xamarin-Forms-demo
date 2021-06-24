@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Linq;
 using Xamarin_Forms_demo.ViewModels;
+using System.Collections.ObjectModel;
+using Xamarin_Forms_demo.Models;
 
 namespace Xamarin_Forms_demo.Views
 {
@@ -30,7 +34,8 @@ namespace Xamarin_Forms_demo.Views
 
         async void OnPushPost(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new SendPostPage());
+            //await Navigation.PushAsync(new SendPostPage());
+            _postsViewModel.GetListAsync();
         }
         private void OnTypeButtonToggle(object sender, EventArgs e)
         {
@@ -46,6 +51,16 @@ namespace Xamarin_Forms_demo.Views
             boxView = (((Button)sender).Parent as StackLayout).Children[1] as BoxView;
             Console.WriteLine(boxView.ClassId);
             boxView.Color = Color.FromHex("#00cccc");
+        }
+    }
+
+    public class Fuck : CollectionView
+    {
+
+        public new IEnumerable ItemsSource
+        {
+            get => (IEnumerable)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, ((System.Collections.Generic.IEnumerable<Posts>)value).Reverse());
         }
     }
 }
