@@ -32,7 +32,8 @@ namespace Xamarin_Forms_demo.ViewModels
 
             MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventOnline.ToString(),
                 (sender, arg) => OnEventOnlinehandler(arg.Key, arg.Value));
-
+            //if OnEventChatSend and user at chat GUI,then should fresh
+            
             GetListCommand = new Command(() => GetListAsync());
         }
 

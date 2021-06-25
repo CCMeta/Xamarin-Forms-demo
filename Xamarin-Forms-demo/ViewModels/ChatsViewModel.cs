@@ -12,7 +12,7 @@ namespace Xamarin_Forms_demo.ViewModels
 {
     public class ChatsViewModel : BaseViewModel
     {
-        private readonly string path = "/api/chats";
+        private static readonly string path = "/api/chats";
         private readonly Contacts _partner;
         public ObservableCollection<Chats> chats = new ObservableCollection<Chats>();
         public ObservableCollection<Chats> Chats
@@ -46,11 +46,12 @@ namespace Xamarin_Forms_demo.ViewModels
                 GetListAsync();
             });
 
-            MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(), (sender, arg) => OnEventChatSendhandler(arg.Key, arg.Value));
+            MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(), (sender, arg) => OnEventChatSendHandler(arg.Key, arg.Value));
         }
 
         public async void GetListAsync()
         {
+            //this get is use local db
             var max_id = Chats.LastOrDefault() is null ? 0 : Chats.LastOrDefault().id;
             var queryParams = new Dictionary<string, string>() {
                 { "partner_id", _partner.partner_id.ToString() },
@@ -59,6 +60,31 @@ namespace Xamarin_Forms_demo.ViewModels
             using var _ = HttpRequest.GetAsync<ObservableCollection<Chats>>(path, queryParams: queryParams);
             Chats = await _;
             IsBusy = false;
+        }
+
+        public static async void GetListRemoteAsync(int partner)
+        {
+            //this get is use remote api
+            var db = new ChatsStore();
+            var chats = await db.ListAsync(partner);
+            var max_id = chats.LastOrDefault() is null ? 0 : chats.LastOrDefault().id;
+            var queryParams = new Dictionary<string, string>() {
+                { "partner_id", partner.ToString() },
+                { "max_id", max_id.ToString() },
+            };
+            var result = await HttpRequest.GetAsync<List<Chats>>(path, queryParams: queryParams);
+            foreach (var i in result)
+            {
+                await db.SaveAsync(i);
+            }
+        }
+
+        public static async void GetUnreadCountGroup()
+        {
+            var db = new ChatsStore();
+            var unread_list = await db.ListUnreadAsync();
+            unread_list.GroupBy(i=>i.partner_id);
+
         }
 
         public async Task<bool> PostAsync(int partner_id, string content)
@@ -78,9 +104,15 @@ namespace Xamarin_Forms_demo.ViewModels
             return false;
         }
 
-        private void OnEventChatSendhandler(string caller, string message)
+        private async void OnEventChatSendHandler(string caller, string message)
         {
+            var contact = ContactsViewModel.Contacts.FirstOrDefault(i => i.partner_id == int.Parse(caller));
+            if (contact is null)
+                return;
+            await new ChatSessionsStore().SaveAsync(contact);
             //go update this partner chat log;
+
+
             GetListAsync();
         }
     }

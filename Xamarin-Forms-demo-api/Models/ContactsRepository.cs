@@ -16,7 +16,7 @@ namespace Xamarin_Forms_demo_api.Models
 
         public async Task<IEnumerable<Contacts>> GetList(int uid)
         {
-            string sql = "SELECT * FROM contacts LEFT JOIN users ON users.id = contacts.partner_id WHERE contacts.uid = @uid";
+            string sql = "SELECT contacts.*, users.*,COUNT(chats.uid) as unread FROM `contacts` LEFT JOIN users ON contacts.partner_id = users.id left join chats on chats.uid = contacts.partner_id WHERE contacts.uid = @uid GROUP BY contacts.partner_id";
             return await WithConnection(async conn =>
             {
                 return await conn.QueryAsync<Contacts>(sql, new { uid });
@@ -25,7 +25,7 @@ namespace Xamarin_Forms_demo_api.Models
 
         public async Task<IEnumerable<Contacts>> GetByPartnerId(int uid, int partner_id)
         {
-            string sql = "SELECT * FROM contacts LEFT JOIN users ON users.id = contacts.partner_id WHERE contacts.uid = @uid AND contacts.partner_id = @partner_id";
+            string sql = "SELECT contacts.*, users.*,COUNT(chats.uid) as unread FROM `contacts` LEFT JOIN users ON contacts.partner_id = users.id left join chats on chats.uid = contacts.partner_id WHERE contacts.partner_id=@partner_id AND contacts.uid = @uid GROUP BY contacts.partner_id";
             return await WithConnection(async conn =>
             {
                 return await conn.QueryAsync<Contacts>(sql, new { uid, partner_id });

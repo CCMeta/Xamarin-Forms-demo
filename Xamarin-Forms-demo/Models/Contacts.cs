@@ -17,5 +17,6 @@ namespace Xamarin_Forms_demo.Models
         public string intro { get; set; }
         public string state { get; set; }
         public int unread { get; set; }
+        public bool IsBadgeShow => unread > 0;
     }
 }

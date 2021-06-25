@@ -18,23 +18,28 @@
                 <FontImageSource Glyph="&#xf2b9;" FontFamily="FontAwesome5Solid" Size="Medium" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
+        <ToolbarItem>
+            <ToolbarItem.Text>
+                [SORT]
+            </ToolbarItem.Text>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <CollectionView x:Name="collectionView" SelectionMode="Single" SelectionChanged="OnItemSelected" ItemsSource="{Binding ChatSessions}" VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset">
+    <CollectionView x:Name="collectionView" SelectionMode="Single" SelectionChanged="OnItemSelected" ItemsSource="{Binding .}" VerticalScrollBarVisibility="Always" ItemsUpdatingScrollMode="KeepScrollOffset">
         <CollectionView.ItemTemplate>
             <DataTemplate>
                 <StackLayout Spacing="1" Background="#EEE">
                     <StackLayout Padding="15" Margin="0,0,0,1" BackgroundColor="White">
                         <StackLayout Orientation="Horizontal" Spacing="0">
-                            <Image WidthRequest="50" HeightRequest="50" Source="https://img9.doubanio.com/icon/ul56537265-26.jpg" Aspect="AspectFill"/>
-                            <Frame BackgroundColor="Red" Padding="0" Margin="-10" CornerRadius="20" WidthRequest="20" HeightRequest="20" VerticalOptions="Start">
-                                <Label HorizontalTextAlignment="Center" TextColor="White" Text="{Binding Unread}"/>
+                            <Image WidthRequest="50" HeightRequest="50" Source="{Binding avatar}" Aspect="AspectFill"/>
+                            <Frame IsVisible="{Binding IsBadgeShow}" BackgroundColor="Red" Padding="0" Margin="-10" CornerRadius="20" WidthRequest="20" HeightRequest="20" VerticalOptions="Start">
+                                <Label HorizontalTextAlignment="Center" TextColor="White" Text="{Binding unread}"/>
                             </Frame>
                             <StackLayout Padding="15,0">
-                                <Label Text="{Binding Partner}" FontSize="Body" TextColor="Black"/>
-                                <Label Text="{Binding ID}" LineBreakMode="NoWrap" FontSize="Caption"/>
+                                <Label Text="{Binding nickname}" FontSize="Body" TextColor="Black"/>
+                                <Label Text="{Binding intro}" LineBreakMode="NoWrap" FontSize="Caption"/>
                             </StackLayout>
-                            <Label FontSize="Caption" Text="昨天" LineBreakMode="NoWrap" BackgroundColor="Transparent"
+                            <Label FontSize="Caption" Text="{Binding state}" LineBreakMode="NoWrap" BackgroundColor="Transparent"
                            TextColor="Green" HorizontalOptions="EndAndExpand"/>
                         </StackLayout>
                     </StackLayout>

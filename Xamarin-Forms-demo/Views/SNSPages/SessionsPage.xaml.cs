@@ -14,13 +14,13 @@ namespace Xamarin_Forms_demo.Views
         public SessionsPage()
         {
             InitializeComponent();
-            BindingContext = _chatSessionsViewModel = new ChatSessionsViewModel();
+            collectionView.BindingContext = ContactsViewModel.Contacts;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _chatSessionsViewModel.GetListAsync();
+            //select all in database chats and find unread items grouping
         }
 
         private async void OnEnterContactsAsync(object sender, EventArgs e)
