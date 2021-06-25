@@ -11,12 +11,17 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class TestIndexPage : ContentPage
     {
-        private readonly ExamsViewModel ExamsViewModel;
+        private readonly ExamsViewModel _examsViewModel;
         public TestIndexPage()
         {
             InitializeComponent();
-            BindingContext = ExamsViewModel = new ExamsViewModel();
-            ExamsViewModel.GetListAsync();
+            BindingContext = _examsViewModel = new ExamsViewModel();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _examsViewModel.GetListAsync();
         }
 
         private async void OnEnterExamQuestionsPageAsync(object sender, SelectionChangedEventArgs e)

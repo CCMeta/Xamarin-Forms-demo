@@ -24,20 +24,17 @@ namespace Xamarin_Forms_demo.Views
         private static readonly ItemsViewModel itemsViewModel = new ItemsViewModel();
 
         //VLC configure
-        private readonly LibVLC _libVLC;
-        private readonly string[] _libVLCOptions = new string[] {
-            " --file-caching=100", "--live-caching=100", "--network-caching=0",
-            "--skip-frames", "--sout-keep", "--sout-all", "--drop-late-frames","--rtsp-tcp"
+        private LibVLC _libVLC;
+        private readonly string[] _lib_options = new string[] {
+            " --file-caching=100", "--live-caching=100",
+            "--network-caching=0", "--skip-frames",
+            "--sout-keep", "--sout-all",
+            "--drop-late-frames","--rtsp-tcp",
         };
 
         public CanvasPage()
         {
             InitializeComponent();
-            Title = "CanvasPage";
-
-            //libVLC initital
-            Core.Initialize();
-            _libVLC = new LibVLC(enableDebugLogs: false, _libVLCOptions);
         }
 
         private bool OnPlayStarted()
@@ -63,6 +60,12 @@ namespace Xamarin_Forms_demo.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            //libVLC initital
+            Core.Initialize();
+            _libVLC = new LibVLC(enableDebugLogs: false, _lib_options);
+
+            //binding callbacks
             itemsViewModel.OnDrawCanvas += (object sender, EventArgs e) =>
             {
                 //this is the fucking point in ios with fucking exception
@@ -71,7 +74,7 @@ namespace Xamarin_Forms_demo.Views
             itemsViewModel.OnLocalRtpSession += (object sender, EventArgs e) =>
             {
                 if (!OnPlayStarted())
-                    throw new Exception("VlcVideoView.MediaPlayer.Play failed");
+                    throw new Exception("[CCMeta]VlcVideoView.MediaPlayer.Play failed");
             };
         }
 
