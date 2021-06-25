@@ -65,8 +65,8 @@
     <Compile Update="Views\SNSPages\ContactsPage.xaml.cs">
       <DependentUpon>ContactsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SNSPages\ChatsPage.xaml.cs">
-      <DependentUpon>ChatsPage.xaml</DependentUpon>
+    <Compile Update="Views\SNSPages\SessionsPage.xaml.cs">
+      <DependentUpon>SessionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\StudyPages\TranscriptAnswersPage.xaml.cs">
       <DependentUpon>TranscriptAnswersPage.xaml</DependentUpon>

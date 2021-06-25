@@ -14,29 +14,29 @@ namespace Xamarin_Forms_demo.Models
         {
             Task.Run(async () =>
             {
-                if (db.TableMappings.Count(i => i.TableName == "ChatSessions") < 1)
-                    await db.CreateTableAsync<ChatSessions>();
+                //if (db.TableMappings.Count(i => i.TableName == "ChatSessions") < 1)
+                await db.DropTableAsync<Contacts>();
+                await db.CreateTableAsync<Contacts>();
 
-                await SaveAsync(new ChatSessions() { Partner = 3, Unread = 2 });
-                var result = await ListAsync();
-            });
+                //var result = await ListAsync();
+            }).Wait();
         }
 
-        public Task<List<ChatSessions>> ListAsync()
+        public Task<List<Contacts>> ListAsync()
         {
             //Get all notes.
-            return db.Table<ChatSessions>().ToListAsync();
+            return db.Table<Contacts>().ToListAsync();
         }
 
-        public Task<ChatSessions> GetAsync(int id)
+        public Task<Contacts> GetAsync(int partner)
         {
             // Get a specific note.
-            return db.Table<ChatSessions>().Where(i => i.ID == id).FirstOrDefaultAsync();
+            return db.Table<Contacts>().Where(i => i.partner_id == partner).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveAsync(ChatSessions item)
+        public Task<int> SaveAsync(Contacts item)
         {
-            if (item.ID != 0)
+            if (item.id != 0)
             {
                 // Update an existing note.
                 return db.UpdateAsync(item);
@@ -48,7 +48,7 @@ namespace Xamarin_Forms_demo.Models
             }
         }
 
-        public Task<int> DeleteAsync(ChatSessions item)
+        public Task<int> DeleteAsync(Contacts item)
         {
             // Delete a note.
             return db.DeleteAsync(item);

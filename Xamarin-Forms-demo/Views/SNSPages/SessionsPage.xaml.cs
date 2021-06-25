@@ -7,11 +7,11 @@ using Xamarin_Forms_demo.ViewModels;
 namespace Xamarin_Forms_demo.Views
 {
     [DesignTimeVisible(false)]
-    public partial class ChatsPage : ContentPage
+    public partial class SessionsPage : ContentPage
     {
         private readonly ChatSessionsViewModel _chatSessionsViewModel;
 
-        public ChatsPage()
+        public SessionsPage()
         {
             InitializeComponent();
             BindingContext = _chatSessionsViewModel = new ChatSessionsViewModel();

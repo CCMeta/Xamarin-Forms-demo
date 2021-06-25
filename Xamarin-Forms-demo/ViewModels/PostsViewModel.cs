@@ -37,7 +37,7 @@ namespace Xamarin_Forms_demo.ViewModels
             {
                 GetListAsync();
             });
-            var _ = new ChatSessionsStore();
+            //var _ = new ChatSessionsStore();
         }
 
         public async void GetListAsync()

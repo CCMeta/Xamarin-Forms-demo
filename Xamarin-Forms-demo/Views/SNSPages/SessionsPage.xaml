@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Xamarin_Forms_demo.Views.ChatsPage"
+             x:Class="Xamarin_Forms_demo.Views.SessionsPage"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <Style TargetType="Frame">
@@ -31,8 +31,8 @@
                                 <Label HorizontalTextAlignment="Center" TextColor="White" Text="{Binding Unread}"/>
                             </Frame>
                             <StackLayout Padding="15,0">
-                                <Label Text="趙雲鵬" FontSize="Body" TextColor="Black"/>
-                                <Label Text="并不代表我没有输" LineBreakMode="NoWrap" FontSize="Caption"/>
+                                <Label Text="{Binding Partner}" FontSize="Body" TextColor="Black"/>
+                                <Label Text="{Binding ID}" LineBreakMode="NoWrap" FontSize="Caption"/>
                             </StackLayout>
                             <Label FontSize="Caption" Text="昨天" LineBreakMode="NoWrap" BackgroundColor="Transparent"
                            TextColor="Green" HorizontalOptions="EndAndExpand"/>

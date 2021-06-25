@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Xamarin_Forms_demo.Models
 {
-    public class ChatSessions
+    public class ChatSessions : Contacts
     {
         [PrimaryKey, AutoIncrement]
-        public int ID { get; set; }
+        public int session_id { get; set; }
         public int Partner { get; set; }
         public int Unread { get; set; }
     }
