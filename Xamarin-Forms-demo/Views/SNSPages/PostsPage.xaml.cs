@@ -29,14 +29,15 @@ namespace Xamarin_Forms_demo.Views
         {
             base.OnAppearing();
             IsBusy = true;
-            _postsViewModel.GetListAsync();
+            _ = Task.Run(async () => await _postsViewModel.GetListAsync());
         }
 
-        async void OnPushPost(object sender, EventArgs e)
+        private async void OnPushPost(object sender, EventArgs e)
         {
-            //await Navigation.PushAsync(new SendPostPage());
-            _postsViewModel.GetListAsync();
+            await Navigation.PushAsync(new SendPostPage());
+            //_ = Task.Run(async () => await _postsViewModel.GetListAsync());
         }
+
         private void OnTypeButtonToggle(object sender, EventArgs e)
         {
             //make all box to transparent.

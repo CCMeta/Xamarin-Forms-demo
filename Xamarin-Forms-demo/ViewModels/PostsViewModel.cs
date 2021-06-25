@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.Services;
+using MvvmHelpers;
 
 namespace Xamarin_Forms_demo.ViewModels
 {
@@ -16,16 +17,14 @@ namespace Xamarin_Forms_demo.ViewModels
     {
 
         private readonly string path = "/api/posts";
-        public List<Posts> posts = new List<Posts>();
-        public List<Posts> Posts
+        public ObservableRangeCollection<Posts> posts = new ObservableRangeCollection<Posts>();
+        public ObservableRangeCollection<Posts> Posts
         {
             get { return posts; }
             set
             {
-                posts.Reverse();
-                posts.AddRange(value);
-                posts.Reverse();
-                SetProperty(ref posts, posts);
+                value.AddRange(posts);
+                posts.ReplaceRange(value);
             }
         }
 
@@ -35,12 +34,12 @@ namespace Xamarin_Forms_demo.ViewModels
         {
             GetListCommand = new Command(() =>
             {
-                GetListAsync();
+                Task.Run(async () => await GetListAsync());
             });
             //var _ = new ChatSessionsStore();
         }
 
-        public async void GetListAsync()
+        public async Task GetListAsync()
         {
             //int maxId = Posts.Count > 0 ? Posts[0].id : 0;
             int maxId = Posts.Count > 0 ? posts[0].id : 0;
@@ -48,7 +47,7 @@ namespace Xamarin_Forms_demo.ViewModels
             var queryParams = new Dictionary<string, string>() {
                     { "p",maxId.ToString() }
             };
-            Posts = await HttpRequest.GetAsync<List<Posts>>(path, queryParams: queryParams);
+            Posts = await HttpRequest.GetAsync<ObservableRangeCollection<Posts>>(path, queryParams: queryParams);
             //posts.MyPushRange(result);
             IsBusy = false;
         }
