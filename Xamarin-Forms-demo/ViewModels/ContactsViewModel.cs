@@ -16,12 +16,12 @@ namespace Xamarin_Forms_demo.ViewModels
         public static ObservableCollection<Contacts> contacts = new ObservableCollection<Contacts>();
         public static ObservableCollection<Contacts> Contacts
         {
-            get { return contacts; }
+            get => contacts;
             set
             {
                 foreach (var item in value)
                 {
-                    contacts.Insert(0, item);
+                    contacts.Add(item);
                 }
             }
         }
@@ -29,11 +29,12 @@ namespace Xamarin_Forms_demo.ViewModels
 
         static ContactsViewModel()
         {
+            MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(), (sender, arg) => GetListAsync());
 
             MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventOnline.ToString(),
                 (sender, arg) => OnEventOnlinehandler(arg.Key, arg.Value));
             //if OnEventChatSend and user at chat GUI,then should fresh
-            
+
             GetListCommand = new Command(() => GetListAsync());
         }
 
@@ -48,8 +49,9 @@ namespace Xamarin_Forms_demo.ViewModels
         public static async void GetListAsync()
         {
             var queryParams = new Dictionary<string, string>() { };
-            using var _ = HttpRequest.GetAsync<ObservableCollection<Contacts>>(path, queryParams: queryParams);
-            Contacts = await _;
+            var result = await HttpRequest.GetAsync<ObservableCollection<Contacts>>(path, queryParams: queryParams);
+            contacts.Clear();
+            Contacts = result;
         }
 
     }

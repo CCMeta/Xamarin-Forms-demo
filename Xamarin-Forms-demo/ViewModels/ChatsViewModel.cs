@@ -46,20 +46,16 @@ namespace Xamarin_Forms_demo.ViewModels
                 GetListAsync();
             });
 
+            //This guy is not ready when this class is not build this is wrong
             MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(), (sender, arg) => OnEventChatSendHandler(arg.Key, arg.Value));
         }
 
         public async void GetListAsync()
         {
-            //this get is use local db
-            var max_id = Chats.LastOrDefault() is null ? 0 : Chats.LastOrDefault().id;
-            var queryParams = new Dictionary<string, string>() {
-                { "partner_id", _partner.partner_id.ToString() },
-                { "max_id", max_id.ToString() },
-            };
-            using var _ = HttpRequest.GetAsync<ObservableCollection<Chats>>(path, queryParams: queryParams);
-            Chats = await _;
-            IsBusy = false;
+            var db = new ChatsStore();
+            List<Chats> chats = await db.ListAsync(_partner.partner_id);
+            Console.WriteLine(chats.Count);
+            Chats = new ObservableCollection<Chats>(chats);
         }
 
         public static async void GetListRemoteAsync(int partner)
@@ -75,7 +71,8 @@ namespace Xamarin_Forms_demo.ViewModels
             var result = await HttpRequest.GetAsync<List<Chats>>(path, queryParams: queryParams);
             foreach (var i in result)
             {
-                await db.SaveAsync(i);
+                var _ = await db.SaveAsync(i);
+                Console.WriteLine($"[fuck]SaveAsync {i.content}");
             }
         }
 
@@ -83,7 +80,7 @@ namespace Xamarin_Forms_demo.ViewModels
         {
             var db = new ChatsStore();
             var unread_list = await db.ListUnreadAsync();
-            unread_list.GroupBy(i=>i.partner_id);
+            unread_list.GroupBy(i => i.partner_id);
 
         }
 
@@ -104,16 +101,13 @@ namespace Xamarin_Forms_demo.ViewModels
             return false;
         }
 
-        private async void OnEventChatSendHandler(string caller, string message)
+        public async void OnEventChatSendHandler(string caller, string message)
         {
-            var contact = ContactsViewModel.Contacts.FirstOrDefault(i => i.partner_id == int.Parse(caller));
-            if (contact is null)
-                return;
-            await new ChatSessionsStore().SaveAsync(contact);
-            //go update this partner chat log;
-
-
-            GetListAsync();
+            if (int.Parse(caller) == _partner.partner_id)
+            {//current user
+                GetListRemoteAsync(_partner.partner_id);
+                GetListAsync();
+            }
         }
     }
 }

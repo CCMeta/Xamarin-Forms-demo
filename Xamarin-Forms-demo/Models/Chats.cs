@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ namespace Xamarin_Forms_demo.Models
 {
     public class Chats
     {
+        [PrimaryKey, AutoIncrement]
+        public int local_id { get; set; }
         public int id { get; set; }
         public int uid { get; set; }
         public int partner_id { get; set; }

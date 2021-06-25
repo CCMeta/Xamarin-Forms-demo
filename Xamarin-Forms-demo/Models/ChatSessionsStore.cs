@@ -15,7 +15,7 @@ namespace Xamarin_Forms_demo.Models
             Task.Run(async () =>
             {
                 //if (db.TableMappings.Count(i => i.TableName == "ChatSessions") < 1)
-                await db.DropTableAsync<Contacts>();
+                //await db.DropTableAsync<Contacts>();
                 await db.CreateTableAsync<Contacts>();
 
                 //var result = await ListAsync();

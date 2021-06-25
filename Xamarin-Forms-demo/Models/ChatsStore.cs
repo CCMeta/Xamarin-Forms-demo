@@ -15,7 +15,7 @@ namespace Xamarin_Forms_demo.Models
             Task.Run(async () =>
             {
                 //if (db.TableMappings.Count(i => i.TableName == "ChatSessions") < 1)
-                await db.DropTableAsync<Chats>();
+                //await db.DropTableAsync<Chats>();
                 await db.CreateTableAsync<Chats>();
 
                 //var result = await ListAsync();
@@ -25,7 +25,7 @@ namespace Xamarin_Forms_demo.Models
         public Task<List<Chats>> ListAsync(int partner)
         {
             //Get all notes.
-            return db.Table<Chats>().Where(i => i.uid == partner).ToListAsync();
+            return db.Table<Chats>().Where(i => i.uid == partner || i.partner_id == partner).ToListAsync();
         }
 
         public Task<List<Chats>> ListUnreadAsync()
@@ -36,7 +36,7 @@ namespace Xamarin_Forms_demo.Models
 
         public Task<int> SaveAsync(Chats item)
         {
-            if (item.id != 0)
+            if (item.local_id != 0)
             {
                 // Update an existing note.
                 return db.UpdateAsync(item);
