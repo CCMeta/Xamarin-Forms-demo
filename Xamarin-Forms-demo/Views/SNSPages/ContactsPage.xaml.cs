@@ -43,6 +43,8 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnContactsSelected(object sender, SelectionChangedEventArgs e)
         {
+            if (e.CurrentSelection.Count == 0)
+                return;
             var partner = e.CurrentSelection[0] as Contacts;
             (sender as CollectionView).SelectedItem = null;
             await Navigation.PushAsync(new ChatPage(partner));

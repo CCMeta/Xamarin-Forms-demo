@@ -26,8 +26,8 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnEnterExamQuestionsPageAsync(object sender, SelectionChangedEventArgs e)
         {
-            //if (e.CurrentSelection.Count < 1)
-            //    return;
+            if (e.CurrentSelection.Count == 0)
+                return;
             (sender as CollectionView).SelectedItem = null;
             //int selected_id = ((Exams)e.CurrentSelection[0]).id;
             var selected = (Exams)e.CurrentSelection[0];

@@ -28,12 +28,14 @@ namespace Xamarin_Forms_demo.Views
             using var media = new Media(VlcVideoView.LibVLC, new Uri(_videoUrl));
             VlcVideoView.MediaPlayer = new MediaPlayer(media)
             {
-                EnableHardwareDecoding = false,
+                EnableHardwareDecoding = true,
                 Fullscreen = true,
                 Scale = 0,
             };
             media.Dispose();
-            VlcVideoView.MediaPlayer.Play();
+            var result = VlcVideoView.MediaPlayer.Play();
+            if (result is false)
+                throw new Exception("[ccmeta]VlcVideoView.MediaPlayer.Play() is fucked");
         }
 
         protected override void OnDisappearing()

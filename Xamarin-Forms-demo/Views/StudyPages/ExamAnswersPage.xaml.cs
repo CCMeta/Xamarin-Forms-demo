@@ -21,7 +21,7 @@ namespace Xamarin_Forms_demo.Views
 
         private void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (e.CurrentSelection.Count < 1)
+            if (e.CurrentSelection.Count == 0)
                 return;
             (sender as CollectionView).SelectedItem = null;
             //int current_id = ((ExamQuestions)e.CurrentSelection[0]).id;
