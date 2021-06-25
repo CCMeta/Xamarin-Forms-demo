@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.ViewModels;
 
 namespace Xamarin_Forms_demo.Views
@@ -31,9 +32,9 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
-            //var partner = e.CurrentSelection[0] as Contacts;
+            var partner = e.CurrentSelection[0] as Contacts;
             //(sender as CollectionView).SelectedItem = null;
-            //await Navigation.PushAsync(new ChatPage(partner));
+            await Navigation.PushAsync(new ChatPage(partner));
         }
     }
 }

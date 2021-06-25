@@ -19,9 +19,11 @@ namespace Xamarin_Forms_demo.Views
             _partner = partner;
             Title = _partner.nickname;
             BindingContext = _chatsViewModel = new ChatsViewModel(_partner);
-
-            ChatsViewModel.GetListRemoteAsync(_partner.partner_id);
-            _chatsViewModel.GetListAsync();
+            Task.Run(async () =>
+            {
+                await ChatsViewModel.GetListRemoteAsync(_partner.partner_id);
+                await _chatsViewModel.GetListAsync();
+            });
         }
 
         protected override void OnAppearing()

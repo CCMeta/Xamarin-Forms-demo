@@ -50,7 +50,7 @@ namespace Xamarin_Forms_demo.ViewModels
             MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(), (sender, arg) => OnEventChatSendHandler(arg.Key, arg.Value));
         }
 
-        public async void GetListAsync()
+        public async Task GetListAsync()
         {
             var db = new ChatsStore();
             List<Chats> chats = await db.ListAsync(_partner.partner_id);
@@ -58,7 +58,7 @@ namespace Xamarin_Forms_demo.ViewModels
             Chats = new ObservableCollection<Chats>(chats);
         }
 
-        public static async void GetListRemoteAsync(int partner)
+        public static async Task GetListRemoteAsync(int partner)
         {
             //this get is use remote api
             var db = new ChatsStore();
@@ -74,14 +74,6 @@ namespace Xamarin_Forms_demo.ViewModels
                 var _ = await db.SaveAsync(i);
                 Console.WriteLine($"[fuck]SaveAsync {i.content}");
             }
-        }
-
-        public static async void GetUnreadCountGroup()
-        {
-            var db = new ChatsStore();
-            var unread_list = await db.ListUnreadAsync();
-            unread_list.GroupBy(i => i.partner_id);
-
         }
 
         public async Task<bool> PostAsync(int partner_id, string content)
@@ -101,12 +93,15 @@ namespace Xamarin_Forms_demo.ViewModels
             return false;
         }
 
-        public async void OnEventChatSendHandler(string caller, string message)
+        public void OnEventChatSendHandler(string caller, string message)
         {
             if (int.Parse(caller) == _partner.partner_id)
             {//current user
-                GetListRemoteAsync(_partner.partner_id);
-                GetListAsync();
+                Task.Run(async () =>
+                {
+                    await GetListRemoteAsync(_partner.partner_id);
+                    await GetListAsync();
+                });
             }
         }
     }
