@@ -33,7 +33,7 @@ namespace Xamarin_Forms_demo.Views
         private async void OnItemSelected(object sender, SelectionChangedEventArgs e)
         {
             var partner = e.CurrentSelection[0] as Contacts;
-            //(sender as CollectionView).SelectedItem = null;
+            (sender as CollectionView).SelectedItem = null;
             await Navigation.PushAsync(new ChatPage(partner));
         }
     }

@@ -19,6 +19,8 @@ namespace Xamarin_Forms_demo.Views
 
         async void ToolbarItem_ClickedAsync(object sender, EventArgs e)
         {
+            if (PostEditor.Text.Length == 0)
+                return;
             var result = await _postsViewModel.PostAsync(PostEditor.Text);
             if (result)
                 await DisplayAlert("提交", "提交動態成功", "確定");

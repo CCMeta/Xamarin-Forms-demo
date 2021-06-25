@@ -25,11 +25,11 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnEnterExamTranscriptsPageAsync(object sender, SelectionChangedEventArgs e)
         {
-            if (e.CurrentSelection.Count < 1)
-                return;
+            //if (e.CurrentSelection.Count < 1)
+            //    return;
+            (sender as CollectionView).SelectedItem = null;
             ExamTranscripts transcripts = e.CurrentSelection[0] as ExamTranscripts;
             await Navigation.PushAsync(new ExamTranscriptsPage(transcripts.id, transcripts.title));
-            (sender as CollectionView).SelectedItem = null;
         }
 
         private void OnTypeButtonToggle(object sender, EventArgs e)

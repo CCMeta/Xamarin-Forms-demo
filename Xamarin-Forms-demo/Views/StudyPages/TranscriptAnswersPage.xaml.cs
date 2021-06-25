@@ -23,6 +23,7 @@ namespace Xamarin_Forms_demo.Views
         {
             if (e.CurrentSelection.Count < 1)
                 return;
+            (sender as CollectionView).SelectedItem = null;
             //int current_id = ((ExamQuestions)e.CurrentSelection[0]).id;
             int position = _examAnswersViewModel.ExamAnswers.IndexOf((ExamAnswers)e.CurrentSelection[0]);
             if (position < 0)
@@ -32,7 +33,6 @@ namespace Xamarin_Forms_demo.Views
             var ExamQuestionsPage = Navigation.NavigationStack.First(q => q.GetType() == typeof(ExamTranscriptsPage)) as ExamTranscriptsPage;
             ExamQuestionsPage.SetCurrentPosition(position);
             Navigation.PopAsync();
-            (sender as CollectionView).SelectedItem = null;
         }
     }
 }

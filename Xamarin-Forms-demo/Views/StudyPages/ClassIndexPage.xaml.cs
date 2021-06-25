@@ -26,13 +26,10 @@ namespace Xamarin_Forms_demo.Views
 
         private async void OnCoursesSelectedAsync(object sender, SelectionChangedEventArgs e)
         {
-            if (e.CurrentSelection.Count < 1)
-                return;
-
             string videoUrl = (e.CurrentSelection[0] as Courses).video;
+            (sender as CollectionView).SelectedItem = null;
             await Navigation.PushAsync(new VideoPage(videoUrl));
             //await Navigation.PushModalAsync(new VideoPage(videoUrl));
-            (sender as CollectionView).SelectedItem = null;
         }
     }
 }
