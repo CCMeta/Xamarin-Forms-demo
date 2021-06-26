@@ -21,5 +21,14 @@ namespace Xamarin_Forms_demo_api.Models
             });
         }
 
+        public async Task<IEnumerable<Users>> ListAsync()
+        {
+            var sql = "SELECT * FROM users";
+            return await WithConnection(async conn =>
+            {
+                return await conn.QueryAsync<Users>(sql);
+            });
+        }
+
     }
 }

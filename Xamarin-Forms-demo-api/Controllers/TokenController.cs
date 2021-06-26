@@ -22,9 +22,10 @@ namespace Xamarin_Forms_demo_api.Controllers
         }
         // GET: api/<TokenController>
         [HttpGet]
-        public IEnumerable<string> Get([FromHeader] string TOKEN)
+        public async Task<ActionResult> Get([FromHeader] string TOKEN)
         {
-            return new string[] { "value1", "value2" };
+            var users = await _usersRepository.ListAsync();
+            return Ok(users);
         }
 
         // GET api/<TokenController>/5

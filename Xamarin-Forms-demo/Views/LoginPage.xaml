@@ -6,9 +6,32 @@
              mc:Ignorable="d"
              x:Class="Xamarin_Forms_demo.Views.LoginPage"
              Title="{Binding Title}">
-    <StackLayout Padding="20">
+    <StackLayout Padding="20" Spacing="20">
         <Label x:Name="MessageLabel" FontSize="Title" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                        Text="LOGIN PAGE" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
-        <Button BackgroundColor="#00cccc" TextColor="White" Text="LOGIN" Clicked="OnLoginClick"/>
+        <CollectionView x:Name="collectionView" ItemsSource="{Binding .}" ItemsLayout="VerticalGrid, 4" 
+                        SelectionMode="Single" SelectionChanged="OnLoginClick">
+            <CollectionView.Header>
+                <Label TextColor="Black" Text="请点击相应头像 即可用此身份登录" HorizontalTextAlignment="Center"/>
+            </CollectionView.Header>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Frame Grid.Row="0" CornerRadius="60" BorderColor="#00cccc" WidthRequest="60" HeightRequest="60" 
+                               VerticalOptions="Center" HorizontalOptions="Center" Padding="0">
+                            <Image WidthRequest="60" HeightRequest="60" Source="{Binding avatar}" Aspect="AspectFit"/>
+                        </Frame>
+                        <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center" TextColor="Black" Text="{Binding nickname}" 
+                               FontSize="Body"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </StackLayout>
 </ContentPage>
