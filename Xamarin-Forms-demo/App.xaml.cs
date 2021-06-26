@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin_Forms_demo.Services;
 using Xamarin_Forms_demo.Views;
 
@@ -12,8 +13,10 @@ namespace Xamarin_Forms_demo
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
             InitializeComponent();
             //DependencyService.Register<HttpRequest>();
-            MainPage = new MainPage();
+            Action SetMainPage = () => MainPage = new MainPage();
+            MainPage = new LoginPage(SetMainPage);
         }
+
 
         protected override void OnStart()
         {
@@ -27,5 +30,6 @@ namespace Xamarin_Forms_demo
         protected override void OnResume()
         {
         }
+
     }
 }

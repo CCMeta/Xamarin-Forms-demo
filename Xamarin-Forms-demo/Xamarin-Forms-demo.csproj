@@ -110,6 +110,9 @@
     <Compile Update="Views\StudyPages\ClassIndexPage.xaml.cs">
       <DependentUpon>ClassIndexPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\__TemplatePage.xaml.cs">
       <DependentUpon>__TemplatePage.xaml</DependentUpon>
     </Compile>

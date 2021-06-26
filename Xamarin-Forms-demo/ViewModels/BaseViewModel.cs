@@ -41,10 +41,12 @@ namespace Xamarin_Forms_demo.ViewModels
             get { return me; }
             set { SetProperty(ref me, value); }
         }
+        public static string username;
 
         public BaseViewModel()
         {
-            var username = AppConfiguration.GetValue<string>("Identity:Username");
+            string username = BaseViewModel.username is null ?
+                AppConfiguration.GetValue<string>("Identity:Username") : BaseViewModel.username;
             var password = AppConfiguration.GetValue<string>("Identity:Password");
             Login(username, password);
 
