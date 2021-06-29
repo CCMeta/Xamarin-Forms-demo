@@ -54,65 +54,15 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public async Task<bool> PostAsync(string content)
         {
-            var queryParams = new Posts();
-            queryParams.content = content;
+            Posts queryParams = new Posts
+            {
+                content = content
+            };
             var result = await HttpRequest.PostAsync(path, queryParams);
             if (result is Posts)
                 return true;
             return false;
         }
 
-    }
-
-    public class MyStack<T> : Stack<T>, INotifyCollectionChanged, INotifyPropertyChanged
-    {
-        private int _blockReentrancyCount;
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-        private void OnCountPropertyChanged() => OnPropertyChanged(EventArgsCache.CountPropertyChanged);
-        private void OnIndexerPropertyChanged() => OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
-        protected virtual void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChanged?.Invoke(this, e);
-        }
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, object? q)
-        {
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, q));
-        }
-        public void MyPushRange(IEnumerable<T> range)
-        {
-            foreach (var i in range)
-            {
-                base.Push(i);
-            }
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(T)));
-
-            OnCountPropertyChanged();
-            OnIndexerPropertyChanged();
-            OnCollectionChanged(NotifyCollectionChangedAction.Add, range);
-        }
-        protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-        {
-            NotifyCollectionChangedEventHandler? handler = CollectionChanged;
-            if (handler != null)
-            {
-                // Not calling BlockReentrancy() here to avoid the SimpleMonitor allocation.
-                _blockReentrancyCount++;
-                try
-                {
-                    handler(this, e);
-                }
-                finally
-                {
-                    _blockReentrancyCount--;
-                }
-            }
-        }
-    }
-    internal static class EventArgsCache
-    {
-        internal static readonly PropertyChangedEventArgs CountPropertyChanged = new PropertyChangedEventArgs("Count");
-        internal static readonly PropertyChangedEventArgs IndexerPropertyChanged = new PropertyChangedEventArgs("Item[]");
-        internal static readonly NotifyCollectionChangedEventArgs ResetCollectionChanged = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
     }
 }

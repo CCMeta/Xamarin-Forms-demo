@@ -41,6 +41,8 @@ namespace Xamarin_Forms_demo.Services
             }
         }
 
+        public string GetState() => connection.State.ToString();
+
         private Dictionary<MessageType, Action<string, string>> InitEventMapper()
         {
             return new Dictionary<MessageType, Action<string, string>>

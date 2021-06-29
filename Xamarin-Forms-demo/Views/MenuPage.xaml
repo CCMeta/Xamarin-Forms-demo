@@ -14,8 +14,10 @@
             <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding avatar}" HeightRequest="50"/>
                 <Label Text="{Binding nickname}" FontSize="Subtitle" VerticalOptions="Center"/>
-                <Button x:Name="WebSocketStateLabel" VerticalOptions="Center"/>
-                <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                <Button Scale="0.8" BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1"
+                        x:Name="WebSocketStateLabel" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+                <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" 
+                       HorizontalOptions="End" VerticalOptions="Center" />
             </StackLayout>
         </Frame>
 
@@ -54,7 +56,8 @@
                     </TableSection>
                     <TableSection>
                         <ViewCell>
-                            <Button Text="退出登录" VerticalOptions="End"/>
+                            <Button BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1"
+                                    Text="退出登录" VerticalOptions="End"/>
                         </ViewCell>
                     </TableSection>
                 </TableRoot>

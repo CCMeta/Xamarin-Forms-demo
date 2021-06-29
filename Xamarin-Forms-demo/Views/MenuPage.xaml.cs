@@ -46,7 +46,7 @@ namespace Xamarin_Forms_demo.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            WebSocketStateLabel.Text = ItemsViewModel.WebSocketState.ToString();
+            WebSocketStateLabel.Text = BaseViewModel._chatHub.GetState();
         }
     }
 }

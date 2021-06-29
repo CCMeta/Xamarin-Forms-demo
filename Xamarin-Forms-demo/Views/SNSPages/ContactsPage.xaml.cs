@@ -9,7 +9,7 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class ContactsPage : ContentPage
     {
-        private readonly ContactsViewModel _contactsViewModel;
+        //private readonly ContactsViewModel _contactsViewModel;
 
         public ContactsPage()
         {

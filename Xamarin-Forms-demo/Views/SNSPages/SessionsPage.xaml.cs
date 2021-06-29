@@ -10,7 +10,7 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class SessionsPage : ContentPage
     {
-        private readonly ChatSessionsViewModel _chatSessionsViewModel;
+        //private readonly ChatSessionsViewModel _chatSessionsViewModel;
 
         public SessionsPage()
         {

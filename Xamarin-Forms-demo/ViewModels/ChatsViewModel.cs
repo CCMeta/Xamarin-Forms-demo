@@ -41,9 +41,9 @@ namespace Xamarin_Forms_demo.ViewModels
         public ChatsViewModel(Contacts partner) : base()
         {
             _partner = partner;
-            GetListCommand = new Command(() =>
+            GetListCommand = new Command(async () =>
             {
-                GetListAsync();
+                await GetListAsync();
             });
 
             //This guy is not ready when this class is not build this is wrong
