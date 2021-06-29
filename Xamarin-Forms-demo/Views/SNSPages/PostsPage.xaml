@@ -33,7 +33,7 @@
                 <BoxView HeightRequest="1" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" />
             </StackLayout>
         </StackLayout>
-         <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
+        <RefreshView IsRefreshing="{Binding IsBusy}" Command="{Binding GetListCommand}">
             <CollectionView  x:Name="collectionView" ItemsSource="{Binding Posts}" VerticalScrollBarVisibility="Always" 
                              ItemsUpdatingScrollMode="KeepScrollOffset">
                 <CollectionView.ItemTemplate>

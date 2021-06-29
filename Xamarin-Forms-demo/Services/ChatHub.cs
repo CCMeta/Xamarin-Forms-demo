@@ -54,7 +54,7 @@ namespace Xamarin_Forms_demo.Services
         {
             return async (error) =>
             {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
+                await Task.Delay(5 * 1000);
                 await connection.StartAsync();
             };
         }
