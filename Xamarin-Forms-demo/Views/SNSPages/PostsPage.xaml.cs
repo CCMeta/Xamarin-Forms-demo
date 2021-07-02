@@ -53,6 +53,13 @@ namespace Xamarin_Forms_demo.Views
             Console.WriteLine(boxView.ClassId);
             boxView.Color = Color.FromHex("#00cccc");
         }
+
+        private async void OnFollowButtonClickAsync(object sender, EventArgs e)
+        {
+            var uid = ((Posts)(sender as Button).BindingContext).uid;
+            _postsViewModel.OnFollowStateChange(uid: uid, action: 1);
+            await DisplayAlert("关注", "关注成功", "确定");
+        }
     }
 
     public class Fuck : CollectionView

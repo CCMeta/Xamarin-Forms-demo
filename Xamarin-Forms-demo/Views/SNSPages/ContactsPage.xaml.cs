@@ -15,14 +15,6 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             collectionView.BindingContext = ContactsViewModel.Contacts;
-            //BindingContext = _contactsViewModel = new ContactsViewModel();
-            //IsBusy = true;
-            //_contactsViewModel.GetListAsync();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
         }
 
         private void OnTypeButtonToggle(object sender, EventArgs e)

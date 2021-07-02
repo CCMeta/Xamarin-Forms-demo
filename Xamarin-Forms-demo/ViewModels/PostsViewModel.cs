@@ -1,15 +1,12 @@
-﻿using System;
+﻿using MvvmHelpers;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
 using Xamarin_Forms_demo.Services;
-using MvvmHelpers;
+using System;
 
 namespace Xamarin_Forms_demo.ViewModels
 {
@@ -23,7 +20,7 @@ namespace Xamarin_Forms_demo.ViewModels
             get { return posts; }
             set
             {
-                value.AddRange(posts);
+                //value.AddRange(posts);
                 posts.ReplaceRange(value);
             }
         }
@@ -39,6 +36,17 @@ namespace Xamarin_Forms_demo.ViewModels
             //var _ = new ChatSessionsStore();
         }
 
+        public void OnFollowStateChange(int uid, int action = 1)
+        {
+            var result = posts.Select(i =>
+            {
+                if (i.uid == uid)
+                    i.IsFollowed = "Following";
+                return i;
+            });
+            Posts = new ObservableRangeCollection<Posts>(result);
+        }
+
         public async Task GetListAsync()
         {
             //int maxId = Posts.Count > 0 ? Posts[0].id : 0;
@@ -47,8 +55,14 @@ namespace Xamarin_Forms_demo.ViewModels
             var queryParams = new Dictionary<string, string>() {
                     { "p",maxId.ToString() }
             };
-            Posts = await HttpRequest.GetAsync<ObservableRangeCollection<Posts>>(path, queryParams: queryParams);
-            //posts.MyPushRange(result);
+            var result = await HttpRequest.GetAsync<ObservableRangeCollection<Posts>>(path, queryParams: queryParams);
+            if (result.Count > 0)
+            {
+                var shit = result.Where(i => ContactsViewModel.Contacts.Select(i => i.partner_id).ToList().Contains(i.uid))
+                    .Select(i => { i.IsFollowed = "Following"; return i; }).ToList();
+                shit.AddRange(posts);
+                posts.ReplaceRange(result);
+            }
             IsBusy = false;
         }
 

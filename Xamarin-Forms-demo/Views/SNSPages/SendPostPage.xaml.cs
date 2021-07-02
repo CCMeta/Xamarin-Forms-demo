@@ -23,7 +23,7 @@ namespace Xamarin_Forms_demo.Views
                 return;
             var result = await _postsViewModel.PostAsync(PostEditor.Text);
             if (result)
-                await DisplayAlert("提交", "提交動態成功", "確定");
+                await DisplayAlert("提交动态", "提交动态成功", "确定");
             await Navigation.PopAsync();
         }
     }

@@ -44,14 +44,14 @@
                                     <StackLayout Orientation="Horizontal">
                                         <Image HeightRequest="50" WidthRequest="50" Aspect="AspectFit" Source="{Binding avatar}"/>
                                         <StackLayout Padding="10,0">
-                                            <Label FontSize="Body" TextColor="Black" Text="{Binding  nickname}" VerticalOptions="Start"/>
+                                            <Label FontSize="Body" TextColor="Black" Text="{Binding nickname}" VerticalOptions="Start"/>
                                             <Label FontSize="Caption" Text="{Binding created_at,StringFormat='{0}'}" HorizontalOptions="Start" VerticalOptions="End"/>
                                         </StackLayout>
-                                        <Button CornerRadius="50" Padding="0" WidthRequest="50" HeightRequest="50"
-                                                TextColor="#00cccc" BackgroundColor="White" 
+                                        <Button CornerRadius="50" Text="{Binding IsFollowed}"
+                                                TextColor="White" BackgroundColor="#00cccc" Clicked="OnFollowButtonClickAsync"
                                                 HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                                             <Button.ImageSource>
-                                                    <FontImageSource Size="Title" Glyph="&#xf0d7;" FontFamily="FontAwesome5Solid" Color="#00CCCC" />
+                                                    <FontImageSource Size="0" Glyph="&#xf0d7;" FontFamily="FontAwesome5Solid" Color="#00CCCC" />
                                             </Button.ImageSource>
                                         </Button>
                                     </StackLayout>
