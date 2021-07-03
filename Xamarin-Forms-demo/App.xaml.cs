@@ -7,14 +7,11 @@ namespace Xamarin_Forms_demo
 {
     public partial class App : Application
     {
-
         public App()
         {
             Device.SetFlags(new string[] { "MediaElement_Experimental" });
             InitializeComponent();
-            //DependencyService.Register<HttpRequest>();
-            Action SetMainPage = () => MainPage = new MainPage();
-            MainPage = new LoginPage(SetMainPage);
+            MainPage = new LoginPage();
         }
 
 

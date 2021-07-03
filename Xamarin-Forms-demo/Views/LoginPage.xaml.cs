@@ -13,12 +13,12 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class LoginPage : ContentPage
     {
-        private readonly Action SetMainPage;
+        private Action SetMainPage;
 
-        public LoginPage(Action SetMainPage)
+        public LoginPage()
         {
             InitializeComponent();
-            this.SetMainPage = SetMainPage;
+            this.SetMainPage = () => Application.Current.MainPage = new MainPage();
 
             var AppConfiguration = Services.AppConfiguration.GetInstence();
             var httpClient = new HttpRequest(AppConfiguration.GetValue<string>("Host"));

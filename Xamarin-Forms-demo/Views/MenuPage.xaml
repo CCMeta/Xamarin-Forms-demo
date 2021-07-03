@@ -71,7 +71,7 @@
             <Frame HorizontalOptions="FillAndExpand">
                 <StackLayout>
                     <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Tapped=""/>
+                        <TapGestureRecognizer Tapped="OnToggleMajor"/>
                     </StackLayout.GestureRecognizers>
                     <Label HorizontalOptions="Center" Text="&#xf698;" TextColor="DeepSkyBlue" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
                     <Label TextColor="#000" Text="数学" HorizontalOptions="Center" VerticalOptions="Center" />
@@ -79,12 +79,18 @@
             </Frame>
             <Frame HorizontalOptions="FillAndExpand">
                 <StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnToggleMajor"/>
+                    </StackLayout.GestureRecognizers>
                     <Label HorizontalOptions="Center" Text="&#xf891;" TextColor="DeepSkyBlue" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
                     <Label TextColor="#000" Text="语文" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
             </Frame>
             <Frame HorizontalOptions="FillAndExpand">
                 <StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnToggleMajor"/>
+                    </StackLayout.GestureRecognizers>
                     <Label HorizontalOptions="Center" Text="&#xf66f;" TextColor="DeepSkyBlue" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
                     <Label TextColor="#000" Text="历史" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>

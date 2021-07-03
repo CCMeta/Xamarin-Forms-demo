@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net.WebSockets;
 using Xamarin.Forms;
 using Xamarin_Forms_demo.Models;
+using Xamarin_Forms_demo.Services;
 using Xamarin_Forms_demo.ViewModels;
 
 namespace Xamarin_Forms_demo.Views
@@ -51,6 +52,13 @@ namespace Xamarin_Forms_demo.Views
 
         private void OnLogout(object sender, EventArgs e)
         {
+            HttpRequest.Token = null;
+            Application.Current.MainPage = new LoginPage();
+        }
+
+        private void OnToggleMajor(object sender, EventArgs e)
+        {
+
         }
     }
 }
