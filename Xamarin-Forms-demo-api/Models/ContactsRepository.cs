@@ -31,5 +31,14 @@ namespace Xamarin_Forms_demo_api.Models
                 return await conn.QueryAsync<Contacts>(sql, new { uid, partner_id });
             });
         }
+
+        public async Task<int> Post(int uid, int partner_id)
+        {
+            var sql = "INSERT INTO contacts SET partner_id = @partner_id, uid = @uid";
+            return await WithConnection(async conn =>
+            {
+                return await conn.ExecuteAsync(sql, new { uid, partner_id });
+            });
+        }
     }
 }

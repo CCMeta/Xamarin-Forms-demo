@@ -36,7 +36,7 @@ namespace Xamarin_Forms_demo.ViewModels
             //var _ = new ChatSessionsStore();
         }
 
-        public void OnFollowStateChange(int uid, int action = 1)
+        public void OnFollowStateChange(int uid, int act = 1)
         {
             var result = posts.Select(i =>
             {
@@ -58,10 +58,11 @@ namespace Xamarin_Forms_demo.ViewModels
             var result = await HttpRequest.GetAsync<ObservableRangeCollection<Posts>>(path, queryParams: queryParams);
             if (result.Count > 0)
             {
-                var shit = result.Where(i => ContactsViewModel.Contacts.Select(i => i.partner_id).ToList().Contains(i.uid))
+                //find followed and mark
+                var marked_result = result.Where(i => ContactsViewModel.Contacts.Select(i => i.partner_id).ToList().Contains(i.uid))
                     .Select(i => { i.IsFollowed = "Following"; return i; }).ToList();
-                shit.AddRange(posts);
-                posts.ReplaceRange(result);
+                marked_result.AddRange(posts);
+                posts.ReplaceRange(marked_result);
             }
             IsBusy = false;
         }

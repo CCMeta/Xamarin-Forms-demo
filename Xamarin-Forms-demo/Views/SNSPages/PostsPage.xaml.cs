@@ -20,9 +20,6 @@ namespace Xamarin_Forms_demo.Views
         {
             InitializeComponent();
             BindingContext = _postsViewModel = new PostsViewModel();
-            //collectionView.RemainingItemsThresholdDirection;
-            //linearLayoutManager
-            //LinearItemsLayout.Vertical.
         }
 
         protected override void OnAppearing()
@@ -57,18 +54,8 @@ namespace Xamarin_Forms_demo.Views
         private async void OnFollowButtonClickAsync(object sender, EventArgs e)
         {
             var uid = ((Posts)(sender as Button).BindingContext).uid;
-            _postsViewModel.OnFollowStateChange(uid: uid, action: 1);
+            _postsViewModel.OnFollowStateChange(uid: uid, act: 1);
             await DisplayAlert("关注", "关注成功", "确定");
-        }
-    }
-
-    public class Fuck : CollectionView
-    {
-
-        public new IEnumerable ItemsSource
-        {
-            get => (IEnumerable)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, ((System.Collections.Generic.IEnumerable<Posts>)value).Reverse());
         }
     }
 }

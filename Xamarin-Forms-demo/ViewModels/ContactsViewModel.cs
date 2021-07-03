@@ -30,7 +30,8 @@ namespace Xamarin_Forms_demo.ViewModels
 
         static ContactsViewModel()
         {
-            MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(), (sender, arg) => GetListAsync());
+            MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventChatSend.ToString(),
+                (sender, arg) => GetListAsync());
 
             MessagingCenter.Subscribe<ChatHub, KeyValuePair<string, string>>(_chatHub, MessageType.OnEventOnline.ToString(),
                 (sender, arg) => OnEventOnlinehandler(arg.Key, arg.Value));
@@ -53,5 +54,16 @@ namespace Xamarin_Forms_demo.ViewModels
             Contacts = result;
         }
 
+        public async Task<bool> PostAsync(int partner_id)
+        {
+            Contacts queryParams = new Contacts
+            {
+                partner_id = partner_id
+            };
+            var result = await HttpRequest.PostAsync(path, queryParams);
+            if (result is Contacts)
+                return true;
+            return false;
+        }
     }
 }
