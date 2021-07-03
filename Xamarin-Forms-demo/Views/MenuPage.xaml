@@ -4,67 +4,92 @@
              x:Class="Xamarin_Forms_demo.Views.MenuPage"
              Visual=""
              Title="MenuPage">
-    <Grid Padding="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True" Padding="15">
-            <StackLayout Orientation="Horizontal">
-                <Image Source="{Binding avatar}" HeightRequest="50"/>
-                <StackLayout Orientation="Vertical">
-                    <Label Text="{Binding nickname}" FontSize="Body" VerticalOptions="Center"/>
-                    <Label Text="{Binding intro}" FontSize="Caption" VerticalOptions="Center"/>
-                </StackLayout>
-                <Button Scale="0.8" BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1"
-                        x:Name="WebSocketStateLabel" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
-                <Label Text="&#xf054;" FontSize="Caption" FontFamily="FontAwesome5Solid" 
-                       HorizontalOptions="End" VerticalOptions="Center" />
+    <StackLayout Padding="20">
+        <StackLayout Orientation="Horizontal" Padding="0,10">
+            <Image Source="{Binding avatar}" HeightRequest="50"/>
+            <StackLayout Orientation="Vertical">
+                <Label Text="{Binding nickname}" FontSize="Body" VerticalOptions="Center"/>
+                <Label Text="{Binding intro}" FontSize="Caption" VerticalOptions="Center"/>
             </StackLayout>
-        </Frame>
-
-        <Frame Grid.Row="1" BorderColor="Orange" CornerRadius="10" HasShadow="True">
-            <TableView Intent="Menu">
-                <TableRoot>
-                    <TableSection Title="NAVIGATION">
-                        <ViewCell x:Name="NavStudyViewCell">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="&#xf5da;" TextColor="Red" FontSize="Body" WidthRequest="20" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
-                                <Label TextColor="#000" Text="学习模式" FontSize="Body" VerticalOptions="Center" />
-                                <Label Text="&#xf054;" FontSize="Body" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
-                            </StackLayout>
-                        </ViewCell>
-                        <ViewCell x:Name="NavSNSViewCell">
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="&#xf086;" TextColor="DarkCyan" FontSize="Body"  WidthRequest="20" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
-                                <Label TextColor="#000" Text="社交模式" FontSize="Body" VerticalOptions="Center" />
-                                <Label Text="&#xf054;" FontSize="Body" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
-                            </StackLayout>
-                        </ViewCell>
-                    </TableSection>
-                    <TableSection Title="MAJORS">
-                        <ViewCell>
-                            <RadioButton Content="History" Value="History" GroupName="CurrentMajor" />
-                        </ViewCell>
-                        <ViewCell>
-                            <RadioButton Content="Math" Value="Math" GroupName="CurrentMajor" />
-                        </ViewCell>
-                        <ViewCell>
-                            <RadioButton Content="Chinese" Value="Chinese" GroupName="CurrentMajor" />
-                        </ViewCell>
-                        <ViewCell>
-                            <RadioButton Content="English" Value="English" GroupName="CurrentMajor" />
-                        </ViewCell>
-                    </TableSection>
-                    <TableSection>
-                        <ViewCell>
-                            <Button BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1"
-                                    Text="退出登录" VerticalOptions="End" Clicked="OnLogout"/>
-                        </ViewCell>
-                    </TableSection>
-                </TableRoot>
-            </TableView>
-        </Frame>
-    </Grid>
+            <Button BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1"
+                        x:Name="WebSocketStateLabel" HorizontalOptions="EndAndExpand" VerticalOptions="FillAndExpand"/>
+        </StackLayout>
+        <TableView Intent="Menu">
+            <TableRoot>
+                <TableSection Title="工作模式">
+                    <ViewCell x:Name="NavStudyViewCell">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf5da;" TextColor="DeepSkyBlue" FontSize="Body" WidthRequest="30" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
+                            <Label TextColor="#000" Text="学习模式" FontSize="Body" VerticalOptions="Center" />
+                            <Label Text="&#xf054;" FontSize="Body" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell x:Name="NavSNSViewCell">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf086;" TextColor="DarkSeaGreen" FontSize="Body"  WidthRequest="30" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
+                            <Label TextColor="#000" Text="社交模式" FontSize="Body" VerticalOptions="Center" />
+                            <Label Text="&#xf054;" FontSize="Body" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf559;" TextColor="Red" FontSize="Body"  WidthRequest="30" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
+                            <Label TextColor="#000" Text="竞技模式" FontSize="Body" VerticalOptions="Center" />
+                            <Label Text="&#xf054;" FontSize="Body" FontFamily="FontAwesome5Solid" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="设置">
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf0f3;" FontSize="Body"  WidthRequest="30" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
+                            <Label TextColor="#000" Text="通知" FontSize="Body" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf256;" FontSize="Body"  WidthRequest="30" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
+                            <Label TextColor="#000" Text="隐私" FontSize="Body" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf013;" FontSize="Body"  WidthRequest="30" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
+                            <Label TextColor="#000" Text="设置" FontSize="Body" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="&#xf059;" FontSize="Body"  WidthRequest="30" FontFamily="FontAwesome5Solid" VerticalOptions="Center"/>
+                            <Label TextColor="#000" Text="帮助" FontSize="Body" VerticalOptions="Center" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+        <StackLayout Orientation="Horizontal" Padding="0,10">
+            <Frame HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped=""/>
+                    </StackLayout.GestureRecognizers>
+                    <Label HorizontalOptions="Center" Text="&#xf698;" TextColor="DeepSkyBlue" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
+                    <Label TextColor="#000" Text="数学" HorizontalOptions="Center" VerticalOptions="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label HorizontalOptions="Center" Text="&#xf891;" TextColor="DeepSkyBlue" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
+                    <Label TextColor="#000" Text="语文" HorizontalOptions="Center" VerticalOptions="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label HorizontalOptions="Center" Text="&#xf66f;" TextColor="DeepSkyBlue" FontFamily="FontAwesome5Solid"  VerticalOptions="Center"/>
+                    <Label TextColor="#000" Text="历史" HorizontalOptions="Center" VerticalOptions="Center" />
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+        <Button BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1" Text="退出登录" VerticalOptions="End" Clicked="OnLogout"/>
+    </StackLayout>
 </ContentPage>
