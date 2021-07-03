@@ -15,12 +15,13 @@ namespace Xamarin_Forms_demo.Views
         MainPage RootPage { get => Application.Current.MainPage as MainPage; }
 
         private List<FlyoutPageItem> flyoutPageItems { get; set; } = new List<FlyoutPageItem>();
+        private readonly BaseViewModel _baseViewModel;
 
         public MenuPage()
         {
             InitializeComponent();
-            BindingContext = new BaseViewModel().Me;
-
+            _baseViewModel = new BaseViewModel();
+            BindingContext = _baseViewModel.Me;
             foreach (var item in Enum.GetValues(typeof(MenuItemType)))
             {
                 flyoutPageItems.Add(new FlyoutPageItem { Id = Convert.ToInt32(item), Title = item.ToString(), IconSource = "" });
@@ -56,9 +57,11 @@ namespace Xamarin_Forms_demo.Views
             Application.Current.MainPage = new LoginPage();
         }
 
-        private void OnToggleMajor(object sender, EventArgs e)
+        private async void OnToggleMajor(object sender, EventArgs e)
         {
-
+            var major = ((sender as StackLayout).Children[1] as Label).Text;
+            _baseViewModel.OnToggleMajor(major);
+            //await RootPage.NavigateFromMenu(MenuItemType.StudyTabbed);
         }
     }
 }

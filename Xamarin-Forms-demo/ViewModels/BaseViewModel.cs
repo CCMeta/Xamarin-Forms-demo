@@ -42,6 +42,12 @@ namespace Xamarin_Forms_demo.ViewModels
             set { SetProperty(ref me, value); }
         }
         public static string username;
+        public static string major1 = "Unknown";
+        public string CurrentMajor
+        {
+            get => major1;
+            set => SetProperty(ref major1, value);
+        }
 
         public BaseViewModel()
         {
@@ -71,6 +77,11 @@ namespace Xamarin_Forms_demo.ViewModels
 
             //init contacts
             ContactsViewModel.GetListAsync();
+        }
+
+        public void OnToggleMajor(string major)
+        {
+            CurrentMajor = major;
         }
 
         //Tookit region begin

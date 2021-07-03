@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin_Forms_demo.ViewModels;
 
 namespace Xamarin_Forms_demo.Views
 {
@@ -15,7 +16,14 @@ namespace Xamarin_Forms_demo.Views
         public StudyTabbedPage()
         {
             InitializeComponent();
-            Title = "学习模式";
+            //BindingContext = new BaseViewModel();
+            //binding current Major  
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            Title = BaseViewModel.major1;
         }
     }
 }
