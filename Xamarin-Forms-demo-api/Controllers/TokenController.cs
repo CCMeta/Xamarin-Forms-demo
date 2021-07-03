@@ -47,7 +47,7 @@ namespace Xamarin_Forms_demo_api.Controllers
                 var token = _sessionService.CreatToken(_user.username);
                 _sessionService.Sessions.Add(token, _user.id);
 
-                return Ok(new { token, _user.username, _user.avatar, _user.id, _user.nickname });
+                return Ok(new { token, _user.username, _user.avatar, _user.id, _user.nickname,_user.intro });
             }
             return NotFound(user);
         }

@@ -13,5 +13,6 @@ namespace Xamarin_Forms_demo.Models
         public string nickname { get; set; }
         public string token { get; set; }
         public string avatar { get; set; }
+        public string intro { get; set; }
     }
 }

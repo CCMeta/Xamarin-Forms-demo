@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31423.177
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin-Forms-demo.Android", "Xamarin-Forms-demo.Android\Xamarin-Forms-demo.Android.csproj", "{199BB71E-2E85-49E3-B056-CD0BA994A5BF}"
 EndProject
@@ -28,9 +28,9 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|Any CPU.Build.0 = Debug|x86
+		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|Any CPU.Deploy.0 = Debug|x86
 		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{199BB71E-2E85-49E3-B056-CD0BA994A5BF}.Debug|iPhone.Deploy.0 = Debug|Any CPU

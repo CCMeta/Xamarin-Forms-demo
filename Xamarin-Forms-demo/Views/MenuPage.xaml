@@ -13,10 +13,13 @@
         <Frame Grid.Row="0" BorderColor="Orange" CornerRadius="10" HasShadow="True" Padding="15">
             <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding avatar}" HeightRequest="50"/>
-                <Label Text="{Binding nickname}" FontSize="Subtitle" VerticalOptions="Center"/>
+                <StackLayout Orientation="Vertical">
+                    <Label Text="{Binding nickname}" FontSize="Body" VerticalOptions="Center"/>
+                    <Label Text="{Binding intro}" FontSize="Caption" VerticalOptions="Center"/>
+                </StackLayout>
                 <Button Scale="0.8" BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1"
                         x:Name="WebSocketStateLabel" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
-                <Label Text="&#xf054;" FontSize="25" FontFamily="FontAwesome5Solid" 
+                <Label Text="&#xf054;" FontSize="Caption" FontFamily="FontAwesome5Solid" 
                        HorizontalOptions="End" VerticalOptions="Center" />
             </StackLayout>
         </Frame>
@@ -57,7 +60,7 @@
                     <TableSection>
                         <ViewCell>
                             <Button BackgroundColor="White" TextColor="#00aaaa" BorderColor="#00aaaa" BorderWidth="1"
-                                    Text="退出登录" VerticalOptions="End"/>
+                                    Text="退出登录" VerticalOptions="End" Clicked="OnLogout"/>
                         </ViewCell>
                     </TableSection>
                 </TableRoot>

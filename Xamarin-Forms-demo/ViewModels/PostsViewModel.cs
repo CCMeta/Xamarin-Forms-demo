@@ -49,7 +49,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public async Task GetListAsync()
         {
-            //int maxId = Posts.Count > 0 ? Posts[0].id : 0;
+            //int maxId = Posts.Count > 0 ? Posts[0].id : 0嗡嗡嗡
             int maxId = Posts.Count > 0 ? posts[0].id : 0;
 
             var queryParams = new Dictionary<string, string>() {

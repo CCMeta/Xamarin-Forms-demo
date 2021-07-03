@@ -48,5 +48,9 @@ namespace Xamarin_Forms_demo.Views
             base.OnAppearing();
             WebSocketStateLabel.Text = BaseViewModel._chatHub.GetState();
         }
+
+        private void OnLogout(object sender, EventArgs e)
+        {
+        }
     }
 }
