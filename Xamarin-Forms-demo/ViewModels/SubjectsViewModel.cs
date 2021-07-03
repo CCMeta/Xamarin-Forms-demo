@@ -25,7 +25,7 @@ namespace Xamarin_Forms_demo.ViewModels
         }
         public ICommand GetSubjectsCommand { protected set; get; }
 
-        public SubjectsViewModel() : base()
+        public SubjectsViewModel()
         {
             Title = "SubjectsViewModel";
             GetSubjectsCommand = new Command(() =>

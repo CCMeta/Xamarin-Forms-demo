@@ -13,17 +13,11 @@ namespace Xamarin_Forms_demo.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StudyTabbedPage : TabbedPage
     {
+        private readonly BaseViewModel vm;
         public StudyTabbedPage()
         {
             InitializeComponent();
-            //BindingContext = new BaseViewModel();
-            //binding current Major  
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            Title = BaseViewModel.major1;
+            shit.BindingContext = vm = BaseViewModel.GetInstance();
         }
     }
 }

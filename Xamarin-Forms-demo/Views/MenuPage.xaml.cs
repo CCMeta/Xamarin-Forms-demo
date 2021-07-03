@@ -20,7 +20,7 @@ namespace Xamarin_Forms_demo.Views
         public MenuPage()
         {
             InitializeComponent();
-            _baseViewModel = new BaseViewModel();
+            _baseViewModel = BaseViewModel.GetInstance();
             BindingContext = _baseViewModel.Me;
             foreach (var item in Enum.GetValues(typeof(MenuItemType)))
             {
@@ -57,7 +57,7 @@ namespace Xamarin_Forms_demo.Views
             Application.Current.MainPage = new LoginPage();
         }
 
-        private async void OnToggleMajor(object sender, EventArgs e)
+        private void OnToggleMajor(object sender, EventArgs e)
         {
             var major = ((sender as StackLayout).Children[1] as Label).Text;
             _baseViewModel.OnToggleMajor(major);

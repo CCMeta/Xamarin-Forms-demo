@@ -22,7 +22,7 @@ namespace Xamarin_Forms_demo.ViewModels
         public event EventHandler OnLocalRtpSession;
         public static WebSocketService webSocketService;
 
-        public ItemsViewModel() : base()
+        public ItemsViewModel() 
         {
             AddConsoleLogger();
             //Func<int,int> shit = (s) => 1;

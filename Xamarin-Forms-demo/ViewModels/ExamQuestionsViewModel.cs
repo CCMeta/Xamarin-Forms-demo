@@ -40,7 +40,7 @@ namespace Xamarin_Forms_demo.ViewModels
         }
 
 
-        public ExamQuestionsViewModel(int exam_id) : base()
+        public ExamQuestionsViewModel(int exam_id) 
         {
             _exam_id = exam_id;
             Title = "ExamQuestions";

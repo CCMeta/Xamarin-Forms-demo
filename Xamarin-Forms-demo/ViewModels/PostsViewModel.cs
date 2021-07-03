@@ -27,7 +27,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public ICommand GetListCommand { protected set; get; }
 
-        public PostsViewModel() : base()
+        public PostsViewModel()
         {
             GetListCommand = new Command(() =>
             {

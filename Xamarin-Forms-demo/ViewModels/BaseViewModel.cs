@@ -42,14 +42,24 @@ namespace Xamarin_Forms_demo.ViewModels
             set { SetProperty(ref me, value); }
         }
         public static string username;
-        public static string major1 = "Unknown";
+        public string major1 = "Unknown";
         public string CurrentMajor
         {
             get => major1;
             set => SetProperty(ref major1, value);
         }
 
-        public BaseViewModel()
+        private static BaseViewModel _instance;
+        public static BaseViewModel GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new BaseViewModel();
+            }
+            return _instance;
+        }
+
+        protected BaseViewModel()
         {
             string username = BaseViewModel.username is null ?
                 AppConfiguration.GetValue<string>("Identity:Username") : BaseViewModel.username;
@@ -82,6 +92,7 @@ namespace Xamarin_Forms_demo.ViewModels
         public void OnToggleMajor(string major)
         {
             CurrentMajor = major;
+            //OnPropertyChanged(nameof(CurrentMajor)); 
         }
 
         //Tookit region begin

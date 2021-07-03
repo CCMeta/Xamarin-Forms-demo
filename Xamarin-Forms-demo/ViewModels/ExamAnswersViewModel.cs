@@ -28,7 +28,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public ICommand GetListCommand { protected set; get; }
 
-        public ExamAnswersViewModel() : base()
+        public ExamAnswersViewModel() 
         {
         }
 

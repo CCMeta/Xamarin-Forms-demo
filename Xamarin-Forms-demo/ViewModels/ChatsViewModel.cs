@@ -38,7 +38,7 @@ namespace Xamarin_Forms_demo.ViewModels
         }
         public ICommand GetListCommand { protected set; get; }
 
-        public ChatsViewModel(Contacts partner) : base()
+        public ChatsViewModel(Contacts partner)
         {
             _partner = partner;
             GetListCommand = new Command(async () =>

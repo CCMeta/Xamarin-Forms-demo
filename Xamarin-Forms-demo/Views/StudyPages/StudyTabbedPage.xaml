@@ -5,8 +5,9 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             x:Class="Xamarin_Forms_demo.Views.StudyTabbedPage"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            Title="{Binding Title}">
+            Title="{Binding .}">
     <TabbedPage.ToolbarItems>
+        <ToolbarItem x:Name="shit" Text="{Binding CurrentMajor}"/>
         <ToolbarItem>
             <ToolbarItem.IconImageSource>
                 <FontImageSource Glyph="&#xf14b;" FontFamily="FontAwesome5Solid" Size="Medium" />
