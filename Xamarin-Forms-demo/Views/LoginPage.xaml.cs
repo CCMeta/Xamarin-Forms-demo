@@ -13,12 +13,12 @@ namespace Xamarin_Forms_demo.Views
     [DesignTimeVisible(false)]
     public partial class LoginPage : ContentPage
     {
-        private Action SetMainPage;
+        private readonly Action SetMainPage;
 
         public LoginPage()
         {
             InitializeComponent();
-            this.SetMainPage = () => Application.Current.MainPage = new MainPage();
+            SetMainPage = () => Application.Current.MainPage = new MainPage();
 
             var AppConfiguration = Services.AppConfiguration.GetInstence();
             var httpClient = new HttpRequest(AppConfiguration.GetValue<string>("Host"));
@@ -34,12 +34,14 @@ namespace Xamarin_Forms_demo.Views
         {
             if (e.CurrentSelection.Count == 0)
                 return;
-            collectionView.SelectedItem = null;
-            BaseViewModel.username = (e.CurrentSelection[0] as Users).username;
-
             MessageLabel.Text = "LOADING...";
             collectionView.IsVisible = false;
-            Device.BeginInvokeOnMainThread(SetMainPage);
+            collectionView.SelectedItem = null;
+            Task.Run(() =>
+            {
+                BaseViewModel.GetInstance().OnLogin(username: (e.CurrentSelection[0] as Users).username);
+                Device.BeginInvokeOnMainThread(SetMainPage);
+            });
         }
 
     }

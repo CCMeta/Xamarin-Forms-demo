@@ -35,13 +35,13 @@ namespace Xamarin_Forms_demo.ViewModels
             set { SetProperty(ref title, value); }
         }
 
-        private static Users me;
+        private Users me;
         public Users Me
         {
             get => me;
             set => SetProperty(ref me, value);
         }
-        public static string username;
+
         public string currentMajor = "Unknown";
         public string CurrentMajor
         {
@@ -57,12 +57,14 @@ namespace Xamarin_Forms_demo.ViewModels
             return _instance;
         }
 
-        protected BaseViewModel()
+        protected BaseViewModel() { }
+
+        public void OnLogin(string username = null)
         {
-            string username = BaseViewModel.username is null ?
-                AppConfiguration.GetValue<string>("Identity:Username") : BaseViewModel.username;
-            var password = AppConfiguration.GetValue<string>("Identity:Password");
-            Login(username, password);
+            string _username = username is null ?
+                AppConfiguration.GetValue<string>("Identity:Username") : username;
+            var _password = AppConfiguration.GetValue<string>("Identity:Password");
+            Login(_username, _password);
         }
 
         protected void Login(string username, string password)
