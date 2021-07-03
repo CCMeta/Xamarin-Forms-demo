@@ -17,7 +17,7 @@ namespace Xamarin_Forms_demo.Views
         public StudyTabbedPage()
         {
             InitializeComponent();
-            shit.BindingContext = vm = BaseViewModel.GetInstance();
+            BindingContext = vm = BaseViewModel.GetInstance();
         }
     }
 }
