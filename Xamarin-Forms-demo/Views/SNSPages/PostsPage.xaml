@@ -47,7 +47,7 @@
                                             <Label FontSize="Body" TextColor="Black" Text="{Binding nickname}" VerticalOptions="Start"/>
                                             <Label FontSize="Caption" Text="{Binding created_at,StringFormat='{0}'}" HorizontalOptions="Start" VerticalOptions="End"/>
                                         </StackLayout>
-                                        <Button CornerRadius="50" Text="{Binding IsFollowed}"
+                                        <Button CornerRadius="50" Text="{Binding FollowState}"
                                                 TextColor="White" BackgroundColor="#00cccc" Clicked="OnFollowButtonClickAsync"
                                                 HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                                             <Button.ImageSource>

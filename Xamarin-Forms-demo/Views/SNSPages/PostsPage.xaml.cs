@@ -54,8 +54,16 @@ namespace Xamarin_Forms_demo.Views
         private async void OnFollowButtonClickAsync(object sender, EventArgs e)
         {
             var uid = ((Posts)(sender as Button).BindingContext).uid;
-            _postsViewModel.OnFollowStateChange(uid: uid, act: 1);
-            await DisplayAlert("关注", "关注成功", "确定");
+            var result = await ContactsViewModel.PostAsync(partner_id: uid);
+            if (result is true)
+            {
+                _postsViewModel.OnFollowStateChange(uid: uid);
+                await DisplayAlert("关注", "关注成功", "确定");
+            }
+            else
+            {
+                await DisplayAlert("关注", "关注失败", "确定");
+            }
         }
     }
 }

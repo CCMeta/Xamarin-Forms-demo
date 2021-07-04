@@ -39,8 +39,9 @@ namespace Xamarin_Forms_demo_api.Controllers
         public async Task<ActionResult> Post([FromBody] Contacts contacts)
         {
             var partner_id = contacts.partner_id == 0 ? throw new ApplicationException("BAD QUERY") : contacts.partner_id;
-            var result = await _contactsRepository.Post(partner_id, _uid);
-            return Ok(result);
+            if (await _contactsRepository.Post(_uid, partner_id) > 0)
+                return Ok(contacts);
+            return BadRequest(contacts);
         }
 
         // PUT api/<ContactsController>/5

@@ -54,7 +54,7 @@ namespace Xamarin_Forms_demo.ViewModels
             Contacts = result;
         }
 
-        public async Task<bool> PostAsync(int partner_id)
+        public static async Task<bool> PostAsync(int partner_id)
         {
             Contacts queryParams = new Contacts
             {

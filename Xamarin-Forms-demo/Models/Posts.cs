@@ -9,6 +9,6 @@ namespace Xamarin_Forms_demo.Models
         public int uid { get; set; }
         public string nickname { get; set; }
         public string avatar { get; set; }
-        public string IsFollowed { get; set; } = "+ Follow";
+        public string FollowState { get; set; } = "+ Follow";
     }
 }
