@@ -30,18 +30,25 @@
             <DataTemplate>
                 <StackLayout Spacing="1" Background="#EEE">
                     <StackLayout Padding="15" Margin="0,0,0,1" BackgroundColor="White">
-                        <StackLayout Orientation="Horizontal" Spacing="0">
-                            <Image WidthRequest="50" HeightRequest="50" Source="{Binding avatar}" Aspect="AspectFill"/>
-                            <Frame IsVisible="{Binding IsBadgeShow}" BackgroundColor="Red" Padding="0" Margin="-10" CornerRadius="20" WidthRequest="20" HeightRequest="20" VerticalOptions="Start">
-                                <Label HorizontalTextAlignment="Center" TextColor="White" Text="{Binding unread}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" WidthRequest="50" HeightRequest="50" Source="{Binding avatar}" Aspect="AspectFill"/>
+                            <Frame Grid.Column="1" IsVisible="{Binding IsBadgeShow}" BackgroundColor="Red" Padding="0" Margin="-20,-10" CornerRadius="20" 
+                                   WidthRequest="20" HeightRequest="20" VerticalOptions="Start" HorizontalOptions="Start">
+                                <Label FontSize="Caption" VerticalOptions="Center" HorizontalTextAlignment="Center" TextColor="White" Text="{Binding unread}"/>
                             </Frame>
-                            <StackLayout Padding="15,0">
+                            <StackLayout Grid.Column="2" Padding="0,0" HorizontalOptions="StartAndExpand">
                                 <Label Text="{Binding nickname}" FontSize="Body" TextColor="Black"/>
-                                <Label Text="{Binding intro}" LineBreakMode="NoWrap" FontSize="Caption"/>
+                                <Label Text="{Binding intro}" FontSize="Caption" LineBreakMode="TailTruncation"/>
                             </StackLayout>
-                            <Label FontSize="Caption" Text="{Binding state}" LineBreakMode="NoWrap" BackgroundColor="Transparent"
-                           TextColor="Green" HorizontalOptions="EndAndExpand"/>
-                        </StackLayout>
+                            <Label Grid.Column="3" FontSize="Caption" Text="{Binding state}" LineBreakMode="NoWrap" BackgroundColor="Transparent"
+                           TextColor="Green" HorizontalOptions="End"/>
+                        </Grid>
                     </StackLayout>
                 </StackLayout>
             </DataTemplate>
