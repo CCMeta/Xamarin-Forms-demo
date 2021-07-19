@@ -101,6 +101,7 @@ namespace Xamarin_Forms_demo.ViewModels
                 {
                     await GetListRemoteAsync(_partner.partner_id);
                     await GetListAsync();
+                    //从本地数据库 读取的内容标记已读
                 });
             }
         }

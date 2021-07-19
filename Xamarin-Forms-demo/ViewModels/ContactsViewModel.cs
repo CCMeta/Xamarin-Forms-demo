@@ -50,6 +50,8 @@ namespace Xamarin_Forms_demo.ViewModels
         {
             var queryParams = new Dictionary<string, string>() { };
             var result = await HttpRequest.GetAsync<ObservableCollection<Contacts>>(path, queryParams: queryParams);
+            // getallchats of remote and 写到本地数据库
+            // 在本地数据库统计所有未读的信息 写到badge上
             contacts.Clear();
             Contacts = result;
         }

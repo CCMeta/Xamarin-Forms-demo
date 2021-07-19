@@ -23,6 +23,8 @@ namespace Xamarin_Forms_demo.Views
             {
                 await ChatsViewModel.GetListRemoteAsync(_partner.partner_id);
                 await _chatsViewModel.GetListAsync();
+                //从本地数据库 读取的内容标记已读
+
             });
         }
 

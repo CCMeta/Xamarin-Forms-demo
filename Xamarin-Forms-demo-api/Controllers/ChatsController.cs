@@ -30,7 +30,7 @@ namespace Xamarin_Forms_demo_api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAsync([FromQuery] int partner_id, int max_id)
         {
-            var result = await _chatsRepository.GetList(_uid, partner_id, max_id);
+            var result = await _chatsRepository.GetListByPartner(_uid, partner_id, max_id);
             return Ok(result);
         }
 
