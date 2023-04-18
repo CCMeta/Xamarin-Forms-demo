@@ -9,12 +9,11 @@ namespace Xamarin_Forms_demo.Models
 {
     public abstract class BaseStore
     {
-        private readonly string DBNAME;
-        protected readonly SQLiteAsyncConnection db;
+        private const string DBNAME = "ChatSessions.db3";
+        protected static readonly SQLiteAsyncConnection db;
 
-        public BaseStore(int uid)
+        static BaseStore()
         {
-            DBNAME = $"{uid}.db3";
             db = new SQLiteAsyncConnection(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DBNAME));
         }
     }

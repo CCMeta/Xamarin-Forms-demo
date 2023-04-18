@@ -10,7 +10,7 @@ namespace Xamarin_Forms_demo.Models
     public class ChatSessionsStore : BaseStore
     {
 
-        public ChatSessionsStore(int uid):base(uid)
+        public ChatSessionsStore()
         {
             Task.Run(async () =>
             {

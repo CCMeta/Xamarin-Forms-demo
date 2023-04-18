@@ -52,7 +52,7 @@ namespace Xamarin_Forms_demo.ViewModels
 
         public async Task GetListAsync()
         {
-            var db = new ChatsStore(uid: GetInstance().Me.id);
+            var db = new ChatsStore();
             List<Chats> chats = await db.ListAsync(_partner.partner_id);
             Console.WriteLine(chats.Count);
             Chats = new ObservableCollection<Chats>(chats);
@@ -61,7 +61,7 @@ namespace Xamarin_Forms_demo.ViewModels
         public static async Task GetListRemoteAsync(int partner)
         {
             //this get is use remote api
-            var db = new ChatsStore(uid: GetInstance().Me.id);
+            var db = new ChatsStore();
             var chats = await db.ListAsync(partner);
             var max_id = chats.LastOrDefault() is null ? 0 : chats.LastOrDefault().id;
             var queryParams = new Dictionary<string, string>() {
