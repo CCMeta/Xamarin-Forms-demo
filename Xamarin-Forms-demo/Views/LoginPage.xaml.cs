@@ -24,6 +24,7 @@ namespace Xamarin_Forms_demo.Views
             var httpClient = new HttpRequest(AppConfiguration.GetValue<string>("Host"));
             Task.Run(async () =>
             {
+                Console.WriteLine(httpClient._host);
                 var users = await httpClient.GetAsync<List<Users>>("/api/token", new Dictionary<string, string>());
                 Console.WriteLine(users.Count);
                 collectionView.BindingContext = users;
@@ -37,11 +38,8 @@ namespace Xamarin_Forms_demo.Views
             MessageLabel.Text = "LOADING...";
             collectionView.IsVisible = false;
             collectionView.SelectedItem = null;
-            Task.Run(() =>
-            {
                 BaseViewModel.GetInstance().OnLogin(username: (e.CurrentSelection[0] as Users).username);
                 Device.BeginInvokeOnMainThread(SetMainPage);
-            });
         }
 
     }

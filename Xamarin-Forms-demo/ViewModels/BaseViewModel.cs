@@ -82,7 +82,7 @@ namespace Xamarin_Forms_demo.ViewModels
             Me = user;
 
             //init local message signalr
-            _chatHub = new ChatHub(AppConfiguration.GetValue<string>("Host") + "/chathub", Me.token);
+            //_chatHub = new ChatHub(AppConfiguration.GetValue<string>("Host") + "/chathub", Me.token);
 
             //init contacts
             ContactsViewModel.GetListAsync();
